@@ -41,7 +41,6 @@ export default class Dashboard extends Component {
 				break;
 		}
 	}
-
 	setProfile=()=>{
 		this.setState({currComponent:'1'})
 	}
@@ -57,8 +56,6 @@ export default class Dashboard extends Component {
 	setHome=()=>{
 		this.setState({currComponent:'5'})
 	}
-
-
 	render() {
 		return <div><Header home={this.setHome} connections={this.setConnections} messaging={this.setMessagin} notification={this.setNotifications} profile={this.setProfile} />
 					<div style={{margin:'75px'}}>
