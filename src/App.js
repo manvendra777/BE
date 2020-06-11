@@ -1,9 +1,9 @@
 import React from 'react';
-import Dashboard from './Dashboards/StartupDashboard/Dashboard';
+import StartupDashboard from './Dashboards/StartupDashboard/StartupDashboard';
 
 function App() {
   return (
-  <div><Dashboard/></div>
+  <div><StartupDashboard/></div>
   );
 }
 
