@@ -22,20 +22,20 @@ class InvestorConfirm extends React.Component{
         
 }
 
- console.log(data);
+    console.log(data);
 
-axios.put('http://localhost:8081/investor/profile/add', {data})
-.then(function (response) {
+    axios.put('http://localhost:8081/investor/profile/add', {data})
+    .then(function (response) {
 
-    console.log("true");
-})
-       this.props.nextStep();
-   }
+        console.log("true");
+    })
+        this.props.nextStep();
+    }
 
-   back= e=>{
-    e.preventDefault();
-    this.props.prevStep();
-}
+    back= e=>{
+        e.preventDefault();
+        this.props.prevStep();
+    }
       
             
         

@@ -32,12 +32,15 @@ class RegistrationPg extends React.Component{
 
                 console.log(data);
 
-                axios.post('http://localhost:8081/security/addUser', {data})
+                axios.post('http://localhost:8081/security/addUser', data=data)
                 .then(function (response) {
 
                     console.log(response.data);
-                    window.location = "/retrieve" //This line of code will redirect you once the submission is succeed
-                })                    
+                    window.location = "/profileFrontPg" //This line of code will redirect you once the submission is succeed
+                })   
+                if(this.resetForm){
+                    console.log("true");
+                }    
         }
     }
     validateForm() {
@@ -113,29 +116,32 @@ class RegistrationPg extends React.Component{
                 <Form className= "RegistrationPg" method= "post" onSubmit= {this.handleSubmit} style= {{marginBottom: 40}}>
                <h2 style={{color: "#2F4F4F", fontWeight: "bold"}}>Register</h2>
                     
-                    <Form.Control type= "text" 
+                    <div>
+                        <input type= "text" 
                            name= "name" 
                            placeholder= "Enter your full name" 
                            onChange= {(event)=>{this.setState({username:event.target.value})}}
                            style= {{marginBottom: 20}}
                            />
-                    
-                    <Form.Control type= "email" 
+                    </div>
+                    <div>
+                    <input type= "email" 
                            name= "email" 
                            placeholder= "Enter your Email"  
                            onChange= {(event)=> {this.setState({email: event.target.value})}}
                            style= {{marginBottom: 20}}
                            />
                            <p style={{color: "red"}}>{this.state.errors.email}</p>
-                        
-                   <Form.Control type= "password" 
+                           </div>
+                    <div>
+                   <input type= "password" 
                            name= "password" 
                            placeholder= "Enter password" 
                            onChange= {(event)=>{this.setState({password: event.target.value})}}
                            style= {{marginBottom: 20}}
                            />
                            <p style={{color: "red"}}>{this.state.errors.password}</p>
-                  
+                           </div>
                   <Button type="submit" variant= "primary" style= {{marginTop: 20}}>Submit</Button>
                     <small>or</small>
                     <Link to= "./loginPg">
