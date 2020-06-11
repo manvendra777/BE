@@ -6,7 +6,7 @@ import ListOfOnlineCandidates from "./Assets/Messaging/Assets/ListOfOnlineCandid
 import Messaging from './Assets/Messaging/Messaging'
 import Connections from "./Assets/Connections/Connections"
 import Home from "./Assets/home/Home"
-export default class Dashboard extends Component {
+export default class StartupDashboard extends Component {
 	constructor(props) {
 		super(props);
 
