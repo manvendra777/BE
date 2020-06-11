@@ -1,5 +1,5 @@
 import React from 'react';
-import Dashboard from './Dashboards/StartupDashboard/Dashboard';
+import StartupDashboard from './Dashboards/StartupDashboard/StartupDashboard';
 import FrontPage from './FrontPage/FrontPage';
 import {Route, BrowserRouter as Router, Link} from 'react-router-dom'
 import RegistrationPg from './FrontPage/Registration/RegistrationPg';
@@ -9,7 +9,6 @@ import  ProfileFrontPage from './ProfileManagement/ProfileFrontPage'
 import CommunityForm from './ProfileManagement/Community/CommunityForm';
 import InvestorForm from './ProfileManagement/Investor/InvestorForm';
 import MentorForm from './ProfileManagement/Mentor/MentorForm'
-
 
 function App() {
   return (
