@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function User() {
+export default function User(props) {
   const classes = useStyles();
 
   return (
@@ -61,7 +61,7 @@ export default function User() {
         <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
 
       </StyledBadge>
-          <ListItemText style={{marginLeft:"16px",}} primary="Sanket Tupe" />
+          <ListItemText style={{marginLeft:"16px",}} primary={props.id} />
         </ListItem>
 
       

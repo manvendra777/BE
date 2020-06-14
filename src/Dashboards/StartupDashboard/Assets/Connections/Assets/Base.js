@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState , updateState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import { spacing } from '@material-ui/system';
 import List from '@material-ui/core/List';
 import Invitation from "./Invitation"
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,8 +35,30 @@ notiList:{
 }
 }));
 
-export default function Base() {
+
+export default function Base(props) {
   const classes = useStyles();
+  const [invitations,setInvitations]=useState([]);
+
+  const rem=()=>{
+    props.m();
+  }
+  
+  React.useEffect(() => {
+    // Your code here
+    let req=[];
+    axios.get(`http://localhost:8080/user/pendingRequests`,{params: {id: 1}})
+    .then(res => {
+      req = res.data;
+      console.log(req)
+      req.map((item,i)=>{
+        console.log(item);
+        setInvitations(invitations=>[...invitations,<Invitation name={item} id={item} seq={i} de={rem} invs={invitations}/>])
+      })
+    })
+  },[]);
+
+ 
 
   return (
     <div className={classes.root}>
@@ -48,17 +71,7 @@ export default function Base() {
             <div className={classes.notiList}>
 
             <List className={classes.listSection}>
-              <Invitation name = "Sanket Tupe" text ="hi Shubhamkar need some help" time="12 hr"/>
-              <Invitation name = "Sanket Tupe" text ="hi Shubhamkar need some help" time="12 hr"/>
-              <Invitation name = "Sanket Tupe" text ="hi Shubhamkar need some help" time="12 hr"/>
-              <Invitation name = "Sanket Tupe" text ="hi Shubhamkar need some help" time="12 hr"/>
-              <Invitation name = "Sanket Tupe" text ="hi Shubhamkar need some help" time="12 hr"/>
-              <Invitation name = "Sanket Tupe" text ="hi Shubhamkar need some help" time="12 hr"/>
-              <Invitation name = "Sanket Tupe" text ="hi Shubhamkar need some help" time="12 hr"/>
-              <Invitation name = "Sanket Tupe" text ="hi Shubhamkar need some help" time="12 hr"/>
-              <Invitation name = "Sanket Tupe" text ="hi Shubhamkar need some help" time="12 hr"/>
-              <Invitation name = "Sanket Tupe" text ="hi Shubhamkar need some help" time="12 hr"/>
-              <Invitation name = "Sanket Tupe" text ="hi Shubhamkar need some help" time="12 hr"/>
+            {invitations.map(child=>child)}
             </List>
             </div>
         </Paper>

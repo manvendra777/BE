@@ -111,7 +111,8 @@ class LoginPg extends React.Component {
   <span className= "errorMessage" style= {{color:"red"}}>{formErrors.password}</span>
           )}
             <div className="Login" style={{marginBottom:20}}>
-            <Button variant= "primary" type= "submit">Login</Button>
+              <Link to="/startupDashboard">
+            <Button variant= "primary" type= "submit">Login</Button></Link>
               <Link to= "/registrationPg">
               <small> Register</small>
             </Link>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{up} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -12,6 +12,7 @@ import Divider from '@material-ui/core/Divider';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Typography from '@material-ui/core/Typography';
 import { Button } from '@material-ui/core';
+import axios from 'axios';
 
   import { blue } from '@material-ui/core/colors';
 
@@ -28,6 +29,21 @@ const useStyles = makeStyles((theme) => ({
 export default function Invitation(props) {
   const classes = useStyles();
 
+  
+  const accept=()=>{
+    
+    axios.post('http://localhost:8080/user/acceptRequest',null,{params:{id: 1,target : props.id}})
+      .then(res => {
+        props.de();
+      })
+     
+  }
+  const del=()=>{
+    axios.post('http://localhost:8080/user/deleteRequest',null,{params: {id:1, target:props.id}})
+    .then(res => {
+      props.de();
+    })
+  }
   return (
    <div>
       <ListItem>
@@ -39,8 +55,8 @@ export default function Invitation(props) {
         <ListItemText primary={props.name} secondary={props.text} />
             <ListItemSecondaryAction>
               
-            <Button style={{margin:"12px"}}>Delete</Button>
-              <Button variant="contained" color="primary">Accept</Button>
+            <Button style={{margin:"12px"}} onClick={del}>Delete</Button>
+              <Button variant="contained" color="primary" onClick={accept}>Accept</Button>
        
             </ListItemSecondaryAction>
  

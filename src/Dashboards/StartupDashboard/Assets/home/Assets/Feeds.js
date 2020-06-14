@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
@@ -7,7 +7,8 @@ import TextField from '@material-ui/core/TextField';
 import ImageIcon from '@material-ui/icons/Image';
 import Icon from '@material-ui/core/Icon';
 import AddIcon from '@material-ui/icons/Add';
-const useStyles = makeStyles((theme) => ({
+import { withStyles } from "@material-ui/core/styles";
+const useStyles = theme => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -24,11 +25,22 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1,1,1,2),
     height:theme.spacing(60),
 },
-}));
+});
 
-export default function Feeds() {
-  const classes = useStyles();
 
+class Feeds extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			name: "Sanket Tupe",
+			sub1: "working in google",
+			sub2: "Pune, Maharastra, India"
+		};
+	}
+
+	render() {
+    const { classes } = this.props;
   return (
     <div className={classes.root}>
         
@@ -42,3 +54,5 @@ export default function Feeds() {
     </div>
   );
 }
+}
+export default withStyles(useStyles)(Feeds);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
@@ -8,7 +8,8 @@ import Chip from '@material-ui/core/Chip';
 import Sent from './Messages/Sent'
 import Rec from './Messages/Rec';
 import SendMessage from './SendMessage'
-const useStyles = makeStyles((theme) => ({
+import { withStyles } from "@material-ui/core/styles";
+const useStyles = theme => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -18,11 +19,19 @@ const useStyles = makeStyles((theme) => ({
       height: theme.spacing(80),
     },
   },
-}));
+});
 
-export default function ChatBase() {
-  const classes = useStyles();
+class ChatBase extends Component {
+  constructor(props) {
+		super(props);
 
+		this.state = {
+			currComponent:'4'
+		};
+	}
+
+  render() {
+    const { classes } = this.props;
   const sendMsg=()=>{
     return <Sent/>
   }
@@ -45,4 +54,5 @@ export default function ChatBase() {
       <SendMessage/>
     </div>
   );
-}
+}}
+export default withStyles(useStyles)(ChatBase);

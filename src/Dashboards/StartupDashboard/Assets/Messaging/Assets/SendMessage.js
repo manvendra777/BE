@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
@@ -10,8 +10,9 @@ import AddIcon from '@material-ui/icons/Add';
 import IconButton from '@material-ui/core/IconButton';
 import { Button } from '@material-ui/core';
 import ChatBase from './ChatBase'
+import { withStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = theme => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -33,12 +34,19 @@ postBox: {
     hd:{
         margin: theme.spacing(1,1,1,2),
     }
-}));
+});
 
-export default function SendMessage() {
-  
-  
-  const classes = useStyles();
+class SendMessage extends Component {
+  constructor(props) {
+		super(props);
+
+		this.state = {
+			currComponent:'4'
+		};
+	}
+
+  render() {
+    const { classes } = this.props;
 
   return (
     <div className={classes.root}>
@@ -59,4 +67,6 @@ export default function SendMessage() {
         </Paper>
     </div>
   );
-}
+}}
+export default withStyles(useStyles)(SendMessage);
+

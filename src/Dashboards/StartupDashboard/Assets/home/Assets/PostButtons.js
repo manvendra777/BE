@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import VideocamIcon from '@material-ui/icons/Videocam';
+import { withStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = theme => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
@@ -14,11 +15,21 @@ const useStyles = makeStyles((theme) => ({
   input: {
     display: 'none',
   },
-}));
+});
 
-export default function PostButtons() {
-  const classes = useStyles();
+class PostButtons extends Component {
+	constructor(props) {
+		super(props);
 
+		this.state = {
+			name: "Sanket Tupe",
+			sub1: "working in google",
+			sub2: "Pune, Maharastra, India"
+		};
+	}
+
+	render() {
+    const { classes } = this.props;
   return (
     <div className={classes.root}>
   
@@ -43,3 +54,5 @@ export default function PostButtons() {
     </div>
   );
 }
+}
+export default withStyles(useStyles)(PostButtons);

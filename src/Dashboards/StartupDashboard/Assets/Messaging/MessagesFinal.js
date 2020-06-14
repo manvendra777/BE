@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
@@ -10,9 +10,12 @@ import Rec from './Assets/Messages/Rec';
 import SendMessage from './Assets/SendMessage'
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
+import axios from 'axios';
+import Container from '@material-ui/core/Container';
+import { withStyles } from "@material-ui/core/styles";
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles =theme => ({
   root: {
     flexWrap: 'wrap',
     '& > *': {
@@ -21,6 +24,20 @@ const useStyles = makeStyles((theme) => ({
       height: theme.spacing(80),
     },
   },
+  box:{
+    //overflowX:'hidden',
+    width: '100%',
+    height: '100%',
+    overflowY:'scroll',
+    paddingRight:'17px',
+    boxSizing:'contentBox'
+  },
+  boxP:{
+    width: '100%',
+    height: '90%',
+    overflow: 'hidden'
+  },
+
   post: {
     margin: theme.spacing(0,1,0,1),
     height:theme.spacing(30),
@@ -33,35 +50,90 @@ postBox: {
     hd:{
         margin: theme.spacing(1,1,1,2),
     }
-}));
+});
+class MessagesFinal extends Component {
+  constructor(props) {
+		super(props);
 
-export default function MessagesFinal() {
-  const classes = useStyles();
-  const [msg,setMsg]=useState([]);
-  const [msgTypo,setMsgTypo] = useState('');
+		this.state = {
+      msg:[],
+      msgTypo:'',
+		};
+	}
+
+  componentDidMount(){
+    
+    // Your code here
+    let persons=[];
+    axios.get(`http://localhost:8080/api/message/find`,{params: {senderId: 45332,receiverId:2364}})
+    .then(res => {
+      persons = res.data;
+
+      persons.map((item,i)=>{
+        console.log(item);
+
+        if(item.senderId==45332){
+          this.setState({
+            msg:[...this.state.msg,<Sent msg={item.text}/>]
+          })
+        }else{
+          this.setState({
+            msg:[...this.state.msg,<Rec msg={item.text}/>]
+          })
+        }
+      
+      })
+    })}
+  render() {
+    const { classes } = this.props;
+
 
   const sendMsg=()=>{
-     console.log(msgTypo);
-     
-      setMsg([...msg,<Sent msg={msgTypo}/>])
-      setMsgTypo('');
+     console.log(this.state.msgTypo);
+      this.setState({
+        msg:[...this.state.msg,<Sent msg={this.state.msgTypo}/>]
+      })
+      this.setState({msgTypo:''});
+
+      var sender = '45332';
+      var receiver= '2364';
+      axios.post('http://localhost:8080/api/message', {
+        "senderId" : sender,
+        "receiverId" : receiver,
+        "text" : this.state.msgTypo })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
   }
- 
+  
+
+  
   const recMsg=()=>{
-    return <Rec/>
+    
+
   }
   const handleChane=(e)=>{
-      setMsgTypo(e.target.value);
+      this.setState({msgTypo:e.target.value});
   }
+
+  
 
   return (
     <div className={classes.root}>
-      <Paper variant="outlined">
-      <User/>
+
+      <Paper variant="outlined"  >
+      <User id="target"/>
       <Divider/>
-       {msg.map(child=>child)}
+      <div className={classes.boxP}>
+      <div className={classes.box} >
+      {this.state.msg.map(child=>child)}
+      </div>
+      </div>
+     
       </Paper>
-      
+
+
     <Paper variant="outlined" className={classes.post}>
         <Typography variant="h6" className={classes.hd}>send</Typography>
               <Divider/>
@@ -71,15 +143,19 @@ export default function MessagesFinal() {
                       label="write something here"
                       multiline
                       rows={4}
-                      value={msgTypo}
+                      value={this.state.msgTypo}
                       defaultValue=""
                       onChange={handleChane}
                       variant="outlined"/>
                       <div className={classes.hd} style={{float:"right"}}>
                           <Button color="primary" onClick={()=>sendMsg()} >Send</Button>
                       </div> 
+                      <div className={classes.hd} style={{float:"right"}}>
+                          <Button color="primary" onClick={()=>recMsg()} >rec</Button>
+                      </div> 
           </Paper>
       </div>
    
   );
-}
+}}
+export default withStyles(useStyles)(MessagesFinal);
