@@ -11,7 +11,7 @@ export default class StartupDashboard extends Component {
 		super(props);
 
 		this.state = {
-			currComponent:'3'
+			currComponent:'1'
 		};
 	}
 	showComponents=(props)=>{
