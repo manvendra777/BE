@@ -1,26 +1,24 @@
-import React,{up} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-import ImageIcon from '@material-ui/icons/Image';
-import WorkIcon from '@material-ui/icons/Work';
-import BeachAccessIcon from '@material-ui/icons/BeachAccess';
-import Divider from '@material-ui/core/Divider';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import Typography from '@material-ui/core/Typography';
-import { Button } from '@material-ui/core';
-import axios from 'axios';
+import React, { up, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Avatar from "@material-ui/core/Avatar";
+import ImageIcon from "@material-ui/icons/Image";
+import WorkIcon from "@material-ui/icons/Work";
+import BeachAccessIcon from "@material-ui/icons/BeachAccess";
+import Divider from "@material-ui/core/Divider";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import Typography from "@material-ui/core/Typography";
+import { Button } from "@material-ui/core";
+import axios from "axios";
 
-  import { blue } from '@material-ui/core/colors';
-
-
+import { blue } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: "100%",
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
@@ -29,39 +27,43 @@ const useStyles = makeStyles((theme) => ({
 export default function Invitation(props) {
   const classes = useStyles();
 
-  
-  const accept=()=>{
-    
-    axios.post('http://localhost:8080/user/acceptRequest',null,{params:{id: 1,target : props.id}})
-      .then(res => {
-        props.de();
+  const accept = () => {
+    axios
+      .post("http://localhost:8080/user/acceptRequest", null, {
+        params: { id: 2, target: props.id },
       })
-     
-  }
-  const del=()=>{
-    axios.post('http://localhost:8080/user/deleteRequest',null,{params: {id:1, target:props.id}})
-    .then(res => {
-      props.de();
-    })
-  }
+      .then((res) => {
+        props.de();
+      });
+  };
+  const del = () => {
+    axios
+      .post("http://localhost:8080/user/deleteRequest", null, {
+        params: { id: props.id, target: 2 },
+      })
+      .then((res) => {
+        props.de();
+      });
+  };
   return (
-   <div>
+    <div>
       <ListItem>
         <ListItemAvatar>
           <Avatar>
             <BeachAccessIcon />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary={props.name} secondary={props.text} />
-            <ListItemSecondaryAction>
-              
-            <Button style={{margin:"12px"}} onClick={del}>Delete</Button>
-              <Button variant="contained" color="primary" onClick={accept}>Accept</Button>
-       
-            </ListItemSecondaryAction>
- 
+        <ListItemText primary={props.name} secondary={props.id} />
+        <ListItemSecondaryAction>
+          <Button style={{ margin: "12px" }} onClick={del}>
+            Delete
+          </Button>
+          <Button variant="contained" color="primary" onClick={accept}>
+            Accept
+          </Button>
+        </ListItemSecondaryAction>
       </ListItem>
-      <Divider/>
-      </div>
+      <Divider />
+    </div>
   );
 }

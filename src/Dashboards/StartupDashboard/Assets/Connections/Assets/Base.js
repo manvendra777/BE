@@ -1,80 +1,84 @@
-import React, { useState , updateState} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
-import { spacing } from '@material-ui/system';
-import List from '@material-ui/core/List';
-import Invitation from "./Invitation"
-import axios from 'axios';
+import React, { Component } from "react";
+import { withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Divider from "@material-ui/core/Divider";
+import Typography from "@material-ui/core/Typography";
+import { spacing } from "@material-ui/system";
+import List from "@material-ui/core/List";
+import Invitation from "./Invitation";
+import axios from "axios";
+import Connections from "../Connections";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = (theme) => ({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '& > *': {
+    display: "flex",
+    flexWrap: "wrap",
+    "& > *": {
       margin: theme.spacing(1),
       width: theme.spacing(100),
       height: theme.spacing(100),
     },
   },
   hd: {
-    margin: theme.spacing(1,1,1,2),
-},
-listSection:{
-  width: "100%",
-  height: "100%",
+    margin: theme.spacing(1, 1, 1, 2),
+  },
+  listSection: {
+    width: "100%",
+    height: "100%",
     overflowY: "scroll",
-    paddingRight: "17px",/* Increase/decrease this value for cross-browser compatibility */
-    boxSizing: "content-box" /* So the width will be 100% + 17px */
-},
-notiList:{
-  width: "100%",
+    paddingRight:
+      "17px" /* Increase/decrease this value for cross-browser compatibility */,
+    boxSizing: "content-box" /* So the width will be 100% + 17px */,
+  },
+  notiList: {
+    width: "100%",
     height: "92%",
     overflow: "hidden",
-}
-}));
+  },
+});
 
-
-export default function Base(props) {
-  const classes = useStyles();
-  const [invitations,setInvitations]=useState([]);
-
-  const rem=()=>{
-    props.m();
+class Base extends Component {
+  state = {
+    invites: [],
+  };
+  componentDidMount() {
+    this.getUsers();
   }
-  
-  React.useEffect(() => {
-    // Your code here
-    let req=[];
-    axios.get(`http://localhost:8080/user/pendingRequests`,{params: {id: 1}})
-    .then(res => {
-      req = res.data;
-      console.log(req)
-      req.map((item,i)=>{
-        console.log(item);
-        setInvitations(invitations=>[...invitations,<Invitation name={item} id={item} seq={i} de={rem} invs={invitations}/>])
-      })
-    })
-  },[]);
 
- 
+  getUsers = async () => {
+    let data = await axios
+      .get(`http://localhost:8080/user/pendingRequests`, { params: { id: 2 } })
+      .then(({ data }) => data);
+    this.setState({ invites: data });
+    console.log(data);
+  };
 
-  return (
-    <div className={classes.root}>
+  render() {
+    const { classes } = this.props;
+    return (
+      <div className={classes.root}>
         <Paper elevation={3}>
-            <div className={classes.hd}>
-                <Typography variant="h6" >Your Invitation</Typography>
-            </div>
-            <Divider />
-            <Divider/>
-            <div className={classes.notiList}>
-
+          <div className={classes.hd}>
+            <Typography variant="h6">Your Invitation</Typography>
+          </div>
+          <Divider />
+          <Divider />
+          <div className={classes.notiList}>
             <List className={classes.listSection}>
-            {invitations.map(child=>child)}
+              {this.state.invites.map((item) => (
+                <Invitation
+                  key={item}
+                  name={item}
+                  id={item}
+                  de={this.getUsers}
+                />
+              ))}
             </List>
-            </div>
+          </div>
         </Paper>
-    </div>
-  );
+      </div>
+    );
+  }
 }
+
+export default withStyles(useStyles)(Base);
