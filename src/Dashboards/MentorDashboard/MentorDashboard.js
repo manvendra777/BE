@@ -6,12 +6,12 @@ import ListOfOnlineCandidates from "./Assets/Messaging/Assets/ListOfOnlineCandid
 import Messaging from './Assets/Messaging/Messaging'
 import Connections from "./Assets/Connections/Connections"
 import Home from "./Assets/home/Home"
-export default class Dashboard extends Component {
+export default class MentorDashboard extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			currComponent:'3'
+			currComponent:'1'
 		};
 	}
 	showComponents=(props)=>{
@@ -41,7 +41,6 @@ export default class Dashboard extends Component {
 				break;
 		}
 	}
-
 	setProfile=()=>{
 		this.setState({currComponent:'1'})
 	}
@@ -57,8 +56,6 @@ export default class Dashboard extends Component {
 	setHome=()=>{
 		this.setState({currComponent:'5'})
 	}
-
-
 	render() {
 		return <div><Header home={this.setHome} connections={this.setConnections} messaging={this.setMessagin} notification={this.setNotifications} profile={this.setProfile} />
 					<div style={{margin:'75px'}}>

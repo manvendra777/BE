@@ -11,18 +11,29 @@ import BeachAccessIcon from '@material-ui/icons/BeachAccess';
 import Divider from '@material-ui/core/Divider';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Typography from '@material-ui/core/Typography';
+import { withStyles } from "@material-ui/core/styles";
+import { Component } from 'react';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = theme => ({
   root: {
     width: '100%',
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
-}));
+});
 
-export default function Noti(props) {
-  const classes = useStyles();
+class Noti extends Component {
+  constructor(props) {
+		super(props);
 
+		this.state = {
+			currComponent:'4'
+		};
+	}
+
+  render() {
+    const { classes } = this.props;
+  
   return (
    <div>
       <ListItem>
@@ -31,9 +42,9 @@ export default function Noti(props) {
             <BeachAccessIcon />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary={props.name} secondary={props.text} />
+        <ListItemText primary={this.props.name} secondary={this.props.text} />
             <ListItemSecondaryAction>
-            <Typography variant="overline" display="block" gutterBottom>{props.time}
+            <Typography variant="overline" display="block" gutterBottom>{this.props.time}
       </Typography>
             </ListItemSecondaryAction>
  
@@ -42,3 +53,5 @@ export default function Noti(props) {
       </div>
   );
 }
+}
+export default withStyles(useStyles)(Noti);

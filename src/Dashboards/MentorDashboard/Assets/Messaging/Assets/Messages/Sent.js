@@ -1,19 +1,32 @@
 import Chip from '@material-ui/core/Chip';
-import React from 'react';
+import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme) => ({
+import { withStyles } from "@material-ui/core/styles";
+const useStyles =theme => ({
     root: {
-        margin:theme.spacing(1,0,0,2),
+      margin:theme.spacing(1,0,0,0),
+        width:'100%',
     },
-  }));
+  });
   
-  export default function Sent(props) {
-    const classes = useStyles();
+  class Sent extends Component {
+    constructor(props) {
+      super(props);
+  
+      this.state = {
+        currComponent:'4'
+      };
+    }
+  
+    render() {
+      const { classes } = this.props;
   
     return (
       <div className={classes.root}>
-        <Chip label={props.msg} color="primary" />
+       <div style={{textAlign:'right'}}>
+        <Chip label={this.props.msg} color="primary"/>
+        </div>
       </div>
     );
-  }
+  }}
+  export default withStyles(useStyles)(Sent);

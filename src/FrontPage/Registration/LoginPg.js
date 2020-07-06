@@ -75,7 +75,7 @@ class LoginPg extends React.Component {
                 />
             </div>
             <div className="Login" style={{marginBottom:20}}>
-              <Link to="/startupDashboard">
+              <Link to="/mentorDashboard">
             <Button variant= "primary" type= "submit">Login</Button></Link>
               <Link to= "/registrationPg">
               <small> Register</small>

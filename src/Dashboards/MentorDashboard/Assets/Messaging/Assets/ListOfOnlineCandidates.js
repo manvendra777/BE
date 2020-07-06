@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -10,7 +10,9 @@ import DraftsIcon from '@material-ui/icons/Drafts';
 import Card from '@material-ui/core/Card';
 import User from './User';
 import Typography from '@material-ui/core/Typography';
-const useStyles = makeStyles((theme) => ({
+import axios from 'axios';
+import { withStyles } from "@material-ui/core/styles";
+const useStyles = theme => ({
   root: {
    
     maxWidth: 360,
@@ -31,10 +33,35 @@ const useStyles = makeStyles((theme) => ({
   hd:{
     margin:theme.spacing(1,1,1,1),
   }
-}));
+});
 
-export default function SelectedListItem() {
-  const classes = useStyles();
+class ListOfOnlineCandidates extends Component {
+  constructor(props) {
+		super(props);
+
+		this.state = {
+			members:[]
+		};
+  }
+  
+  componentWillMount(){
+    // Your code here
+    let mem=[];
+    axios.get(`http://localhost:8081/user/myConnections`,{params: {id: 2}})
+    .then(res => {
+      mem = res.data;
+      console.log(mem)
+
+      mem.map((item,i)=>{
+        console.log(item);
+        this.setState({members:[...this.state.members,<User id={item}/>]})
+      })
+    })
+  };
+
+
+  render() {
+    const { classes } = this.props;
 
   return (
     <div className={classes.root}>
@@ -45,10 +72,7 @@ export default function SelectedListItem() {
       <div style={{overflowY: "auto",width:'100%',height:'100%',paddingRight:'15px',paddingLeft:'0px'}}>
 
       <List component="nav" aria-label="main mailbox folders" >
-        <User/>
-        <User/>
-        <User/>
-        <User/>
+      {this.state.members.map(child=>child)}
       </List>
       </div>
       </div>
@@ -57,3 +81,6 @@ export default function SelectedListItem() {
     </div>
   );
 }
+}
+export default withStyles(useStyles)(ListOfOnlineCandidates);
+

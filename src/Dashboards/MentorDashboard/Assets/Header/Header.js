@@ -1,4 +1,4 @@
-import React from "react";
+import React,{Component} from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -11,9 +11,9 @@ import Menu from "@material-ui/core/Menu";
 import Button from "@material-ui/core/Button";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
+import { withStyles } from "@material-ui/core/styles";
 
-
-const useStyles = makeStyles(theme => ({
+const useStyles = theme => ({
 	grow: {
 		flexGrow: 1
 	},
@@ -80,10 +80,21 @@ const useStyles = makeStyles(theme => ({
 			display: "none"
 		}
 	}
-}));
+});
 
-export default function Header(props) {
-	const classes = useStyles();
+class Header extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			name: "Sanket Tupe",
+			sub1: "working ",
+			sub2: "Pune, Maharastra, India"
+		};
+	}
+
+	render() {
+    const { classes } = this.props;
 	
 	return (
 
@@ -92,37 +103,23 @@ export default function Header(props) {
 			<AppBar position="fixed">
 				<Toolbar>
 					
+					<div onClick={this.props.home} >
 					<Typography className={classes.title} variant="h6" noWrap>
-						Startup
+						Mentor
 					</Typography>	
-
-
-
-					<div className={classes.search}>
-						<div className={classes.searchIcon}>
-							<SearchIcon />
-						</div>
-						<InputBase
-							placeholder="Search…"
-							classes={{
-								root: classes.inputRoot,
-								input: classes.inputInput
-							}}
-							inputProps={{ "aria-label": "search" }}
-						/>
 					</div>
-
-				
 					<div className={classes.groupButtons}>						
 							
-							<Button onClick={props.home}  style={{color:"white",margin:"5px"}} >Home</Button>
-							<Button onClick={props.connections}  style={{color:"white",margin:"5px"}} >Connections</Button>
-							<Button onClick={props.messaging}  style={{color:"white",margin:"5px"}} >Messaging</Button>
-							<Button onClick={props.notification}  style={{color:"white",margin:"5px"}} >Notifications</Button>
-							<Button onClick={props.profile}  style={{color:"white",margin:"5px"}} > Profile </Button>
+							<Button onClick={this.props.home}  style={{color:"white",margin:"5px"}} >Home</Button>
+							<Button onClick={this.props.connections}  style={{color:"white",margin:"5px"}} >Connections</Button>
+							<Button onClick={this.props.messaging}  style={{color:"white",margin:"5px"}} >Messaging</Button>
+							<Button onClick={this.props.notification}  style={{color:"white",margin:"5px"}} >Notifications</Button>
+							<Button onClick={this.props.profile}  style={{color:"white",margin:"5px"}} > Profile </Button>
 						</div>
 				</Toolbar>
 			</AppBar>
 		</div>
 	);
-}
+}}
+export default withStyles(useStyles)(Header);
+	

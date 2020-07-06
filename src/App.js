@@ -1,5 +1,6 @@
 import React from 'react';
 import StartupDashboard from './Dashboards/StartupDashboard/StartupDashboard';
+import MentorDashboard from './Dashboards/MentorDashboard/MentorDashboard';
 import FrontPage from './FrontPage/FrontPage';
 import {Route, BrowserRouter as Router, Link} from 'react-router-dom'
 import RegistrationPg from './FrontPage/Registration/RegistrationPg';
@@ -24,7 +25,7 @@ function App() {
         <Route path= "/mentorform" component= {MentorForm}/>
         <Route path= "/investorform" component= {InvestorForm}/>
         <Route path= "/communityform" component= {CommunityForm}/>
-        <Route path= "/startupDashboard" component= {StartupDashboard}/>
+        <Route path= "/mentorDashboard" component= {StartupDashboard}/>
         </Router>
   </div>
   );

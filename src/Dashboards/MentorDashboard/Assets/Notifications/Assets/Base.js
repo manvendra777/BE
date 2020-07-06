@@ -6,8 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import { spacing } from '@material-ui/system';
 import List from '@material-ui/core/List';
 import Noti from "./Noti"
+import { withStyles } from "@material-ui/core/styles";
+import { Component } from 'react';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles =theme => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -32,10 +34,18 @@ notiList:{
     height: "92%",
     overflow: "hidden",
 }
-}));
+});
 
-export default function Base() {
-  const classes = useStyles();
+class Base extends Component {
+  constructor(props) {
+		super(props);
+
+		this.state = {
+			currComponent:'4'
+		};
+	}
+  render() {
+  const { classes } = this.props;
 
   return (
     <div className={classes.root}>
@@ -64,4 +74,6 @@ export default function Base() {
         </Paper>
     </div>
   );
+  }
 }
+export default withStyles(useStyles)(Base);

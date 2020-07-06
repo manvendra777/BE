@@ -32,7 +32,7 @@ class RegistrationPg extends React.Component{
 
                 console.log(data);
 
-                axios.post('http://localhost:8081/security/addUser', data=data)
+                axios.post('http://localhost:8080/security/addUser', data=data)
                 .then(function (response) {
 
                     console.log(response.data);

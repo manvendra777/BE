@@ -88,7 +88,7 @@ class Header extends Component {
 
 		this.state = {
 			name: "Sanket Tupe",
-			sub1: "working in google",
+			sub1: "working ",
 			sub2: "Pune, Maharastra, India"
 		};
 	}
@@ -103,27 +103,11 @@ class Header extends Component {
 			<AppBar position="fixed">
 				<Toolbar>
 					
+					<div onClick={this.props.home} >
 					<Typography className={classes.title} variant="h6" noWrap>
 						Startup
 					</Typography>	
-
-
-
-					<div className={classes.search}>
-						<div className={classes.searchIcon}>
-							<SearchIcon />
-						</div>
-						<InputBase
-							placeholder="Search…"
-							classes={{
-								root: classes.inputRoot,
-								input: classes.inputInput
-							}}
-							inputProps={{ "aria-label": "search" }}
-						/>
 					</div>
-
-				
 					<div className={classes.groupButtons}>						
 							
 							<Button onClick={this.props.home}  style={{color:"white",margin:"5px"}} >Home</Button>
@@ -138,3 +122,4 @@ class Header extends Component {
 	);
 }}
 export default withStyles(useStyles)(Header);
+	

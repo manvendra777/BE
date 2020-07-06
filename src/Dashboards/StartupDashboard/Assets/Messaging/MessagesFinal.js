@@ -65,7 +65,7 @@ class MessagesFinal extends Component {
     
     // Your code here
     let persons=[];
-    axios.get(`http://localhost:8080/api/message/find`,{params: {senderId: 45332,receiverId:2364}})
+    axios.get(`http://localhost:8081/api/message/find`,{params: {senderId: 45332,receiverId:2364}})
     .then(res => {
       persons = res.data;
 
@@ -97,7 +97,7 @@ class MessagesFinal extends Component {
 
       var sender = '45332';
       var receiver= '2364';
-      axios.post('http://localhost:8080/api/message', {
+      axios.post('http://localhost:8081/api/message', {
         "senderId" : sender,
         "receiverId" : receiver,
         "text" : this.state.msgTypo })

@@ -1,23 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-
+import { withStyles } from "@material-ui/core/styles";
 import PostFinal from './PostFinal';
 import { List } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
+
+const useStyles = theme => ({
   root: {
      
   },
   base:{
    
   }
-}));
+});
 
-export default function VirtualizedList() {
-  const classes = useStyles();
+class PostList extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			name: "Sanket Tupe",
+			sub1: "working in google",
+			sub2: "Pune, Maharastra, India"
+		};
+	}
+
+	render() {
+		const { classes } = this.props;
 
   return (
     <div className={classes.root}>
@@ -40,3 +52,6 @@ export default function VirtualizedList() {
     </div>
   );
 }
+}
+export default withStyles(useStyles)(PostList);
+

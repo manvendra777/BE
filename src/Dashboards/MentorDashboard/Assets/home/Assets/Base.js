@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Post from './Post'
 import Feeds from './Feeds'
 import PostFinal from './PostFinal'
-
+import { withStyles } from "@material-ui/core/styles";
 
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import PostList from "./PostList"
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = theme => ({
   root: {
     justifyContent: 'space-around',
     overflow: 'hidden',
@@ -19,11 +19,21 @@ const useStyles = makeStyles((theme) => ({
     margin:theme.spacing(0),
   
   },
-}));
+});
 
+class Base extends Component {
+	constructor(props) {
+		super(props);
 
-export default function Base() {
-  const classes = useStyles();
+		this.state = {
+			name: "Sanket Tupe",
+			sub1: "working in google",
+			sub2: "Pune, Maharastra, India"
+		};
+	}
+
+	render() {
+    const { classes } = this.props;
   return (
 
     <div style={{right:"25%",float:"right",position:"relative"}}>
@@ -36,3 +46,5 @@ export default function Base() {
     </div>
   );
 }
+}
+export default withStyles(useStyles)(Base);

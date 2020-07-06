@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -16,8 +16,9 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Divider } from '@material-ui/core';
+import { withStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = theme => ({
   root: {
     maxWidth: theme.spacing(100),
     width:theme.spacing(100),
@@ -40,14 +41,25 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: red[500],
   },
-}));
+});
 
-export default function PostFinal() {
-  const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+class PostFinal extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			name: "Sanket Tupe",
+			sub1: "working in google",
+      sub2: "Pune, Maharastra, India",
+      expanded:false,
+		};
+	}
+
+	render() {
+    const { classes } = this.props;
 
   const handleExpandClick = () => {
-    setExpanded(!expanded);
+    this.setState({expanded : !this.state.expanded});
   };
 
   return (
@@ -87,16 +99,16 @@ export default function PostFinal() {
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
+            [classes.expandOpen]: this.state.expanded,
           })}
           onClick={handleExpandClick}
-          aria-expanded={expanded}
+          aria-expanded={this.state.expanded}
           aria-label="show more"
         >
           <ExpandMoreIcon />
         </IconButton>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Comments</Typography>
          
@@ -105,3 +117,5 @@ export default function PostFinal() {
     </Card>
   );
 }
+}
+export default withStyles(useStyles)(PostFinal);
