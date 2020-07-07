@@ -15,7 +15,7 @@ import Container from '@material-ui/core/Container';
 import { withStyles } from "@material-ui/core/styles";
 
 
-const useStyles =theme => ({
+const useStyles = theme => ({
   root: {
     flexWrap: 'wrap',
     '& > *': {
@@ -24,167 +24,135 @@ const useStyles =theme => ({
       height: theme.spacing(80),
     },
   },
-  box:{
+  box: {
     //overflowX:'hidden',
     width: '100%',
     height: '100%',
-    overflowY:'scroll',
-    paddingRight:'17px',
-    boxSizing:'contentBox'
+    overflowY: 'scroll',
+    paddingRight: '17px',
+    boxSizing: 'contentBox'
   },
-  boxP:{
+  boxP: {
     width: '100%',
     height: '90%',
     overflow: 'hidden'
   },
 
   post: {
-    margin: theme.spacing(0,1,0,1),
-    height:theme.spacing(30),
-},
-postBox: {
-    margin: theme.spacing(1,5,1,2),
-    width:theme.spacing(71)
-    
-},
-    hd:{
-        margin: theme.spacing(1,1,1,2),
-    }
+    margin: theme.spacing(0, 1, 0, 1),
+    height: theme.spacing(30),
+  },
+  postBox: {
+    margin: theme.spacing(1, 5, 1, 2),
+    width: theme.spacing(71)
+
+  },
+  hd: {
+    margin: theme.spacing(1, 1, 1, 2),
+  }
 });
 class MessagesFinal extends Component {
   constructor(props) {
-		super(props);
+    super(props);
 
-		this.state = {
-      msg:[],
-      msgTypo:'',
-      newMsg:[]
-		};
-	}
-
-  componentDidMount(){
+    this.state = {
+      msg: [],
+      msgTypo: '',
+      buffer: [],
+    };
+  }
+  recMsg() {
     // Your code here
-    let persons=[];
-    axios.get(`http://localhost:8081/api/message/find`,{params: {senderId: 45332,receiverId:2364}})
-    .then(res => {
-      persons = res.data;
-
-      persons.map((item,i)=>{
-        console.log(item);
-
-        if(item.senderId==45332){
-          this.setState({
-            msg:[...this.state.msg,<Sent msg={item.text}/>]
-          })
-        }else{
-          this.setState({
-            msg:[...this.state.msg,<Rec msg={item.text}/>]
-          })
-        }
-      
+    let persons = [];
+    let up = [];
+    axios.get(`http://localhost:8081/api/message/find`, { params: { senderId: 45332, receiverId: 2364 } })
+      .then(res => {
+        persons = res.data;
+        persons.map((item, i) => {
+          if (i > this.state.buffer.length - 1) {
+            if (item.senderId == 45332) {
+              this.setState({
+                msg: [...this.state.msg, <Sent msg={item.text} />]
+              })
+            } else {
+              this.setState({
+                msg: [...this.state.msg, <Rec msg={item.text} />]
+              })
+            }
+          }
+        })
+        this.setState({ buffer: persons })
       })
+  }
+
+  sendMsg = () => {
+    this.setState({ msgTypo: '' });
+
+    var sender = '45332';
+    var receiver = '2364';
+    axios.post('http://localhost:8081/api/message', {
+      "senderId": sender,
+      "receiverId": receiver,
+      "text": this.state.msgTypo
     })
+      .then(res => {
+
+      })
+    this.recMsg();
+  }
+  componentDidMount() {
+    this.recMsg();
+    this.interval = setInterval(() => {
+      this.recMsg();
+    }, 3000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
 
   render() {
     const { classes } = this.props;
 
+    const handleChane = (e) => {
+      this.setState({ msgTypo: e.target.value });
+    }
+    return (
+      <div className={classes.root}>
+        <Paper variant="outlined"  >
+          <User id="target" />
+          <Divider />
+          <div className={classes.boxP}>
+            <div className={classes.box} >
+              {this.state.msg.map(child => child)}
+            </div>
+          </div>
+        </Paper>
 
-  const sendMsg=()=>{
-     console.log(this.state.msgTypo);
-      this.setState({
-        msg:[...this.state.msg,<Sent msg={this.state.msgTypo}/>]
-      })
-      this.setState({msgTypo:''});
 
-      var sender = '45332';
-      var receiver= '2364';
-      axios.post('http://localhost:8081/api/message', {
-        "senderId" : sender,
-        "receiverId" : receiver,
-        "text" : this.state.msgTypo })
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      })
-      recMsg();
-  }
-  
-
-  
-  const recMsg=()=>{
-        // Your code here
-        let persons=[];
-        let up = [];
-        
-        axios.get(`http://localhost:8081/api/message/find`,{params: {senderId: 45332,receiverId:2364}})
-        .then(res => {
-          persons = res.data;
-          
-         
-          this.setState({newMsg:[]})
-          persons.map((item,i)=>{
-            
-            
-            if(item.senderId==45332){
-              this.setState({
-                newMsg:[...this.state.newMsg,<Sent msg={item.text}/>]
-              })
-            }else{
-              this.setState({
-                newMsg:[...this.state.newMsg,<Rec msg={item.text}/>]
-              })
-            }
-          
-          })
-         
-        })
-  }
-
-  const handleChane=(e)=>{
-      this.setState({msgTypo:e.target.value});
-  }
-
-  
-
-  return (
-    <div className={classes.root}>
-
-      <Paper variant="outlined"  >
-      <User id="target"/>
-      <Divider/>
-      <div className={classes.boxP}>
-      <div className={classes.box} >
-      {this.state.msg.map(child=>child)}
+        <Paper variant="outlined" className={classes.post}>
+          <Typography variant="h6" className={classes.hd}>send</Typography>
+          <Divider />
+          <TextField
+            className={classes.postBox}
+            id="outlined-multiline-static"
+            label="write something here"
+            multiline
+            rows={4}
+            value={this.state.msgTypo}
+            defaultValue=""
+            onChange={handleChane}
+            variant="outlined" />
+          <div className={classes.hd} style={{ float: "right" }}>
+            <Button color="primary" onClick={() => this.sendMsg()} >Send</Button>
+          </div>
+          <div className={classes.hd} style={{ float: "right" }}>
+            <Button color="primary" onClick={() => this.recMsg()} >rec</Button>
+          </div>
+        </Paper>
       </div>
-      </div>
-     
-      </Paper>
 
-
-    <Paper variant="outlined" className={classes.post}>
-        <Typography variant="h6" className={classes.hd}>send</Typography>
-              <Divider/>
-                      <TextField
-                      className={classes.postBox}
-                      id="outlined-multiline-static"
-                      label="write something here"
-                      multiline
-                      rows={4}
-                      value={this.state.msgTypo}
-                      defaultValue=""
-                      onChange={handleChane}
-                      variant="outlined"/>
-                      <div className={classes.hd} style={{float:"right"}}>
-                          <Button color="primary" onClick={()=>sendMsg()} >Send</Button>
-                      </div> 
-                      <div className={classes.hd} style={{float:"right"}}>
-                          <Button color="primary" onClick={()=>recMsg()} >rec</Button>
-                      </div> 
-          </Paper>
-      </div>
-   
-  );
-}}
+    );
+  }
+}
 export default withStyles(useStyles)(MessagesFinal);
