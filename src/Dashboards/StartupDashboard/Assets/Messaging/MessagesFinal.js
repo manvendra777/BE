@@ -58,11 +58,11 @@ class MessagesFinal extends Component {
 		this.state = {
       msg:[],
       msgTypo:'',
+      newMsg:[]
 		};
 	}
 
   componentDidMount(){
-    
     // Your code here
     let persons=[];
     axios.get(`http://localhost:8081/api/message/find`,{params: {senderId: 45332,receiverId:2364}})
@@ -83,7 +83,10 @@ class MessagesFinal extends Component {
         }
       
       })
-    })}
+    })
+  }
+
+
   render() {
     const { classes } = this.props;
 
@@ -105,14 +108,40 @@ class MessagesFinal extends Component {
         console.log(res);
         console.log(res.data);
       })
+      recMsg();
   }
   
 
   
   const recMsg=()=>{
-    
-
+        // Your code here
+        let persons=[];
+        let up = [];
+        
+        axios.get(`http://localhost:8081/api/message/find`,{params: {senderId: 45332,receiverId:2364}})
+        .then(res => {
+          persons = res.data;
+          
+         
+          this.setState({newMsg:[]})
+          persons.map((item,i)=>{
+            
+            
+            if(item.senderId==45332){
+              this.setState({
+                newMsg:[...this.state.newMsg,<Sent msg={item.text}/>]
+              })
+            }else{
+              this.setState({
+                newMsg:[...this.state.newMsg,<Rec msg={item.text}/>]
+              })
+            }
+          
+          })
+         
+        })
   }
+
   const handleChane=(e)=>{
       this.setState({msgTypo:e.target.value});
   }

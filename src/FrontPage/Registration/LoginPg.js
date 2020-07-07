@@ -21,20 +21,22 @@ class LoginPg extends React.Component {
       password: this.state.password
     }
     
-    if(this.state.username.length>3 || this.state.password.length>3)
-    {
-      console.log('Valid data');
-      console.log({data});
+    if((this.state.username!=null && this.state.password!=null)&&(this.state.username.length > 3 && this.state.password.length>3))
+    { 
+     
       axios.post('http://localhost:8081/security/login', data=data)
       .then(function (response) {
+          if(response.data){
+            //window.location = "/login" //This line of code will redirect you once the submission is succeed
+            console.log("here you go !");
+          }else{
+            console.log("incorrect username or password");
+          }
+      })
 
-          console.log(response.data);
-          //window.location = "/login" //This line of code will redirect you once the submission is succeed
-      })   
       if(this.resetForm){
           console.log("true");
-      }
-      
+      } 
     }
     else{
       console.error('Invalid');
@@ -75,8 +77,8 @@ class LoginPg extends React.Component {
                 />
             </div>
             <div className="Login" style={{marginBottom:20}}>
-              <Link to="/mentorDashboard">
-            <Button variant= "primary" type= "submit">Login</Button></Link>
+             
+            <Button variant= "primary" type= "submit">Login</Button>
               <Link to= "/registrationPg">
               <small> Register</small>
             </Link>
