@@ -3,7 +3,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {List, ListItem} from 'material-ui/List';
 import RaisedButton from 'material-ui/RaisedButton'
 import axios from 'axios';
-
+import Header from './header';
+import CardM from '@material-ui/core/Card';
 
 
 
@@ -48,9 +49,12 @@ class InvestorConfirm extends React.Component{
         
                 <MuiThemeProvider>
                   <React.Fragment>
-                  <h1 style= {{color: "white",
-                                 backgroundColor: "#77a6f7"
-                    }}>Confirm your Details</h1>
+                  <Header info="Confirm your Details"/>
+                      <div style={{margin:"auto",width:"40%"}}>
+                    <CardM style= {{width: 600, marginTop: 70,marginRight:100,marginLeft:100,padding:20,paddingLeft:50}} elevation={10}> 
+                     
+                
+                
                      <List>
                          <ListItem
                          primaryText= "First Name:"
@@ -89,8 +93,11 @@ class InvestorConfirm extends React.Component{
                       <RaisedButton
                         label="Back"
                         primary= {false}
+                        style={{marginTop:20,marginLeft:20}}
                         onClick= {this.back}
                       />
+                      </CardM>
+                      </div>
                   </React.Fragment>
          
                 </MuiThemeProvider>

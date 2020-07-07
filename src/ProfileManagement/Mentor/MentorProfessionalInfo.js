@@ -2,7 +2,8 @@ import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton'
-
+import Header from './header';
+import CardM from '@material-ui/core/Card';
 
 
 class MentorProfessionalInfo extends React.Component{ 
@@ -26,10 +27,10 @@ class MentorProfessionalInfo extends React.Component{
         
                 <MuiThemeProvider>
                   <React.Fragment>
-                  <h1 style= {{color: "white",
-                                 backgroundColor: "#77a6f7"
-                    }}>Professional Details</h1>
-                  <br/>
+                  <Header info="Professional Details"/>
+                    <div style={{margin:"auto",width:"40%"}}>
+                    <CardM style= {{width: 400,marginTop: 80,marginRight:100,marginLeft:100,padding:10,paddingLeft:50}} elevation={10}> 
+                      
                       <TextField
                       hintText= "Enter qualification"
                       floatingLabelText= "Qualification"
@@ -92,13 +93,17 @@ class MentorProfessionalInfo extends React.Component{
                         label="Continue"
                         primary= {true}
                         onClick= {this.continue}
+                        style={{marginTop:20}}
                       />
 
                     <RaisedButton
                         label="Back"
                         primary= {false}
                         onClick= {this.back}
+                        style={{marginTop:20,marginLeft:20,marginBottom:20}}
                       />
+                      </CardM>
+                      </div>
                   </React.Fragment>
          
                 </MuiThemeProvider>

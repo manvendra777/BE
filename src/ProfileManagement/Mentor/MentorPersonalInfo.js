@@ -3,6 +3,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton'
 import { AppBar } from 'material-ui';
+import Header from './header';
+import CardM from '@material-ui/core/Card';
 
 
 
@@ -23,10 +25,11 @@ class MentorPersonalInfo extends React.Component{
         
                 <MuiThemeProvider>
                   <React.Fragment>
-                    <h1 style= {{color: "white",
-                                 backgroundColor: "#77a6f7"
-                    }}>Personal Details</h1>
-                    <br/>
+                  <Header info="Personal Details"/>
+                  <div style={{margin:"auto",width:"40%"}}>
+                    <CardM style= {{width: 400, marginTop: 150,marginRight:100,marginLeft:100,padding:20,paddingLeft:50}} elevation={10}> 
+                    
+                   
                       <TextField
                       hintText= "Enter Firstname"
                       floatingLabelText= "Firstname"
@@ -64,7 +67,10 @@ class MentorPersonalInfo extends React.Component{
                         label="Continue"
                         primary= {true}
                         onClick= {this.continue}
+                        style={{marginTop:20}}
                       />
+                      </CardM>
+                      </div>
                   </React.Fragment>
          
                 </MuiThemeProvider>

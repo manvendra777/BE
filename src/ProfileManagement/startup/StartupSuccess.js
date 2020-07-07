@@ -2,7 +2,6 @@ import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import CardM from '@material-ui/core/Card';
 import Header from './header';
-import { wait } from '@testing-library/react';
 
 
 class StartupSuccess extends React.Component{ 
