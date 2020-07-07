@@ -61,7 +61,12 @@ class MessagesFinal extends Component {
       buffer: [],
     };
   }
+  scrollToBottom = () => {
+    const { messageList } = this.refs;
+    messageList.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+  }
   recMsg() {
+    this.scrollToBottom();
     // Your code here
     let persons = [];
     let up = [];
@@ -86,30 +91,34 @@ class MessagesFinal extends Component {
   }
 
   sendMsg = () => {
-    this.setState({ msgTypo: '' });
-
-    var sender = '45332';
-    var receiver = '2364';
-    axios.post('http://localhost:8081/api/message', {
-      "senderId": sender,
-      "receiverId": receiver,
-      "text": this.state.msgTypo
-    })
-      .then(res => {
-
+    if (this.state.msgTypo != "") {
+      this.setState({ msgTypo: '' });
+      var sender = '45332';
+      var receiver = '2364';
+      axios.post('http://localhost:8081/api/message', {
+        "senderId": sender,
+        "receiverId": receiver,
+        "text": this.state.msgTypo
       })
-    this.recMsg();
+        .then(res => {
+        })
+      this.recMsg();
+    }
+
   }
   componentDidMount() {
     this.recMsg();
     this.interval = setInterval(() => {
       this.recMsg();
-    }, 3000);
+    }, 1000);
+    this.scrollToBottom();
   }
   componentWillUnmount() {
     clearInterval(this.interval);
   }
-
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
 
   render() {
     const { classes } = this.props;
@@ -119,17 +128,22 @@ class MessagesFinal extends Component {
     }
     return (
       <div className={classes.root}>
+
         <Paper variant="outlined"  >
           <User id="target" />
           <Divider />
           <div className={classes.boxP}>
-            <div className={classes.box} >
-              {this.state.msg.map(child => child)}
+            <div className={classes.box}>
+
+              <div ref="messageList">
+                {this.state.msg.map(child => child)}
+              </div>
+            </div>
+            <div style={{ float: "left", clear: "both" }}
+              ref={(el) => { this.messagesEnd = el; }}>
             </div>
           </div>
         </Paper>
-
-
         <Paper variant="outlined" className={classes.post}>
           <Typography variant="h6" className={classes.hd}>send</Typography>
           <Divider />

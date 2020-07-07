@@ -24,7 +24,7 @@ const useStyles =theme => ({
     return (
       <div className={classes.root}>
        <div style={{textAlign:'right'}}>
-        <Chip label={this.props.msg} color="primary"/>
+        <Chip style={{maxWidth:250}} label={this.props.msg} color="primary"/>
         </div>
       </div>
     );

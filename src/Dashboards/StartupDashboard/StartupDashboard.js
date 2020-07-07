@@ -11,57 +11,56 @@ export default class StartupDashboard extends Component {
 		super(props);
 
 		this.state = {
-			currComponent:'3'
+			currComponent: '3'
 		};
 	}
-	showComponents=(props)=>{
+	showComponents = (props) => {
 		switch (this.state.currComponent) {
 			case '1':
-				return (<Profile/>)
+				return (<Profile />)
 				break;
-				
+
 			case '2':
-				return (<Notification/>)
+				return (<Notification />)
 				break;
 
 			case '3':
-				return (<Messaging/>)
+				return (<Messaging />)
 				break;
 
 			case '4':
-				return (<Connections/>)
+				return (<Connections />)
 				break;
 
 			case '5':
-				return (<Home/>)
+				return (<Home />)
 				break;
-
-			default :
-				return (<Profile/>)
+			default:
+				return (<Profile />)
 				break;
 		}
 	}
-	setProfile=()=>{
-		this.setState({currComponent:'1'})
+	setProfile = () => {
+		this.setState({ currComponent: '1' })
 	}
-	setNotifications=()=>{
-		this.setState({currComponent:'2'})
+	setNotifications = () => {
+		this.setState({ currComponent: '2' })
 	}
-	setMessagin=()=>{
-		this.setState({currComponent:'3'})
+	setMessagin = () => {
+		this.setState({ currComponent: '3' })
 	}
-	setConnections=()=>{
-		this.setState({currComponent:'4'})
+	setConnections = () => {
+		this.setState({ currComponent: '4' })
 	}
-	setHome=()=>{
-		this.setState({currComponent:'5'})
+	setHome = () => {
+		this.setState({ currComponent: '5' })
 	}
 	render() {
 		return <div><Header home={this.setHome} connections={this.setConnections} messaging={this.setMessagin} notification={this.setNotifications} profile={this.setProfile} />
-					<div style={{margin:'75px'}}>
-					{this.showComponents()}
-					<ListOfOnlineCandidates/>
-					</div>
-				</div>;
+			<div style={{ margin: '75px' }}>
+				{this.showComponents()}
+				<ListOfOnlineCandidates />
+			</div>
+		</div>;
 	}
 }
