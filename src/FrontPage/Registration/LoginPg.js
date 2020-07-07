@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import { Button, Container, Card, Form, Row, Col, Image} from 'react-bootstrap';
 import axios from 'axios'
+import CardM from '@material-ui/core/Card';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import ButtonM from '@material-ui/core/Button';
 
 class LoginPg extends React.Component {
 
@@ -23,7 +27,6 @@ class LoginPg extends React.Component {
     
     if((this.state.username!=null && this.state.password!=null)&&(this.state.username.length > 3 && this.state.password.length>3))
     { 
-     
       axios.post('http://localhost:8081/security/login', data=data)
       .then(function (response) {
           if(response.data){
@@ -49,43 +52,36 @@ class LoginPg extends React.Component {
   render(){
     return (
       <div>
-        <Row style={{background: "#151B54"}}>
+        <Row style={{background: "#90caf9"}}>
         <Col >
           <Image style= {{width: 500, height: 600}} src= "assets/login.png"/>        </Col>
         <Col>
-        <Card style={{marginTop:150, marginRight: 100, width: 300}}>
+        <CardM style= {{width: 400, marginTop: 150,marginRight:100}} elevation={10}> 
           <Container>
-        <Form onSubmit= {this.handleSubmit} method= "post" >
-        <h1 style={{color: "#2F4F4F", fontWeight: "bold"}}>Sign In</h1>
+        <Form onSubmit= {this.handleSubmit} method= "post" style= {{marginBottom: 40,marginTop:20,marginLeft:20}} >
+        <Typography variant="h4" gutterBottom style={{color: "#2F4F4F", fontWeight: "bold"}}>
+        Sign In
+        </Typography>
         <div >
-            <input
-              type= "text"
-              placeholder= "Enter your username"
-              name= "username"
-              onChange= {(event)=>{this.setState({username:event.target.value})}}
-              style= {{marginBottom: 20}}
-              />            
-        
+        <div>
+            <TextField type="text" name="username" error={this.state.estateM} style= {{marginBottom: 20, width:"90%"}}  id="standard-basic" label="Enter your username" onChange= {(event)=>{this.setState({username:event.target.value})}}/>
+        </div>  
+        <div>
+            <TextField type="password" name="password" error={this.state.estateM} style= {{marginBottom: 20, width:"90%"}}  id="standard-basic" label="Enter your password" onChange= {(event)=>{this.setState({password:event.target.value})}}/>
+        </div>  
           </div>
-            <div >
-              <input
-                type= "password"
-                placeholder= "Enter your password"
-                name= "password"
-                onChange= {(event)=>{this.setState({password:event.target.value})}}
-                style= {{marginBottom: 20}}
-                />
-            </div>
             <div className="Login" style={{marginBottom:20}}>
-             
-            <Button variant= "primary" type= "submit">Login</Button>
+            <ButtonM type="submit"  variant="contained" color="primary" style= {{marginTop: 20,background:"#2196f3"}}>
+                    Login
+              </ButtonM>
               <Link to= "/registrationPg">
-              <small> Register</small>
+              <Typography  style={{marginTop:20}}  variant="subtitle1" gutterBottom>Create your Account</Typography>
             </Link>
             </div>
         </Form>
         </Container>
-        </Card>
+        </CardM>
+        
         </Col>
         </Row>
       </div>

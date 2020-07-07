@@ -2,6 +2,8 @@ import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton'
+import Header from './header';
+import CardM from '@material-ui/core/Card';
 
 
 
@@ -26,10 +28,9 @@ class StartupCompanyInfo extends React.Component{
         
                 <MuiThemeProvider>
                   <React.Fragment>
-                  <h1 style= {{color: "white",
-                                 backgroundColor: "#77a6f7"
-                    }}>Company Details</h1>
-                     <br/>
+                  <Header info="Company Details"/>
+                    <div style={{margin:"auto",width:"40%"}}>
+                    <CardM style= {{width: 400,marginTop: 80,marginRight:100,marginLeft:100,padding:10,paddingLeft:50}} elevation={10}> 
                       <TextField
                       hintText= "Enter your profession"
                       floatingLabelText= "profession"
@@ -101,18 +102,21 @@ class StartupCompanyInfo extends React.Component{
 
                       />
                      <br/>
-                      
                       <RaisedButton
                         label="Continue"
                         primary= {true}
                         onClick= {this.continue}
+                        style={{marginTop:20,marginBottom:5}}
                       />
 
                     <RaisedButton
                         label="Back"
                         primary= {false}
                         onClick= {this.back}
+                        style={{marginLeft:20}}
                       />
+                      </CardM>
+                      </div>
                   </React.Fragment>
          
                 </MuiThemeProvider>

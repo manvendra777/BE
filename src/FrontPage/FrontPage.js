@@ -1,26 +1,19 @@
 import React from 'react'
 import {Row, Col, Container, Button, Image, Card, figcaption} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
+import Header from './header'
 
 class FrontPage extends React.Component{
 
     render(){
         return(
             <div>
-                <Row style= {{background: "#501d1b"}}>
-                    <Col style= {{color: "white", marginTop: 20, fontFamily: "serif", fontStyle: "bold"}}><h1>Acquaintance</h1></Col>
-                    <Col lg= {{span: 1, offset:5}} style= {{marginTop: 20, marginBottom: 20}}>
-                    <Link to= "./registrationPg">
-                    <Button variant="primary">Register</Button></Link>
-                    </Col>
-                    <Col lg= {{span: 1, offset:0}} style= {{marginTop: 20}}>
-                        <Link to= "./LoginPg">
-                    <Button variant="outline-info">Login</Button></Link>
-                    </Col>
-                </Row>
+            <Header/>
+            <div style={{marginTop:120}}>
+              
                 <Row>
                 </Row>
-                <Container>
+                <Container >
                 <Row>
                     <Row>
                     <Col md= {{offset:0}}>
@@ -68,9 +61,9 @@ class FrontPage extends React.Component{
                 </Row>
              
                 </Container>
-                <center><h1 style= {{background: "powderblue", color: "black"}}>Developers</h1>
+                <center style={{marginTop:60}}><h1 style= {{background: "powderblue", color: "black"}}>Developers</h1>
                 <div>
-                <Container>
+                <Container >
                     <Row style= {{}}>
                    <Col>
                     <Image style= {{width: 100, height: 100, marginLeft: 40}} src="assets/sanket.png" roundedCircle ></Image>
@@ -95,6 +88,7 @@ class FrontPage extends React.Component{
                     <figcaption>Nagesh Sir</figcaption></center>
                     </Container>
 
+            </div>
             </div>
         );
     }

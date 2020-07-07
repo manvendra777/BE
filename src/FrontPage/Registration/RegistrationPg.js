@@ -3,7 +3,10 @@ import { Link, Route } from 'react-router-dom';
 import './RegistrationPg.css';
 import { Button, Container, Card, Form, Row, Col, Image} from 'react-bootstrap';
 import axios from 'axios';
-
+import CardM from '@material-ui/core/Card';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import ButtonM from '@material-ui/core/Button';
 
 class RegistrationPg extends React.Component{
 
@@ -13,14 +16,16 @@ class RegistrationPg extends React.Component{
             email: "",
             password: "",
             username: "",
-            errors: {}
+            errors: {},
+            estateM:false,
+            estateP:false
         };
         this.handleSubmit= this.handleSubmit.bind(this);
     }
 
     
     handleSubmit(event){
-        event.preventDefault();
+        event.preventDefault(); 
             if (this.validateForm()) {
                 console.log(this.state);
               
@@ -46,11 +51,11 @@ class RegistrationPg extends React.Component{
     validateForm() {
 
         let errors = {};
-        
+        this.setState({estateM:false,estateP:false})
         let formIsValid = true;
         
         if (!this.state.email) {
-        
+        this.setState({estateM:true})
         formIsValid = false;
         
         errors["email"] = "*Please enter your email-ID.";
@@ -64,7 +69,7 @@ class RegistrationPg extends React.Component{
         var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
         
         if (!pattern.test(this.state.email)) {
-        
+            this.setState({estateM:true})
         formIsValid = false;
         
         errors["email"] = "*Please enter valid email-ID.";
@@ -74,7 +79,7 @@ class RegistrationPg extends React.Component{
         }
         
         if (!this.state.password) {
-        
+            this.setState({estateP:true})
         formIsValid = false;
         
         errors["password"] = "*Please enter your password.";
@@ -84,7 +89,7 @@ class RegistrationPg extends React.Component{
         if (typeof this.state.password !== "undefined") {
         
         if (!this.state.password.match(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/)) {
-        
+            this.setState({estateP:true})
         formIsValid = false;
         
         errors["password"] = "*Please enter secure and strong password.";
@@ -94,9 +99,7 @@ class RegistrationPg extends React.Component{
         }
         
         this.setState({
-        
         errors: errors
-        
         });
         
         return formIsValid;
@@ -105,52 +108,44 @@ class RegistrationPg extends React.Component{
     render(){
         return( 
             <div>             
-                <Row style= {{background: " 	#FFFF99"}}>
+                <Row style= {{background: "#FFFF99"}}>
                     <Col >
                         <Image style= {{width: 500, height: 600, marginTop: 0}} src= "assets/registration.png"/>
                     </Col>
                     <Col >
-                    <Card style= {{width: 500, marginTop: 120}}> 
+                    <CardM style= {{width: 500, marginTop: 120}} elevation={10}> 
                 
                     <Container>
-                <Form className= "RegistrationPg" method= "post" onSubmit= {this.handleSubmit} style= {{marginBottom: 40}}>
-               <h2 style={{color: "#2F4F4F", fontWeight: "bold"}}>Register</h2>
-                    
-                    <div>
-                        <input type= "text" 
-                           name= "name" 
-                           placeholder= "Enter your full name" 
-                           onChange= {(event)=>{this.setState({username:event.target.value})}}
-                           style= {{marginBottom: 20}}
-                           />
+
+                <Form className= "RegistrationPg" method= "post" onSubmit= {this.handleSubmit} style= {{marginBottom: 40,marginTop:20,marginLeft:20}}>
+                <Typography variant="h4" gutterBottom style={{color: "#2F4F4F", fontWeight: "bold"}}>
+                Register
+                </Typography>       
+                    <div >
+                        <div>
+                        <TextField type="username" style= {{marginBottom: 20, width:"60%"}}  id="standard-basic" label="Enter username" onChange= {(event)=>{this.setState({username:event.target.value})}}/>
+                        </div>
+                        <div>
+                        <TextField error={this.state.estateM} style= {{marginBottom: 20, width:"60%"}} helperText={this.state.errors.email} id="standard-basic" label="Enter your Email" onChange= {(event)=> {this.setState({email: event.target.value})}}/>
+                        </div>
+                        <div>
+                        <TextField type="password" error={this.state.estateP} style= {{marginBottom: 20, width:"60%"}} helperText={this.state.errors.password} id="standard-basic" label="Enter password" onChange= {(event)=>{this.setState({password: event.target.value})}}/>
+                        </div>        
+                   </div>
+
+                   <ButtonM type="submit"  variant="contained" color="primary" style= {{marginTop: 20,background:"#2196f3"}}>
+                        Sign up
+                    </ButtonM>
+                  <div style={{display:"flex",marginTop:20}}>   
+                    <Typography variant="subtitle1" gutterBottom>Already have an account?</Typography>
+                        <Link to= "./loginPg">
+                          <Typography  style={{marginLeft:10}}  variant="subtitle1" gutterBottom>Sign in</Typography>
+                        </Link>
                     </div>
-                    <div>
-                    <input type= "email" 
-                           name= "email" 
-                           placeholder= "Enter your Email"  
-                           onChange= {(event)=> {this.setState({email: event.target.value})}}
-                           style= {{marginBottom: 20}}
-                           />
-                           <p style={{color: "red"}}>{this.state.errors.email}</p>
-                           </div>
-                    <div>
-                   <input type= "password" 
-                           name= "password" 
-                           placeholder= "Enter password" 
-                           onChange= {(event)=>{this.setState({password: event.target.value})}}
-                           style= {{marginBottom: 20}}
-                           />
-                           <p style={{color: "red"}}>{this.state.errors.password}</p>
-                           </div>
-                  <Button type="submit" variant= "primary" style= {{marginTop: 20}}>Submit</Button>
-                    <small>or</small>
-                    <Link to= "./loginPg">
-                    <Button variant="primary" style= {{marginTop: 20}}>Login</Button>
-                    </Link>
                 </Form>
                 </Container>
                 
-                </Card>
+                </CardM>
                 </Col>
                 </Row>
             </div>
