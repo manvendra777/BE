@@ -6,12 +6,13 @@ import ListOfOnlineCandidates from "./Assets/Messaging/Assets/ListOfOnlineCandid
 import Messaging from './Assets/Messaging/Messaging'
 import Connections from "./Assets/Connections/Connections"
 import Home from "./Assets/home/Home"
+import FindMentors from './Assets/FindMentors/FindMentors'
 export default class StartupDashboard extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			currComponent: '1'
+			currComponent: '5'
 		};
 	}
 	showComponents = (props) => {
@@ -35,6 +36,9 @@ export default class StartupDashboard extends Component {
 			case '5':
 				return (<Home />)
 				break;
+			case '6':
+				return (<FindMentors />)
+				break;
 			default:
 				return (<Profile />)
 				break;
@@ -55,13 +59,15 @@ export default class StartupDashboard extends Component {
 	setHome = () => {
 		this.setState({ currComponent: '5' })
 	}
-			
+	setFind = () => {
+		this.setState({ currComponent: '6' })
+	}
+
 	render() {
-		return <div><Header home={this.setHome} connections={this.setConnections} messaging={this.setMessagin} notification={this.setNotifications} profile={this.setProfile} />
-	
+		return <div><Header find={this.setFind} home={this.setHome} connections={this.setConnections} messaging={this.setMessagin} notification={this.setNotifications} profile={this.setProfile} />
 			<div style={{ margin: '75px' }}>
-				{this.showComponents()}
 				<ListOfOnlineCandidates />
+				{this.showComponents()}
 			</div>
 		</div>;
 	}

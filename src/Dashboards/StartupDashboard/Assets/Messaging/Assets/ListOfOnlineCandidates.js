@@ -14,8 +14,7 @@ import axios from 'axios';
 import { withStyles } from "@material-ui/core/styles";
 const useStyles = theme => ({
   root: {
-   
-    maxWidth: 360,
+    minWidth: '15%',
     height: "90%",
     position: "fixed",
     zIndex: 1,
@@ -23,7 +22,6 @@ const useStyles = theme => ({
     overflowY: "hidden",
     overflow:"hidden",
     right:0,
-    margin:theme.spacing(1,1,1,1),
     backgroundColor: theme.palette.background.paper,
     width:250,
   },
@@ -70,7 +68,6 @@ class ListOfOnlineCandidates extends Component {
       <Divider/>
       <div style={{width:'100%',height:'100%',overflow:'hidden'}}>
       <div style={{overflowY: "auto",width:'100%',height:'100%',paddingRight:'15px',paddingLeft:'0px'}}>
-
       <List component="nav" aria-label="main mailbox folders" >
       {this.state.members.map(child=>child)}
       </List>

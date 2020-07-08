@@ -36,7 +36,7 @@ class Base extends Component {
     const { classes } = this.props;
   return (
 
-    <div style={{right:"25%",float:"right",position:"relative"}}>
+    <div style={{right:"25%",float:"right",position:"relative",}}>
         <div className={classes.spc}>
         <Post/>
         </div>
