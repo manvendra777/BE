@@ -25,11 +25,9 @@ const useStyles = theme => ({
     },
   },
   box: {
-    //overflowX:'hidden',
-    width: '100%',
+    overflowX:'hidden',
     height: '100%',
     overflowY: 'scroll',
-    paddingRight: '17px',
     boxSizing: 'contentBox'
   },
   boxP: {
@@ -39,8 +37,8 @@ const useStyles = theme => ({
   },
 
   post: {
-    margin: theme.spacing(0, 1, 0, 1),
-    height: theme.spacing(30),
+    margin: theme.spacing(2, 1, 0, 1),
+    height: theme.spacing(17),
   },
   postBox: {
     margin: theme.spacing(1, 5, 1, 2),
@@ -60,7 +58,13 @@ class MessagesFinal extends Component {
       msgTypo: '',
       buffer: [],
     };
+    this.keyPress = this.keyPress.bind(this);
   }
+  keyPress(e){
+    if(e.keyCode == 13){
+      this.sendMsg()
+    }
+ }
   scrollToBottom = () => {
     const { messageList } = this.refs;
     messageList.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
@@ -77,11 +81,11 @@ class MessagesFinal extends Component {
           if (i > this.state.buffer.length - 1) {
             if (item.senderId == 45332) {
               this.setState({
-                msg: [...this.state.msg, <Sent msg={item.text} />]
+                msg: [...this.state.msg, <Sent msg={item.text} time={new Date(item.timestamp)} />]
               })
             } else {
               this.setState({
-                msg: [...this.state.msg, <Rec msg={item.text} />]
+                msg: [...this.state.msg, <Rec msg={item.text} time={new Date(item.timestamp)}/>]
               })
             }
           }
@@ -129,14 +133,15 @@ class MessagesFinal extends Component {
     return (
       <div className={classes.root}>
 
-        <Paper variant="outlined"  >
+        <Paper  elevation={5}  >
           <User id="target" />
           <Divider />
           <div className={classes.boxP}>
             <div className={classes.box}>
-
               <div ref="messageList">
+                <div style={{background:'#e5eaea',padding:20,displat:'flex'}}>
                 {this.state.msg.map(child => child)}
+                </div>
               </div>
             </div>
             <div style={{ float: "left", clear: "both" }}
@@ -144,24 +149,21 @@ class MessagesFinal extends Component {
             </div>
           </div>
         </Paper>
-        <Paper variant="outlined" className={classes.post}>
-          <Typography variant="h6" className={classes.hd}>send</Typography>
-          <Divider />
+        <Paper elevation={5} className={classes.post}>
           <TextField
+            style={{marginTop:17}}
             className={classes.postBox}
-            id="outlined-multiline-static"
+            id="outlined-basic"
             label="write something here"
-            multiline
             rows={4}
             value={this.state.msgTypo}
             defaultValue=""
+            type="text"
             onChange={handleChane}
+            onKeyDown={this.keyPress}
             variant="outlined" />
           <div className={classes.hd} style={{ float: "right" }}>
             <Button color="primary" onClick={() => this.sendMsg()} >Send</Button>
-          </div>
-          <div className={classes.hd} style={{ float: "right" }}>
-            <Button color="primary" onClick={() => this.recMsg()} >rec</Button>
           </div>
         </Paper>
       </div>

@@ -2,31 +2,24 @@ import Chip from '@material-ui/core/Chip';
 import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { withStyles } from "@material-ui/core/styles";
-const useStyles =theme => ({
-    root: {
-      margin:theme.spacing(1,0,0,0),
-        width:'100%',
-    },
-  });
-  
-  class Sent extends Component {
-    constructor(props) {
-      super(props);
-  
-      this.state = {
-        currComponent:'4'
-      };
-    }
-  
-    render() {
-      const { classes } = this.props;
-  
+import { Card } from '@material-ui/core';
+import  './msgBox.css'
+class Sent extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      date:'',
+    };
+  }
+  render() {
+    //style={{ marginTop: 5, marginBottom: 5, textAlign: 'right', padding: 7,paddingRight:25 }}
     return (
-      <div className={classes.root}>
-       <div style={{textAlign:'right'}}>
-        <Chip style={{maxWidth:250}} label={this.props.msg} color="primary"/>
+      <div style={{ marginLeft: 250, marginTop:10,marginBottom:10}}><Card elevation={5} style={{color:'#435a7b',background:'#f6f7f7',marginTop:5,marginBottom:5,textAlign:'left',padding:7,paddingLeft:25 ,borderBottomLeftRadius:25,borderTopRightRadius:25,borderTopLeftRadius:25,}}>
+        {this.props.msg}
+        </Card>
         </div>
-      </div>
     );
-  }}
-  export default withStyles(useStyles)(Sent);
+  }
+}
+export default Sent;
