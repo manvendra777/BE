@@ -1,4 +1,4 @@
-import React,{Component} from "react";
+import React, { Component } from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -12,15 +12,17 @@ import Button from "@material-ui/core/Button";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import { withStyles } from "@material-ui/core/styles";
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 const useStyles = theme => ({
 	grow: {
 		flexGrow: 1
 	},
-	groupButtons:{
+	groupButtons: {
 		position: "absolute",
-  		right: "0px",
-		padding:theme.spacing(1)
+		right: "0px",
+		padding: theme.spacing(1),
+		marginRight: 20
 	},
 	menuButton: {
 		marginRight: theme.spacing(2)
@@ -89,37 +91,40 @@ class Header extends Component {
 		this.state = {
 			name: "Sanket Tupe",
 			sub1: "working ",
-			sub2: "Pune, Maharastra, India"
+			sub2: "Pune, Maharastra, India",
 		};
+	}
+	logout(){
+		window.location = "/"
 	}
 
 	render() {
-    const { classes } = this.props;
-	
-	return (
+		const { classes } = this.props;
+		return (
 
-		<div className={classes.grow}>
+			<div className={classes.grow}>
 
-			<AppBar position="fixed">
-				<Toolbar>
-					
-					<div onClick={this.props.home} >
-					<Typography className={classes.title} variant="h6" noWrap>
-						Startup
-					</Typography>	
-					</div>
-					<div className={classes.groupButtons}>						
-							
-							<Button onClick={this.props.home}  style={{color:"white",margin:"5px"}} >Home</Button>
-							<Button onClick={this.props.connections}  style={{color:"white",margin:"5px"}} >Connections</Button>
-							<Button onClick={this.props.messaging}  style={{color:"white",margin:"5px"}} >Messaging</Button>
-							<Button onClick={this.props.notification}  style={{color:"white",margin:"5px"}} >Notifications</Button>
-							<Button onClick={this.props.profile}  style={{color:"white",margin:"5px"}} > Profile </Button>
+				<AppBar position="fixed">
+					<Toolbar>
+
+						<div onClick={this.props.home} >
+							<Typography className={classes.title} variant="h6" noWrap>
+								Startup
+					</Typography>
 						</div>
-				</Toolbar>
-			</AppBar>
-		</div>
-	);
-}}
+						<div className={classes.groupButtons}>
+							<Button onClick={this.props.home} style={{ color: "white", margin: "5px" }} >Home</Button>
+							<Button onClick={this.props.connections} style={{ color: "white", margin: "5px" }} >Connections</Button>
+							<Button onClick={this.props.messaging} style={{ color: "white", margin: "5px" }} >Messaging</Button>
+							<Button onClick={this.props.notification} style={{ color: "white", margin: "5px" }} >Notifications</Button>
+							<Button onClick={this.props.profile} style={{ color: "white", margin: "5px" }} > Profile </Button>
+							<Button  variant="outlined" color="secondary" onClick={this.logout} style={{color:'white',marginLeft:15}} >Logout </Button>
+						</div>
+					</Toolbar>
+				</AppBar>
+
+			</div>
+		);
+	}
+}
 export default withStyles(useStyles)(Header);
-	

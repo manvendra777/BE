@@ -14,8 +14,8 @@ import MentorForm from './ProfileManagement/Mentor/MentorForm'
 
 function App() {
   return (
+   
     <div>
-
       <Router>
         <Route exact path="/" component={FrontPage} />
         <Route path="/loginPg" component={LoginPg} />

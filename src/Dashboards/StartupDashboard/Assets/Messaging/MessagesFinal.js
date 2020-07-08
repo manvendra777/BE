@@ -28,12 +28,14 @@ const useStyles = theme => ({
     overflowX:'hidden',
     height: '100%',
     overflowY: 'scroll',
-    boxSizing: 'contentBox'
+    boxSizing: 'contentBox',
+    
   },
   boxP: {
     width: '100%',
-    height: '90%',
-    overflow: 'hidden'
+    height: '91.1%',
+    overflow: 'hidden',
+    background:'#e5eaea'
   },
 
   post: {
@@ -139,7 +141,7 @@ class MessagesFinal extends Component {
           <div className={classes.boxP}>
             <div className={classes.box}>
               <div ref="messageList">
-                <div style={{background:'#e5eaea',padding:20,displat:'flex'}}>
+                <div style={{padding:20,displat:'flex'}}>
                 {this.state.msg.map(child => child)}
                 </div>
               </div>

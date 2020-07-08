@@ -15,7 +15,7 @@ class Sent extends Component {
   render() {
     //style={{ marginTop: 5, marginBottom: 5, textAlign: 'right', padding: 7,paddingRight:25 }}
     return (
-      <div style={{ marginLeft: 250, marginTop:10,marginBottom:10}}><Card elevation={5} style={{color:'#435a7b',background:'#f6f7f7',marginTop:5,marginBottom:5,textAlign:'left',padding:7,paddingLeft:25 ,borderBottomLeftRadius:25,borderTopRightRadius:25,borderTopLeftRadius:25,}}>
+      <div style={{ marginLeft: 250, marginTop:10,marginBottom:10}}><Card elevation={5} style={{color:'#FFFFFF',background:'#435a7b',marginTop:5,marginBottom:5,textAlign:'left',padding:7,paddingLeft:25 ,borderBottomLeftRadius:25,borderTopRightRadius:25,borderTopLeftRadius:25,}}>
         {this.props.msg}
         </Card>
         </div>

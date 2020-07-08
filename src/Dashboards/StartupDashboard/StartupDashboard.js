@@ -11,7 +11,7 @@ export default class StartupDashboard extends Component {
 		super(props);
 
 		this.state = {
-			currComponent: '3'
+			currComponent: '1'
 		};
 	}
 	showComponents = (props) => {
@@ -55,8 +55,10 @@ export default class StartupDashboard extends Component {
 	setHome = () => {
 		this.setState({ currComponent: '5' })
 	}
+			
 	render() {
 		return <div><Header home={this.setHome} connections={this.setConnections} messaging={this.setMessagin} notification={this.setNotifications} profile={this.setProfile} />
+	
 			<div style={{ margin: '75px' }}>
 				{this.showComponents()}
 				<ListOfOnlineCandidates />
