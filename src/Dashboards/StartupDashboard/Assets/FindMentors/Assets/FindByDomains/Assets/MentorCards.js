@@ -10,18 +10,20 @@ import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
 const useStyles = makeStyles({
     root: {
-        maxWidth: '95%',
-        margin: 20,
+        width:400,
+        margin: 10,
         padding: 0,
-        whiteSpace:'normal'
+     
+        float:'left'
     },
     media: {
         height: 200,
     },
 });
 
-export default function MediaCard() {
+export default function MediaCard(props) {
     const classes = useStyles();
+
 
     return (
         <Card className={classes.root}>
@@ -33,30 +35,21 @@ export default function MediaCard() {
                 />
                 <CardContent >
                     <Typography gutterBottom variant="h5" component="h2">
-                        Raj Malhotra
-          </Typography>
-                    <div style={{ margin: 5, display: 'flex',padding:1,whiteSpace:'normal'}}>
-                        <Chip style={{marginLeft:5,marginRight:5}} label="Machine Learning" color="primary" />
-                        <Chip style={{marginLeft:5,marginRight:5}} label="Marketing" color="primary" />
-                        <Chip style={{marginLeft:5,marginRight:5}} label="Sports" color="primary" />
-                        <Chip style={{marginLeft:5,marginRight:5}} label="Space" color="primary" />
-                        <Chip style={{marginLeft:5,marginRight:5}} label="Space" color="primary" />
-                        <Chip style={{marginLeft:5,marginRight:5}} label="Space" color="primary" />
+                        {props.firstname + ' ' + props.lastname}
+                    </Typography>
+
+                    <div style={{ width: '100%',padding: 0, flex: 1, display: 'flex', overflow: 'hidden',position:'relative' }}>
+                    <div style={{ margin: 5, display: 'flex', padding: 1, whiteSpace: 'normal',overflow: 'hidden',bottom:-20 }}>
+                        {props.domain.map((item, i) => {
+                             return <Chip style={{ marginLeft: 5, marginRight: 5 }} label={item} color="primary" />
+                        })}
+                    </div>
                     </div>
 
                     <Typography variant="body2" color="textSecondary" component="p" >
                         <div >
-                            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                            across all continents except Antarctica
-                            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                            across all continents except Antarctica
-                            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                            across all continents except Antarctica
-                            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                            across all continents except Antarctica
-                            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                            across all continents except Antarctica
-              </div>
+                            {props.about}
+                        </div>
 
                     </Typography>
                 </CardContent>

@@ -8,20 +8,40 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import MentorCards from './Assets/MentorCards';
 import Typography from "@material-ui/core/Typography";
+import axios from 'axios';
 class FindByDomains extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             value: null,
+            MentorList:[]
         };
+    }
+
+    getDomainByList(){
+        //localhost:8081/mentor/profile/domain/findbylist?domain=Milk
+        var domainList='Milk';
+        this.setState({MentorList:[]})
+        var mentors;
+        axios.get(`http://localhost:8081/mentor/profile/domain/findbylist`, { params: { domain:domainList} })
+        .then(res => {
+          mentors = res.data;
+          mentors.map((item, i) => {
+              console.log(item);
+              
+              this.setState({MentorList:[...this.state.MentorList,<MentorCards domain={item.domain} firstname={item.firstName} lastname={item.lastName} about={item.about_yourself} />]})
+          })
+        })
     }
     render() {
         const handleChange = (event) => {
             this.setState({ value: event.target.value });
             console.log(this.state.value);
-
+            this.getDomainByList();
         };
+
+      
 
         return (
             <div>
@@ -45,15 +65,11 @@ class FindByDomains extends Component {
                     </div>
                     <Divider orientation="vertical" flexItem />
                     
-                    <div style={{height:500}}>
-                    <div style={{ background: '#bfbfbf', width: '100%' ,overflow:'scroll',height:'100%'}}>
-                        
+               
+                    <div style={{height:550,display:'block',width:'100%'}}>
+                    <div style={{ background: '#bfbfbf', display:'flex',flexFlow:'row wrap',justifyContent:'space-around',minWidth:'100%' ,overflow:'scroll',height:'100%'}}>
                         <div>
-                        <MentorCards/>
-                        <MentorCards/>
-                        <MentorCards/>
-                        <MentorCards/>
-                        <MentorCards/>
+                        {this.state.MentorList.map(child => child)}
                         </div>
                     </div>
                     </div>
