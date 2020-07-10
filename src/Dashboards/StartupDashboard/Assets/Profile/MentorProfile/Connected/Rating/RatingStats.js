@@ -80,7 +80,7 @@ export class RatingStat extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.setState({
       ratings: this.props.ratings,
       ratingAverage: this.props.ratingAverage,
@@ -90,10 +90,10 @@ export class RatingStat extends React.Component {
 
   render() {
     const classes = this.props.classes
-    const ratings = this.state.ratings
+    const ratings = this.props.ratings
     const colors = this.state.colors
-    const ratingAverage = this.state.ratingAverage
-    const raterCount = this.state.raterCount
+    const ratingAverage = this.props.ratingAverage
+    const raterCount = this.props.raterCount
 
     return (
       <div className={classes.root}>

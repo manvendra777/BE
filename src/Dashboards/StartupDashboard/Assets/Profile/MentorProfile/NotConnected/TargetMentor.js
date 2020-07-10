@@ -48,14 +48,21 @@ class TargetMentor extends Component {
         super(props);
 
         this.state = {
-            myProfile: []
+            myProfile: [],
+            val: [],
+            avg: '',
         };
         this.mapDomain = this.mapDomain.bind(this);
         this.getInfo = this.getInfo.bind(this);
         this.getLogs = this.getLogs.bind(this)
+
+        this.getRating = this.getRating.bind(this)
+        this.getRatingAv = this.getRatingAv.bind(this)
     }
     componentWillMount() {
         this.getInfo()
+        this.getRating()
+        this.getRatingAv()
     }
     getInfo() {
         var id = this.props.match.params.id
@@ -74,6 +81,27 @@ class TargetMentor extends Component {
             return this.state.myProfile.domain.map((item, i) => (<Chip color="primary" style={{ marginLeft: 5, margin: 2 }} label={item} />))
         }
     }
+
+
+    getRating() {
+        var avg;
+        axios.get(`http://localhost:8080/ratings/getRatingCount`, { params: { id: this.props.match.params.id } })
+            .then(res => {
+                avg = res.data;
+                avg = avg.reverse()
+                this.setState({ val: avg })
+            })
+    }
+    getRatingAv() {
+        var rate;
+        axios.get(`http://localhost:8080/ratings/getRatingAverage`, { params: { id: this.props.match.params.id } })
+            .then(res => {
+                rate = res.data;
+                console.log(rate);
+                this.setState({ avg: rate })
+            })
+    }
+
     render() {
         const { classes } = this.props;
         return (
@@ -99,7 +127,7 @@ class TargetMentor extends Component {
                         </Container>
                         <Divider style={{marginLeft:10,marginRight:20}} orientation="vertical" flexItem />
                         
-                        <RatingStats  ratings={[20, 25, 12, 7, 3]} ratingAverage={3.8} raterCount={67} />,
+                        <RatingStats ratings={this.state.val} ratingAverage={Math.round(this.state.avg * 10) / 10} raterCount={this.state.val.reduce((a, b) => a + b, 0)} />,
 
                     </Container>
                     <Divider style={{marginBottom:10}} />

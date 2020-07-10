@@ -57,9 +57,6 @@ export default function MediaCard() {
             </CardActionArea>
             <CardActions>
                 <Button size="small" color="primary">
-                    Send Invitation
-        </Button>
-                <Button size="small" color="primary">
                     Learn More
         </Button>
             </CardActions>

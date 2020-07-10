@@ -62,9 +62,6 @@ export default function MediaCard(props) {
 
             </CardActionArea>
             <CardActions>
-                <Button size="small" color="primary">
-                    Send Invitation
-        </Button>
                 <Button onClick={openMentorPage} size="small" color="primary">
                     Learn More
         </Button>

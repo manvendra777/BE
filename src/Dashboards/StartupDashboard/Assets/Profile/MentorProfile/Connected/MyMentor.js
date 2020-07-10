@@ -48,14 +48,25 @@ class MyMentor extends Component {
         super(props);
 
         this.state = {
-            myProfile: []
+            myProfile: [],
+            val: [],
+            avg: '',
+            myrating:0
         };
         this.mapDomain = this.mapDomain.bind(this);
         this.getInfo = this.getInfo.bind(this);
         this.getLogs = this.getLogs.bind(this)
+
+        this.getRating = this.getRating.bind(this)
+        this.getRatingAv = this.getRatingAv.bind(this)
+
+        this.gateMyRating = this.gateMyRating.bind(this)
     }
     componentWillMount() {
         this.getInfo()
+        this.getRating()
+        this.getRatingAv()
+        this.gateMyRating()
     }
     getInfo() {
         var id = this.props.match.params.id
@@ -66,6 +77,50 @@ class MyMentor extends Component {
                 this.setState({ myProfile: persons })
             })
     }
+
+    gateMyRating() {
+        var myid="5f05fec985937b5e5bb16df2"
+        var my=0
+        axios.get(`http://localhost:8080/ratings/get`, { params: { provider:myid ,entity:this.props.match.params.id} })
+        .then(res => {
+            my = res.data;
+            console.log(my);
+            
+            this.setState({ myrating: my })
+        })
+    }
+    setMyRating(rating) {
+        var myid="5f05fec985937b5e5bb16df2"
+        var m=this.props.match.params.id
+        //localhost:8080/ratings/save
+        axios.post('http://localhost:8080/ratings/save', {
+            "entityId": m,
+            "providerId": myid,
+            "value": rating
+        })
+            .then(res => {
+            })
+    }
+
+    getRating() {
+        var avg;
+        axios.get(`http://localhost:8080/ratings/getRatingCount`, { params: { id: this.props.match.params.id } })
+            .then(res => {
+                avg = res.data;
+                avg = avg.reverse()
+                this.setState({ val: avg })
+            })
+    }
+    getRatingAv() {
+        var rate;
+        axios.get(`http://localhost:8080/ratings/getRatingAverage`, { params: { id: this.props.match.params.id } })
+            .then(res => {
+                rate = res.data;
+                console.log(rate);
+                this.setState({ avg: rate })
+            })
+    }
+
     getLogs() {
         console.log(this.state.myProfile);
     }
@@ -79,12 +134,12 @@ class MyMentor extends Component {
         return (
             <div className={classes.root}>
                 <Card elevation={3}>
-                    <Container className={classes.cont} style={{marginBottom:20}}>
+                    <Container className={classes.cont} style={{ marginBottom: 20 }}>
                         <Avatar alt="Sanket" className={classes.large} />
-                        <Divider style={{marginLeft:10}} orientation="vertical" flexItem />
+                        <Divider style={{ marginLeft: 10 }} orientation="vertical" flexItem />
                         <Container className={classes.spc}>
                             <Typography variant="h4" gutterBottom>
-                                
+
                             </Typography>
                             <Typography variant="h5" gutterBottom>
                                 Mentor : {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}
@@ -97,21 +152,20 @@ class MyMentor extends Component {
                             </Typography>
                             <div>{this.mapDomain()}</div>
                         </Container>
-                        <Divider style={{marginLeft:10,marginRight:20}} orientation="vertical" flexItem />
-                        
-                        <RatingStats  ratings={[20, 25, 12, 7, 3]} ratingAverage={3.8} raterCount={67} />,
+                        <Divider style={{ marginLeft: 10, marginRight: 20 }} orientation="vertical" flexItem />
+                        <RatingStats ratings={this.state.val} ratingAverage={Math.round(this.state.avg * 10) / 10} raterCount={this.state.val.reduce((a, b) => a + b, 0)} />,
 
                     </Container>
-                    <Divider style={{marginBottom:10}} />
-                    <Button style={{marginLeft:30}} size="small" color="primary">Remove as a Mentor</Button>
-					<Button style={{marginLeft:30}} size="small" color="primary">Send Message</Button>
-					
-					<Rater style={{marginLeft:50,transform:"scale(1.5)"}} total={5} interactive={true} onRate={({rating}) => {console.log(rating)}}/>
-                  
-					<Divider style={{ marginTop: 10 }} />
+                    <Divider style={{ marginBottom: 10 }} />
+                    <Button style={{ marginLeft: 30 }} size="small" color="primary">Remove as a Mentor</Button>
+                    <Button style={{ marginLeft: 30 }} size="small" color="primary">Send Message</Button>
 
-                    <Container style={{ marginLeft:10,marginTop: 10,display:'block'}}>
-                       
+                    <Rater style={{ marginLeft: 50, transform: "scale(1.5)" }} rating={this.state.myrating} total={5} interactive={true} onRate={({ rating }) => { this.setMyRating(rating) }} />
+
+                    <Divider style={{ marginTop: 10 }} />
+
+                    <Container style={{ marginLeft: 10, marginTop: 10, display: 'block' }}>
+
                         <Typography variant="subtitle2" gutterBottom>
                             qualification: {this.state.myProfile.qualification}
                         </Typography>
@@ -121,7 +175,7 @@ class MyMentor extends Component {
                         <Typography variant="subtitle2" gutterBottom>
                             phone: {this.state.myProfile.phone_no}
                         </Typography>
-						
+
                         <Typography variant="subtitle2" gutterBottom>
                             experience_in_domain:{this.state.myProfile.experience_in_domain}
                         </Typography>
@@ -132,7 +186,7 @@ class MyMentor extends Component {
                             method_of_contact: {this.state.myProfile.method_of_contact}
                         </Typography>
                     </Container>
-                   
+
                 </Card>
             </div>
         );
