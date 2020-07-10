@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
+import { Route, BrowserRouter as Router, Link } from 'react-router-dom'
 const useStyles = makeStyles({
     root: {
         width:400,
@@ -21,13 +22,18 @@ const useStyles = makeStyles({
     },
 });
 
+
 export default function MediaCard(props) {
     const classes = useStyles();
 
+    
+    const openMentorPage=()=>{
+        window.location="/startupDashboard/TargetMentor/"+props.id
+    }
 
     return (
         <Card className={classes.root}>
-            <CardActionArea>
+            <CardActionArea onClick={openMentorPage}>
                 <CardMedia
                     className={classes.media}
                     image="https://specials-images.forbesimg.com/imageserve/1211231028/960x0.jpg?fit=scale"
@@ -59,7 +65,7 @@ export default function MediaCard(props) {
                 <Button size="small" color="primary">
                     Send Invitation
         </Button>
-                <Button size="small" color="primary">
+                <Button onClick={openMentorPage} size="small" color="primary">
                     Learn More
         </Button>
             </CardActions>

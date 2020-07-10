@@ -73,7 +73,7 @@ class LoginPg extends React.Component {
           if (response.data) {
             //window.location = "/login" //This line of code will redirect you once the submission is succeed
             console.log("here you go !");
-            window.location = "/startupDashboard"
+            window.location = "/startupDashboard/Home"
           } else {
             self.onError();
           }
@@ -104,7 +104,7 @@ class LoginPg extends React.Component {
                     </div>
                   </div>
                   <div className="Login" style={{ marginBottom: 20 }}>
-                    <ButtonM type="submit" variant="contained" color="primary" style={{ marginTop: 20, background: "#2196f3" }}>
+                  <ButtonM type="submit" variant="contained" color="primary" style={{ marginTop: 20, background: "#2196f3" }}>
                       Login
               </ButtonM>
                     <Link to="/registrationPg">

@@ -1,0 +1,136 @@
+import React, { Component } from "react";
+import { withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Avatar from "@material-ui/core/Avatar";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
+import Card from "@material-ui/core/Card";
+import { Button } from "@material-ui/core";
+import Divider from '@material-ui/core/Divider';
+import axios from 'axios';
+import Chip from '@material-ui/core/Chip';
+import RatingStats from './Rating/RatingStats'
+
+
+
+const styles = theme => ({
+    root: {
+        display: "flex",
+        flexWrap: "wrap",
+        "& > *": {
+            margin: theme.spacing(1, 1, 1, 1),
+            padding: theme.spacing(1, 0, 2, 0),
+            width: '80%',
+            marginLeft: '2%',
+            marginTop: '5%',
+        }
+    },
+    cont: {
+        display: "flex",
+        margin: "5px 0px 0px 5px ",
+        alignItems: "center",
+        marginBotton: 200
+    },
+    large: {
+        width: theme.spacing(15),
+        height: theme.spacing(15)
+    },
+    spc: {
+        display: "",
+        alignText: "center"
+    }
+});
+
+
+
+class TargetMentor extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            myProfile: []
+        };
+        this.mapDomain = this.mapDomain.bind(this);
+        this.getInfo = this.getInfo.bind(this);
+        this.getLogs = this.getLogs.bind(this)
+    }
+    componentWillMount() {
+        this.getInfo()
+    }
+    getInfo() {
+        var id = this.props.match.params.id
+        var persons;
+        axios.get(`http://localhost:8081/mentor/profile/` + id)
+            .then(res => {
+                persons = res.data;
+                this.setState({ myProfile: persons })
+            })
+    }
+    getLogs() {
+        console.log(this.state.myProfile);
+    }
+    mapDomain() {
+        if (this.state.myProfile.domain != undefined) {
+            return this.state.myProfile.domain.map((item, i) => (<Chip color="primary" style={{ marginLeft: 5, margin: 2 }} label={item} />))
+        }
+    }
+    render() {
+        const { classes } = this.props;
+        return (
+            <div className={classes.root}>
+                <Card elevation={3}>
+                    <Container className={classes.cont} style={{marginBottom:20}}>
+                        <Avatar alt="Sanket" className={classes.large} />
+                        <Divider style={{marginLeft:10}} orientation="vertical" flexItem />
+                        <Container className={classes.spc}>
+                            <Typography variant="h4" gutterBottom>
+                                
+                            </Typography>
+                            <Typography variant="h5" gutterBottom>
+                                Mentor : {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}
+                            </Typography>
+                            <Typography variant="subtitle2" gutterBottom>
+                                Id : {this.state.myProfile.id}
+                            </Typography>
+                            <Typography variant="subtitle1" gutterBottom>
+                                Address: {this.state.myProfile.address + ', ' + this.state.myProfile.city + ', ' + this.state.myProfile.postalCode + ', ' + this.state.myProfile.country}
+                            </Typography>
+                            <div>{this.mapDomain()}</div>
+                        </Container>
+                        <Divider style={{marginLeft:10,marginRight:20}} orientation="vertical" flexItem />
+                        
+                        <RatingStats  ratings={[20, 25, 12, 7, 3]} ratingAverage={3.8} raterCount={67} />,
+
+                    </Container>
+                    <Divider style={{marginBottom:10}} />
+                    <Button style={{marginLeft:30}} size="small" color="primary">Send Invitation</Button>
+                    <Divider style={{ marginTop: 10 }} />
+                    <Container style={{ marginLeft:10,marginTop: 10,display:'block'}}>
+                       
+                        <Typography variant="subtitle2" gutterBottom>
+                            qualification: {this.state.myProfile.qualification}
+                        </Typography>
+                        <Typography variant="subtitle2" gutterBottom>
+                            email: {this.state.myProfile.email}
+                        </Typography>
+                        <Typography variant="subtitle2" gutterBottom>
+                            phone: {this.state.myProfile.phone_no}
+                        </Typography>
+
+                        <Typography variant="subtitle2" gutterBottom>
+                            experience_in_domain:{this.state.myProfile.experience_in_domain}
+                        </Typography>
+                        <Typography variant="subtitle2" gutterBottom>
+                            Description: {this.state.myProfile.about_yourself}
+                        </Typography>
+                        <Typography variant="subtitle2" gutterBottom>
+                            method_of_contact: {this.state.myProfile.method_of_contact}
+                        </Typography>
+                    </Container>
+                   
+                </Card>
+            </div>
+        );
+    }
+}
+export default withStyles(styles)(TargetMentor);

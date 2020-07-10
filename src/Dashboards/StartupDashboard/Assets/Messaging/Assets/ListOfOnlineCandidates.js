@@ -14,7 +14,7 @@ import axios from 'axios';
 import { withStyles } from "@material-ui/core/styles";
 const useStyles = theme => ({
   root: {
-    minWidth: '15%',
+    width: '10%',
     height: "90%",
     position: "fixed",
     zIndex: 1,

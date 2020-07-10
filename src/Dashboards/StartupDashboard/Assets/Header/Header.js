@@ -102,7 +102,24 @@ class Header extends Component {
 	logout() {
 		window.location = "/"
 	}
-
+	find(){
+		window.location = "/startupDashboard/FindMentors"
+	}
+	home(){
+		window.location = "/startupDashboard/Home"
+	}
+	connections(){
+		window.location = "/startupDashboard/Connections"
+	}
+	messaging(){
+		window.location = "/startupDashboard/Messaging"
+	}
+	notification(){
+		window.location = "/startupDashboard/Notification"
+	}
+	profile(){
+		window.location = "/startupDashboard/Profile"
+	}
 	render() {
 		const { classes } = this.props;
 		return (
@@ -118,12 +135,12 @@ class Header extends Component {
 					</Typography>
 						</div>
 						<div className={classes.groupButtons}>
-							<Button onClick={this.props.find} style={{ color: "white", margin: "5px" }} >Find<SearchIcon style={{marginLeft:7}}/></Button>
-							<Button onClick={this.props.home} style={{ color: "white", margin: "5px" }} >Home<HomeIcon style={{marginLeft:7}}/></Button>
-							<Button onClick={this.props.connections} style={{ color: "white", margin: "5px" }} >Connections<PersonAddIcon style={{marginLeft:7}}/></Button>
-							<Button onClick={this.props.messaging} style={{ color: "white", margin: "5px" }} >Messaging<MessageIcon style={{marginLeft:7}}/></Button>
-							<Button onClick={this.props.notification} style={{ color: "white", margin: "5px" }} >Notifications<NotificationsIcon style={{marginLeft:7}}/></Button>
-							<Button onClick={this.props.profile} style={{ color: "white", margin: "5px" }} > Profile <AccountCircle style={{marginLeft:7}}/></Button>
+							<Button onClick={this.find} style={{ color: "white", margin: "5px" }} >Find<SearchIcon style={{marginLeft:7}}/></Button>
+							<Button onClick={this.home} style={{ color: "white", margin: "5px" }} >Home<HomeIcon style={{marginLeft:7}}/></Button>
+							<Button onClick={this.connections} style={{ color: "white", margin: "5px" }} >Connections<PersonAddIcon style={{marginLeft:7}}/></Button>
+							<Button onClick={this.messaging} style={{ color: "white", margin: "5px" }} >Messaging<MessageIcon style={{marginLeft:7}}/></Button>
+							<Button onClick={this.notification} style={{ color: "white", margin: "5px" }} >Notifications<NotificationsIcon style={{marginLeft:7}}/></Button>
+							<Button onClick={this.profile} style={{ color: "white", margin: "5px" }} > Profile <AccountCircle style={{marginLeft:7}}/></Button>
 							<Button variant="outlined" color="secondary" onClick={this.logout} style={{ color: 'white', marginLeft: 15 }} >Logout <ExitToAppIcon style={{marginLeft:7}}/></Button>
 						</div>
 					</Toolbar>

@@ -10,7 +10,7 @@ import ProfileFrontPage from './ProfileManagement/ProfileFrontPage'
 import CommunityForm from './ProfileManagement/Community/CommunityForm';
 import InvestorForm from './ProfileManagement/Investor/InvestorForm';
 import MentorForm from './ProfileManagement/Mentor/MentorForm'
-
+import Profile from './Dashboards/StartupDashboard/Assets/Profile/MyProfile/Profile'
 
 function App() {
   return (
