@@ -22,7 +22,7 @@ class CommunityConfirm extends React.Component{
 
 console.log(data);
 
-axios.put('http://localhost:8081/community/profile/add', {data})
+axios.put('http://localhost:8082/community/profile/add', {data})
 .then(function (response) {
 
     console.log("true");

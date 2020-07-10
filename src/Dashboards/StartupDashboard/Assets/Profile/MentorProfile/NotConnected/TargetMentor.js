@@ -67,7 +67,7 @@ class TargetMentor extends Component {
     getInfo() {
         var id = this.props.match.params.id
         var persons;
-        axios.get(`http://localhost:8081/mentor/profile/` + id)
+        axios.get(`http://localhost:8082/mentor/profile/` + id)
             .then(res => {
                 persons = res.data;
                 this.setState({ myProfile: persons })
@@ -85,7 +85,7 @@ class TargetMentor extends Component {
 
     getRating() {
         var avg;
-        axios.get(`http://localhost:8080/ratings/getRatingCount`, { params: { id: this.props.match.params.id } })
+        axios.get(`http://localhost:8085/ratings/getRatingCount`, { params: { id: this.props.match.params.id } })
             .then(res => {
                 avg = res.data;
                 avg = avg.reverse()
@@ -94,7 +94,7 @@ class TargetMentor extends Component {
     }
     getRatingAv() {
         var rate;
-        axios.get(`http://localhost:8080/ratings/getRatingAverage`, { params: { id: this.props.match.params.id } })
+        axios.get(`http://localhost:8085/ratings/getRatingAverage`, { params: { id: this.props.match.params.id } })
             .then(res => {
                 rate = res.data;
                 console.log(rate);

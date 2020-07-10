@@ -35,7 +35,7 @@ class StartupConfirm extends React.Component{
 
         console.log(data);
 
-        axios.put('http://localhost:8081/startup/profile/add', {data})
+        axios.put('http://localhost:8082/startup/profile/add', {data})
         .then(function (response) {
 
             console.log("true");

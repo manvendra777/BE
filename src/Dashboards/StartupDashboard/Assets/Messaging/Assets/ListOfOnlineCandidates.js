@@ -45,7 +45,7 @@ class ListOfOnlineCandidates extends Component {
   componentWillMount(){
     // Your code here
     let mem=[];
-    axios.get(`http://localhost:8080/user/myConnections`,{params: {id: 2}})
+    axios.get(`http://localhost:8083/user/myConnections`,{params: {id: 2}})
     .then(res => {
       mem = res.data;
       console.log(mem)

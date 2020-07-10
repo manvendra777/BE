@@ -15,7 +15,7 @@ export default class Profile extends Component {
 		var id = '5ed7d3b239ff0059a0a9980e'
 		var persons;
 
-		axios.get(`http://localhost:8081/startup/profile/` + id)
+		axios.get(`http://localhost:8082/startup/profile/` + id)
 			.then(res => {
 				persons = res.data;
 				console.log(persons);

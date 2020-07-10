@@ -25,7 +25,7 @@ class InvestorConfirm extends React.Component{
 
     console.log(data);
 
-    axios.put('http://localhost:8081/investor/profile/add', {data})
+    axios.put('http://localhost:8082/investor/profile/add', {data})
     .then(function (response) {
 
         console.log("true");
