@@ -7,19 +7,19 @@ class Cookie extends Component {
         super(props);
 
         this.state = {
-            cookie:''
+            cookie: ''
         };
     }
-    getCookie(){
-        console.log( Cookies.get('username'));
+    getCookie() {
+        console.log(Cookies.get('username'));
     }
     //localhost:8080/security/get
-    setCookie(){
+    setCookie() {
         Cookies.set('username', 'xxyyzzysasds', { expires: 7 })
     }
-   
+
     render() {
 
         return (<div><Button onClick={this.setCookie}>set</Button><Button onClick={this.getCookie}>get</Button></div>)
     }
-}export default Cookie;
+} export default Cookie;
