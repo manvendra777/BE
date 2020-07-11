@@ -3,7 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import Card from "@material-ui/core/Card";import React, { Component } from "react";
+import Card from "@material-ui/core/Card";
 import { Button } from "@material-ui/core";
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
@@ -55,6 +55,7 @@ class Name extends Component {
             phone_no: "",
             email: "",
 			age: "",
+			investingCapacity: null,
 			userID: ""
 		};
 		this.handleSubmit= this.handleSubmit.bind(this);
@@ -67,7 +68,9 @@ class Name extends Component {
             age: props.data.age,
             email:props.data.email,
             phone_no: props.data.phone_no,
-            userID: props.data.userID,
+			userID: props.data.userID,
+			investingCapacity: props.data.investingCapacity
+
 		});
 	}
 
@@ -85,12 +88,13 @@ class Name extends Component {
             age: this.state.age,
             email:this.state.email,
             phone_no: this.state.phone_no,
-            userID: this.state.userID,
+			userID: this.state.userID,
+			investingCapacity: this.state.investingCapacity
 		}
 
 		console.log(data);
 
-		axios.post('http://localhost:8081/investor/profile/5f06cef3c99ce30f9aa4d169', data = data)
+		axios.post('http://localhost:8081/investor/profile/5f09f43ff0612e2e4cc7db54', data = data)
 			.then(function (response) {
 				console.log(response.data);
 			})
@@ -151,6 +155,13 @@ class Name extends Component {
 					  name="phone_no"
 					  onChange={this.handleChange.bind(this)}
                       />
+					   <TextField
+                      defaultValue={this.state.investingCapacity}
+					  type= "number"
+					  label= "Investing Capacity"
+					  name="investingCapacity"
+					  onChange={this.handleChange.bind(this)}
+                      />
 					  <br/>
 					  <Button color= "primary" type= "submit">Submit</Button>
                      </form>
@@ -161,9 +172,11 @@ class Name extends Component {
 			</div>	
 		);
 		return (
-			<div className={classes.root}>
-					<Card elevation={3}>
+			<div >
+					<Card elevation={3} >
+					<Container>
 					<Container className={classes.cont}>
+						
 					<Grid md={3}>
 						<Avatar alt="Sanket" className={classes.large}/></Grid>
 						<Grid>
@@ -176,14 +189,15 @@ class Name extends Component {
 					<Divider style={{marginTop: 20}}/>
 					
 
-					<Card className={classes.root} md={6} variant="outlined" style={{marginTop: 20}}>
-						
-						<div style={{marginTop: 1, marginLeft: 600}}>
+					<Card md={6} variant="outlined" style={{marginTop: 20, marginBottom: 20}}>
+						<Container>
+						<div style={{marginTop: 5, marginLeft: 600}}>
 						<Button variant="outlined" color="primary" onClick={this.toggleModal}>
   						Edit</Button></div><Dialog
 						  open={this.state.isModalOpen}
 						  onClose={this.toggleModal}
 							>{loginForm}</Dialog>
+						
 						  <Table>
 							  <TableBody>
 							  <TableRow>
@@ -198,13 +212,15 @@ class Name extends Component {
 								  <TableCell><h6 style={{color: "#1a237e"}}>Age</h6></TableCell>
 								  <TableCell>{this.props.data.age}</TableCell>
 							  </TableRow>
-							  </TableBody></Table>
+							  <TableRow>
+								  <TableCell><h6 style={{color: "#1a237e"}}>Investing Capacity</h6></TableCell>
+								  <TableCell>{this.props.data.investingCapacity}</TableCell>
+							  </TableRow>
+							  </TableBody></Table></Container>
 							</Card>	
-
-							<Card variant="outlined" style={{marginTop: 20, color: "#1a237e"}}>
-					</Card>
-							
+							</Container>
 				</Card>
+
 			</div>
 		);
 	}
