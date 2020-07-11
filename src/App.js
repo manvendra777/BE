@@ -11,6 +11,7 @@ import CommunityForm from './ProfileManagement/Community/CommunityForm';
 import InvestorForm from './ProfileManagement/Investor/InvestorForm';
 import MentorForm from './ProfileManagement/Mentor/MentorForm'
 import Profile from './Dashboards/StartupDashboard/Assets/Profile/MyProfile/Profile'
+import InvestorDashboard from './Dashboards/InvestorsDashboard/Dashboard';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/investorform" component={InvestorForm} />
         <Route path="/communityform" component={CommunityForm} />
         <Route path="/startupDashboard" component={StartupDashboard} />
+    <Route path="/InvestorDashboard" component={InvestorDashboard} />
       </Router>
     </div>
   );
