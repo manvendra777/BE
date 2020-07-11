@@ -2,9 +2,10 @@ import React from 'react';
 import Badge from '@material-ui/core/Badge';
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import { Divider } from '@material-ui/core';
+import { Divider, Link } from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import Button from '@material-ui/core/Button'
 
 const StyledBadge = withStyles((theme) => ({
   badge: {
@@ -46,25 +47,27 @@ const useStyles = makeStyles((theme) => ({
 
 export default function User(props) {
   const classes = useStyles();
-
+  const openMentorPage = () => {
+    window.location = "/startupDashboard/TargetMentor/" + props.id
+  }
   return (
     <div className={classes.root}>
-         <ListItem className={classes.listItem} button>
-         <StyledBadge
-        overlap="circle"
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        variant="dot"
-      >
-        <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
 
-      </StyledBadge>
-          <ListItemText style={{marginLeft:"16px",}} primary={props.id} />
-        </ListItem>
+      <ListItem onClick={openMentorPage} className={classes.listItem} button>
+        <StyledBadge
+          overlap="circle"
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          variant="dot"
+        >
+          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+        </StyledBadge>
+        <ListItemText style={{ marginLeft: "16px", }} primary={props.id} />
+      </ListItem>
 
-      
+
     </div>
   );
 }

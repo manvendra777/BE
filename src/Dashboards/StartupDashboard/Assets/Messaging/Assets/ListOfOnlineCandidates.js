@@ -44,12 +44,11 @@ class ListOfOnlineCandidates extends Component {
   
   componentWillMount(){
     // Your code here
+    var myid="5f07ae9d919bc64fc3513d0c"
     let mem=[];
-    axios.get(`http://localhost:8083/user/myConnections`,{params: {id: 2}})
+    axios.get(`http://localhost:8083/entityAction/user/myConnections`,{params: {id: myid}})
     .then(res => {
       mem = res.data;
-      console.log(mem)
-
       mem.map((item,i)=>{
         console.log(item);
         this.setState({members:[...this.state.members,<User id={item}/>]})

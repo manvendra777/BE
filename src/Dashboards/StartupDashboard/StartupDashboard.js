@@ -12,6 +12,7 @@ import MyMentor from './Assets/Profile/MentorProfile/Connected/MyMentor'
 import { Route, BrowserRouter as Router, Link } from 'react-router-dom'
 import { useHistory } from "react-router-dom";
 import { Button } from "@material-ui/core";
+import Cookie from './Cookie'
 
 export default class StartupDashboard extends Component {
 	constructor(props) {
@@ -39,8 +40,9 @@ export default class StartupDashboard extends Component {
 					<Route path="/startupDashboard/Connections" component={Connections} />
 					<Route path="/startupDashboard/Home" component={Home} />
 					<Route path="/startupDashboard/FindMentors" component={FindMentors} />
-					<Route path="/startupDashboard/TargetMentor/:id" component={TargetMentor} />
-					<Route path="/startupDashboard/MyMentor/:id" component={MyMentor} />
+					<Route exact path="/startupDashboard/TargetMentor/:id" component={TargetMentor} />
+					<Route exact path="/startupDashboard/MyMentor/:id" component={MyMentor} />
+					<Route path="/startupDashboard/cookie/" component={Cookie}></Route>
 					</div>
 				</Router>
 

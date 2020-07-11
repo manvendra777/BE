@@ -51,19 +51,16 @@ class TargetMentor extends Component {
             myProfile: [],
             val: [],
             avg: '',
+            setReq: false,
         };
-        this.mapDomain = this.mapDomain.bind(this);
         this.getInfo = this.getInfo.bind(this);
-        this.getLogs = this.getLogs.bind(this)
-
+        this.mapDomain = this.mapDomain.bind(this);
         this.getRating = this.getRating.bind(this)
         this.getRatingAv = this.getRatingAv.bind(this)
+        this.sendRequest = this.sendRequest.bind(this)
+        this.checkSentReq = this.checkSentReq.bind(this)
     }
-    componentWillMount() {
-        this.getInfo()
-        this.getRating()
-        this.getRatingAv()
-    }
+ 
     getInfo() {
         var id = this.props.match.params.id
         var persons;
@@ -71,10 +68,8 @@ class TargetMentor extends Component {
             .then(res => {
                 persons = res.data;
                 this.setState({ myProfile: persons })
+                console.log(this.state.myProfile);
             })
-    }
-    getLogs() {
-        console.log(this.state.myProfile);
     }
     mapDomain() {
         if (this.state.myProfile.domain != undefined) {
@@ -97,22 +92,44 @@ class TargetMentor extends Component {
         axios.get(`http://localhost:8085/ratings/getRatingAverage`, { params: { id: this.props.match.params.id } })
             .then(res => {
                 rate = res.data;
-                console.log(rate);
                 this.setState({ avg: rate })
             })
     }
 
+    sendRequest() {
+        var myid = "5f07ae9d919bc64fc3513d0a";
+        var response;
+        axios.post('http://localhost:8083/entityAction/user/sendRequest', null, { params: { id: myid, target: this.props.match.params.id } })
+            .then(res => {
+                response = res.data
+            })
+    }
+    checkSentReq() {
+        var myid = "5f07ae9d919bc64fc3513d0a";
+        var response;
+        axios.get('http://localhost:8083/entityAction/user/checkRequest', { params: { id: myid, target: this.props.match.params.id } })
+            .then(res => {
+                response = res.data
+                this.setState({ setReq: response })
+            })
+    }
+    componentWillMount(){
+        this.getRating()
+        this.checkSentReq()
+        this.getRatingAv()
+        this.getInfo()
+    }
     render() {
         const { classes } = this.props;
         return (
             <div className={classes.root}>
                 <Card elevation={3}>
-                    <Container className={classes.cont} style={{marginBottom:20}}>
+                    <Container className={classes.cont} style={{ marginBottom: 20 }}>
                         <Avatar alt="Sanket" className={classes.large} />
-                        <Divider style={{marginLeft:10}} orientation="vertical" flexItem />
+                        <Divider style={{ marginLeft: 10 }} orientation="vertical" flexItem />
                         <Container className={classes.spc}>
                             <Typography variant="h4" gutterBottom>
-                                
+
                             </Typography>
                             <Typography variant="h5" gutterBottom>
                                 Mentor : {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}
@@ -125,16 +142,16 @@ class TargetMentor extends Component {
                             </Typography>
                             <div>{this.mapDomain()}</div>
                         </Container>
-                        <Divider style={{marginLeft:10,marginRight:20}} orientation="vertical" flexItem />
-                        
+                        <Divider style={{ marginLeft: 10, marginRight: 20 }} orientation="vertical" flexItem />
+
                         <RatingStats ratings={this.state.val} ratingAverage={Math.round(this.state.avg * 10) / 10} raterCount={this.state.val.reduce((a, b) => a + b, 0)} />,
 
                     </Container>
-                    <Divider style={{marginBottom:10}} />
-                    <Button style={{marginLeft:30}} size="small" color="primary">Send Invitation</Button>
+                    <Divider style={{ marginBottom: 10 }} />
+                    <Button disabled={this.state.setReq} style={{ marginLeft: 30 }} size="small" onClick={this.sendRequest} color="primary">Send Invitation</Button>
                     <Divider style={{ marginTop: 10 }} />
-                    <Container style={{ marginLeft:10,marginTop: 10,display:'block'}}>
-                       
+                    <Container style={{ marginLeft: 10, marginTop: 10, display: 'block' }}>
+
                         <Typography variant="subtitle2" gutterBottom>
                             qualification: {this.state.myProfile.qualification}
                         </Typography>
@@ -155,10 +172,10 @@ class TargetMentor extends Component {
                             method_of_contact: {this.state.myProfile.method_of_contact}
                         </Typography>
                     </Container>
-                   
+
                 </Card>
             </div>
-        );
+       );
     }
 }
 export default withStyles(styles)(TargetMentor);
