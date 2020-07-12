@@ -102,8 +102,11 @@ class Header extends Component {
 	logout() {
 		window.location = "/"
 	}
-	find(){
+	findMentor(){
 		window.location = "/startupDashboard/FindMentors"
+	}
+	findInvestor(){
+		window.location = "/startupDashboard/FindInvestor"
 	}
 	home(){
 		window.location = "/startupDashboard/Home"
@@ -135,7 +138,8 @@ class Header extends Component {
 					</Typography>
 						</div>
 						<div className={classes.groupButtons}>
-							<Button onClick={this.find} style={{ color: "white", margin: "5px" }} >Find<SearchIcon style={{marginLeft:7}}/></Button>
+							<Button onClick={this.findMentor} style={{ color: "white", margin: "5px" }} >Find<SearchIcon style={{marginLeft:7}}/></Button>
+							<Button onClick={this.findInvestor} style={{ color: "white", margin: "5px" }} >Find Investor<SearchIcon style={{marginLeft:7}}/></Button>
 							<Button onClick={this.home} style={{ color: "white", margin: "5px" }} >Home<HomeIcon style={{marginLeft:7}}/></Button>
 							<Button onClick={this.connections} style={{ color: "white", margin: "5px" }} >Connections<PersonAddIcon style={{marginLeft:7}}/></Button>
 							<Button onClick={this.messaging} style={{ color: "white", margin: "5px" }} >Messaging<MessageIcon style={{marginLeft:7}}/></Button>
