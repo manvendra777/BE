@@ -10,7 +10,6 @@ import FindMentors from './Assets/FindMentors/FindMentors'
 import TargetMentor from './Assets/Profile/MentorProfile/NotConnected/TargetMentor'
 import MyMentor from './Assets/Profile/MentorProfile/Connected/MyMentor'
 import { Route, BrowserRouter as Router, Link } from 'react-router-dom'
-import Cookie from './Cookie'
 import FindInvestor from './Assets/FindInvestor/FindInvestor'
 import MyInvestor from './Assets/Profile/InvestorProfile/Connected/MyInvestor'
 import TargetInvestor from './Assets/Profile/InvestorProfile/NotConnected/TargetInvestor'
@@ -49,7 +48,6 @@ export default class StartupDashboard extends Component {
 					<Route exact path="/startupDashboard/MyMentor/:id" component={MyMentor} />
 					<Route path="/startupDashboard/TargetInvestor/:id" component={TargetInvestor} />
 					<Route path="/startupDashboard/MyInvestor/:id" component={MyInvestor} />
-					<Route path="/startupDashboard/cookie/" component={Cookie}></Route>
 					<Route path="/startupDashboard/Ads" component={Advertise}></Route>
 					</div>
 					</div>

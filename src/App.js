@@ -10,25 +10,29 @@ import ProfileFrontPage from './ProfileManagement/ProfileFrontPage'
 import CommunityForm from './ProfileManagement/Community/CommunityForm';
 import InvestorForm from './ProfileManagement/Investor/InvestorForm';
 import MentorForm from './ProfileManagement/Mentor/MentorForm'
-import Profile from './Dashboards/StartupDashboard/Assets/Profile/MyProfile/Profile'
 import InvestorDashboard from './Dashboards/InvestorsDashboard/Dashboard';
 
 function App() {
   return (
-   
+
     <div>
       <Router>
         <Route exact path="/" component={FrontPage} />
+        
         <Route path="/LoginPg" component={LoginPg} />
+        
         <Route path="/registrationPg" component={RegistrationPg} />
         <Route path="/profileFrontPg" component={ProfileFrontPage} />
+        
         <Route path="/startupform" component={StartupForm} />
         <Route path="/mentorform" component={MentorForm} />
         <Route path="/investorform" component={InvestorForm} />
         <Route path="/communityform" component={CommunityForm} />
+
         <Route path="/startupDashboard" component={StartupDashboard} />
-    <Route path="/InvestorDashboard" component={InvestorDashboard} />
-     <Route path="/MentorDashboard" component={MentorDashboard} />
+        <Route path="/MentorDashboard" component={MentorDashboard} />
+        <Route path="/InvestorDashboard" component={InvestorDashboard} />
+        
       </Router>
     </div>
   );
