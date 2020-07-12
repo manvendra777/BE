@@ -63,7 +63,7 @@ class FindByDomains extends Component {
 
         return (
             <div>
-                <Card elevation={5} style={{ width: '70%', marginTop: 10 }}>
+                <Card elevation={5} style={{ width: '84%', marginTop: 10,}}>
                     <Typography variant="h5" color='primary' style={{ margin: 10 }} gutterBottom>
                         Find Mentor
 							</Typography>

@@ -11,13 +11,6 @@ import Connections from "../Connections";
 
 const useStyles = (theme) => ({
   root: {
-    display: "flex",
-    flexWrap: "wrap",
-    "& > *": {
-      margin: theme.spacing(1),
-      width: theme.spacing(100),
-      height: theme.spacing(100),
-    },
   },
   hd: {
     margin: theme.spacing(1, 1, 1, 2),
@@ -47,7 +40,7 @@ class Base extends Component {
 
   getUsers = async () => {
     let data = await axios
-      .get(`http://localhost:8083/user/pendingRequests`, { params: { id: 2 } })
+      .get(`http://localhost:8083/entityAction/user/pendingRequests`, { params: { id: 2 } })
       .then(({ data }) => data);
     this.setState({ invites: data });
     console.log(data);

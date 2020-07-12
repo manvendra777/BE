@@ -10,14 +10,11 @@ import FindMentors from './Assets/FindMentors/FindMentors'
 import TargetMentor from './Assets/Profile/MentorProfile/NotConnected/TargetMentor'
 import MyMentor from './Assets/Profile/MentorProfile/Connected/MyMentor'
 import { Route, BrowserRouter as Router, Link } from 'react-router-dom'
-import { useHistory } from "react-router-dom";
-import { Button } from "@material-ui/core";
 import Cookie from './Cookie'
 import FindInvestor from './Assets/FindInvestor/FindInvestor'
-import FindByCapacity from "./Assets/FindInvestor/FindByCapacity.js";
 import MyInvestor from './Assets/Profile/InvestorProfile/Connected/MyInvestor'
 import TargetInvestor from './Assets/Profile/InvestorProfile/NotConnected/TargetInvestor'
-
+import Advertise from './Assets/Advertise/Advertise'
 export default class StartupDashboard extends Component {
 	constructor(props) {
 		super(props);
@@ -34,10 +31,13 @@ export default class StartupDashboard extends Component {
 
 				<Router >
 					<Header/>
-
-					<div style={{ margin: '75px' }}>
-						<ListOfOnlineCandidates />
 					
+					<div style={{ margin: '75px',marginLeft:'10px'}}>
+						<ListOfOnlineCandidates />
+						<Advertise/>
+						<div style={{marginTop:"5%"}}>
+					</div>
+					<div style={{marginLeft:'18.5%',width:'80%'}}>
 					<Route path="/startupDashboard/Profile" component={Profile} />
 					<Route path="/startupDashboard/Notification" component={Notification} />
 					<Route path="/startupDashboard/Messaging" component={Messaging} />
@@ -50,7 +50,10 @@ export default class StartupDashboard extends Component {
 					<Route path="/startupDashboard/TargetInvestor/:id" component={TargetInvestor} />
 					<Route path="/startupDashboard/MyInvestor/:id" component={MyInvestor} />
 					<Route path="/startupDashboard/cookie/" component={Cookie}></Route>
+					<Route path="/startupDashboard/Ads" component={Advertise}></Route>
 					</div>
+					</div>
+					
 				</Router>
 
 

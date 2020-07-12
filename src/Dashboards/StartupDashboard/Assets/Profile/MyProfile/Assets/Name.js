@@ -23,13 +23,7 @@ import axios from 'axios';
 
 const styles = theme => ({
 	root: {
-		display: "flex",
-		flexWrap: "wrap",
-		"& > *": {
-			margin: theme.spacing(1, 1, 1, 1),
-			padding: theme.spacing(4, 4, 4, 4),
-			width: theme.spacing(100),
-		}
+		
 	},
 	cont: {
 		display: "flex",

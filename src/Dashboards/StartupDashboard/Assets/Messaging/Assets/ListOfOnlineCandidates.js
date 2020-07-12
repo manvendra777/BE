@@ -14,7 +14,7 @@ import axios from 'axios';
 import { withStyles } from "@material-ui/core/styles";
 const useStyles = theme => ({
   root: {
-    width: '10%',
+    width: '15%',
     height: "90%",
     position: "fixed",
     zIndex: 1,
@@ -23,7 +23,6 @@ const useStyles = theme => ({
     overflow:"hidden",
     right:0,
     backgroundColor: theme.palette.background.paper,
-    width:250,
   },
   listItem:{
     margin:theme.spacing(0,0,0,0),
