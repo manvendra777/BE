@@ -28,6 +28,7 @@ function App() {
         <Route path="/communityform" component={CommunityForm} />
         <Route path="/startupDashboard" component={StartupDashboard} />
     <Route path="/InvestorDashboard" component={InvestorDashboard} />
+     <Route path="/MentorDashboard" component={MentorDashboard} />
       </Router>
     </div>
   );
