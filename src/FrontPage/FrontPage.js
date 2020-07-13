@@ -74,7 +74,7 @@ class FrontPage extends React.Component{
                     <figcaption>Manvendra Chavan</figcaption></Col> 
                     <Col><Image style= {{width: 100, height: 100, marginLeft: 40}} src="assets/daksh.png" roundedCircle ></Image>
                     <figcaption>Daksh Chaudhary</figcaption></Col>
-                    <Col> <Image style= {{width: 100, height: 100, marginLeft: 40}} src="assets/sanket.png" roundedCircle ></Image>
+                    <Col> <Image style= {{width: 100, height: 100, marginLeft: 40}} src="assets/shubhankar.jpeg" roundedCircle ></Image>
                     <figcaption>Shubhankar Deshmukh</figcaption>
                     </Col>
                     <Col><Image style= {{width: 100, height: 100, marginLeft: 40}} src="assets/chaitrali.png" roundedCircle ></Image>
