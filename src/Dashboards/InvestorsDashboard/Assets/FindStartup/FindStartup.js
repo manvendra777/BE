@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FindByDomain from './Assets/FindByDomains/FindByDomains'
-class FindMentors extends Component {
+class FindStartup extends Component {
     render() {
         return (
             <div>
@@ -11,4 +11,4 @@ class FindMentors extends Component {
     }
 }
 
-export default FindMentors;
+export default FindStartup;
