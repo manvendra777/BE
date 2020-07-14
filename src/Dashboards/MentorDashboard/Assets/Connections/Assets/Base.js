@@ -11,16 +11,6 @@ import Connections from "../Connections";
 
 const useStyles = (theme) => ({
   root: {
-    display: "flex",
-    flexWrap: "wrap",
-    "& > *": {
-      margin: theme.spacing(1),
-      width: theme.spacing(100),
-      height: theme.spacing(100),
-    },
-  },
-  hd: {
-    margin: theme.spacing(1, 1, 1, 2),
   },
   listSection: {
     width: "100%",
@@ -47,7 +37,7 @@ class Base extends Component {
 
   getUsers = async () => {
     let data = await axios
-      .get(`http://localhost:8081/user/pendingRequests`, { params: { id: 2 } })
+      .get(`http://localhost:8083/entityAction/user/pendingRequests`, { params: { id: 2 } })
       .then(({ data }) => data);
     this.setState({ invites: data });
     console.log(data);
@@ -59,7 +49,9 @@ class Base extends Component {
       <div className={classes.root}>
         <Paper elevation={3}>
           <div className={classes.hd}>
-            <Typography variant="h6">Your Invitation</Typography>
+          <Typography variant="h5" color='primary' style={{ margin: 15 }} gutterBottom>
+          Your Invitations
+							</Typography>
           </div>
           <Divider />
           <Divider />

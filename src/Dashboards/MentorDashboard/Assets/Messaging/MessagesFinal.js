@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import User from './Assets/User'
+import Added from './Assets/Added'
 import Chip from '@material-ui/core/Chip';
 import Sent from './Assets/Messages/Sent'
 import Rec from './Assets/Messages/Rec';
@@ -15,147 +16,228 @@ import Container from '@material-ui/core/Container';
 import { withStyles } from "@material-ui/core/styles";
 
 
-const useStyles =theme => ({
+const useStyles = theme => ({
   root: {
-    flexWrap: 'wrap',
-    '& > *': {
-      margin: theme.spacing(1),
-      width: theme.spacing(75),
-      height: theme.spacing(80),
-    },
+    margin: '1%',
+    width: '60%',
+    height: "70%"
   },
-  box:{
-    //overflowX:'hidden',
+  r: {
+
+    margin: '1%',
+    width: '40%',
+    height: "75%"
+
+  },
+  box: {
+    overflowX: 'hidden',
+    height: '100%',
+    overflowY: 'scroll',
+    boxSizing: 'contentBox',
+
+  },
+  boxP: {
+    width: '100%',
+    position:'relative',
+    height:'100%',
+    overflow: 'hidden',
+    background: '#e5eaea',
+    marginTop:'1%'
+  },
+  b: {
+    overflowX: 'hidden',
+    height: '100%',
+    overflowY: 'scroll',
+    boxSizing: 'contentBox',
+
+  },
+  bP: {
     width: '100%',
     height: '100%',
-    overflowY:'scroll',
-    paddingRight:'17px',
-    boxSizing:'contentBox'
-  },
-  boxP:{
-    width: '100%',
-    height: '90%',
-    overflow: 'hidden'
-  },
+    overflow: 'hidden',
 
+  },
   post: {
-    margin: theme.spacing(0,1,0,1),
-    height:theme.spacing(30),
-},
-postBox: {
-    margin: theme.spacing(1,5,1,2),
-    width:theme.spacing(71)
-    
-},
-    hd:{
-        margin: theme.spacing(1,1,1,2),
-    }
+    margin: theme.spacing(2, 1, 0, 1),
+    height: theme.spacing(17),
+  },
+  
+  hd: {
+    margin: theme.spacing(1, 1, 1, 2),
+  }
 });
 class MessagesFinal extends Component {
   constructor(props) {
-		super(props);
+    super(props);
 
-		this.state = {
-      msg:[],
-      msgTypo:'',
-		};
-	}
+    this.state = {
+      msg: [],
+      msgTypo: '',
+      buffer: [],
+      members: [],
+      addedUserId: '',
+      myId: 2
+    };
+    this.keyPress = this.keyPress.bind(this);
+    this.setAddedUser = this.setAddedUser.bind(this)
+  }
 
-  componentDidMount(){
-    
-    // Your code here
-    let persons=[];
-    axios.get(`http://localhost:8081/api/message/find`,{params: {senderId: 45332,receiverId:2364}})
-    .then(res => {
-      persons = res.data;
+  setAddedUser = (addedUser) => {
+    this.setState({
+      addedUserId: addedUser,
+      msg: [],
+      msgTypo: '',
+      buffer: [],
+    })
+  }
 
-      persons.map((item,i)=>{
-        console.log(item);
 
-        if(item.senderId==45332){
-          this.setState({
-            msg:[...this.state.msg,<Sent msg={item.text}/>]
-          })
-        }else{
-          this.setState({
-            msg:[...this.state.msg,<Rec msg={item.text}/>]
-          })
-        }
-      
+  getUsers() {
+    var myid = "5f07ae9d919bc64fc3513d0c"
+    let mem = [];
+    axios.get(`http://localhost:8083/entityAction/user/myConnections`, { params: { id: myid } })
+      .then(res => {
+        mem = res.data;
+        mem.map((item, i) => {
+          console.log(item);
+          this.setState({ members: [...this.state.members, <Added id={item} method={this.setAddedUser} />] })
+          if (i == 0) {
+            this.setState({ addedUserId: item })
+          }
+        })
       })
-    })}
+  }
+
+  keyPress(e) {
+    if (e.keyCode == 13) {
+      this.sendMsg()
+    }
+  }
+  scrollToBottom = () => {
+    const { messageList } = this.refs;
+    messageList.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+  }
+  recMsg() {
+    this.scrollToBottom();
+    // Your code here
+    let persons = [];
+    let up = [];
+    axios.get(`http://localhost:8080/communication/message/find`, { params: { senderId: this.state.myId, receiverId: this.state.addedUserId } })
+      .then(res => {
+        persons = res.data;
+        persons.map((item, i) => {
+          if (i > this.state.buffer.length - 1) {
+            if (item.senderId == this.state.myId) {
+              this.setState({
+                msg: [...this.state.msg, <Sent msg={item.text} time={new Date(item.timestamp)} />]
+              })
+            } else {
+              this.setState({
+                msg: [...this.state.msg, <Rec msg={item.text} time={new Date(item.timestamp)} />]
+              })
+            }
+          }
+        })
+        this.setState({ buffer: persons })
+      })
+  }
+
+  sendMsg = () => {
+    if (this.state.msgTypo != "") {
+      this.setState({ msgTypo: '' });
+      var sender = this.state.myId;
+      var receiver = this.state.addedUser;
+      axios.post('http://localhost:8080/communication/message/send', {
+        "senderId": sender,
+        "receiverId": this.state.addedUserId,
+        "text": this.state.msgTypo
+      })
+        .then(res => {
+        })
+      this.recMsg();
+    }
+  }
+  componentDidMount() {
+
+    this.getUsers();
+    this.recMsg();
+    this.interval = setInterval(() => {
+      this.recMsg();
+    }, 1000);
+    this.scrollToBottom();
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
   render() {
     const { classes } = this.props;
 
-
-  const sendMsg=()=>{
-     console.log(this.state.msgTypo);
-      this.setState({
-        msg:[...this.state.msg,<Sent msg={this.state.msgTypo}/>]
-      })
-      this.setState({msgTypo:''});
-
-      var sender = '45332';
-      var receiver= '2364';
-      axios.post('http://localhost:8081/api/message', {
-        "senderId" : sender,
-        "receiverId" : receiver,
-        "text" : this.state.msgTypo })
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      })
-  }
-  
-
-  
-  const recMsg=()=>{
-    
-
-  }
-  const handleChane=(e)=>{
-      this.setState({msgTypo:e.target.value});
-  }
-
-  
-
-  return (
-    <div className={classes.root}>
-
-      <Paper variant="outlined"  >
-      <User id="target"/>
-      <Divider/>
-      <div className={classes.boxP}>
-      <div className={classes.box} >
-      {this.state.msg.map(child=>child)}
-      </div>
-      </div>
-     
-      </Paper>
-
-
-    <Paper variant="outlined" className={classes.post}>
-        <Typography variant="h6" className={classes.hd}>send</Typography>
-              <Divider/>
-                      <TextField
-                      className={classes.postBox}
-                      id="outlined-multiline-static"
-                      label="write something here"
-                      multiline
-                      rows={4}
-                      value={this.state.msgTypo}
-                      defaultValue=""
-                      onChange={handleChane}
-                      variant="outlined"/>
-                      <div className={classes.hd} style={{float:"right"}}>
-                          <Button color="primary" onClick={()=>sendMsg()} >Send</Button>
-                      </div> 
-                      <div className={classes.hd} style={{float:"right"}}>
-                          <Button color="primary" onClick={()=>recMsg()} >rec</Button>
-                      </div> 
+    const handleChane = (e) => {
+      this.setState({ msgTypo: e.target.value });
+    }
+    return (
+      <div style={{ display: 'flex', height: "90%", width: "50%", position: 'fixed' }}>
+        <div className={classes.r}>
+          <Paper elevation={5} style={{height:'8%',padding:'2%'}}>
+          All message
           </Paper>
+        
+          <Paper elevation={5} style={{height:'100%',marginTop:'1%'}}  >
+            <div className={classes.bP}>
+              <div className={classes.b}>
+                {this.state.members.map(child => child)}
+              </div>
+              <div style={{ float: "left", clear: "both" }}
+                ref={(el) => { this.messagesEnd = el; }}>
+              </div>
+            </div>
+          </Paper>
+        </div>
+
+        <div className={classes.root}>
+          <Paper elevation={5} style={{zIndex:10}}>
+            <User id={this.state.addedUserId} />
+            </Paper>
+            <Paper elevation={5}  style={{height:'100%',marginTop:'0.1%'}}>
+            <div className={classes.boxP}>
+              <div className={classes.box}>
+                <div ref="messageList">
+                  <div style={{ padding: 20, displat: 'flex' }}>
+                    {this.state.msg.map(child => child)}
+                  </div>
+                </div>
+              </div>
+              <div style={{ float: "left", clear: "both" }}
+                ref={(el) => { this.messagesEnd = el; }}>
+              </div>
+            </div>
+          </Paper>
+          <Paper elevation={5} style={{padding:'2%',overflow:'hidden',marginTop:'2%'}} >
+            <TextField
+              style={{ marginTop: 17,width:'100%',}}
+              id="outlined-basic"
+              label="write something here"
+              rows={4}
+              value={this.state.msgTypo}
+              defaultValue=""
+              type="text"
+              onChange={handleChane}
+              onKeyDown={this.keyPress}
+              variant="outlined" />
+            <div style={{ float: "right" }}>
+
+              <Button style={{marginTop:10}} color="primary" onClick={() => this.sendMsg()} >Send</Button>
+            </div>
+          </Paper>
+
+        </div>
+
       </div>
-   
-  );
-}}
+    );
+  }
+}
 export default withStyles(useStyles)(MessagesFinal);

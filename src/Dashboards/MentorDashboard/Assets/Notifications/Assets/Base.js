@@ -11,13 +11,7 @@ import { Component } from 'react';
 
 const useStyles =theme => ({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '& > *': {
-      margin: theme.spacing(1),
-      width: theme.spacing(100),
-      height: theme.spacing(100),
-    },
+ 
   },
   hd: {
     margin: theme.spacing(1,1,1,2),
@@ -69,6 +63,7 @@ class Base extends Component {
               <Noti name = "Sanket Tupe" text ="hi Shubhamkar need some help" time="12 hr"/>
               <Noti name = "Sanket Tupe" text ="hi Shubhamkar need some help" time="12 hr"/>
               <Noti name = "Sanket Tupe" text ="hi Shubhamkar need some help" time="12 hr"/>
+              
             </List>
             </div>
         </Paper>

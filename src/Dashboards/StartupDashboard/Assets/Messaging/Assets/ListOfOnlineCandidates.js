@@ -62,7 +62,9 @@ class ListOfOnlineCandidates extends Component {
   return (
     <div className={classes.root}>
       <Card className={classes.root} variant="outlined">
-      <Typography variant="h6" className={classes.hd}>Members</Typography>
+      <Typography variant="h5" color='primary' style={{ margin: 10 }} gutterBottom>
+                        Members
+							</Typography>
       <Divider/>
       <div style={{width:'100%',height:'100%',overflow:'hidden'}}>
       <div style={{overflowY: "auto",width:'100%',height:'100%',paddingRight:'15px',paddingLeft:'0px'}}>

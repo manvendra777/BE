@@ -10,8 +10,8 @@ import ProfileFrontPage from './ProfileManagement/ProfileFrontPage'
 import CommunityForm from './ProfileManagement/Community/CommunityForm';
 import InvestorForm from './ProfileManagement/Investor/InvestorForm';
 import MentorForm from './ProfileManagement/Mentor/MentorForm'
-import InvestorDashboard from './Dashboards/InvestorsDashboard/Dashboard';
-
+import InvestorDashboard from './Dashboards/InvestorsDashboard/InvestorDashboard';
+import CommunityDashboard from './Dashboards/CommunityDashboard/CommunityDashboard'
 function App() {
   return (
 
@@ -32,6 +32,7 @@ function App() {
         <Route path="/startupDashboard" component={StartupDashboard} />
         <Route path="/MentorDashboard" component={MentorDashboard} />
         <Route path="/InvestorDashboard" component={InvestorDashboard} />
+        <Route path="/CommunityDashboard" component={CommunityDashboard} />
         
       </Router>
     </div>

@@ -29,7 +29,7 @@ export default function Invitation(props) {
 
   const accept = () => {
     axios
-      .post("http://localhost:8080/user/acceptRequest", null, {
+      .post("http://localhost:8083/user/acceptRequest", null, {
         params: { id: 2, target: props.id },
       })
       .then((res) => {
@@ -38,7 +38,7 @@ export default function Invitation(props) {
   };
   const del = () => {
     axios
-      .post("http://localhost:8080/user/deleteRequest", null, {
+      .post("http://localhost:8083/user/deleteRequest", null, {
         params: { id: props.id, target: 2 },
       })
       .then((res) => {

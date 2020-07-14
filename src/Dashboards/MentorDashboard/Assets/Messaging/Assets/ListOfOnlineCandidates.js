@@ -14,8 +14,7 @@ import axios from 'axios';
 import { withStyles } from "@material-ui/core/styles";
 const useStyles = theme => ({
   root: {
-   
-    maxWidth: 360,
+    width: '15%',
     height: "90%",
     position: "fixed",
     zIndex: 1,
@@ -23,9 +22,7 @@ const useStyles = theme => ({
     overflowY: "hidden",
     overflow:"hidden",
     right:0,
-    margin:theme.spacing(1,1,1,1),
     backgroundColor: theme.palette.background.paper,
-    width:250,
   },
   listItem:{
     margin:theme.spacing(0,0,0,0),
@@ -46,12 +43,11 @@ class ListOfOnlineCandidates extends Component {
   
   componentWillMount(){
     // Your code here
+    var myid="5f07ae9d919bc64fc3513d0c"
     let mem=[];
-    axios.get(`http://localhost:8081/user/myConnections`,{params: {id: 2}})
+    axios.get(`http://localhost:8083/entityAction/user/myConnections`,{params: {id: myid}})
     .then(res => {
       mem = res.data;
-      console.log(mem)
-
       mem.map((item,i)=>{
         console.log(item);
         this.setState({members:[...this.state.members,<User id={item}/>]})
@@ -66,11 +62,12 @@ class ListOfOnlineCandidates extends Component {
   return (
     <div className={classes.root}>
       <Card className={classes.root} variant="outlined">
-      <Typography variant="h6" className={classes.hd}>Members</Typography>
+      <Typography variant="h5" color='primary' style={{ margin: 10 }} gutterBottom>
+                        Members
+							</Typography>
       <Divider/>
       <div style={{width:'100%',height:'100%',overflow:'hidden'}}>
       <div style={{overflowY: "auto",width:'100%',height:'100%',paddingRight:'15px',paddingLeft:'0px'}}>
-
       <List component="nav" aria-label="main mailbox folders" >
       {this.state.members.map(child=>child)}
       </List>

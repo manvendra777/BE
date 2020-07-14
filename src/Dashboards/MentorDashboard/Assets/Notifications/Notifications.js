@@ -3,7 +3,7 @@ import Base from "./Assets/Base"
 class Notifications extends Component {
     
 render() {
-        return (<div style={{right:"25%",float:"right",position:"relative"}}>
+        return (<div style={{width:'84%'}}>
             <Base/>
             </div>
         );

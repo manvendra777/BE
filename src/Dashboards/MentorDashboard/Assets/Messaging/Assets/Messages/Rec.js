@@ -2,10 +2,12 @@ import Chip from '@material-ui/core/Chip';
 import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { withStyles } from "@material-ui/core/styles";
+import { Card } from '@material-ui/core';
 const useStyles =  theme => ({
     root: {
-      margin:theme.spacing(1,1,0,2),
         width:'100%',
+        marginTop:7,
+        marginBottom:7,
     },
   });
   
@@ -21,11 +23,7 @@ const useStyles =  theme => ({
     render() {
       const { classes } = this.props;
     return (
-      <div className={classes.root}>
-        <div style={{textAlign:'left'}}>
-        <Chip label={this.props.msg} />
-        </div>
-      </div>
-    );
+      <div style={{marginRight:'30%',marginBottom:10,marginTop:10}}><Card elevation={5} style={{color:'#435a7b',background:'#FFFFFF',marginTop:5,marginBottom:5,textAlign:'left',padding:7,paddingLeft:25 ,borderBottomLeftRadius:25,borderTopRightRadius:25,borderBottomRightRadius:25,}}>{this.props.msg}</Card></div> 
+      );
   }}
   export default withStyles(useStyles)(Rec);

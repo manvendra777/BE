@@ -1,4 +1,4 @@
-import React,{Component} from "react";
+import React, { Component } from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -12,15 +12,24 @@ import Button from "@material-ui/core/Button";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import { withStyles } from "@material-ui/core/styles";
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import HomeIcon from '@material-ui/icons/Home';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import MessageIcon from '@material-ui/icons/Message';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
+import MoreIcon from '@material-ui/icons/MoreVert'
+import LogoutButton from './Logout'
 const useStyles = theme => ({
 	grow: {
 		flexGrow: 1
 	},
-	groupButtons:{
+	groupButtons: {
 		position: "absolute",
-  		right: "0px",
-		padding:theme.spacing(1)
+		right: "0px",
+		padding: theme.spacing(1),
+		marginRight: 20
 	},
 	menuButton: {
 		marginRight: theme.spacing(2)
@@ -29,7 +38,8 @@ const useStyles = theme => ({
 		display: "none",
 		[theme.breakpoints.up("sm")]: {
 			display: "block"
-		}
+		},
+		color:'white'
 	},
 	search: {
 		position: "relative",
@@ -87,39 +97,61 @@ class Header extends Component {
 		super(props);
 
 		this.state = {
-			name: "Sanket Tupe",
-			sub1: "working ",
-			sub2: "Pune, Maharastra, India"
+			
 		};
 	}
-
+	
+	findMentor() {
+		window.location = "/mentorDashboard/FindMentors"
+	}
+	findInvestor() {
+		window.location = "/mentorDashboard/FindInvestor"
+	}
+	home() {
+		window.location = "/mentorDashboard/Home"
+	}
+	connections() {
+		window.location = "/mentorDashboard/Connections"
+	}
+	messaging() {
+		window.location = "/mentorDashboard/Messaging"
+	}
+	notification() {
+		window.location = "/mentorDashboard/Notification"
+	}
+	profile() {
+		window.location = "/mentorDashboard/Profile"
+	}
 	render() {
-    const { classes } = this.props;
-	
-	return (
+		const { classes } = this.props;
+		
+		return (
 
-		<div className={classes.grow}>
+			<div className={classes.grow}>
 
-			<AppBar position="fixed">
-				<Toolbar>
-					
-					<div onClick={this.props.home} >
-					<Typography className={classes.title} variant="h6" noWrap>
-						Mentor
-					</Typography>	
-					</div>
-					<div className={classes.groupButtons}>						
-							
-							<Button onClick={this.props.home}  style={{color:"white",margin:"5px"}} >Home</Button>
-							<Button onClick={this.props.connections}  style={{color:"white",margin:"5px"}} >Connections</Button>
-							<Button onClick={this.props.messaging}  style={{color:"white",margin:"5px"}} >Messaging</Button>
-							<Button onClick={this.props.notification}  style={{color:"white",margin:"5px"}} >Notifications</Button>
-							<Button onClick={this.props.profile}  style={{color:"white",margin:"5px"}} > Profile </Button>
+				<AppBar position="fixed">
+					<Toolbar>
+
+						<div onClick={this.props.home} >
+							<Typography className={classes.title} variant="h6" noWrap>
+								Mentor
+					</Typography>
 						</div>
-				</Toolbar>
-			</AppBar>
-		</div>
-	);
-}}
+						<div className={classes.groupButtons}>
+							<Button onClick={this.findMentor} style={{ color: "white", margin: "5px" }} >Find<SearchIcon style={{ marginLeft: 7 }} /></Button>
+							<Button onClick={this.findInvestor} style={{ color: "white", margin: "5px" }} >Find Investor<SearchIcon style={{ marginLeft: 7 }} /></Button>
+							<Button onClick={this.home} style={{ color: "white", margin: "5px" }} >Home<HomeIcon style={{ marginLeft: 7 }} /></Button>
+							<Button onClick={this.connections} style={{ color: "white", margin: "5px" }} >Connections<PersonAddIcon style={{ marginLeft: 7 }} /></Button>
+							<Button onClick={this.messaging} style={{ color: "white", margin: "5px" }} >Messaging<MessageIcon style={{ marginLeft: 7 }} /></Button>
+							<Button onClick={this.notification} style={{ color: "white", margin: "5px" }} >Notifications<NotificationsIcon style={{ marginLeft: 7 }} /></Button>
+							<Button onClick={this.profile} style={{ color: "white", margin: "5px" }} > Profile <AccountCircle style={{ marginLeft: 7 }} /></Button>
+							<LogoutButton	/>
+						</div>
+					</Toolbar>
+				</AppBar>
+
+			</div>
+		);
+	}
+}
 export default withStyles(useStyles)(Header);
-	

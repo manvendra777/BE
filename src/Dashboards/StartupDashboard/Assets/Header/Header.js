@@ -18,7 +18,7 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import MessageIcon from '@material-ui/icons/Message';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
 import MoreIcon from '@material-ui/icons/MoreVert'
 import LogoutButton from './Logout'
 const useStyles = theme => ({
