@@ -14,3 +14,5 @@ EXPOSE 8085
 ENTRYPOINT ["java" "-jar" "abc.jar"]
 
 sudo docker build -f Dockerfile -t entity-action . 
+
+account-0.0.1-SNAPSHOT.jar

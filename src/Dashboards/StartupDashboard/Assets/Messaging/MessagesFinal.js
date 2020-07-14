@@ -18,20 +18,16 @@ import { withStyles } from "@material-ui/core/styles";
 
 const useStyles = theme => ({
   root: {
-    flexWrap: 'wrap',
-    '& > *': {
-      margin: theme.spacing(1),
-      width: theme.spacing(75),
-      height: theme.spacing(80),
-    },
+    margin: '1%',
+    width: '60%',
+    height: "70%"
   },
   r: {
-    flexWrap: 'wrap',
-    '& > *': {
-      margin: theme.spacing(1),
-      width: theme.spacing(40),
-      height: theme.spacing(99),
-    },
+
+    margin: '1%',
+    width: '40%',
+    height: "75%"
+
   },
   box: {
     overflowX: 'hidden',
@@ -42,9 +38,11 @@ const useStyles = theme => ({
   },
   boxP: {
     width: '100%',
-    height: '91.1%',
+    position:'relative',
+    height:'100%',
     overflow: 'hidden',
-    background: '#e5eaea'
+    background: '#e5eaea',
+    marginTop:'1%'
   },
   b: {
     overflowX: 'hidden',
@@ -55,7 +53,7 @@ const useStyles = theme => ({
   },
   bP: {
     width: '100%',
-    height: '96.5%',
+    height: '100%',
     overflow: 'hidden',
 
   },
@@ -63,11 +61,7 @@ const useStyles = theme => ({
     margin: theme.spacing(2, 1, 0, 1),
     height: theme.spacing(17),
   },
-  postBox: {
-    margin: theme.spacing(1, 5, 1, 2),
-    width: theme.spacing(71)
-
-  },
+  
   hd: {
     margin: theme.spacing(1, 1, 1, 2),
   }
@@ -107,8 +101,8 @@ class MessagesFinal extends Component {
         mem.map((item, i) => {
           console.log(item);
           this.setState({ members: [...this.state.members, <Added id={item} method={this.setAddedUser} />] })
-          if(i==0){
-            this.setState({addedUserId:item})
+          if (i == 0) {
+            this.setState({ addedUserId: item })
           }
         })
       })
@@ -164,7 +158,7 @@ class MessagesFinal extends Component {
     }
   }
   componentDidMount() {
-   
+
     this.getUsers();
     this.recMsg();
     this.interval = setInterval(() => {
@@ -186,11 +180,13 @@ class MessagesFinal extends Component {
       this.setState({ msgTypo: e.target.value });
     }
     return (
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', height: "90%", width: "50%", position: 'fixed' }}>
         <div className={classes.r}>
-          <Paper elevation={5}  >
-            All message
-          <Divider />
+          <Paper elevation={5} style={{height:'8%',padding:'2%'}}>
+          All message
+          </Paper>
+        
+          <Paper elevation={5} style={{height:'100%',marginTop:'1%'}}  >
             <div className={classes.bP}>
               <div className={classes.b}>
                 {this.state.members.map(child => child)}
@@ -203,9 +199,10 @@ class MessagesFinal extends Component {
         </div>
 
         <div className={classes.root}>
-          <Paper elevation={5}  >
+          <Paper elevation={5} style={{zIndex:10}}>
             <User id={this.state.addedUserId} />
-            <Divider />
+            </Paper>
+            <Paper elevation={5}  style={{height:'100%',marginTop:'0.1%'}}>
             <div className={classes.boxP}>
               <div className={classes.box}>
                 <div ref="messageList">
@@ -219,10 +216,9 @@ class MessagesFinal extends Component {
               </div>
             </div>
           </Paper>
-          <Paper elevation={5} className={classes.post}>
+          <Paper elevation={5} style={{padding:'2%',overflow:'hidden',marginTop:'2%'}} >
             <TextField
-              style={{ marginTop: 17 }}
-              className={classes.postBox}
+              style={{ marginTop: 17,width:'100%',}}
               id="outlined-basic"
               label="write something here"
               rows={4}
@@ -232,10 +228,12 @@ class MessagesFinal extends Component {
               onChange={handleChane}
               onKeyDown={this.keyPress}
               variant="outlined" />
-            <div className={classes.hd} style={{ float: "right" }}>
-              <Button color="primary" onClick={() => this.sendMsg()} >Send</Button>
+            <div style={{ float: "right" }}>
+
+              <Button style={{marginTop:10}} color="primary" onClick={() => this.sendMsg()} >Send</Button>
             </div>
           </Paper>
+
         </div>
 
       </div>

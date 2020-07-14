@@ -84,7 +84,7 @@ class FrontPage extends React.Component{
                 </Container>
                 </div></center>
                 <center><h1 style= {{background: "powderblue", color: "black"}}>Mentor</h1></center>
-                    <Container><center><Image style= {{width: 100, height: 100, marginLeft: 40}} src="assets/sanket.png" roundedCircle ></Image>
+                    <Container><center><Image style= {{width: 100, height: 100, marginLeft: 40}} src="assets/nageshsir.jpeg" roundedCircle ></Image>
                     <figcaption>Nagesh Sir</figcaption></center>
                     </Container>
 
