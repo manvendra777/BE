@@ -10,6 +10,7 @@ const useStyles = theme => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
+      padding:'2%'
     },
   },
   input: {

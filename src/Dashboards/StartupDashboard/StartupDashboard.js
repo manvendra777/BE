@@ -15,6 +15,8 @@ import MyInvestor from './Assets/Profile/InvestorProfile/Connected/MyInvestor'
 import TargetInvestor from './Assets/Profile/InvestorProfile/NotConnected/TargetInvestor'
 import Advertise from './Assets/Advertise/Advertise'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import MyAdvertise from './Assets/MyAdvertise/MyAvertise'
+import ViewAd from './Assets/MyAdvertise/Assets/ViewAd'
 
 export default class StartupDashboard extends Component {
 	constructor(props) {
@@ -58,6 +60,8 @@ export default class StartupDashboard extends Component {
 								<Route path="/startupDashboard/TargetInvestor/:id" component={TargetInvestor} />
 								<Route path="/startupDashboard/MyInvestor/:id" component={MyInvestor} />
 								<Route path="/startupDashboard/Ads" component={Advertise}></Route>
+								<Route path="/startupDashboard/MyAdvertise" component={MyAdvertise}></Route>
+								<Route path="/startupDashboard/viewAd/:id" component={ViewAd} />
 							</div>
 						</div>
 

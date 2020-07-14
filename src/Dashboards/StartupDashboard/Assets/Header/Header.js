@@ -18,7 +18,7 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import MessageIcon from '@material-ui/icons/Message';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-
+import NoteAddIcon from '@material-ui/icons/NoteAdd';
 import MoreIcon from '@material-ui/icons/MoreVert'
 import LogoutButton from './Logout'
 const useStyles = theme => ({
@@ -101,7 +101,9 @@ class Header extends Component {
 			sub2: "Pune, Maharastra, India",
 		};
 	}
-	
+	advertiseManagement() {
+		window.location = "/startupDashboard/MyAdvertise"
+	}
 	findMentor() {
 		window.location = "/startupDashboard/FindMentors"
 	}
@@ -139,6 +141,8 @@ class Header extends Component {
 					</Typography>
 						</div>
 						<div className={classes.groupButtons}>
+						<Button onClick={this.advertiseManagement} style={{ color: "white", margin: "5px" }} > Advertise Management <NoteAddIcon style={{ marginLeft: 7 }} /></Button>
+							
 							<Button onClick={this.findMentor} style={{ color: "white", margin: "5px" }} >Find<SearchIcon style={{ marginLeft: 7 }} /></Button>
 							<Button onClick={this.findInvestor} style={{ color: "white", margin: "5px" }} >Find Investor<SearchIcon style={{ marginLeft: 7 }} /></Button>
 							<Button onClick={this.home} style={{ color: "white", margin: "5px" }} >Home<HomeIcon style={{ marginLeft: 7 }} /></Button>
@@ -146,6 +150,7 @@ class Header extends Component {
 							<Button onClick={this.messaging} style={{ color: "white", margin: "5px" }} >Messaging<MessageIcon style={{ marginLeft: 7 }} /></Button>
 							<Button onClick={this.notification} style={{ color: "white", margin: "5px" }} >Notifications<NotificationsIcon style={{ marginLeft: 7 }} /></Button>
 							<Button onClick={this.profile} style={{ color: "white", margin: "5px" }} > Profile <AccountCircle style={{ marginLeft: 7 }} /></Button>
+							
 							<LogoutButton	/>
 						</div>
 					</Toolbar>
