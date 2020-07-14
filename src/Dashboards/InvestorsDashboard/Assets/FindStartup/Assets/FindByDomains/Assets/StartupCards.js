@@ -42,6 +42,12 @@ export default function MediaCard(props) {
                     <Typography gutterBottom variant="h5" component="h2">
                         {props.firstname + ' ' + props.lastname}
                     </Typography>
+                    <Typography gutterBottom variant="h5" component="h2">
+                        {props.startupName}
+                    </Typography>
+                    <Typography gutterBottom variant="h5" component="h2">
+                        {props.startupDescription}
+                    </Typography>
 
                     <div style={{ width: '100%',padding: 0, flex: 1, display: 'flex', overflow: 'hidden',position:'relative' }}>
                     <div style={{ margin: 5, display: 'flex', padding: 1, whiteSpace: 'normal',overflow: 'hidden',bottom:-20 }}>
