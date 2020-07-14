@@ -27,6 +27,7 @@ export default function MediaCard(props) {
 
     
     const openStartupPage=()=>{
+        
         window.location="/InvestorDashboard/TargetStartup/"+props.id
     }
 
