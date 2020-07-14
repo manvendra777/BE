@@ -6,13 +6,10 @@ import ListOfOnlineCandidates from "./Assets/Messaging/Assets/ListOfOnlineCandid
 import Messaging from './Assets/Messaging/Messaging'
 import Connections from "./Assets/Connections/Connections"
 import Home from "./Assets/home/Home"
-import FindMentors from './Assets/FindMentors/FindMentors'
-import TargetMentor from './Assets/Profile/MentorProfile/NotConnected/TargetMentor'
-import MyMentor from './Assets/Profile/MentorProfile/Connected/MyMentor'
+import FindStartup from './Assets/FindStartup/FindStartup'
+import TargetStartup from './Assets/Profile/StartupProfile/NotConnected/TargetStartup'
+import MyStartup from './Assets/Profile/StartupProfile/Connected/MyStartup'
 import { Route, BrowserRouter as Router, Link } from 'react-router-dom'
-import FindInvestor from './Assets/FindInvestor/FindInvestor'
-import MyInvestor from './Assets/Profile/InvestorProfile/Connected/MyInvestor'
-import TargetInvestor from './Assets/Profile/InvestorProfile/NotConnected/TargetInvestor'
 import Advertise from './Assets/Advertise/Advertise'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 export default class StartupDashboard extends Component {
@@ -49,12 +46,9 @@ export default class StartupDashboard extends Component {
 								<Route path="/investorDashboard/Messaging" component={Messaging} />
 								<Route path="/investorDashboard/Connections" component={Connections} />
 								<Route path="/investorDashboard/Home" component={Home} />
-								<Route path="/investorDashboard/FindMentors" component={FindMentors} />
-								<Route path="/investorDashboard/FindInvestor" component={FindInvestor} />
-								<Route exact path="/investorDashboard/TargetMentor/:id" component={TargetMentor} />
-								<Route exact path="/investorDashboard/MyMentor/:id" component={MyMentor} />
-								<Route path="/investorDashboard/TargetInvestor/:id" component={TargetInvestor} />
-								<Route path="/investorDashboard/MyInvestor/:id" component={MyInvestor} />
+								<Route path="/investorDashboard/FindStartup" component={FindStartup} />
+								<Route exact path="/investorDashboard/TargetStartup/:id" component={TargetStartup} />
+								<Route exact path="/investorDashboard/MyStartup/:id" component={MyStartup} />
 								<Route path="/investorDashboard/Ads" component={Advertise}></Route>
 							</div>
 						</div>

@@ -9,7 +9,7 @@ import { Button } from "@material-ui/core";
 import Divider from '@material-ui/core/Divider';
 import axios from 'axios';
 import Chip from '@material-ui/core/Chip';
-
+import RatingStats from './Rating/RatingStats'
 
 
 
@@ -43,7 +43,7 @@ const styles = theme => ({
 
 
 
-class TargetInvestor extends Component {
+class TargetStartup extends Component {
     constructor(props) {
         super(props);
 
@@ -54,7 +54,9 @@ class TargetInvestor extends Component {
             setReq: false,
         };
         this.getInfo = this.getInfo.bind(this);
-       
+        this.mapDomain = this.mapDomain.bind(this);
+        this.getRating = this.getRating.bind(this)
+        this.getRatingAv = this.getRatingAv.bind(this)
         this.sendRequest = this.sendRequest.bind(this)
         this.checkSentReq = this.checkSentReq.bind(this)
     }
@@ -62,14 +64,38 @@ class TargetInvestor extends Component {
     getInfo() {
         var id = this.props.match.params.id
         var persons;
-        axios.get(`http://localhost:8082/investor/profile/` + id)
+        axios.get(`http://localhost:8082/startup/profile/` + id)
             .then(res => {
                 persons = res.data;
                 this.setState({ myProfile: persons })
                 console.log(this.state.myProfile);
             })
     }
-   
+    mapDomain() {
+        if (this.state.myProfile.domain != undefined) {
+            return this.state.myProfile.domain.map((item, i) => (<Chip color="primary" style={{ marginLeft: 5, margin: 2 }} label={item} />))
+        }
+    }
+
+
+    getRating() {
+        var avg;
+        axios.get(`http://localhost:8085/ratings/getRatingCount`, { params: { id: this.props.match.params.id } })
+            .then(res => {
+                avg = res.data;
+                avg = avg.reverse()
+                this.setState({ val: avg })
+            })
+    }
+    getRatingAv() {
+        var rate;
+        axios.get(`http://localhost:8085/ratings/getRatingAverage`, { params: { id: this.props.match.params.id } })
+            .then(res => {
+                rate = res.data;
+                this.setState({ avg: rate })
+            })
+    }
+
     sendRequest() {
         var myid = "5f07ae9d919bc64fc3513d0a";
         var response;
@@ -88,9 +114,9 @@ class TargetInvestor extends Component {
             })
     }
     componentWillMount(){
-       
+        this.getRating()
         this.checkSentReq()
-      
+        this.getRatingAv()
         this.getInfo()
     }
     render() {
@@ -106,27 +132,28 @@ class TargetInvestor extends Component {
 
                             </Typography>
                             <Typography variant="h5" gutterBottom>
-                                Investor : {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}
+                                Startup : {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}
                             </Typography>
                             <Typography variant="subtitle2" gutterBottom>
                                 Id : {this.state.myProfile.id}
                             </Typography>
-                           
-                        
+                            <Typography variant="subtitle1" gutterBottom>
+                                Address: {this.state.myProfile.address + ', ' + this.state.myProfile.city + ', ' + this.state.myProfile.postalCode + ', ' + this.state.myProfile.country}
+                            </Typography>
+                            <div>{this.mapDomain()}</div>
                         </Container>
                         <Divider style={{ marginLeft: 10, marginRight: 20 }} orientation="vertical" flexItem />
 
-                     
+                        <RatingStats ratings={this.state.val} ratingAverage={Math.round(this.state.avg * 10) / 10} raterCount={this.state.val.reduce((a, b) => a + b, 0)} />,
+
                     </Container>
                     <Divider style={{ marginBottom: 10 }} />
-                     <Divider style={{ marginTop: 10 }} />
+                    <Button disabled={this.state.setReq} style={{ marginLeft: 30 }} size="small" onClick={this.sendRequest} color="primary">Send Invitation</Button>
+                    <Divider style={{ marginTop: 10 }} />
                     <Container style={{ marginLeft: 10, marginTop: 10, display: 'block' }}>
 
                         <Typography variant="subtitle2" gutterBottom>
-                            Min investment: {this.state.myProfile.min}
-                        </Typography>
-                        <Typography variant="subtitle2" gutterBottom>
-                            Max investment: {this.state.myProfile.max}
+                            qualification: {this.state.myProfile.qualification}
                         </Typography>
                         <Typography variant="subtitle2" gutterBottom>
                             email: {this.state.myProfile.email}
@@ -134,11 +161,6 @@ class TargetInvestor extends Component {
                         <Typography variant="subtitle2" gutterBottom>
                             phone: {this.state.myProfile.phone_no}
                         </Typography>
-
-                        <Typography variant="subtitle2" gutterBottom>
-                            age: {this.state.myProfile.age}
-                        </Typography>
-                      
                     </Container>
 
                 </Card>
@@ -146,4 +168,4 @@ class TargetInvestor extends Component {
        );
     }
 }
-export default withStyles(styles)(TargetInvestor);
+export default withStyles(styles)(TargetStartup);

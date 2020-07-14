@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
 import Divider from '@material-ui/core/Divider';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import MentorCards from './Assets/StartupCards';
+import StartupCards from './Assets/StartupCards';
 import Typography from "@material-ui/core/Typography";
 import axios from 'axios';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -20,7 +18,7 @@ class FindByDomains extends Component {
         this.state = {
             domains: [],
             value: [],
-            MentorList: [],
+            StartupList: [],
         };
         this.getListData = this.getListData.bind(this)
     }
@@ -49,13 +47,13 @@ class FindByDomains extends Component {
         //localhost:8081/mentor/profile/domain/findbylist?domain=Milk
         console.log(this.state.domains);
 
-        this.setState({ MentorList: [] })
-        var mentors;
-        axios.get(`http://localhost:8082/mentor/profile/domain/findbylist`, { params: { domain: this.state.domains + '' } })
+        this.setState({ StartupList: [] })
+        var startups;
+        axios.get(`http://localhost:8082/startup/profile/domain/findbylist`, { params: { domain: this.state.domains + '' } })
             .then(res => {
-                mentors = res.data;
-                mentors.map((item, i) => {
-                    this.setState({ MentorList: [...this.state.MentorList, <MentorCards id={item.id} domain={item.domain} firstname={item.firstName} lastname={item.lastName} about={item.about_yourself} />] })
+                startups = res.data;
+                startups.map((item, i) => {
+                    this.setState({ StartupList: [...this.state.StartupList, <StartupCards id={item.id} domain={item.domain} firstname={item.firstName} lastname={item.lastName} />] })
                 })
             })
     }
@@ -89,7 +87,7 @@ class FindByDomains extends Component {
                         <div style={{ height: 550, display: 'block', width: '100%' }}>
                             <div style={{ background: '#bfbfbf', display: 'flex', flexFlow: 'row wrap', justifyContent: 'space-around', minWidth: '100%', overflow: 'scroll', height: '100%' }}>
                                 <div>
-                                    {this.state.MentorList.map(child => child)}
+                                    {this.state.StartupList.map(child => child)}
                                 </div>
                             </div>
                         </div>
