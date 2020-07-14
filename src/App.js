@@ -31,7 +31,7 @@ function App() {
 
         <Route path="/startupDashboard" component={StartupDashboard} />
         <Route path="/MentorDashboard" component={MentorDashboard} />
-        <Route path="/InvestorDashboard" component={InvestorDashboard} />
+        <Route path="/investorDashboard" component={InvestorDashboard} />
         <Route path="/CommunityDashboard" component={CommunityDashboard} />
         
       </Router>

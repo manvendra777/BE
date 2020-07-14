@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
-import MentorCard from './MentorCards'
+import StartupCards from './StarupCards'
 import Divider from '@material-ui/core/Divider';
 import Typography from "@material-ui/core/Typography";
 class Recommendation extends Component {
@@ -14,14 +14,14 @@ class Recommendation extends Component {
                 <Divider/>
                 <div style={{ width: '100%',padding: 0, flex: 1, display: 'flex', overflow: 'auto', }}>
                     <div style={{ display: 'flex', overflow: 'scroll',background:'#bfbfbf',padding:10 }}>
-                        <MentorCard />
-                        <MentorCard />
-                        <MentorCard />
-                        <MentorCard />
-                        <MentorCard />
-                        <MentorCard />
-                        <MentorCard />
-                        <MentorCard />
+                        <StartupCards />
+                        <StartupCards />
+                        <StartupCards />
+                        <StartupCards />
+                        <StartupCards />
+                        <StartupCards />
+                        <StartupCards />
+                        <StartupCards />
                     </div>
                 </div>
                 </Card >

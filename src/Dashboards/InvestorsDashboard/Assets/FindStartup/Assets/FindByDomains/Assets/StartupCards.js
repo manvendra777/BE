@@ -26,13 +26,13 @@ export default function MediaCard(props) {
     const classes = useStyles();
 
     
-    const openMentorPage=()=>{
-        window.location="/startupDashboard/TargetMentor/"+props.id
+    const openStartupPage=()=>{
+        window.location="/InvestorDashboard/TargetStartup/"+props.id
     }
 
     return (
         <Card className={classes.root}>
-            <CardActionArea onClick={openMentorPage}>
+            <CardActionArea onClick={openStartupPage}>
                 <CardMedia
                     className={classes.media}
                     image="https://specials-images.forbesimg.com/imageserve/1211231028/960x0.jpg?fit=scale"
@@ -61,7 +61,7 @@ export default function MediaCard(props) {
 
             </CardActionArea>
             <CardActions>
-                <Button onClick={openMentorPage} size="small" color="primary">
+                <Button onClick={openStartupPage} size="small" color="primary">
                     Learn More
         </Button>
             </CardActions>
