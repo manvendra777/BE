@@ -71,7 +71,7 @@ class MyMentor extends Component {
     getInfo() {
         var id = this.props.match.params.id
         var persons;
-        axios.get(`http://localhost:8081/mentor/profile/` + id)
+        axios.get(`http://localhost:8082/mentor/profile/` + id)
             .then(res => {
                 persons = res.data;
                 this.setState({ myProfile: persons })

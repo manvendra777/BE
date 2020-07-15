@@ -39,7 +39,8 @@ class MentorProfessionalInfo extends React.Component{
                       />
                          <br/>
                        <TextField
-                      hintText= "Enter Experience in Domain"
+                       type= "number"
+                      hintText= "Enter year's Experience in Domain"
                       floatingLabelText= "Experience"
                       onChange= {handleChange('experience_in_Domain')}
                       defaultValue= {values.experience_in_Domain}
