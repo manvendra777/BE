@@ -26,13 +26,14 @@ export default function MediaCard(props) {
     const classes = useStyles();
 
     
-    const openMentorPage=()=>{
-        window.location="/startupDashboard/TargetMentor/"+props.id
+    const openStartupPage=()=>{
+        
+        window.location="/MentorDashboard/TargetStartup/"+props.id
     }
 
     return (
         <Card className={classes.root}>
-            <CardActionArea onClick={openMentorPage}>
+            <CardActionArea onClick={openStartupPage}>
                 <CardMedia
                     className={classes.media}
                     image="https://specials-images.forbesimg.com/imageserve/1211231028/960x0.jpg?fit=scale"
@@ -41,6 +42,12 @@ export default function MediaCard(props) {
                 <CardContent >
                     <Typography gutterBottom variant="h5" component="h2">
                         {props.firstname + ' ' + props.lastname}
+                    </Typography>
+                    <Typography gutterBottom variant="h5" component="h2">
+                        {props.startupName}
+                    </Typography>
+                    <Typography gutterBottom variant="h5" component="h2">
+                        {props.startupDescription}
                     </Typography>
 
                     <div style={{ width: '100%',padding: 0, flex: 1, display: 'flex', overflow: 'hidden',position:'relative' }}>
@@ -61,7 +68,7 @@ export default function MediaCard(props) {
 
             </CardActionArea>
             <CardActions>
-                <Button onClick={openMentorPage} size="small" color="primary">
+                <Button onClick={openStartupPage} size="small" color="primary">
                     Learn More
         </Button>
             </CardActions>
