@@ -20,6 +20,7 @@ import Dialog from '@material-ui/core/Dialog';
 import TextField from '@material-ui/core/TextField';
 import { EditorFormatAlignCenter } from "material-ui/svg-icons";
 import axios from 'axios';
+import Chip from '@material-ui/core/Chip';
 
 const styles = theme => ({
 	root: {
@@ -355,39 +356,8 @@ class Name extends Component {
 					<Card variant="outlined" style={{ marginTop: 20, color: "#1a237e" }}>
 						<Container>
 							<h4>Domain</h4>
-							<FormControlLabel
-								control={<Checkbox color="primary" />}
-								label="AI" />
-							<FormControlLabel
-								control={<Checkbox color="primary" />}
-								label="Agriculture" />
-							<FormControlLabel
-								control={<Checkbox color="primary" />}
-								label="Arts" />
-							<FormControlLabel
-								control={<Checkbox color="primary" />}
-								label="Biotechnology" />
-							<FormControlLabel
-								control={<Checkbox color="primary" />}
-								label="Construction" />
-							<FormControlLabel
-								control={<Checkbox color="primary" />}
-								label="Education" />
-							<FormControlLabel
-								control={<Checkbox color="primary" />}
-								label="FInance" />
-							<FormControlLabel
-								control={<Checkbox color="primary" />}
-								label="Media and Entertainment" />
-							<FormControlLabel
-								control={<Checkbox color="primary" />}
-								label="Sports" />
-							<FormControlLabel
-								control={<Checkbox color="primary" />}
-								label="Travel and tourism " />
-							<FormControlLabel
-								control={<Checkbox color="primary" />}
-								label="Others" />
+								<Chip size= "small"
+										label="hello"/>
 						</Container>
 					</Card>
 

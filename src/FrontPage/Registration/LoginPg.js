@@ -67,7 +67,7 @@ class LoginPg extends React.Component {
           if (response.data) {
             //window.location = "/login" //This line of code will redirect you once the submission is succeed
             console.log("here you go !");
-            window.location = "/InvestorDashboard/Home"
+            window.location = "/StartupDashboard/Home"
           } else {
             self.onError();
           }
