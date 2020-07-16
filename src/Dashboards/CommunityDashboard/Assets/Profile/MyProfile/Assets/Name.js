@@ -50,21 +50,7 @@ class Name extends Component {
 			isModalOpen: false,
 			firstName: "",
 			lastName: "",
-			age: "",
-			email: "",
-			qualification: "",
-			phone_no: "",
-			userID: "",
-			domain: "",
-			dipp_no: "",
-			address: "",
-			city: "",
-			country: "",
-			postalCode: "",
-			startupName: "",
-			startupDescription: "",
-			websiteURL: "",
-			profession: ""
+			interests: ""
 		};
 
 		this.mapDomain = this.mapDomain.bind(this);
@@ -77,21 +63,7 @@ class Name extends Component {
 		this.setState({
 			firstName: props.data.firstName,
 			lastName: props.data.lastName,
-			age: props.data.age,
-			email: props.data.email,
-			qualification: props.data.qualification,
-			phone_no: props.data.phone_no,
-			userID: props.data.userID,
-			domain: props.data.domain,
-			dipp_no: props.data.dipp_no,
-			address: props.data.address,
-			city: props.data.city,
-			country: props.data.country,
-			postalCode: props.data.postalCode,
-			startupName: props.data.startupName,
-			startupDescription: props.data.startupDescription,
-			websiteURL: props.data.websiteURL,
-			profession: props.data.profession
+			interests: props.data.interests,
 		});
 	}
 
@@ -113,26 +85,12 @@ class Name extends Component {
 		var data = {
 			firstName: this.state.firstName,
 			lastName: this.state.lastName,
-			age: this.state.age,
-			email: this.state.email,
-			qualification: this.state.qualification,
-			phone_no: this.state.phone_no,
-			userID: this.state.userID,
-			domain: this.state.domain,
-			dipp_no: this.state.dipp_no,
-			address: this.state.address,
-			city: this.state.city,
-			country: this.state.country,
-			postalCode: this.state.postalCode,
-			startupName: this.state.startupName,
-			startupDescription: this.state.startupDescription,
-			websiteURL: this.state.websiteURL,
-			profession: this.state.profession
+			interests: this.state.interests,
 		}
 
 		console.log(data);
 
-		axios.post('http://localhost:8082/startup/profile/5f06cef3c99ce30f9aa4d169', data = data)
+		axios.post('http://localhost:8082/community/profile/5f06cef3c99ce30f9aa4d169', data = data)
 			.then(function (response) {
 				console.log(response.data);
 			})
@@ -168,101 +126,15 @@ class Name extends Component {
 							/>
 							<br />
 							<TextField
-								defaultValue={this.state.age}
-								name="age"
+								defaultValue={this.state.interests}
+								name="interests"
 								type="number"
-								label="Age"
+								label="Interests"
 								onChange={this.handleChange.bind(this)}
 
 							/>
 							<br />
-							<TextField
-								defaultValue={this.state.email}
-								type="email"
-								label="Email"
-								name="email"
-								onChange={this.handleChange.bind(this)}
-
-							/>
-							<br />
-							<TextField
-								defaultValue={this.state.qualification}
-								label="Qualification"
-								name="qualification"
-								onChange={this.handleChange.bind(this)}
-							/>
-							<br />
-							<TextField
-								defaultValue={this.state.phone_no}
-								type="number"
-								label="Phone No."
-								name="phone_no"
-								onChange={this.handleChange.bind(this)}
-							/>
-							<TextField
-								defaultValue={this.state.profession}
-								label="Profession"
-								name="profession"
-								onChange={this.handleChange.bind(this)}
-							/>
-							<br />
-							<TextField
-								defaultValue={this.state.startupName}
-								label="Company Name"
-								name="startupName"
-								onChange={this.handleChange.bind(this)}
-							/>
-							<br />
-							<TextField
-								defaultValue={this.state.startupDescription}
-								label="Desciption"
-								name="startupDescription"
-								onChange={this.handleChange.bind(this)}
-							/>
-							<br />
-							<TextField
-								defaultValue={this.state.websiteURL}
-								type="url"
-								label="URL"
-								name="websiteURL"
-								onChange={this.handleChange.bind(this)}
-							/>   <br />
-							<TextField
-								defaultValue={this.state.domain}
-								label="Domain"
-								name="domain"
-								onChange={this.handleChange.bind(this)}
-							/>   <br />
-							<TextField
-								defaultValue={this.state.dipp_no}
-								label="Dipp No."
-								name="dipp_no"
-								onChange={this.handleChange.bind(this)}
-							/>   <br />
-							<TextField
-								defaultValue={this.state.address}
-								label="Address"
-								name="address"
-								onChange={this.handleChange.bind(this)}
-							/>   <br />
-							<TextField
-								defaultValue={this.state.city}
-								label="City"
-								name="city"
-								onChange={this.handleChange.bind(this)}
-							/>   <br />
-							<TextField
-								defaultValue={this.state.country}
-								label="Country"
-								startupName="country"
-								onChange={this.handleChange.bind(this)}
-							/>   <br />
-							<TextField
-								defaultValue={this.state.postalCode}
-								label="Postal Code"
-								name="postalCode"
-								onChange={this.handleChange.bind(this)}
-							/><br />
+							
 							<Button color="primary" type="submit">Submit</Button>
 						</form>
 
@@ -289,16 +161,8 @@ class Name extends Component {
 								<Typography variant="h4" gutterBottom style={{ color: "#1a237e" }}>
 									{this.props.data.firstName + ' ' + this.props.data.lastName}
 								</Typography>
-								<Grid><Typography variant="h5" gutterBottom>
-									{this.props.data.startupName} </Typography>
-									<div>
-									{checkDipp()}</div>
+								<Grid/>
 									
-							<Typography><RoomIcon color="primary" />{this.props.data.city}</Typography>
-									<Typography variant="h7" gutterBottom >
-										Website: <a style={{ color: "#01579b" }}>{this.props.data.websiteURL}</a>
-									</Typography>
-								</Grid>
 							</Container></Grid>
 					</Container>
 					<Divider style={{ marginTop: 20 }} />
@@ -316,38 +180,8 @@ class Name extends Component {
 						<Table>
 							<TableBody>
 								<TableRow>
-									<TableCell><h6 style={{ color: "#1a237e" }}>Description</h6></TableCell>
-									<TableCell>{this.props.data.startupDescription}</TableCell>
-								</TableRow>
-								<TableRow>
-									<TableCell><h6 style={{ color: "#1a237e" }}>Dipp No.</h6></TableCell>
-									<TableCell>{this.props.data.dipp_no}</TableCell>
-								</TableRow>
-								<TableRow>
-									<TableCell><h6 style={{ color: "#1a237e" }}>Profession</h6></TableCell>
-									<TableCell>{this.props.data.profession}</TableCell>
-								</TableRow>
-								<TableRow>
-									<TableCell><h6 style={{ color: "#1a237e" }}>Qualification</h6></TableCell>
-									<TableCell>{this.props.data.qualification}</TableCell>
-								</TableRow>
-							</TableBody>
-							<TableBody>
-								<TableRow>
-									<TableCell><h6 style={{ color: "#1a237e" }}>Email</h6></TableCell>
-									<TableCell>{this.props.data.email}</TableCell>
-								</TableRow>
-								<TableRow>
-									<TableCell><h6 style={{ color: "#1a237e" }}>Phone</h6></TableCell>
-									<TableCell>{this.props.data.phone_no}</TableCell>
-								</TableRow>
-								<TableRow>
-									<TableCell><h6 style={{ color: "#1a237e" }}>Age</h6></TableCell>
-									<TableCell>{this.props.data.age}</TableCell>
-								</TableRow>
-								<TableRow>
-									<TableCell><h6 style={{ color: "#1a237e" }}>Address</h6></TableCell>
-									<TableCell>{this.props.data.address + ', ' + this.props.data.city + ', ' + this.props.data.postalCode + ', ' + this.props.data.country}</TableCell>
+									<TableCell><h6 style={{ color: "#1a237e" }}>Interests</h6></TableCell>
+									<TableCell>{this.props.data.interests}</TableCell>
 								</TableRow>
 							</TableBody></Table>
 					</Card>
