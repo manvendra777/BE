@@ -64,7 +64,8 @@ class FindByDomains extends Component {
                 <Card elevation={5} style={{ width: '84%', marginTop: 10,}}>
                     <Typography variant="h5" color='primary' style={{ margin: 10 }} gutterBottom>
                         Find Startups
-							</Typography>
+						
+                        	</Typography>
                     <Divider />
                     <div style={{ display: 'flex' }}>
                         <div style={{ margin: 20, padding: 20 }}>
