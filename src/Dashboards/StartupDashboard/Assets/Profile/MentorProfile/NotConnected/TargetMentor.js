@@ -12,7 +12,7 @@ import Chip from '@material-ui/core/Chip';
 import RatingStats from './Rating/RatingStats'
 import Rater from 'react-rater'
 import 'react-rater/lib/react-rater.css'
-
+import { Checkmark } from 'react-checkmark'
 
 const styles = theme => ({
     root: {
@@ -43,7 +43,7 @@ const styles = theme => ({
 });
 
 
-class MyMentor extends Component {
+class TargetMentor extends Component {
     constructor(props) {
         super(props);
 
@@ -51,22 +51,37 @@ class MyMentor extends Component {
             myProfile: [],
             val: [],
             avg: '',
-            myrating:0
+            myrating:0,
+            isVerified:false,
         };
-        this.getInfo = this.getInfo.bind(this);
         this.mapDomain = this.mapDomain.bind(this);
+        this.getInfo = this.getInfo.bind(this);
+        this.getLogs = this.getLogs.bind(this)
+
         this.getRating = this.getRating.bind(this)
         this.getRatingAv = this.getRatingAv.bind(this)
-       
-        this.sendRequest = this.sendRequest.bind(this)
-        this.checkSentReq = this.checkSentReq.bind(this)
-       
+
+        this.gateMyRating = this.gateMyRating.bind(this)
+
+        this.isVerified = this.isVerified.bind(this)
     }
     componentWillMount() {
         this.getInfo()
         this.getRating()
         this.getRatingAv()
-        this.checkSentReq()
+        this.gateMyRating()
+        this.isVerified()
+        
+    }
+    isVerified(){
+        
+        var id = this.props.match.params.id
+        var isVerified;
+        axios.get(`http://localhost:8085/ratings/isVerified`,{params:{id:this.props.match.params.id}} )
+        .then(res => {
+            isVerified = res.data;
+            this.setState({ isVerified: isVerified })
+        })
     }
     getInfo() {
         var id = this.props.match.params.id
@@ -78,29 +93,33 @@ class MyMentor extends Component {
             })
     }
 
-
-    sendRequest() {
-        var myid = "5f07ae9d919bc64fc3513d0a";
-        var response;
-        axios.post('http://localhost:8083/entityAction/user/sendRequest', null, { params: { id: myid, target: this.props.match.params.id } })
+    gateMyRating() {
+        var myid="5f05fec985937b5e5bb16df2"
+        var my=0
+        axios.get(`http://localhost:8085/ratings/get`, { params: { provider:myid ,entity:this.props.match.params.id} })
+        .then(res => {
+            my = res.data;
+            console.log(my);
+            
+            this.setState({ myrating: my })
+        })
+    }
+    setMyRating(rating) {
+        var myid="5f05fec985937b5e5bb16df2"
+        var m=this.props.match.params.id
+        //localhost:8080/ratings/save
+        axios.post('http://localhost:8085/ratings/save', {
+            "entityId": m,
+            "providerId": myid,
+            "value": rating
+        })
             .then(res => {
-                response = res.data
             })
     }
-    checkSentReq() {
-        var myid = "5f07ae9d919bc64fc3513d0a";
-        var response;
-        axios.get('http://localhost:8083/entityAction/user/checkRequest', { params: { id: myid, target: this.props.match.params.id } })
-            .then(res => {
-                response = res.data
-                this.setState({ setReq: response })
-            })
-    }
-   
 
     getRating() {
         var avg;
-        axios.get(`http://localhost:8080/ratings/getRatingCount`, { params: { id: this.props.match.params.id } })
+        axios.get(`http://localhost:8085/ratings/getRatingCount`, { params: { id: this.props.match.params.id } })
             .then(res => {
                 avg = res.data;
                 avg = avg.reverse()
@@ -109,7 +128,7 @@ class MyMentor extends Component {
     }
     getRatingAv() {
         var rate;
-        axios.get(`http://localhost:8080/ratings/getRatingAverage`, { params: { id: this.props.match.params.id } })
+        axios.get(`http://localhost:8085/ratings/getRatingAverage`, { params: { id: this.props.match.params.id } })
             .then(res => {
                 rate = res.data;
                 console.log(rate);
@@ -146,16 +165,20 @@ class MyMentor extends Component {
                             <Typography variant="subtitle1" gutterBottom>
                                 Address: {this.state.myProfile.address + ', ' + this.state.myProfile.city + ', ' + this.state.myProfile.postalCode + ', ' + this.state.myProfile.country}
                             </Typography>
+                            <div style={{width:100}}>
+                            {!this.state.isVerified ? <div style={{display:'flex'}}><Checkmark size={25}  color='blue'/>Verified</div> : <div></div>}
+                            </div>
                             <div>{this.mapDomain()}</div>
                         </Container>
                         <Divider style={{ marginLeft: 10, marginRight: 20 }} orientation="vertical" flexItem />
-
                         <RatingStats ratings={this.state.val} ratingAverage={Math.round(this.state.avg * 10) / 10} raterCount={this.state.val.reduce((a, b) => a + b, 0)} />,
 
                     </Container>
                     <Divider style={{ marginBottom: 10 }} />
-                    <Button disabled={this.state.setReq} style={{ marginLeft: 30 }} size="small" onClick={this.sendRequest} color="primary">Send Invitation</Button>
+                    <Button style={{ marginLeft: 30 }} size="small" color="primary">Send Invitation</Button>
+                    
                     <Divider style={{ marginTop: 10 }} />
+
                     <Container style={{ marginLeft: 10, marginTop: 10, display: 'block' }}>
 
                         <Typography variant="subtitle2" gutterBottom>
@@ -181,7 +204,7 @@ class MyMentor extends Component {
 
                 </Card>
             </div>
-       );
+        );
     }
 }
-export default withStyles(styles)(MyMentor);
+export default withStyles(styles)(TargetMentor);

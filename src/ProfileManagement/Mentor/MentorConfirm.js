@@ -28,7 +28,8 @@ class MentorConfirm extends React.Component {
             "address": this.props.values.address,
             "city": this.props.values.city,
             "country": this.props.values.country,
-            "domainValue": this.props.values.domainValue
+            "domainValue": this.props.values.domainValue,
+            "Incentive":this.props.values.Incentive
 
         })
             .then(function (response) {
@@ -50,7 +51,7 @@ class MentorConfirm extends React.Component {
     render() {
 
         const { values: { firstName, lastName, email, phone_no, experience_in_Domain, qualification, method_of_contact,
-            what_makes_you_a_great_mentor, about_yourself, address, city, country } } = this.props;
+            what_makes_you_a_great_mentor, about_yourself, address, city, country,Incentive } } = this.props;
 
         return (
 
@@ -130,6 +131,12 @@ class MentorConfirm extends React.Component {
                                 <ListItem
                                     primaryText="Country"
                                     secondaryText={country}
+                                />
+                            </List>
+                            <List>
+                                <ListItem
+                                    primaryText="Incentive"
+                                    secondaryText={Incentive}
                                 />
                             </List>
 

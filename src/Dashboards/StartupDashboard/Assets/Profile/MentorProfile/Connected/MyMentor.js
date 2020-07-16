@@ -12,7 +12,7 @@ import Chip from '@material-ui/core/Chip';
 import RatingStats from './Rating/RatingStats'
 import Rater from 'react-rater'
 import 'react-rater/lib/react-rater.css'
-
+import { Checkmark } from 'react-checkmark'
 
 const styles = theme => ({
     root: {
@@ -51,7 +51,8 @@ class MyMentor extends Component {
             myProfile: [],
             val: [],
             avg: '',
-            myrating:0
+            myrating:0,
+            isVerified:false,
         };
         this.mapDomain = this.mapDomain.bind(this);
         this.getInfo = this.getInfo.bind(this);
@@ -61,17 +62,31 @@ class MyMentor extends Component {
         this.getRatingAv = this.getRatingAv.bind(this)
 
         this.gateMyRating = this.gateMyRating.bind(this)
+
+        this.isVerified = this.isVerified.bind(this)
     }
     componentWillMount() {
         this.getInfo()
         this.getRating()
         this.getRatingAv()
         this.gateMyRating()
+        this.isVerified()
+        
+    }
+    isVerified(){
+        
+        var id = this.props.match.params.id
+        var isVerified;
+        axios.get(`http://localhost:8085/ratings/isVerified`,{params:{id:this.props.match.params.id}} )
+        .then(res => {
+            isVerified = res.data;
+            this.setState({ isVerified: isVerified })
+        })
     }
     getInfo() {
         var id = this.props.match.params.id
         var persons;
-        axios.get(`http://localhost:8081/mentor/profile/` + id)
+        axios.get(`http://localhost:8082/mentor/profile/` + id)
             .then(res => {
                 persons = res.data;
                 this.setState({ myProfile: persons })
@@ -81,7 +96,7 @@ class MyMentor extends Component {
     gateMyRating() {
         var myid="5f05fec985937b5e5bb16df2"
         var my=0
-        axios.get(`http://localhost:8080/ratings/get`, { params: { provider:myid ,entity:this.props.match.params.id} })
+        axios.get(`http://localhost:8085/ratings/get`, { params: { provider:myid ,entity:this.props.match.params.id} })
         .then(res => {
             my = res.data;
             console.log(my);
@@ -93,7 +108,7 @@ class MyMentor extends Component {
         var myid="5f05fec985937b5e5bb16df2"
         var m=this.props.match.params.id
         //localhost:8080/ratings/save
-        axios.post('http://localhost:8080/ratings/save', {
+        axios.post('http://localhost:8085/ratings/save', {
             "entityId": m,
             "providerId": myid,
             "value": rating
@@ -104,7 +119,7 @@ class MyMentor extends Component {
 
     getRating() {
         var avg;
-        axios.get(`http://localhost:8080/ratings/getRatingCount`, { params: { id: this.props.match.params.id } })
+        axios.get(`http://localhost:8085/ratings/getRatingCount`, { params: { id: this.props.match.params.id } })
             .then(res => {
                 avg = res.data;
                 avg = avg.reverse()
@@ -113,7 +128,7 @@ class MyMentor extends Component {
     }
     getRatingAv() {
         var rate;
-        axios.get(`http://localhost:8080/ratings/getRatingAverage`, { params: { id: this.props.match.params.id } })
+        axios.get(`http://localhost:8085/ratings/getRatingAverage`, { params: { id: this.props.match.params.id } })
             .then(res => {
                 rate = res.data;
                 console.log(rate);
@@ -150,6 +165,9 @@ class MyMentor extends Component {
                             <Typography variant="subtitle1" gutterBottom>
                                 Address: {this.state.myProfile.address + ', ' + this.state.myProfile.city + ', ' + this.state.myProfile.postalCode + ', ' + this.state.myProfile.country}
                             </Typography>
+                            <div style={{width:100}}>
+                            {this.state.isVerified ? <div style={{display:'flex'}}><Checkmark size={25}  color='blue'/>Verified</div> : <div></div>}
+                            </div>
                             <div>{this.mapDomain()}</div>
                         </Container>
                         <Divider style={{ marginLeft: 10, marginRight: 20 }} orientation="vertical" flexItem />

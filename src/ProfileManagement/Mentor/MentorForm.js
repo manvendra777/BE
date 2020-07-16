@@ -12,10 +12,11 @@ export class MentorForm extends Component {
         this.setDomain = this.setDomain.bind(this)
         this.setDomainValues = this.setDomainValues.bind(this)
         this.setDomainC = this.setDomainC.bind(this)
+        this.setIncentiveG = this.setIncentiveG.bind(this)
     }
 
     state = {
-        step: 1,
+        step: 3,
         firstName: "",
         lastName: "",
         email: "",
@@ -31,6 +32,7 @@ export class MentorForm extends Component {
         domainValue: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         domain:[],
         domainsC: [false, false, false, false, false, false, false, false, false, false],
+        Incentive:''
     }
 
     //proceed to next step
@@ -54,6 +56,9 @@ export class MentorForm extends Component {
     setDomainC(domain){
         this.setState({domainsC:domain})
     }
+    setIncentiveG(incentive){
+        this.setState({Incentive:incentive})
+    }
 
     setDomainValues(values){
         this.setState({domainValue:values})
@@ -70,11 +75,11 @@ export class MentorForm extends Component {
 
         const { step } = this.state;
         const { firstName, lastName, email, phone_no, experience_in_Domain, qualification, method_of_contact,
-            what_makes_you_a_great_mentor, about_yourself, address, city, country, domain, domainValue,domainsC } = this.state;
+            what_makes_you_a_great_mentor, about_yourself, address, city, country, domain, domainValue,domainsC,Incentive } = this.state;
 
         const values = {
             firstName, lastName, email, phone_no, experience_in_Domain, qualification, method_of_contact,
-            what_makes_you_a_great_mentor, about_yourself, address, city, country, domain, domainValue,domainsC
+            what_makes_you_a_great_mentor, about_yourself, address, city, country, domain, domainValue,domainsC,Incentive
         };
         switch (step) {
             case 1:
@@ -101,6 +106,7 @@ export class MentorForm extends Component {
                         setDomain={this.setDomain}
                         setDomainValues={this.setDomainValues}
                         setDomainC={this.setDomainC}
+                        setIncentiveG={this.setIncentiveG}
                         nextStep={this.nextStep}
                         prevStep={this.prevStep}
                         value={values}
