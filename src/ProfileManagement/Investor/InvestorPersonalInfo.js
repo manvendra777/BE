@@ -67,6 +67,20 @@ class InvestorPersonalInfo extends React.Component{
                       onChange= {handleChange('age')}
                       defaultValue= {values.age}
                       />
+                        <TextField
+                      hintText= "Enter Min Investment Limit"
+                      floatingLabelText= "min"
+                      type="number"
+                      onChange= {handleChange('min')}
+                      defaultValue= {values.min}
+                      />
+                        <TextField
+                      hintText= "Enter Max Investment Limit"
+                      floatingLabelText= "max"
+                      type="number"
+                      onChange= {handleChange('max')}
+                      defaultValue= {values.max}
+                      />
                      <br/>
                       
                       <RaisedButton

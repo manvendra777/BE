@@ -14,23 +14,27 @@ class InvestorConfirm extends React.Component{
        e.preventDefault();
        //Api calling
        var data={
-        "firstName": this.props.values.firstName,
-        "lastName": this.props.values.lastName,
-        "email": this.props.values.email,
-        "phone_no": this.props.values.phone_no,
-        "age": this.props.values.age,
+       
         
         
 }
 
     console.log(data);
 
-    axios.put('http://localhost:8082/investor/profile/add', {data})
+    axios.put('http://localhost:8082/investor/profile/add', {
+        "firstName": this.props.values.firstName,
+        "lastName": this.props.values.lastName,
+        "email": this.props.values.email,
+        "phone_no": this.props.values.phone_no,
+        "age": this.props.values.age,
+        "min":this.props.values.min,
+        "max":this.props.values.max
+    })
     .then(function (response) {
 
         console.log("true");
     })
-        this.props.nextStep();
+        //this.props.nextStep();
     }
 
     back= e=>{
