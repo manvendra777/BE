@@ -95,6 +95,7 @@ class TargetMentor extends Component {
         //localhost:8080/entityAction/user/sendRequest?id=5f07ae9d919bc64fc3513d0a&target=2
         if(this.state.isVerified){
             console.log('buy');
+            
         }else{
             console.log('sent');
             axios.post(`http://localhost:8083/entityAction/user/sendRequest`,null,{params:{id:myid,target:this.props.match.params.id}} )
