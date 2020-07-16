@@ -75,19 +75,24 @@ class FindByDomains extends Component {
                             <FormControl >
                                 <FormLabel >Domain</FormLabel>
                                 <FormGroup>
-                                    <FormControlLabel control={<Checkbox onClick={this.getList} name="Ai" value="Ai" color="primary" />} label="Ai" />
+                                    <FormControlLabel control={<Checkbox onClick={this.getList} name="Agriculture" value="Agriculture" color="primary" />} label="Agriculture" />
+                                    <FormControlLabel control={<Checkbox onClick={this.getList} name="Artificial Intelligence" value="Artificial Intelligence" color="primary" />} label="Artificial Intelligence" />
+                                    <FormControlLabel control={<Checkbox onClick={this.getList} name="Art and Photography" value="Art and Photography" color="primary" />} label="Art and Photography" />
+                                    <FormControlLabel control={<Checkbox onClick={this.getList} name="Education" value="Education" color="primary" />} label="Education" />
+                                    <FormControlLabel control={<Checkbox onClick={this.getList} name="Fashion" value="Fashion" color="primary" />} label="Fashion" />
+                                    <FormControlLabel control={<Checkbox onClick={this.getList} name="Food and Beverages" value="Food and Beverages" color="primary" />} label="Food and Beverages" />
+                                    <FormControlLabel control={<Checkbox onClick={this.getList} name="Heathcare" value="Heathcare" color="primary" />} label="Heathcare" />
                                     <FormControlLabel control={<Checkbox onClick={this.getList} name="Marketing" value="Marketing" color="primary" />} label="Marketing" />
-                                    <FormControlLabel control={<Checkbox onClick={this.getList} name="Milk" value="Milk" color="primary" />} label="Milk" />
-                                    <FormControlLabel control={<Checkbox onClick={this.getList} name="Travel" value="Travel" color="primary" />} label="Travel" />
-                                    <FormControlLabel control={<Checkbox onClick={this.getList} name="Armed-Vehicles" value="Armed-Vehicles" color="primary" />} label="Armed-Vehicles" />
+                                    <FormControlLabel control={<Checkbox onClick={this.getList} name="Sports" value="Sports" color="primary" />} label="Sports" />
+                                    <FormControlLabel control={<Checkbox onClick={this.getList} name="Other" value="Other" color="primary" />} label="Other" />
                                 </FormGroup>
-                                <Button style={{ marginTop: 20 }} variant="outlined" onClick={this.getListData}>find</Button>
+                                <Button style={{ marginTop:30 }} variant="outlined" onClick={this.getListData}>find</Button>
                             </FormControl>
                         </div>
                         <Divider orientation="vertical" flexItem />
 
-                        <div style={{ height: 550, display: 'block', width: '100%' }}>
-                            <div style={{ background: '#bfbfbf', display: 'flex', flexFlow: 'row wrap', justifyContent: 'space-around', minWidth: '100%', overflow: 'scroll', height: '100%' }}>
+                        <div style={{ height: 700, display: 'block', width: '100%' }}>
+                            <div style={{ background: '#bfbfbf', display: 'flex', flexFlow: 'row wrap', justifyContent: 'space-around', minWidth: '100%', overflowY: 'scroll', height: '100%' }}>
                                 <div>
                                     {this.state.MentorList.map(child => child)}
                                 </div>

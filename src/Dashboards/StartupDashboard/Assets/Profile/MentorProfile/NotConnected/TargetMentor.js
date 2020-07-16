@@ -10,7 +10,8 @@ import Divider from '@material-ui/core/Divider';
 import axios from 'axios';
 import Chip from '@material-ui/core/Chip';
 import RatingStats from './Rating/RatingStats'
-
+import Rater from 'react-rater'
+import 'react-rater/lib/react-rater.css'
 
 
 const styles = theme => ({
@@ -42,8 +43,7 @@ const styles = theme => ({
 });
 
 
-
-class TargetMentor extends Component {
+class MyMentor extends Component {
     constructor(props) {
         super(props);
 
@@ -51,16 +51,23 @@ class TargetMentor extends Component {
             myProfile: [],
             val: [],
             avg: '',
-            setReq: false,
+            myrating:0
         };
         this.getInfo = this.getInfo.bind(this);
         this.mapDomain = this.mapDomain.bind(this);
         this.getRating = this.getRating.bind(this)
         this.getRatingAv = this.getRatingAv.bind(this)
+       
         this.sendRequest = this.sendRequest.bind(this)
         this.checkSentReq = this.checkSentReq.bind(this)
+       
     }
- 
+    componentWillMount() {
+        this.getInfo()
+        this.getRating()
+        this.getRatingAv()
+        this.checkSentReq()
+    }
     getInfo() {
         var id = this.props.match.params.id
         var persons;
@@ -68,33 +75,9 @@ class TargetMentor extends Component {
             .then(res => {
                 persons = res.data;
                 this.setState({ myProfile: persons })
-                console.log(this.state.myProfile);
             })
-    }
-    mapDomain() {
-        if (this.state.myProfile.domain != undefined) {
-            return this.state.myProfile.domain.map((item, i) => (<Chip color="primary" style={{ marginLeft: 5, margin: 2 }} label={item} />))
-        }
     }
 
-
-    getRating() {
-        var avg;
-        axios.get(`http://localhost:8085/ratings/getRatingCount`, { params: { id: this.props.match.params.id } })
-            .then(res => {
-                avg = res.data;
-                avg = avg.reverse()
-                this.setState({ val: avg })
-            })
-    }
-    getRatingAv() {
-        var rate;
-        axios.get(`http://localhost:8085/ratings/getRatingAverage`, { params: { id: this.props.match.params.id } })
-            .then(res => {
-                rate = res.data;
-                this.setState({ avg: rate })
-            })
-    }
 
     sendRequest() {
         var myid = "5f07ae9d919bc64fc3513d0a";
@@ -113,11 +96,34 @@ class TargetMentor extends Component {
                 this.setState({ setReq: response })
             })
     }
-    componentWillMount(){
-        this.getRating()
-        this.checkSentReq()
-        this.getRatingAv()
-        this.getInfo()
+   
+
+    getRating() {
+        var avg;
+        axios.get(`http://localhost:8080/ratings/getRatingCount`, { params: { id: this.props.match.params.id } })
+            .then(res => {
+                avg = res.data;
+                avg = avg.reverse()
+                this.setState({ val: avg })
+            })
+    }
+    getRatingAv() {
+        var rate;
+        axios.get(`http://localhost:8080/ratings/getRatingAverage`, { params: { id: this.props.match.params.id } })
+            .then(res => {
+                rate = res.data;
+                console.log(rate);
+                this.setState({ avg: rate })
+            })
+    }
+
+    getLogs() {
+        console.log(this.state.myProfile);
+    }
+    mapDomain() {
+        if (this.state.myProfile.domain != undefined) {
+            return this.state.myProfile.domain.map((item, i) => (<Chip color="primary" style={{ marginLeft: 5, margin: 2 }} label={item} />))
+        }
     }
     render() {
         const { classes } = this.props;
@@ -178,4 +184,4 @@ class TargetMentor extends Component {
        );
     }
 }
-export default withStyles(styles)(TargetMentor);
+export default withStyles(styles)(MyMentor);
