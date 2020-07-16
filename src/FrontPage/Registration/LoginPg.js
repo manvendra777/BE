@@ -62,7 +62,7 @@ class LoginPg extends React.Component {
     }
     var self = this;
     if (this.validateForm()) {
-      axios.post('http://localhost:8085/security/login', data = data)
+      axios.post('http://localhost:8081/security/login', data = data)
         .then(function (response) {
           if (response.data) {
             //window.location = "/login" //This line of code will redirect you once the submission is succeed
