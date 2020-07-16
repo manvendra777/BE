@@ -193,7 +193,6 @@ class MyMentor extends Component {
                         <Typography variant="subtitle2" gutterBottom>
                             phone: {this.state.myProfile.phone_no}
                         </Typography>
-
                         <Typography variant="subtitle2" gutterBottom>
                             experience_in_domain:{this.state.myProfile.experience_in_domain}
                         </Typography>

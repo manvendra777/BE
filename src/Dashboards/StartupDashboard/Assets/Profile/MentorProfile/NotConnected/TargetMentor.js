@@ -53,6 +53,7 @@ class TargetMentor extends Component {
             avg: '',
             myrating:0,
             isVerified:false,
+            sentReq:false
         };
         this.mapDomain = this.mapDomain.bind(this);
         this.getInfo = this.getInfo.bind(this);
@@ -64,14 +65,44 @@ class TargetMentor extends Component {
         this.gateMyRating = this.gateMyRating.bind(this)
 
         this.isVerified = this.isVerified.bind(this)
+
+        this.sendInvitation = this.sendInvitation.bind(this)
+
+        this.checkInvitation = this.checkInvitation.bind(this)
     }
     componentWillMount() {
-        this.getInfo()
+        
         this.getRating()
         this.getRatingAv()
         this.gateMyRating()
         this.isVerified()
-        
+        this.checkInvitation()
+        this.getInfo()
+    }
+    checkInvitation(){
+       //localhost:8083/entityAction/user/checkRequest
+       var myid = '5f07ae9d919bc64fc3513d0c';
+       var sent;
+       axios.get(`http://localhost:8083/entityAction/user/checkRequest`,{params:{id:myid,target:this.props.match.params.id}} )
+       .then(res => {
+           sent = res.data;
+           this.setState({ sentReq: sent })
+       })
+
+    }
+    sendInvitation(){
+        var myid='5f07ae9d919bc64fc3513d0c'
+        //localhost:8080/entityAction/user/sendRequest?id=5f07ae9d919bc64fc3513d0a&target=2
+        if(this.state.isVerified){
+            console.log('buy');
+        }else{
+            console.log('sent');
+            axios.post(`http://localhost:8083/entityAction/user/sendRequest`,null,{params:{id:myid,target:this.props.match.params.id}} )
+            .then(res => {
+                
+            })
+
+        }
     }
     isVerified(){
         
@@ -166,7 +197,7 @@ class TargetMentor extends Component {
                                 Address: {this.state.myProfile.address + ', ' + this.state.myProfile.city + ', ' + this.state.myProfile.postalCode + ', ' + this.state.myProfile.country}
                             </Typography>
                             <div style={{width:100}}>
-                            {!this.state.isVerified ? <div style={{display:'flex'}}><Checkmark size={25}  color='blue'/>Verified</div> : <div></div>}
+                            {this.state.isVerified ? <div style={{display:'flex'}}><Checkmark size={25}  color='blue'/>Verified</div> : <div></div>}
                             </div>
                             <div>{this.mapDomain()}</div>
                         </Container>
@@ -175,7 +206,7 @@ class TargetMentor extends Component {
 
                     </Container>
                     <Divider style={{ marginBottom: 10 }} />
-                    <Button style={{ marginLeft: 30 }} size="small" color="primary">Send Invitation</Button>
+                    <Button disabled={this.state.sentReq} onClick={this.sendInvitation} style={{ marginLeft: 30 }} size="small" color="primary">Send Invitation</Button>
                     
                     <Divider style={{ marginTop: 10 }} />
 
