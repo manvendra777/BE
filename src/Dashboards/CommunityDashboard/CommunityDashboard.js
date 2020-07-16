@@ -6,12 +6,7 @@ import ListOfOnlineCandidates from "./Assets/Messaging/Assets/ListOfOnlineCandid
 import Messaging from './Assets/Messaging/Messaging'
 import Connections from "./Assets/Connections/Connections"
 import Home from "./Assets/home/Home"
-
-import TargetMentor from './Assets/Profile/MentorProfile/NotConnected/TargetMentor'
-import MyMentor from './Assets/Profile/MentorProfile/Connected/MyMentor'
 import { Route, BrowserRouter as Router, Link } from 'react-router-dom'
-import MyInvestor from './Assets/Profile/InvestorProfile/Connected/MyInvestor'
-import TargetInvestor from './Assets/Profile/InvestorProfile/NotConnected/TargetInvestor'
 import Advertise from './Assets/Advertise/Advertise'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
@@ -53,11 +48,7 @@ export default class StartupDashboard extends Component {
 								<Route path="/communityDashboard/Connections" component={Connections} />
 								<Route path="/communityDashboard/Home" component={Home} />
 								
-								
-								<Route exact path="/communityDashboard/TargetMentor/:id" component={TargetMentor} />
-								<Route exact path="/communityDashboard/MyMentor/:id" component={MyMentor} />
-								<Route path="/communityDashboard/TargetInvestor/:id" component={TargetInvestor} />
-								<Route path="/communityDashboard/MyInvestor/:id" component={MyInvestor} />
+					
 								<Route path="/communityDashboard/Ads" component={Advertise}></Route>
 
 								<Route path="/communityDashboard/Feed/:Domain" component={Feed}></Route>

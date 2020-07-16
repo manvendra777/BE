@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import { Button } from 'react-bootstrap';
+import AskQue from './AskQue'
 
 
 const useStyles = theme => ({
@@ -27,7 +28,7 @@ class Feed extends Component{
     render(){
         return(
             <div>
-                <h1>hey</h1>
+                <AskQue/>
                 <h1>{this.props.match.params.Domain}</h1>
             </div>
         );
