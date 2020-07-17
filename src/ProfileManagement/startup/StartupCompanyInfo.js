@@ -60,13 +60,6 @@ class StartupCompanyInfo extends React.Component{
                       defaultValue= {values.websiteURL}
                       />   <br/>
                        <TextField
-                      hintText= "Enter Domain"
-                      floatingLabelText= "Domain"
-                      onChange= {handleChange('domain')}
-                      defaultValue= {values.domain}
-
-                      />   <br/>
-                       <TextField
                       hintText= "Enter DIPP Number"
                       floatingLabelText= "DIPP No."
                       onChange= {handleChange('DIPP_no')}

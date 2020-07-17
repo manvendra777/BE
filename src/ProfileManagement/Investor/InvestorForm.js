@@ -12,9 +12,11 @@ export class InvestorForm extends Component {
             step: 1,
              firstName: "",
             lastName: "",
-            phone_no: "",
+            phone_no:0,
             email: "",
-            age: ""
+            age: 0,
+            min:0,
+            max:0
     
         }
 
@@ -45,9 +47,9 @@ export class InvestorForm extends Component {
 
         
         const {step}= this.state;
-        const {firstName, lastName, email, phone_no, age}= this.state;
+        const {firstName, lastName, email, phone_no, age,min,max}= this.state;
             
-        const values= {firstName, lastName, email, phone_no, age};
+        const values= {firstName, lastName, email, phone_no, age,min,max};
         
             switch(step){
                 case 1: 

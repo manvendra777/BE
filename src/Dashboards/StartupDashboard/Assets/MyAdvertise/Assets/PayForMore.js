@@ -14,6 +14,8 @@ import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import ViewAd from './ViewAd';
+import { PricingTable, PricingSlot, PricingDetail } from 'react-pricing-table';
+
 
 class PayForMore extends Component {
     constructor(props) {
@@ -27,64 +29,44 @@ class PayForMore extends Component {
 
     render() {
         return (
-            <div style={{ display: 'flex', padding: 10 }}>
-                <Card style={{ height: 200, width: 500, margin: 10 }}>
-                    <div>
-                        plan1
-               </div>
-                    <div>
-                        Advertise Limit : 10
-               </div>
-                    <div>
-                        Advertise Time : 10 days
-               </div>
-                    <div>
-                        Pricing : 1000/-
-               </div>
-                    <div>
-                        <Fab variant="extended" size="small">
-                            Select
-                            </Fab>
+            <div style={{ display: 'flex', }}>
+                <div>
+                    <PricingTable highlightColor='#2196f3'>
+                        <PricingSlot buttonText='TRY IT FREE' title='FREE' priceText='Rs 0/month'>
+                            <PricingDetail> <b>1</b> Advertise</PricingDetail>
+                            <PricingDetail> <b>2 days</b> Advertise Time</PricingDetail>
+                            <PricingDetail strikethrough> <b>premium mentors</b></PricingDetail>
+                        </PricingSlot>
+                    </PricingTable>
+                </div>
+                <div>
+                    <PricingTable highlightColor='#00bcd4'>
+                        <PricingSlot highlighted buttonText='Select' title='BASIC' priceText='Rs 240/month'>
+                            <PricingDetail> <b>5</b> Advertise</PricingDetail>
+                            <PricingDetail> <b>7 days</b> Advertise Time</PricingDetail>
+                            <PricingDetail> <b>1</b> premium mentor</PricingDetail>
+                        </PricingSlot>
+                    </PricingTable>
+                </div>
+                <div>
+                    <PricingTable highlightColor='#00bcd4'>
+                        <PricingSlot buttonText='Select' title='PROFESSIONAL' priceText='Rs 500/month'>
+                            <PricingDetail> <b>10</b> Advertise</PricingDetail>
+                            <PricingDetail> <b>30 days</b> Advertise Time</PricingDetail>
+                            <PricingDetail> <b>10</b> premium mentor</PricingDetail>
+                        </PricingSlot>
+                    </PricingTable>
+                </div>
+                <div>
+                    <PricingTable highlightColor='#00bcd4'>
+                        <PricingSlot highlighted buttonText='Select' title='ENTERPRISE' priceText='Rs 1000/month'>
+                            <PricingDetail> <b>100</b> Advertise</PricingDetail>
+                            <PricingDetail> <b>90 days</b> Advertise Time</PricingDetail>
+                            <PricingDetail> <b>Unlimited</b> premium mentor</PricingDetail>
+                        </PricingSlot>
+                    </PricingTable>
                     </div>
-                </Card>
-                <Card style={{ height: 200, width: 500, margin: 10 }}>
-                    <div>
-                        plan2
-               </div>
-                    <div>
-                        Advertise Limit : 20
-               </div>
-                    <div>
-                        Advertise Time : 20 days
-               </div>
-                    <div>
-                        Pricing : 1500/-
-               </div>
-                    <div>
-                        <Fab variant="extended" size="small">
-                            Select
-                            </Fab>
-                    </div>
-                </Card>
-                <Card style={{ height: 200, width: 500, margin: 10 }}>
-                    <div>
-                        plan1
-               </div>
-                    <div>
-                        Advertise Limit : 100
-               </div>
-                    <div>
-                        Advertise Time : 30 days
-               </div>
-                    <div>
-                        Pricing : 2000/-
-               </div>
-                    <div>
-                        <Fab variant="extended" size="small">
-                            Select
-                            </Fab>
-                    </div>
-                </Card>
+
             </div>
 
         );

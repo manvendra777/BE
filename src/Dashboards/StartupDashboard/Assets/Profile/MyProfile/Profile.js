@@ -12,7 +12,7 @@ export default class Profile extends Component {
 	}
 
 	componentDidMount() {
-		var id = '5ed7d3b239ff0059a0a9980e'
+		var id = '5f10670eb5e5b458dac423e0'
 		var persons;
 
 		axios.get(`http://localhost:8082/startup/profile/` + id)

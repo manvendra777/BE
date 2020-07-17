@@ -31,7 +31,6 @@ class StartupSuccess extends React.Component{
     //set entity
   }
   componentDidMount(){
-   
     this.createDb();
     this.setId();
     window.location = "/loginPg"
