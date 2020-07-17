@@ -13,7 +13,7 @@ import RatingStats from './Rating/RatingStats'
 import Rater from 'react-rater'
 import 'react-rater/lib/react-rater.css'
 import { Checkmark } from 'react-checkmark'
-
+import Cookies from 'js-cookie'
 const styles = theme => ({
     root: {
         display: "flex",
@@ -81,7 +81,7 @@ class TargetMentor extends Component {
     }
     checkInvitation(){
        //localhost:8083/entityAction/user/checkRequest
-       var myid = '5f07ae9d919bc64fc3513d0c';
+       var myid = Cookies.get('id');
        var sent;
        axios.get(`http://localhost:8083/entityAction/user/checkRequest`,{params:{id:myid,target:this.props.match.params.id}} )
        .then(res => {
@@ -91,7 +91,7 @@ class TargetMentor extends Component {
 
     }
     sendInvitation(){
-        var myid='5f07ae9d919bc64fc3513d0c'
+        var myid = Cookies.get('id');
         //localhost:8080/entityAction/user/sendRequest?id=5f07ae9d919bc64fc3513d0a&target=2
         if(this.state.isVerified){
             console.log('buy');
@@ -126,7 +126,7 @@ class TargetMentor extends Component {
     }
 
     gateMyRating() {
-        var myid="5f05fec985937b5e5bb16df2"
+        var myid = Cookies.get('id');
         var my=0
         axios.get(`http://localhost:8085/ratings/get`, { params: { provider:myid ,entity:this.props.match.params.id} })
         .then(res => {
@@ -137,7 +137,7 @@ class TargetMentor extends Component {
         })
     }
     setMyRating(rating) {
-        var myid="5f05fec985937b5e5bb16df2"
+        var myid = Cookies.get('id');
         var m=this.props.match.params.id
         //localhost:8080/ratings/save
         axios.post('http://localhost:8085/ratings/save', {

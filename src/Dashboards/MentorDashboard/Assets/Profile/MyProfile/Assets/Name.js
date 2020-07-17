@@ -20,7 +20,7 @@ import Dialog from '@material-ui/core/Dialog';
 import TextField from '@material-ui/core/TextField';
 import { EditorFormatAlignCenter } from "material-ui/svg-icons";
 import axios from 'axios';
-
+import Cookies from 'js-cookie'
 const styles = theme => ({
 	root: {
 		display: "flex",
@@ -128,7 +128,7 @@ class Name extends Component {
 
 		console.log(data);
 
-		axios.post('http://localhost:8081/mentor/profile/5f0b2064c634612f75c10e46', data = data)
+		axios.post('http://localhost:8081/mentor/profile/'+Cookies.get('id'), data = data)
 			.then(function (response) {
 				console.log(response.data);
 			})

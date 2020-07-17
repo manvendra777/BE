@@ -19,8 +19,9 @@ export default function Logout() {
     };
 
     const logout = () => {
-        const cookieValue = document.cookie.split('=')[0];
-        Cookies.remove(cookieValue);
+        Cookies.remove('isLoggedIn');
+        Cookies.remove('type')
+        Cookies.remove('id')
         window.location = "/"
     }
     return (

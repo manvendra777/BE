@@ -58,25 +58,25 @@ const ProtectedLogin = ({ cookieValue, component: Component, ...rest }) => {
   switch (Cookies.get('type')) {
     case "S":
       return (
-        <Route {...rest} render={props => Auth.getAuth() ? (<Redirect to="/startupDashboard" />) : (<Component />)}
+        <Route {...rest} render={props => Auth.getAuth() ? (<Redirect to="/startupDashboard/Home" />) : (<Component />)}
         />
       )
       break;
     case "M":
       return (
-        <Route {...rest} render={props => Auth.getAuth() ? (<Redirect to="/mentorDashboard" />) : (<Component />)}
+        <Route {...rest} render={props => Auth.getAuth() ? (<Redirect to="/mentorDashboard/Home" />) : (<Component />)}
         />
       )
       break;
     case "I":
       return (
-        <Route {...rest} render={props => Auth.getAuth() ? (<Redirect to="/investorDashboard" />) : (<Component />)}
+        <Route {...rest} render={props => Auth.getAuth() ? (<Redirect to="/investorDashboard/Home" />) : (<Component />)}
         />
       )
       break;
     case "C":
       return (
-        <Route {...rest} render={props => Auth.getAuth() ? (<Redirect to="/CommunityDashboard" />) : (<Component />)}
+        <Route {...rest} render={props => Auth.getAuth() ? (<Redirect to="/CommunityDashboard/Home" />) : (<Component />)}
         />
       )
       break;

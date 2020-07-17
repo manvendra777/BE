@@ -11,6 +11,7 @@ import Card from '@material-ui/core/Card';
 import User from './User';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
+import Cookies from 'js-cookie'
 import { withStyles } from "@material-ui/core/styles";
 const useStyles = theme => ({
   root: {
@@ -43,7 +44,7 @@ class ListOfOnlineCandidates extends Component {
   
   componentWillMount(){
     // Your code here
-    var myid="5f07ae9d919bc64fc3513d0c"
+    var myid = Cookies.get('id')
     let mem=[];
     axios.get(`http://localhost:8083/entityAction/user/myConnections`,{params: {id: myid}})
     .then(res => {

@@ -8,7 +8,7 @@ import List from "@material-ui/core/List";
 import Invitation from "./Invitation";
 import axios from "axios";
 import Connections from "../Connections";
-
+import Cookies from 'js-cookie'
 const useStyles = (theme) => ({
   root: {
   },
@@ -37,7 +37,7 @@ class Base extends Component {
 
   getUsers = async () => {
     let data = await axios
-      .get(`http://localhost:8083/entityAction/user/pendingRequests`, { params: { id: 2 } })
+      .get(`http://localhost:8083/entityAction/user/pendingRequests`, { params: { id: Cookies.get('id')} })
       .then(({ data }) => data);
     this.setState({ invites: data });
     console.log(data);

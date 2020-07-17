@@ -18,17 +18,19 @@ class InvestorSuccess extends React.Component {
     axios.post('http://localhost:8083/entityAction/user/createRequestDB', null, { params: { id: myid } })
       .then(res => {
         response = res.data
-        console.log(response);
+        axios.post('http://localhost:8081/security/setInvestor?userName=' + Cookies.get('temp')).then(
+          res=>{
+            Cookies.remove('temp');
+            Cookies.remove('tempId');
+            window.location = "/loginPg"
+          }) 
       })
   }
 
 
   componentDidMount() {
     this.createDb()
-    axios.post('http://localhost:8081/security/setInvestor?userName=' + Cookies.get('temp')) //Investor
-    Cookies.remove('temp');
-    Cookies.remove('tempId');
-    window.location = "/loginPg"
+    
   }
 
   render() {

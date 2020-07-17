@@ -13,7 +13,7 @@ import RatingStats from './Rating/RatingStats'
 import Rater from 'react-rater'
 import 'react-rater/lib/react-rater.css'
 import { Checkmark } from 'react-checkmark'
-
+import Cookies from 'js-cookie'
 const styles = theme => ({
     root: {
         display: "flex",
@@ -94,7 +94,7 @@ class MyMentor extends Component {
     }
 
     gateMyRating() {
-        var myid="5f05fec985937b5e5bb16df2"
+        var myid = Cookies.get('id');
         var my=0
         axios.get(`http://localhost:8085/ratings/get`, { params: { provider:myid ,entity:this.props.match.params.id} })
         .then(res => {
@@ -105,7 +105,7 @@ class MyMentor extends Component {
         })
     }
     setMyRating(rating) {
-        var myid="5f05fec985937b5e5bb16df2"
+        var myid = Cookies.get('id');
         var m=this.props.match.params.id
         //localhost:8080/ratings/save
         axios.post('http://localhost:8085/ratings/save', {

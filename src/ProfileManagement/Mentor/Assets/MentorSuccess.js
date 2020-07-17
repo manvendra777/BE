@@ -6,7 +6,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 
-class MentorSuccess extends React.Component{ 
+class MentorSuccess extends React.Component {
   constructor(props) {
     super(props);
     this.createDb = this.createDb.bind(this)
@@ -19,41 +19,43 @@ class MentorSuccess extends React.Component{
     axios.post('http://localhost:8083/entityAction/user/createRequestDB', null, { params: { id: myid } })
       .then(res => {
         response = res.data
-        console.log(response);
+
+        axios.post('http://localhost:8081/security/setMentor?userName=' + Cookies.get('temp')).then(res => {
+          Cookies.remove('temp');
+          Cookies.remove('tempId');
+
+          window.location = "/loginPg"
+        }) //Mentor
+
+
       })
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.createDb();
-    axios.post('http://localhost:8081/security/setMentor?userName=' + Cookies.get('temp')) //Mentor
-
-    Cookies.remove('temp');
-    Cookies.remove('tempId');
-    
-    //window.location = "/loginPg"
   }
-    render(){
+  render() {
 
-        return(
-        
-                <MuiThemeProvider>
-                  <React.Fragment>
-                  <Header/>
-                  <div style={{margin:"auto",width:"40%",marginTop:300,textAlign:"center"}}>
-                  <CardM style= {{width: 600, marginTop: 70,padding:20}} elevation={10}> 
-                     <h1>Thank You </h1>
-                     <p>Your Data Is Submitted</p>
-                     </CardM>
-                     </div>
-                  </React.Fragment>
-         
-                </MuiThemeProvider>
-                
-       
-        );
+    return (
 
-    }
-    
+      <MuiThemeProvider>
+        <React.Fragment>
+          <Header />
+          <div style={{ margin: "auto", width: "40%", marginTop: 300, textAlign: "center" }}>
+            <CardM style={{ width: 600, marginTop: 70, padding: 20 }} elevation={10}>
+              <h1>Thank You </h1>
+              <p>Your Data Is Submitted</p>
+            </CardM>
+          </div>
+        </React.Fragment>
+
+      </MuiThemeProvider>
+
+
+    );
+
+  }
+
 }
 
 export default MentorSuccess;

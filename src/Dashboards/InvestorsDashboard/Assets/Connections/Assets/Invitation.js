@@ -13,7 +13,7 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Typography from "@material-ui/core/Typography";
 import { Button } from "@material-ui/core";
 import axios from "axios";
-
+import Cookies from 'js-cookie'
 import { blue } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
@@ -29,8 +29,8 @@ export default function Invitation(props) {
 
   const accept = () => {
     axios
-      .post("http://localhost:8083/user/acceptRequest", null, {
-        params: { id: 2, target: props.id },
+      .post("http://localhost:8083/entityAction/user/acceptRequest", null, {
+        params: { id:Cookies.get('id'), target: props.id },
       })
       .then((res) => {
         props.de();
@@ -38,8 +38,8 @@ export default function Invitation(props) {
   };
   const del = () => {
     axios
-      .post("http://localhost:8083/user/deleteRequest", null, {
-        params: { id: props.id, target: 2 },
+      .post("http://localhost:8083/entityAction/user/deleteRequest", null, {
+        params: { id: Cookies.get('id'), target: props.id },
       })
       .then((res) => {
         props.de();

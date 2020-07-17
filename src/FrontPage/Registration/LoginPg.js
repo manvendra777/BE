@@ -80,34 +80,40 @@ class LoginPg extends React.Component {
 
             axios.post('http://localhost:8081/security/getId', data = data) //Gets the session ID from database
               .then(function (response) {
-
-                Cookies.set('id', response.data, { expires: 7 })
-                Cookies.set('isLoggedIn',true,{ expires: 7 })
-                
+                var id = response.data
                 axios.get('http://localhost:8081/security/getType?userName=' + self.state.username)  //Gets the type of user from database.
                   .then(function (response) {
                     var destination = response.data;  //store the type of user in variable
                     console.log(response.data);
-                    Cookies.set('type',destination)
                     switch (destination) {
                       case "S":
-                      
+                        Cookies.set('id', id, { expires: 7 })
+                        Cookies.set('isLoggedIn', true, { expires: 7 })
+                        Cookies.set('type', destination)
                         window.location = "/StartupDashboard/Home";
                         break;
                       case "M":
-                       
+                        Cookies.set('id', id, { expires: 7 })
+                        Cookies.set('isLoggedIn', true, { expires: 7 })
+                        Cookies.set('type', destination)
                         window.location = "/MentorDashboard/Home"
                         break;
                       case "I":
-                        
+                        Cookies.set('id', id, { expires: 7 })
+                        Cookies.set('isLoggedIn', true, { expires: 7 })
+                        Cookies.set('type', destination)
                         window.location = "/InvestorDashboard/Home"
                         break;
                       case "C":
+                        Cookies.set('id', id, { expires: 7 })
+                        Cookies.set('isLoggedIn', true, { expires: 7 })
+                        Cookies.set('type', destination)
                         window.location = "/CommunityDashboard/Home"
                         break;
                       default:
-                        Cookies.set('temp',self.state.username)
-                        window.location="/profileFrontPg"
+                        Cookies.set('temp', self.state.username)
+                        Cookies.set('tempId', id)
+                        window.location = "/profileFrontPg"
                     }
                   })
 

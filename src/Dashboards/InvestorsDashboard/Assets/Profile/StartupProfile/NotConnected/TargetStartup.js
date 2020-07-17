@@ -10,7 +10,7 @@ import Divider from '@material-ui/core/Divider';
 import axios from 'axios';
 import Chip from '@material-ui/core/Chip';
 import RatingStats from './Rating/RatingStats'
-
+import Cookies from 'js-cookie'
 
 
 const styles = theme => ({
@@ -97,7 +97,7 @@ class TargetStartup extends Component {
     }
 
     sendRequest() {
-        var myid = "5f07ae9d919bc64fc3513d0a";
+        var myid = Cookies.get('id')
         var response;
         axios.post('http://localhost:8083/entityAction/user/sendRequest', null, { params: { id: myid, target: this.props.match.params.id } })
             .then(res => {
@@ -105,7 +105,7 @@ class TargetStartup extends Component {
             })
     }
     checkSentReq() {
-        var myid = "5f07ae9d919bc64fc3513d0a";
+        var myid = Cookies.get('id')
         var response;
         axios.get('http://localhost:8083/entityAction/user/checkRequest', { params: { id: myid, target: this.props.match.params.id } })
             .then(res => {
