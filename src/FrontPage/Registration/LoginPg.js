@@ -54,6 +54,17 @@ class LoginPg extends React.Component {
     });
     return formIsValid;
   }
+  onErrorNetwork = (event) => {
+    let formIsValid = true;
+    let errors = {};
+    this.setState({ estateM: true })
+    errors["username"] = "*Incorrect username or password.";
+    this.setState({
+      errors: errors
+    });
+    return formIsValid;
+  }
+
   //when the form is submitted then checks valid or not
   handleSubmit = e => {
     e.preventDefault();
@@ -63,43 +74,49 @@ class LoginPg extends React.Component {
     }
     var self = this;
     if (this.validateForm()) {
-      axios.post('http://localhost:8085/security/login', data = data)   //Login
+      axios.post('http://localhost:8081/security/login', data = data)   //Login
         .then(function (response) {
           if (response.data) {
 
-            axios.post('http://localhost:8085/security/getId', data = data) //Gets the session ID from database
-            .then(function(response){
-             
-              Cookies.set(self.state.username, response.data, {expires:7})
+            axios.post('http://localhost:8081/security/getId', data = data) //Gets the session ID from database
+              .then(function (response) {
 
-              axios.get('http://localhost:8085/security/getType?userName='+self.state.username)  //Gets the type of user from database.
-              .then(function(response){
-                var destination = response.data;  //store the type of user in variable
-              
-                if(destination == "S")
-                {
-                  window.location = "/StartupDashboard/Home";
-                }
-                else if(destination == "M")
-                {
-                  window.location = "/MentorDashboard/Home"
-                }
-                else if(destination == "I")
-                {
-                  window.location = "/InvestorDashboard/Home"
-                }
-                else if(destination == "C")
-                {
-                  window.location = "/CommunityDashboard/Home"
-                }
+                Cookies.set('id', response.data, { expires: 7 })
+                Cookies.set('isLoggedIn',true,{ expires: 7 })
+                
+                axios.get('http://localhost:8081/security/getType?userName=' + self.state.username)  //Gets the type of user from database.
+                  .then(function (response) {
+                    var destination = response.data;  //store the type of user in variable
+                    console.log(response.data);
+                    Cookies.set('type',destination)
+                    switch (destination) {
+                      case "S":
+                      
+                        window.location = "/StartupDashboard/Home";
+                        break;
+                      case "M":
+                       
+                        window.location = "/MentorDashboard/Home"
+                        break;
+                      case "I":
+                        
+                        window.location = "/InvestorDashboard/Home"
+                        break;
+                      case "C":
+                        window.location = "/CommunityDashboard/Home"
+                        break;
+                      default:
+                        Cookies.set('temp',self.state.username)
+                        window.location="/profileFrontPg"
+                    }
+                  })
+
               })
 
-            })
-            
           } else {
             self.onError();
           }
-        })
+        }).catch(function (error) { self.onError() })
     }
   };
 

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import MentorPersonalInfo from './MentorPersonalInfo';
-import MentorProfessionalInfo from './MentorProfessionalInfo';
-import MentorSuccess from './MentorSuccess';
-import MentorConfirm from './MentorConfirm'
-import DomainSet from './DomainSet'
+import MentorPersonalInfo from './Assets/MentorPersonalInfo';
+import MentorProfessionalInfo from './Assets/MentorProfessionalInfo';
+import MentorSuccess from './Assets/MentorSuccess';
+import MentorConfirm from './Assets/MentorConfirm'
+import DomainSet from './Assets/DomainSet'
 
 
 export class MentorForm extends Component {

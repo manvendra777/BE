@@ -17,10 +17,12 @@ class RegistrationPg extends React.Component {
             email: "",
             password: "",
             username: "",
-            type:"",
+            type: "",
             errors: {},
             estateM: false,
-            estateP: false
+            estateP: false,
+            exists: false,
+            helperUsername: ''
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -35,21 +37,25 @@ class RegistrationPg extends React.Component {
                 "username": this.state.username,
                 "password": this.state.password,
                 "email": this.state.email,
-                "type":this.state.type
+                "type": this.state.type
             }
 
             console.log(data);
-            var self = this; 
-            axios.post('http://localhost:8085/security/addUser', data = data)
+            var self = this;
+            axios.post('http://localhost:8081/security/addUser', data = data)
                 .then(function (response) {
-
-                    console.log(response.data);
-                    axios.post('http://localhost:8085/security/getId', data = data)
-                        .then(function(response){
-                            Cookies.set(self.state.username, response.data, {expires:7})
-                            window.location = "/profileFrontPg" //This line of code will redirect you once the submission is succeed
-                        })
-                   
+                    if (response.data == "exists") {
+                        self.setState({ helperUsername: 'username already exists' })
+                        self.setState({ exists: true })
+                    } else {
+                        Cookies.set('temp', data.username);
+                       
+                        axios.post('http://localhost:8081/security/getId', data = data)
+                            .then(function (response) {
+                                Cookies.set('tempId',response.data)
+                            })
+                            window.location = "/profileFrontPg"
+                    }
                 })
             if (this.resetForm) {
                 console.log("true");
@@ -59,7 +65,7 @@ class RegistrationPg extends React.Component {
     validateForm() {
 
         let errors = {};
-        this.setState({ estateM: false, estateP: false })
+        this.setState({ estateM: false, estateP: false, exists: false })
         let formIsValid = true;
 
         if (!this.state.email) {
@@ -131,7 +137,7 @@ class RegistrationPg extends React.Component {
                                     </Typography>
                                     <div >
                                         <div>
-                                            <TextField type="username" style={{ marginBottom: 20, width: "60%" }} id="standard-basic" label="Enter username" onChange={(event) => { this.setState({ username: event.target.value }) }} />
+                                            <TextField type="username" helperText={this.state.helperUsername} error={this.state.exists} style={{ marginBottom: 20, width: "60%" }} id="standard-basic" label="Enter username" onChange={(event) => { this.setState({ username: event.target.value }) }} />
                                         </div>
                                         <div>
                                             <TextField error={this.state.estateM} style={{ marginBottom: 20, width: "60%" }} helperText={this.state.errors.email} id="standard-basic" label="Enter your Email" onChange={(event) => { this.setState({ email: event.target.value }) }} />

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import StartupPersonalInfo from './startupPersnonalInfo';
-import StartupCompanyInfo from './StartupCompanyInfo';
-import StartupConfirm from './StartupConfirm';
-import StartupSuccess from './StartupSuccess';
-import DomainSet from './DomainSet';
+import StartupPersonalInfo from './Assets/startupPersnonalInfo';
+import StartupCompanyInfo from './Assets/StartupCompanyInfo';
+import StartupConfirm from './Assets/StartupConfirm';
+import StartupSuccess from './Assets/StartupSuccess';
+import DomainSet from './Assets/DomainSet';
 
 
 
@@ -112,7 +112,7 @@ export class StartupForm extends Component {
                         values={values}
                     />
                 )
-            case 4:
+            case 5:
                 return (
                     <StartupSuccess />
                 )

@@ -41,7 +41,6 @@ export default class StartupDashboard extends Component {
 				<MuiThemeProvider theme={theme}>
 					<Router >
 						<Header />
-
 						<div style={{ margin: '75px', marginLeft: '10px' }}>
 							<ListOfOnlineCandidates />
 							<Advertise />

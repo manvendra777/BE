@@ -1,12 +1,7 @@
 import React, { Component } from 'react'
-import Card from 'react-bootstrap/Card'
-import CardDeck from 'react-bootstrap/CardDeck'
-import Button from 'react-bootstrap/Button'
-import StartupPersonalInfo from './startup/startupPersnonalInfo'
-import StartupForm from './startup/StartupForm'
+
 import { Link, Route } from 'react-router-dom';
 import Header from './header'
-import Avatar from '@material-ui/core/Avatar';
 import Cards from './Cards'
 export class FrontPage extends Component {
 

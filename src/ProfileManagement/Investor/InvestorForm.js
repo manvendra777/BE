@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import InvestorPersonalInfo from './InvestorPersonalInfo';
-import InvestorSuccess from './InvestorSuccess';
-import InvestorConfirm from './InvestorConfirm'
+import InvestorPersonalInfo from './Assets/InvestorPersonalInfo';
+import InvestorSuccess from './Assets/InvestorSuccess';
+import InvestorConfirm from './Assets/InvestorConfirm'
 
 
 

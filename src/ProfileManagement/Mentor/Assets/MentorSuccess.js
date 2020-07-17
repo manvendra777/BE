@@ -5,36 +5,32 @@ import Header from './header';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-class StartupSuccess extends React.Component{
+
+class MentorSuccess extends React.Component{ 
   constructor(props) {
     super(props);
+    this.createDb = this.createDb.bind(this)
+  };
 
-    this.state = {
-        myProfile: [],
-        val: [],
-        avg: '',
-        setReq:false,}
-        this.createDb = this.createDb.bind(this)
-    };
 
-  createDb(){
-    var myid = "5f07ae9d919bc64fc3513d0l";
-        var response;
-        axios.post('http://localhost:8083/entityAction/user/createRequestDB', null,{ params: { id: myid} })
-            .then(res => { 
-                response = res.data 
-                console.log(response);
-            })
+  createDb() {
+    var myid = Cookies.get('tempId');
+    var response;
+    axios.post('http://localhost:8083/entityAction/user/createRequestDB', null, { params: { id: myid } })
+      .then(res => {
+        response = res.data
+        console.log(response);
+      })
   }
-  //set Entity for unique ID
-  setId(){
-    //set entity
-  }
+
   componentDidMount(){
     this.createDb();
-    this.setId();
-    window.location = "/loginPg"
+    axios.post('http://localhost:8081/security/setMentor?userName=' + Cookies.get('temp')) //Mentor
+
+    Cookies.remove('temp');
+    Cookies.remove('tempId');
     
+    //window.location = "/loginPg"
   }
     render(){
 
@@ -60,4 +56,4 @@ class StartupSuccess extends React.Component{
     
 }
 
-export default StartupSuccess;
+export default MentorSuccess;
