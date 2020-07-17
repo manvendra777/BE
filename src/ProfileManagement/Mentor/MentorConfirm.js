@@ -15,6 +15,8 @@ class MentorConfirm extends React.Component {
         e.preventDefault();
 
         //Api calling
+        // Code to set the user type.
+
         axios.put('http://localhost:8082/mentor/profile/add', {
             "firstName": this.props.values.firstName,
             "lastName": this.props.values.lastName,
@@ -34,15 +36,14 @@ class MentorConfirm extends React.Component {
 
         })
             .then(function (response) {
-                // Code to set the user type.
-                const cookieName = document.cookie.split('=')[0]; //username
-                const cookieValue = document.cookie.split('=')[1]; //ID
-
-                axios.post('http://localhost:8085/security/setMentor?userName=' + cookieName) //Mentor
                 //End of code
                 console.log(response.data);
             })
-        Cookies.remove(cookieName);
+        //const cookieName =  //username
+        const cookieValue = document.cookie.split('=')[1]; //ID
+
+        axios.post('http://localhost:8085/security/setMentor?userName=' + document.cookie.split('=')[0]) //Mentor
+        Cookies.remove(document.cookie.split('=')[0]);
         this.props.nextStep();
     }
 

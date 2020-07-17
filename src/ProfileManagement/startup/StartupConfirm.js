@@ -13,7 +13,10 @@ class StartupConfirm extends React.Component {
 
     continue = e => {
         e.preventDefault();
-
+         //Code to set user type.
+         //const cookieName = ; //username
+         const cookieValue = document.cookie.split('=')[1]; //ID
+ 
         axios.put('http://localhost:8082/startup/profile/add', {
             "firstName": this.props.values.firstName,
             "lastName": this.props.values.lastName,
@@ -34,15 +37,12 @@ class StartupConfirm extends React.Component {
         })
             .then(function (response) {
                 console.log("true");
-                 //Code to set user type.
-        const cookieName = document.cookie.split('=')[0]; //username
-        const cookieValue = document.cookie.split('=')[1]; //ID
-
-        axios.post('http://localhost:8085/security/setStartup?userName='+cookieName) //startup
+                
+        axios.post('http://localhost:8085/security/setStartup?userName='+ document.cookie.split('=')[0]) //startup
         // End of code
 
             })
-            Cookies.remove(cookieName);
+            Cookies.remove(document.cookie.split('=')[0]);
             this.props.nextStep();
     }
 
