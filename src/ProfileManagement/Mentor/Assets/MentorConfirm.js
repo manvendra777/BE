@@ -10,15 +10,30 @@ import Cookies from 'js-cookie';
 
 
 class MentorConfirm extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            id: 'blank'
+        }
+        this.setId = this.setId.bind(this)
+    }
+    componentWillMount() {
+        this.setId();
+    }
+    setId() {
+        this.setState({ id: Cookies.get('tempId') })
+    }
+
 
     continue = e => {
         e.preventDefault();
-
+        var self = this;
         //Api calling
         // Code to set the user type.
 
         axios.put('http://localhost:8082/mentor/profile/add', {
-            "id":Cookies.get('tempId'),
+            "id": this.state.id,
             "firstName": this.props.values.firstName,
             "lastName": this.props.values.lastName,
             "domain": this.props.values.domain,
@@ -37,10 +52,9 @@ class MentorConfirm extends React.Component {
 
         })
             .then(function (response) {
+                self.props.nextStep();
             })
 
-            this.props.nextStep();
-       
     }
 
     back = e => {

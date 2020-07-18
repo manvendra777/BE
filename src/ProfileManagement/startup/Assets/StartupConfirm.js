@@ -10,11 +10,26 @@ import Cookies from 'js-cookie';
 
 
 class StartupConfirm extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            id: 'blank'
+        }
+        this.setId = this.setId.bind(this)
+    }
+    componentWillMount() {
+        this.setId();
+    }
+    setId() {
+        this.setState({ id: Cookies.get('tempId') })
+    }
 
     continue = e => {
         e.preventDefault();
+        var self = this;
         axios.put('http://localhost:8082/startup/profile/add', {
-            "id":Cookies.get('tempId'),
+            "id": this.state.id,
             "firstName": this.props.values.firstName,
             "lastName": this.props.values.lastName,
             "startupName": this.props.values.startupName,
@@ -33,10 +48,8 @@ class StartupConfirm extends React.Component {
             "dipp_no": this.props.values.DIPP_no,
         })
             .then(function (response) {
-                
+                self.props.nextStep();
             })
-           
-            this.props.nextStep();
     }
 
 

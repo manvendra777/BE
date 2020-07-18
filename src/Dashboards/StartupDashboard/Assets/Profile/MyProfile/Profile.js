@@ -1,7 +1,7 @@
+
 import React, { Component } from "react";
 import axios from 'axios';
 import Name from "./Assets/Name"
-import About from "./Assets/About"
 import Cookies from 'js-cookie'
 export default class Profile extends Component {
 	constructor(props) {
@@ -24,7 +24,7 @@ export default class Profile extends Component {
 			})
 	}
 	render() {
-		return <div style={{width:'84%' }}>
+		return <div style={{width:'60%',marginLeft:'auto',marginRight:'auto' }}>
 			<Name data={this.state.myProfile} />
 		</div>;
 	}

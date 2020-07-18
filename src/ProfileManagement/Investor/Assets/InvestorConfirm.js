@@ -10,21 +10,27 @@ import axios from 'axios';
 
 
 class InvestorConfirm extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            id: 'blank'
+        }
+        this.setId = this.setId.bind(this)
+    }
+    componentWillMount() {
+        this.setId();
+    }
+    setId() {
+        this.setState({ id: Cookies.get('tempId') })
+    }
+
 
     continue = e => {
         e.preventDefault();
-        //Api calling
-        var data = {
-            "firstName": this.props.values.firstName,
-            "lastName": this.props.values.lastName,
-            "email": this.props.values.email,
-            "phone_no": this.props.values.phone_no,
-            "age": this.props.values.age,
-
-
-        }
+        var self = this
         axios.put('http://localhost:8082/investor/profile/add', {
-            "id": Cookies.get('tempId'),
+            "id": this.state.id,
             "firstName": this.props.values.firstName,
             "lastName": this.props.values.lastName,
             "email": this.props.values.email,
@@ -34,11 +40,8 @@ class InvestorConfirm extends React.Component {
             "max": this.props.values.max
         })
             .then(function (response) {
-
-                
+                self.props.nextStep();
             })
-            this.props.nextStep();
-       
     }
 
     back = e => {
