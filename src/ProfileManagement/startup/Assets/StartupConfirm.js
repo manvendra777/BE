@@ -33,10 +33,10 @@ class StartupConfirm extends React.Component {
             "dipp_no": this.props.values.DIPP_no,
         })
             .then(function (response) {
-                console.log("true");
+                
             })
+           
             this.props.nextStep();
-      
     }
 
 

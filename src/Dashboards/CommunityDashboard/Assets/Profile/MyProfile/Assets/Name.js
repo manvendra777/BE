@@ -20,7 +20,7 @@ import Dialog from '@material-ui/core/Dialog';
 import TextField from '@material-ui/core/TextField';
 import { EditorFormatAlignCenter } from "material-ui/svg-icons";
 import axios from 'axios';
-
+import Cookies from 'js-cookie';
 const styles = theme => ({
 	root: {
 		
@@ -90,7 +90,7 @@ class Name extends Component {
 
 		console.log(data);
 
-		axios.post('http://localhost:8082/community/profile/5f06cef3c99ce30f9aa4d169', data = data)
+		axios.post('http://localhost:8082/community/profile/'+Cookies.get('id'), data = data)
 			.then(function (response) {
 				console.log(response.data);
 			})

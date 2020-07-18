@@ -37,12 +37,10 @@ class MentorConfirm extends React.Component {
 
         })
             .then(function (response) {
-                //End of code
-                console.log(response.data);
             })
 
-        
-        this.props.nextStep();
+            this.props.nextStep();
+       
     }
 
     back = e => {

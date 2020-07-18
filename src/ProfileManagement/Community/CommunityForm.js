@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import CommunityConfirm from './CommunityConfirm';
-import CommunityPersonalInfo from './CommunityPersonalInfo';
-import CommunitySuccess from './CommunitySuccess'
+import CommunityConfirm from './Assets/CommunityConfirm';
+import CommunityPersonalInfo from './Assets/CommunityPersonalInfo';
+import CommunitySuccess from './Assets/CommunitySuccess'
 
 
 

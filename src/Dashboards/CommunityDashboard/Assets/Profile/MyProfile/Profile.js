@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from 'axios';
 import Name from "./Assets/Name"
 import About from "./Assets/About"
+import Cookies from 'js-cookie';
 export default class Profile extends Component {
 	constructor(props) {
 		super(props);
@@ -12,10 +13,10 @@ export default class Profile extends Component {
 	}
 
 	componentDidMount() {
-		var id = '5ed7d3b239ff0059a0a9980e'
+		var myid = Cookies.get('id')
 		var persons;
 
-		axios.get(`http://localhost:8082/community/profile/` + id)
+		axios.get(`http://localhost:8082/community/profile/` + myid)
 			.then(res => {
 				persons = res.data;
 				console.log(persons);

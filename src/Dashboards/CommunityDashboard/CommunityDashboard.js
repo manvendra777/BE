@@ -54,9 +54,11 @@ export default class StartupDashboard extends Component {
 								
 								<Route exact path="/communityDashboard/TargetMentor/:id" component={TargetMentor} />
 								<Route exact path="/communityDashboard/MyMentor/:id" component={MyMentor} />
+
 								<Route path="/communityDashboard/TargetInvestor/:id" component={TargetInvestor} />
 								<Route path="/communityDashboard/MyInvestor/:id" component={MyInvestor} />
 								<Route path="/communityDashboard/Ads" component={Advertise}></Route>
+								
 								<Route path="/communityDashboard/Feed/:Domain" component={Feed}></Route>
 							</div>
 						</div>

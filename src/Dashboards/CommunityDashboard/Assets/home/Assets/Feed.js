@@ -5,34 +5,34 @@ import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import { Button } from 'react-bootstrap';
-import AskQue from './AskQue'
-
+import CreatePost from './CreatePost'
+import Post from './Post'
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = theme => ({
-  root: {
-    justifyContent: 'space-around',
-    overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
-  },
-  spc: {
-    margin:theme.spacing(0),
-  
-  },
+
 });
 
-class Feed extends Component{
+class Feed extends Component {
 
-    constructor(props){
-        super(props);
-    }
-    render(){
-        return(
-            <div>
-                <AskQue/>
-                <h1>{this.props.match.params.Domain}</h1>
-            </div>
-        );
-    }
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div style={{ width: '84%', padding: '1%' }}>
+        <div style={{ width: '50%', marginLeft: 'auto', marginRight: 'auto' }}>
+          <h1>{this.props.match.params.Domain}</h1>
+          <Divider />
+          <CreatePost />
+          <div style={{ marginTop: '2%' }}>
+            <Post />
+            <Post />
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default withStyles(useStyles)(Feed);

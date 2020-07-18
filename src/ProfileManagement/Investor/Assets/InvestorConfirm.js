@@ -2,11 +2,11 @@ import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { List, ListItem } from 'material-ui/List';
 import RaisedButton from 'material-ui/RaisedButton'
-import axios from 'axios';
+
 import Header from './header';
 import CardM from '@material-ui/core/Card';
 import Cookies from 'js-cookie';
-
+import axios from 'axios';
 
 
 class InvestorConfirm extends React.Component {
@@ -35,10 +35,10 @@ class InvestorConfirm extends React.Component {
         })
             .then(function (response) {
 
-                console.log("true");
+                
             })
-
-        this.props.nextStep();
+            this.props.nextStep();
+       
     }
 
     back = e => {
