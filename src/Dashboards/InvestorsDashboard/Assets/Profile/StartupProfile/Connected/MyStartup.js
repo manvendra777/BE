@@ -51,7 +51,8 @@ class MyStartup extends Component {
             myProfile: [],
             val: [],
             avg: '',
-            setReq:false,
+            setReq: false,
+            image: null
         };
         this.mapDomain = this.mapDomain.bind(this);
         this.getInfo = this.getInfo.bind(this);
@@ -60,13 +61,23 @@ class MyStartup extends Component {
         this.getRating = this.getRating.bind(this)
         this.getRatingAv = this.getRatingAv.bind(this)
         this.sendRequest = this.sendRequest.bind(this)
-        this.checkSentReq= this.checkSentReq.bind(this)
+        this.checkSentReq = this.checkSentReq.bind(this)
     }
     componentWillMount() {
         this.getInfo()
         this.getRating()
         this.getRatingAv()
         this.checkSentReq()
+        this.getImage()
+    }
+    getImage() {
+        var self = this;
+        var mem;
+        axios.get(`http://localhost:8082/startup/photos/` + this.props.match.params.id)
+            .then(res => {
+                mem = res.data;
+                self.setState({ image: mem })
+            })
     }
     getInfo() {
         var id = this.props.match.params.id
@@ -109,21 +120,21 @@ class MyStartup extends Component {
     sendRequest() {
         var myid = Cookies.get('id')
         var response;
-        axios.post('http://localhost:8083/entityAction/user/sendRequest', null,{ params: { id: myid, target: this.props.match.params.id } })
-            .then(res => { 
-                response = res.data 
+        axios.post('http://localhost:8083/entityAction/user/sendRequest', null, { params: { id: myid, target: this.props.match.params.id } })
+            .then(res => {
+                response = res.data
                 console.log(response);
-                
+
             })
     }
-    checkSentReq(){
+    checkSentReq() {
         var myid = Cookies.get('id')
         var response;
-        axios.get('http://localhost:8083/entityAction/user/checkRequest',{ params: { id: myid, target: this.props.match.params.id } })
-            .then(res => { 
-                response = res.data 
+        axios.get('http://localhost:8083/entityAction/user/checkRequest', { params: { id: myid, target: this.props.match.params.id } })
+            .then(res => {
+                response = res.data
                 console.log(response);
-                this.setState({setReq:response})
+                this.setState({ setReq: response })
             })
     }
 
@@ -133,7 +144,7 @@ class MyStartup extends Component {
             <div className={classes.root}>
                 <Card elevation={3}>
                     <Container className={classes.cont} style={{ marginBottom: 20 }}>
-                        <Avatar alt="Sanket" className={classes.large} />
+                        <Avatar src={`data:image/jpeg;base64,${this.state.image}`} alt="Sanket" className={classes.large} />
                         <Divider style={{ marginLeft: 10 }} orientation="vertical" flexItem />
                         <Container className={classes.spc}>
                             <Typography variant="h4" gutterBottom>

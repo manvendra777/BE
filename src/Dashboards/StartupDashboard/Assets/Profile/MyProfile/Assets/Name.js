@@ -68,13 +68,30 @@ class Name extends Component {
             startupName: "",
             startupDescription: "",
             websiteURL: "",
-            profession: ""
+            profession: "",
+            image:null,
         };
 
         this.mapDomain = this.mapDomain.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.toggleModal = this.handleModal.bind(this);
+        this.getImage  = this.getImage.bind(this);
 
+    }
+    componentWillMount(){
+        this.getImage()
+    }
+    getImage() {
+        var self = this;
+        var mem;
+        axios.get(`http://localhost:8082/startup/photos/`+Cookies.get('id'))
+            .then(res => {
+                mem = res.data;
+                self.setState({ image: mem })
+            })
+    }
+    showImage() {
+        return (<img src={`data:image/jpeg;base64,${this.state.image}`} />)
     }
 
     componentWillReceiveProps(props) {
@@ -157,7 +174,7 @@ class Name extends Component {
                         Edit your Details
                     </Typography>
                     <Divider />
-                    <div style={{padding:'2%'}}>
+                    <div style={{ padding: '2%' }}>
                         <form onSubmit={this.handleSubmit}>
                             <TextField
                                 label="Firstname"
@@ -232,7 +249,7 @@ class Name extends Component {
                                 name="websiteURL"
                                 onChange={this.handleChange.bind(this)}
                             />   <br />
-                           
+
                             <TextField
                                 defaultValue={this.state.dipp_no}
                                 label="Dipp No."
@@ -287,7 +304,7 @@ class Name extends Component {
             <div className={classes.root}>
                 <Card elevation={3} style={{ display: 'flex', padding: '1%' }}>
                     <div>
-                        <Avatar variant="square" alt="Sanket" className={classes.large} />
+                        <Avatar variant="square" alt={this.props.data.startupName} src={`data:image/jpeg;base64,${this.state.image}`} className={classes.large} />
                     </div>
                     <div style={{ marginLeft: '3%' }}>
                         <Typography variant="h4" style={{ color: "#455a64" }} >

@@ -10,11 +10,12 @@ import { Button } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper'
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import IconButton from '@material-ui/core/IconButton';
+import Feedback from './Feedback';
 const useStyles = theme => ({
   root: {
     width: '84%',
-    display:'flex',
-    padding:2
+    display: 'flex',
+    padding: 2
 
   },
   input: {
@@ -28,219 +29,80 @@ class ViewAd extends Component {
     super(props);
 
     this.state = {
-      members: []
+      Ad: {},
+      image: null,
+      feedback: []
     };
+    this.getMyAd = this.getMyAd.bind(this)
   }
 
   componentWillMount() {
+    this.getMyAd();
+    console.log(this.state.feedback);
   };
-
+  getMyAd() {
+    var self = this;
+    var ad;
+    axios.get(`http://localhost:8086/advert/myAd`, { params: { id: this.props.match.params.id } })
+      .then(res => {
+        ad = res.data;
+        this.setState({ Ad: ad });
+        this.setState({ image: ad.image.data })
+        ad.feedbackList.map((item, i) => {
+          this.setState({ feedback: [...this.state.feedback, <Feedback name={item.username} body={item.feedbackBody} />] })
+        })
+       
+      })
+  }
 
   render() {
     const { classes } = this.props;
 
     return (
       <div className={classes.root}>
-        <Paper variant="outlined" style={{width:'40%',height:'100%' }}>
+        <Paper variant="outlined" style={{ width: '40%', height: '100%' }}>
           <div style={{ display: 'flex' }}>
-            <Typography variant="h5" color='primary' style={{ margin: 10 }} >Advertise Name
-          </Typography>
-            <TextField style={{ width: '60%',margin:1 }}
-              id="outlined-multiline-static"
-              variant="outlined"
-              defaultValue={this.props.match.params.id}
-            />
+            <Typography variant="h5" color='primary' style={{ margin: 10 }} >{this.state.Ad.header}
+            </Typography>
           </div>
           <Divider />
-          <input accept="image/*" className={classes.input} id="icon-img-file" type="file" />
-          <label htmlFor="icon-img-file">
-            <IconButton color="primary" aria-label="upload picture" component="span">
-              <PhotoCamera />
-            </IconButton>
-          </label>
-          <div style={{ display: 'flex' }}>
+
+          <div style={{}}>
             <CardMedia
-              style={{ height: 300, width: 300 }}
-              image="http://blog.clickdimensions.com/wp-content/uploads/2017/05/BlogFeatureImage-5-Types-of-Online-Advertising-to-Generate-Leads.png"
+              style={{ height: 300, width: '100%' }}
+              image={`data:image/jpeg;base64,${this.state.image}`}
               title="Contemplative Reptile"
             />
-            <div style={{width:'50%',marginLeft: 'auto'}}>
-            <TextField style={{ width: "100%", height:'100%' }}
-              id="outlined-multiline-static"
-              label="Discription"
-              multiline
-              rows={14}
-              variant="outlined"
-            />
-            
-            </div></div>
-            <Divider />
-            <div style={{display:'flex'}}>
-            <Button style={{marginLeft:'auto'}}color="primary">Update</Button>
+            <div style={{ width: '96%', margin: '2%' }}>
+              <TextField style={{ width: "100%", height: '100%' }}
+                disabled
+                id="outlined-multiline-static"
+                multiline
+                rows={4}
+                defaultValue={this.state.Ad.description}
+                variant="outlined"
+              />
+
             </div>
-          <Divider />
+          </div>
         </Paper>
 
 
 
-        <div style={{marginLeft:'1%',width:'50%'}}>
-        <Paper variant="outlined" style={{ }}>
-          <div style={{ display: 'flex' }}>
-            <Typography variant="h5" color='primary' style={{ margin: 10 }} gutterBottom>
-              Feedback
+        <div style={{ marginLeft: '1%', width: '50%' }}>
+          <Paper variant="outlined" style={{}}>
+            <div style={{ display: 'flex' }}>
+              <Typography variant="h5" color='primary' style={{ margin: 10 }} gutterBottom>
+                Feedback
           </Typography>
-          </div>
-          <Divider />
-          
-          <div>      
-             <Paper style={{width:'100%',padding:'2%',marginTop:'1%',marginBottom:'1%'}}>
-              <div>
-                Name: Raja Babu
-              </div>
-              <div>
-                feedback: nice product ! nice product ! nice product ! nice product ! nice product !
-              </div>
-            </Paper>
-            <Paper style={{width:'100%',padding:'2%',marginTop:'1%',marginBottom:'1%'}}>
-              <div>
-                Name:
-              </div>
-              <div>
-                feedback:
-              </div>
-            </Paper>
-            <Paper style={{width:'100%',padding:'2%',marginTop:'1%',marginBottom:'1%'}}>
-              <div>
-                Name:
-              </div>
-              <div>
-                feedback:
-              </div>
-            </Paper>
-            <Paper style={{width:'100%',padding:'2%',marginTop:'1%',marginBottom:'1%'}}>
-              <div>
-                Name: Raja Babu
-              </div>
-              <div>
-                feedback: nice product ! nice product ! nice product ! nice product ! nice product !
-              </div>
-            </Paper>
-            <Paper style={{width:'100%',padding:'2%',marginTop:'1%',marginBottom:'1%'}}>
-              <div>
-                Name:
-              </div>
-              <div>
-                feedback:
-              </div>
-            </Paper>
-            <Paper style={{width:'100%',padding:'2%',marginTop:'1%',marginBottom:'1%'}}>
-              <div>
-                Name:
-              </div>
-              <div>
-                feedback:
-              </div>
-            </Paper>
-            <Paper style={{width:'100%',padding:'2%',marginTop:'1%',marginBottom:'1%'}}>
-              <div>
-                Name: Raja Babu
-              </div>
-              <div>
-                feedback: nice product ! nice product ! nice product ! nice product ! nice product !
-              </div>
-            </Paper>
-            <Paper style={{width:'100%',padding:'2%',marginTop:'1%',marginBottom:'1%'}}>
-              <div>
-                Name:
-              </div>
-              <div>
-                feedback:
-              </div>
-            </Paper>
-            <Paper style={{width:'100%',padding:'2%',marginTop:'1%',marginBottom:'1%'}}>
-              <div>
-                Name:
-              </div>
-              <div>
-                feedback:
-              </div>
-            </Paper>
-            <Paper style={{width:'100%',padding:'2%',marginTop:'1%',marginBottom:'1%'}}>
-              <div>
-                Name: Raja Babu
-              </div>
-              <div>
-                feedback: nice product ! nice product ! nice product ! nice product ! nice product !
-              </div>
-            </Paper>
-            <Paper style={{width:'100%',padding:'2%',marginTop:'1%',marginBottom:'1%'}}>
-              <div>
-                Name:
-              </div>
-              <div>
-                feedback:
-              </div>
-            </Paper>
-            <Paper style={{width:'100%',padding:'2%',marginTop:'1%',marginBottom:'1%'}}>
-              <div>
-                Name:
-              </div>
-              <div>
-                feedback:
-              </div>
-            </Paper>
-            <Paper style={{width:'100%',padding:'2%',marginTop:'1%',marginBottom:'1%'}}>
-              <div>
-                Name: Raja Babu
-              </div>
-              <div>
-                feedback: nice product ! nice product ! nice product ! nice product ! nice product !
-              </div>
-            </Paper>
-            <Paper style={{width:'100%',padding:'2%',marginTop:'1%',marginBottom:'1%'}}>
-              <div>
-                Name:
-              </div>
-              <div>
-                feedback:
-              </div>
-            </Paper>
-            <Paper style={{width:'100%',padding:'2%',marginTop:'1%',marginBottom:'1%'}}>
-              <div>
-                Name:
-              </div>
-              <div>
-                feedback:
-              </div>
-            </Paper>
-            <Paper style={{width:'100%',padding:'2%',marginTop:'1%',marginBottom:'1%'}}>
-              <div>
-                Name: Raja Babu
-              </div>
-              <div>
-                feedback: nice product ! nice product ! nice product ! nice product ! nice product !
-              </div>
-            </Paper>
-            <Paper style={{width:'100%',padding:'2%',marginTop:'1%',marginBottom:'1%'}}>
-              <div>
-                Name:
-              </div>
-              <div>
-                feedback:
-              </div>
-            </Paper>
-            <Paper style={{width:'100%',padding:'2%',marginTop:'1%',marginBottom:'1%'}}>
-              <div>
-                Name:
-              </div>
-              <div>
-                feedback:
-              </div>
-            </Paper>
+            </div>
+            <Divider />
 
-          </div>
+            <div>
+              {this.state.feedback.map(child => child)}
+            </div>
 
-        </Paper>
+          </Paper>
         </div>
       </div>
     );

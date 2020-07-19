@@ -53,7 +53,8 @@ class TargetMentor extends Component {
             avg: '',
             myrating:0,
             isVerified:false,
-            sentReq:false
+            sentReq:false,
+            image:null
         };
         this.mapDomain = this.mapDomain.bind(this);
         this.getInfo = this.getInfo.bind(this);
@@ -67,7 +68,7 @@ class TargetMentor extends Component {
         this.isVerified = this.isVerified.bind(this)
 
         this.sendInvitation = this.sendInvitation.bind(this)
-
+        this.getImage = this.getImage.bind(this)
         this.checkInvitation = this.checkInvitation.bind(this)
     }
     componentWillMount() {
@@ -78,6 +79,16 @@ class TargetMentor extends Component {
         this.isVerified()
         this.checkInvitation()
         this.getInfo()
+        this.getImage()
+    }
+    getImage() {
+        var self = this;
+        var mem;
+        axios.get(`http://localhost:8082/mentor/photos/` + this.props.match.params.id)
+            .then(res => {
+                mem = res.data;
+                self.setState({ image: mem })
+            })
     }
     checkInvitation(){
        //localhost:8083/entityAction/user/checkRequest
@@ -182,7 +193,7 @@ class TargetMentor extends Component {
             <div className={classes.root}>
                 <Card elevation={3}>
                     <Container className={classes.cont} style={{ marginBottom: 20 }}>
-                        <Avatar alt="Sanket" className={classes.large} />
+                        <Avatar src={`data:image/jpeg;base64,${this.state.image}`} alt="Sanket" className={classes.large} />
                         <Divider style={{ marginLeft: 10 }} orientation="vertical" flexItem />
                         <Container className={classes.spc}>
                             <Typography variant="h4" gutterBottom>

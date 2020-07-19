@@ -52,13 +52,22 @@ class TargetInvestor extends Component {
             val: [],
             avg: '',
             setReq: false,
+            image:null,
         };
         this.getInfo = this.getInfo.bind(this);
-       
+        this.getImage = this.getImage.bind(this)
         this.sendRequest = this.sendRequest.bind(this)
         this.checkSentReq = this.checkSentReq.bind(this)
     }
- 
+    getImage() {
+        var self = this;
+        var mem;
+        axios.get(`http://localhost:8082/investor/photos/` + this.props.match.params.id)
+            .then(res => {
+                mem = res.data;
+                self.setState({ image: mem })
+            })
+    }
     getInfo() {
         var id = this.props.match.params.id
         var persons;
@@ -90,7 +99,7 @@ class TargetInvestor extends Component {
     componentWillMount(){
        
         this.checkSentReq()
-      
+        this.getImage()
         this.getInfo()
     }
     render() {
@@ -99,7 +108,7 @@ class TargetInvestor extends Component {
             <div className={classes.root}>
                 <Card elevation={3}>
                     <Container className={classes.cont} style={{ marginBottom: 20 }}>
-                        <Avatar alt="Sanket" className={classes.large} />
+                        <Avatar src={`data:image/jpeg;base64,${this.state.image}`} alt="Sanket" className={classes.large} />
                         <Divider style={{ marginLeft: 10 }} orientation="vertical" flexItem />
                         <Container className={classes.spc}>
                             <Typography variant="h4" gutterBottom>

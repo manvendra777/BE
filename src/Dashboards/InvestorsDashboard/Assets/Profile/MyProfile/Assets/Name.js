@@ -56,10 +56,12 @@ class Name extends Component {
             email: "",
 			age: "",
 			investingCapacity: null,
-			userID: ""
+			userID: "",
+			image:null,
 		};
 		this.handleSubmit= this.handleSubmit.bind(this);
 		this.toggleModal= this.handleModal.bind(this);
+		this.getImage = this.getImage.bind(this)
 	}
 	componentWillReceiveProps(props){
 		this.setState({
@@ -73,7 +75,21 @@ class Name extends Component {
 
 		});
 	}
-
+	componentWillMount(){
+        this.getImage()
+    }
+    getImage() {
+        var self = this;
+        var mem;
+        axios.get(`http://localhost:8082/investor/photos/`+Cookies.get('id'))
+            .then(res => {
+                mem = res.data;
+                self.setState({ image: mem })
+            })
+    }
+    showImage() {
+        return (<img src={`data:image/jpeg;base64,${this.state.image}`} />)
+    }
 	handleModal(){
 		this.setState({
 			isModalOpen: !this.state.isModalOpen
@@ -94,7 +110,7 @@ class Name extends Component {
 
 		console.log(data);
 
-		axios.post('http://localhost:8081/investor/profile/'+Cookies.get('id'), data = data)
+		axios.post('http://localhost:8082/investor/profile/'+Cookies.get('id'), data = data)
 			.then(function (response) {
 				console.log(response.data);
 			})
@@ -178,7 +194,7 @@ class Name extends Component {
 					<Container className={classes.cont}>
 						
 					<Grid md={3}>
-						<Avatar alt="Sanket" className={classes.large}/></Grid>
+						<Avatar alt="Sanket"  src={`data:image/jpeg;base64,${this.state.image}`} className={classes.large}/></Grid>
 						<Grid>
 						<Container className={classes.spc}>
 							<Typography variant="h4" gutterBottom style={{color: "#1a237e"}}>

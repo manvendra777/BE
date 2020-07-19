@@ -52,11 +52,12 @@ class MyStartup extends Component {
             val: [],
             avg: '',
             setReq:false,
+            image:null
         };
         this.mapDomain = this.mapDomain.bind(this);
         this.getInfo = this.getInfo.bind(this);
         this.getLogs = this.getLogs.bind(this)
-
+        this.getImage = this.getImage.bind(this)
         this.getRating = this.getRating.bind(this)
         this.getRatingAv = this.getRatingAv.bind(this)
         this.sendRequest = this.sendRequest.bind(this)
@@ -67,6 +68,16 @@ class MyStartup extends Component {
         this.getRating()
         this.getRatingAv()
         this.checkSentReq()
+        this.getImage()
+    }
+    getImage() {
+        var self = this;
+        var mem;
+        axios.get(`http://localhost:8082/startup/photos/` + this.props.match.params.id)
+            .then(res => {
+                mem = res.data;
+                self.setState({ image: mem })
+            })
     }
     getInfo() {
         var id = this.props.match.params.id
@@ -133,7 +144,7 @@ class MyStartup extends Component {
             <div className={classes.root}>
                 <Card elevation={3}>
                     <Container className={classes.cont} style={{ marginBottom: 20 }}>
-                        <Avatar alt="Sanket" className={classes.large} />
+                        <Avatar alt="Sanket" src={`data:image/jpeg;base64,${this.state.image}`} className={classes.large} />
                         <Divider style={{ marginLeft: 10 }} orientation="vertical" flexItem />
                         <Container className={classes.spc}>
                             <Typography variant="h4" gutterBottom>

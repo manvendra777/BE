@@ -53,6 +53,7 @@ class MyMentor extends Component {
             avg: '',
             myrating:0,
             isVerified:false,
+            image:null
         };
         this.mapDomain = this.mapDomain.bind(this);
         this.getInfo = this.getInfo.bind(this);
@@ -71,7 +72,17 @@ class MyMentor extends Component {
         this.getRatingAv()
         this.gateMyRating()
         this.isVerified()
+        this.getImage()
         
+    }
+    getImage() {
+        var self = this;
+        var mem;
+        axios.get(`http://localhost:8082/mentor/photos/` + this.props.match.params.id)
+            .then(res => {
+                mem = res.data;
+                self.setState({ image: mem })
+            })
     }
     isVerified(){
         
@@ -150,7 +161,7 @@ class MyMentor extends Component {
             <div className={classes.root}>
                 <Card elevation={3}>
                     <Container className={classes.cont} style={{ marginBottom: 20 }}>
-                        <Avatar alt="Sanket" className={classes.large} />
+                        <Avatar src={`data:image/jpeg;base64,${this.state.image}`} alt="Sanket" className={classes.large} />
                         <Divider style={{ marginLeft: 10 }} orientation="vertical" flexItem />
                         <Container className={classes.spc}>
                             <Typography variant="h4" gutterBottom>

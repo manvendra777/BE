@@ -122,7 +122,7 @@ class MessagesFinal extends Component {
     // Your code here
     let persons = [];
     let up = [];
-    axios.get(`http://localhost:8080/communication/message/find`, { params: { senderId: this.state.myId, receiverId: this.state.addedUserId } })
+    axios.get(`http://localhost:8084/communication/message/find`, { params: { senderId: this.state.myId, receiverId: this.state.addedUserId } })
       .then(res => {
         persons = res.data;
         persons.map((item, i) => {
@@ -147,7 +147,7 @@ class MessagesFinal extends Component {
       this.setState({ msgTypo: '' });
       var sender = this.state.myId;
       var receiver = this.state.addedUser;
-      axios.post('http://localhost:8080/communication/message/send', {
+      axios.post('http://localhost:8084/communication/message/send', {
         "senderId": sender,
         "receiverId": this.state.addedUserId,
         "text": this.state.msgTypo

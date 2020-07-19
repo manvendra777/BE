@@ -9,15 +9,19 @@ import PaymentIcon from '@material-ui/icons/Payment';
 import Dialog from '@material-ui/core/Dialog'
 import CreateAd from './Assets/CreateAd'
 import PayForMore from './Assets/PayForMore'
+import Cookies from 'js-cookie'
+import axios from 'axios'
 class MyAvertise extends Component {
     constructor(props) {
         super(props);
         this.state = {
             isModelOpen:false,
             isPayForeMoreOpen:false,
+            AdList:[]
         }
         this.createAd = this.createAd.bind(this)
         this.createPayForMore = this.createPayForMore.bind(this)
+        this.getMyAds = this.getMyAds.bind(this)
     }
     createAd(){
         this.setState({isModelOpen:!this.state.isModelOpen});
@@ -25,9 +29,19 @@ class MyAvertise extends Component {
     createPayForMore(){
         this.setState({isPayForeMoreOpen:!this.state.isPayForeMoreOpen});
     }
+    componentWillMount(){
+        this.getMyAds()
+    }
 
-    renderCard() {
-        return <AdvertiseCard />
+    getMyAds(){
+        var ads=[]
+        axios.get(`http://localhost:8086/advert/getMyAds`, { params: { id:Cookies.get('id') } })
+            .then(res => {
+                ads = res.data;
+                ads.map((item, i) => {
+                    this.setState({ AdList: [...this.state.AdList, <AdvertiseCard id={item.adId} tags={item.tags} description={item.description} image={item.image} header={item.header} feedbackList={item.feedbackList} />] })
+                })
+            })
     }
     render() {
         return (
@@ -66,10 +80,7 @@ class MyAvertise extends Component {
                 <div >
                     <div style={{ height: 550, display: 'block', width: '100%', }}>
                         <div style={{ display: 'flex', flexFlow: 'row wrap', justifyContent: 'space-around', minWidth: '100%', overflowY: 'scroll', height: '100%' }}>
-                            <AdvertiseCard />
-                            <AdvertiseCard />
-                            <AdvertiseCard />
-                            <AdvertiseCard />
+                        {this.state.AdList.map(child => child)}
                         </div>
                     </div>
                 </div>

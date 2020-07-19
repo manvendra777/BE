@@ -5,6 +5,7 @@ ports
 8083 : EntityActionService
 8084 : CommunicationService
 8085 : RatingsService
+8086 : AdService
 
 
 Dockerfile

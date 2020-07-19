@@ -15,31 +15,31 @@ import ViewAd from './ViewAd';
 class AdvertiseCard extends Component {
     constructor(props) {
         super(props);
-        this.state={
-            
+        this.state = {
+            id:props.id,
+            image:props.image,
+            header:props.header
         }
-       
-
+        this.ViewMyAd = this.ViewMyAd.bind(this)
     }
-    ViewMyAd(){
-        window.location='/startupDashboard/viewAd/'+2
+    ViewMyAd() {
+        window.location = '/startupDashboard/viewAd/' + this.state.id
     }
 
     render() {
         return (
             <div style={{ margin: '1%', width: '45%', height: '50%' }}>
                 <Card elevation={3} style={{ width: '100%', height: '100%', }}>
-                    <CardActionArea style={{ width: '100%', height: '100%', margin:'0%'}} onClick={this.ViewMyAd}>
-                      
+                    <CardActionArea style={{ width: '100%', height: '100%', margin: '0%' }} onClick={this.ViewMyAd}>
+
                         <Typography variant="h5" color='primary' style={{ margin: '1%', display: 'flex' }} gutterBottom>
-                            Advertise
-                    </Typography>
+                            {this.state.header}
+                        </Typography>
                         <CardMedia
                             style={{ height: "100%" }}
-                            image="http://blog.clickdimensions.com/wp-content/uploads/2017/05/BlogFeatureImage-5-Types-of-Online-Advertising-to-Generate-Leads.png"
-                            title="Contemplative Reptile"
+                            image={`data:image/jpeg;base64,${this.state.image.data}`}
                         />
-                        </CardActionArea>
+                    </CardActionArea>
                 </Card>
             </div>
         );
