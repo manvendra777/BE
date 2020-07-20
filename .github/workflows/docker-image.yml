@@ -14,10 +14,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image
-    
-    - name: Login to DockerHub Registry
-      run: echo Pune1999@ | docker login -u sankettupe1 --password-stdin
+    - run: echo Pune1999@ | docker login -u sankettupe1 --password-stdin
     - run: sudo docker build -f Dockerfile -t  sihbruteforce2020/startup:latest .
-    - name: Push docker image
-      run: docker push sihbruteforce2020/startup:latest
+    - run: docker push sihbruteforce2020/startup:latest
