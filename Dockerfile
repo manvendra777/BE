@@ -19,5 +19,3 @@ COPY . ./
 
 # start app
 CMD ["npm", "run", "build"]
-CMD ["npm", "install", "-g", "serve"]
-CMD ["serve", "-s" ,"build"]
