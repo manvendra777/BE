@@ -62,7 +62,7 @@ class TargetInvestor extends Component {
     getImage() {
         var self = this;
         var mem;
-        axios.get(`http://localhost:8082/investor/photos/` + this.props.match.params.id)
+        axios.get(`http://54.237.17.61/investor/photos/` + this.props.match.params.id)
             .then(res => {
                 mem = res.data;
                 self.setState({ image: mem })
@@ -71,7 +71,7 @@ class TargetInvestor extends Component {
     getInfo() {
         var id = this.props.match.params.id
         var persons;
-        axios.get(`http://localhost:8082/investor/profile/` + id)
+        axios.get(`http://54.237.17.61/investor/profile/` + id)
             .then(res => {
                 persons = res.data;
                 this.setState({ myProfile: persons })
@@ -82,7 +82,7 @@ class TargetInvestor extends Component {
     sendRequest() {
         var myid = Cookies.get('id');
         var response;
-        axios.post('http://localhost:8083/entityAction/user/sendRequest', null, { params: { id: myid, target: this.props.match.params.id } })
+        axios.post('http://54.237.17.61/entityAction/user/sendRequest', null, { params: { id: myid, target: this.props.match.params.id } })
             .then(res => {
                 response = res.data
             })
@@ -90,7 +90,7 @@ class TargetInvestor extends Component {
     checkSentReq() {
         var myid = Cookies.get('id');
         var response;
-        axios.get('http://localhost:8083/entityAction/user/checkRequest', { params: { id: myid, target: this.props.match.params.id } })
+        axios.get('http://54.237.17.61/entityAction/user/checkRequest', { params: { id: myid, target: this.props.match.params.id } })
             .then(res => {
                 response = res.data
                 this.setState({ setReq: response })

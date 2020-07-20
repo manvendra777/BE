@@ -37,7 +37,7 @@ class MentorCard extends Component {
     getImage() {
         var self = this;
         var mem;
-        axios.get(`http://localhost:8082/mentor/photos/` + this.props.id)
+        axios.get(`http://54.237.17.61/mentor/photos/` + this.props.id)
             .then(res => {
                 mem = res.data;
                 self.setState({ image: mem })

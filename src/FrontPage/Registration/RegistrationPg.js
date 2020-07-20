@@ -42,7 +42,7 @@ class RegistrationPg extends React.Component {
 
             console.log(data);
             var self = this;
-            axios.post('http://localhost:8081/security/addUser', data = data)
+            axios.post('http://54.237.17.61/security/addUser', data = data)
                 .then(function (response) {
                     if (response.data == "exists") {
                         self.setState({ helperUsername: 'username already exists' })
@@ -50,7 +50,7 @@ class RegistrationPg extends React.Component {
                     } else {
                         Cookies.set('temp', data.username);
                        
-                        axios.post('http://localhost:8081/security/getId', data = data)
+                        axios.post('http://54.237.17.61/security/getId', data = data)
                             .then(function (response) {
                                 Cookies.set('tempId',response.data)
                                 window.location = "/profileFrontPg"

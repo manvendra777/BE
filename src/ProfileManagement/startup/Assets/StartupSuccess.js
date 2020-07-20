@@ -14,7 +14,7 @@ class StartupSuccess extends React.Component {
   createDb() {
     var myid = Cookies.get('tempId');
     var response;
-    axios.post('http://localhost:8083/entityAction/user/createRequestDB', null, { params: { id: myid } })
+    axios.post('http://54.237.17.61/entityAction/user/createRequestDB', null, { params: { id: myid } })
       .then(res => {
         response = res.data
         console.log(response);
@@ -24,7 +24,7 @@ class StartupSuccess extends React.Component {
   componentDidMount() {
     this.createDb();
 
-    axios.post('http://localhost:8081/security/setStartup?userName=' + Cookies.get('temp')) //startup
+    axios.post('http://54.237.17.61/security/setStartup?userName=' + Cookies.get('temp')) //startup
     // End of code
     Cookies.remove('temp');
     Cookies.remove('tempId');

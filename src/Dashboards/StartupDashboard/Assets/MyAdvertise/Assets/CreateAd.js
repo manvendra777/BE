@@ -75,7 +75,7 @@ class CreateAd extends Component {
   };
 
   onFileUpload = () => {
-    //localhost:8082/community/uploadPhoto/5f1373f48888db417a8d0dcc
+    //54.237.17.61/community/uploadPhoto/5f1373f48888db417a8d0dcc
     const formData = new FormData();
     formData.append('image', this.state.selectedFile);
     var id;
@@ -84,12 +84,12 @@ class CreateAd extends Component {
       
     axios({
       method: 'post',
-      url: 'http://localhost:8086/advert/createAd/',
+      url: 'http://54.237.17.61/advert/createAd/',
       data: formData,
       headers: { 'Content-Type': 'multipart/form-data' }
     }).then(res => {
       id = res.data;
-      axios.post('http://localhost:8086/advert/createAdInfo/',{
+      axios.post('http://54.237.17.61/advert/createAdInfo/',{
         "adId": id,
         "description": this.state.adDiscription,
         "header": this.state.adName,

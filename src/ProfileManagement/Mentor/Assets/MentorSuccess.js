@@ -16,11 +16,11 @@ class MentorSuccess extends React.Component {
   createDb() {
     var myid = Cookies.get('tempId');
     var response;
-    axios.post('http://localhost:8083/entityAction/user/createRequestDB', null, { params: { id: myid } })
+    axios.post('http://54.237.17.61/entityAction/user/createRequestDB', null, { params: { id: myid } })
       .then(res => {
         response = res.data
 
-        axios.post('http://localhost:8081/security/setMentor?userName=' + Cookies.get('temp')).then(res => {
+        axios.post('http://54.237.17.61/security/setMentor?userName=' + Cookies.get('temp')).then(res => {
           Cookies.remove('temp');
           Cookies.remove('tempId');
 

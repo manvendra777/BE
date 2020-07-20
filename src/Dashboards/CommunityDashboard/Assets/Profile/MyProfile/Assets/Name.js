@@ -66,7 +66,7 @@ class Name extends Component {
     getImage() {
         var self = this;
         var mem;
-        axios.get(`http://localhost:8082/community/photos/`+Cookies.get('id'))
+        axios.get(`http://54.237.17.61/community/photos/`+Cookies.get('id'))
             .then(res => {
                 mem = res.data;
                 self.setState({ image: mem })
@@ -107,7 +107,7 @@ class Name extends Component {
 
 		console.log(data);
 
-		axios.post('http://localhost:8082/community/profile/'+Cookies.get('id'), data = data)
+		axios.post('http://54.237.17.61/community/profile/'+Cookies.get('id'), data = data)
 			.then(function (response) {
 				console.log(response.data);
 			})

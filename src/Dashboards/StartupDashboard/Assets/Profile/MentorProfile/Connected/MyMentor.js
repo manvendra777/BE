@@ -78,7 +78,7 @@ class MyMentor extends Component {
     getImage() {
         var self = this;
         var mem;
-        axios.get(`http://localhost:8082/mentor/photos/` + this.props.match.params.id)
+        axios.get(`http://54.237.17.61/mentor/photos/` + this.props.match.params.id)
             .then(res => {
                 mem = res.data;
                 self.setState({ image: mem })
@@ -88,7 +88,7 @@ class MyMentor extends Component {
         
         var id = this.props.match.params.id
         var isVerified;
-        axios.get(`http://localhost:8085/ratings/isVerified`,{params:{id:this.props.match.params.id}} )
+        axios.get(`http://54.237.17.61/ratings/isVerified`,{params:{id:this.props.match.params.id}} )
         .then(res => {
             isVerified = res.data;
             this.setState({ isVerified: isVerified })
@@ -97,7 +97,7 @@ class MyMentor extends Component {
     getInfo() {
         var id = this.props.match.params.id
         var persons;
-        axios.get(`http://localhost:8082/mentor/profile/` + id)
+        axios.get(`http://54.237.17.61/mentor/profile/` + id)
             .then(res => {
                 persons = res.data;
                 this.setState({ myProfile: persons })
@@ -107,7 +107,7 @@ class MyMentor extends Component {
     gateMyRating() {
         var myid = Cookies.get('id');
         var my=0
-        axios.get(`http://localhost:8085/ratings/get`, { params: { provider:myid ,entity:this.props.match.params.id} })
+        axios.get(`http://54.237.17.61/ratings/get`, { params: { provider:myid ,entity:this.props.match.params.id} })
         .then(res => {
             my = res.data;
             console.log(my);
@@ -118,8 +118,8 @@ class MyMentor extends Component {
     setMyRating(rating) {
         var myid = Cookies.get('id');
         var m=this.props.match.params.id
-        //localhost:8080/ratings/save
-        axios.post('http://localhost:8085/ratings/save', {
+        //54.237.17.61:8080/ratings/save
+        axios.post('http://54.237.17.61/ratings/save', {
             "entityId": m,
             "providerId": myid,
             "value": rating
@@ -130,7 +130,7 @@ class MyMentor extends Component {
 
     getRating() {
         var avg;
-        axios.get(`http://localhost:8085/ratings/getRatingCount`, { params: { id: this.props.match.params.id } })
+        axios.get(`http://54.237.17.61/ratings/getRatingCount`, { params: { id: this.props.match.params.id } })
             .then(res => {
                 avg = res.data;
                 avg = avg.reverse()
@@ -139,7 +139,7 @@ class MyMentor extends Component {
     }
     getRatingAv() {
         var rate;
-        axios.get(`http://localhost:8085/ratings/getRatingAverage`, { params: { id: this.props.match.params.id } })
+        axios.get(`http://54.237.17.61/ratings/getRatingAverage`, { params: { id: this.props.match.params.id } })
             .then(res => {
                 rate = res.data;
                 console.log(rate);
