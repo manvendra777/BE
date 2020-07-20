@@ -110,18 +110,14 @@ class Header extends Component {
 	findInvestor() {
 		window.location = "/startupDashboard/FindInvestor"
 	}
-	home() {
-		window.location = "/startupDashboard/Home"
-	}
+
 	connections() {
 		window.location = "/startupDashboard/Connections"
 	}
 	messaging() {
 		window.location = "/startupDashboard/Messaging"
 	}
-	notification() {
-		window.location = "/startupDashboard/Notification"
-	}
+	
 	profile() {
 		window.location = "/startupDashboard/Profile"
 	}
@@ -145,10 +141,8 @@ class Header extends Component {
 							
 							<Button onClick={this.findMentor} style={{ color: "white", margin: "5px" }} >Find<SearchIcon style={{ marginLeft: 7 }} /></Button>
 							<Button onClick={this.findInvestor} style={{ color: "white", margin: "5px" }} >Find Investor<SearchIcon style={{ marginLeft: 7 }} /></Button>
-							<Button onClick={this.home} style={{ color: "white", margin: "5px" }} >Home<HomeIcon style={{ marginLeft: 7 }} /></Button>
 							<Button onClick={this.connections} style={{ color: "white", margin: "5px" }} >Connections<PersonAddIcon style={{ marginLeft: 7 }} /></Button>
 							<Button onClick={this.messaging} style={{ color: "white", margin: "5px" }} >Messaging<MessageIcon style={{ marginLeft: 7 }} /></Button>
-							<Button onClick={this.notification} style={{ color: "white", margin: "5px" }} >Notifications<NotificationsIcon style={{ marginLeft: 7 }} /></Button>
 							<Button onClick={this.profile} style={{ color: "white", margin: "5px" }} > Profile <AccountCircle style={{ marginLeft: 7 }} /></Button>
 							
 							<LogoutButton	/>

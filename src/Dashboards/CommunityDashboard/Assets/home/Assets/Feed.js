@@ -8,7 +8,8 @@ import { Button } from 'react-bootstrap';
 import CreatePost from './CreatePost'
 import Post from './Post'
 import Divider from '@material-ui/core/Divider';
-
+import Advertise from '../../Advertise/Advertise'
+import axios from 'axios'
 const useStyles = theme => ({
 
 });
@@ -17,17 +18,42 @@ class Feed extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      postList: []
+    }
+    this.getPosts = this.getPosts.bind(this)
+    this.addToCur = this.addToCur.bind(this)
   }
+  componentWillMount(){
+    this.getPosts();
+  }
+
+  getPosts() {
+    var ads;
+    var self = this;
+    axios.get(`http://localhost:8087/forum/getPostsByDomain/`, { params: { tag:this.props.match.params.Domain } })
+      .then(res => {
+        ads = res.data;
+        console.log(ads);
+        ads.map((item, i) => {
+          self.setState({ postList: [...self.state.postList, <Post date ={item.dateOfCreation}id={item.discussionId}/>] })
+        })
+      })
+  }
+
+  addToCur(id,time){
+      this.setState({ postList: [<Post date ={time}id={id}/>,...this.state.postList, ] })
+  }
+
   render() {
     return (
       <div style={{ width: '84%', padding: '1%' }}>
         <div style={{ width: '50%', marginLeft: 'auto', marginRight: 'auto' }}>
           <h1>{this.props.match.params.Domain}</h1>
           <Divider />
-          <CreatePost />
+          <CreatePost method={this.addToCur} postDomain={this.props.match.params.Domain} />
           <div style={{ marginTop: '2%' }}>
-            <Post />
-            <Post />
+            {this.state.postList.map(child=>child)}
           </div>
         </div>
       </div>

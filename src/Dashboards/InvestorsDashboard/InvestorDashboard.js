@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import Header from "./Assets/Header/Header";
-import Notification from "./Assets/Notifications/Notifications"
 import Profile from "./Assets/Profile/MyProfile/Profile"
 import ListOfOnlineCandidates from "./Assets/Messaging/Assets/ListOfOnlineCandidates"
 import Messaging from './Assets/Messaging/Messaging'
 import Connections from "./Assets/Connections/Connections"
-import Home from "./Assets/home/Home"
 import FindStartup from './Assets/FindStartup/FindStartup'
 import TargetStartup from './Assets/Profile/StartupProfile/NotConnected/TargetStartup'
 import MyStartup from './Assets/Profile/StartupProfile/Connected/MyStartup'
@@ -42,10 +40,10 @@ export default class StartupDashboard extends Component {
 							</div>
 							<div style={{ marginLeft: '18.5%', width: '80%' }}>
 								<Route path="/investorDashboard/Profile" component={Profile} />
-								<Route path="/investorDashboard/Notification" component={Notification} />
+
 								<Route path="/investorDashboard/Messaging" component={Messaging} />
 								<Route path="/investorDashboard/Connections" component={Connections} />
-								<Route path="/investorDashboard/Home" component={Home} />
+
 								<Route path="/investorDashboard/FindStartup" component={FindStartup} />
 								<Route exact path="/investorDashboard/TargetStartup/:id" component={TargetStartup} />
 								<Route exact path="/investorDashboard/MyStartup/:id" component={MyStartup} />

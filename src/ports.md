@@ -6,6 +6,7 @@ ports
 8084 : CommunicationService
 8085 : RatingsService
 8086 : AdService
+8087 : Forum
 
 
 Dockerfile

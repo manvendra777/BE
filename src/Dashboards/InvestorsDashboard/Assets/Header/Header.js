@@ -104,17 +104,12 @@ class Header extends Component {
 	findStartup() {
 		window.location = "/investorDashboard/FindStartup"
 	}
-	home() {
-		window.location = "/investorDashboard/Home"
-	}
+	
 	connections() {
 		window.location = "/investorDashboard/Connections"
 	}
 	messaging() {
 		window.location = "/investorDashboard/Messaging"
-	}
-	notification() {
-		window.location = "/investorDashboard/Notification"
 	}
 	profile() {
 		window.location = "/investorDashboard/Profile"
@@ -136,10 +131,8 @@ class Header extends Component {
 						</div>
 						<div className={classes.groupButtons}>
 							<Button onClick={this.findStartup} style={{ color: "white", margin: "5px" }} >Find Startup<SearchIcon style={{ marginLeft: 7 }} /></Button>
-							<Button onClick={this.home} style={{ color: "white", margin: "5px" }} >Home<HomeIcon style={{ marginLeft: 7 }} /></Button>
 							<Button onClick={this.connections} style={{ color: "white", margin: "5px" }} >Connections<PersonAddIcon style={{ marginLeft: 7 }} /></Button>
 							<Button onClick={this.messaging} style={{ color: "white", margin: "5px" }} >Messaging<MessageIcon style={{ marginLeft: 7 }} /></Button>
-							<Button onClick={this.notification} style={{ color: "white", margin: "5px" }} >Notifications<NotificationsIcon style={{ marginLeft: 7 }} /></Button>
 							<Button onClick={this.profile} style={{ color: "white", margin: "5px" }} > Profile <AccountCircle style={{ marginLeft: 7 }} /></Button>
 							<LogoutButton	/>
 						</div>

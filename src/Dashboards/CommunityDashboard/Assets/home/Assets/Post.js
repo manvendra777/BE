@@ -17,6 +17,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import TextField from '@material-ui/core/TextField';
 import Comment from './Comment'
+import Cookies from 'js-cookie'
+import axios from 'axios'
 const styles = theme => ({
   root: {
     width: '100%',
@@ -47,15 +49,138 @@ class Post extends Component {
 
     this.state = {
       expanded: false,
-      comment:''
+      comment: '',
+      commentList: [],
+      id: props.id,
+      post: {},
+      image: null,
+      username: '',
+      profilePicture: null,
+      idOfUser: '',
+      checkLike: false,
+      count: 0,
+      mnth: '',
+      date: '',
+      year: '',
     };
     this.keyPress = this.keyPress.bind(this)
     this.handleExpandClick = this.handleExpandClick.bind(this)
+    this.getPostData = this.getPostData.bind(this)
+    this.getProfilePicture = this.getProfilePicture.bind(this)
+    this.getLikeStatus = this.getLikeStatus.bind(this)
+    this.setLike = this.setLike.bind(this)
+    this.setLikeButton = this.setLikeButton.bind(this)
+    this.getCount = this.getCount.bind(this)
   }
+
+  componentWillMount() {
+    var d = new Date(this.props.date);
+    var mnth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var n = mnth[d.getMonth()]
+    var dateH = d.getDate();
+    var year = d.getFullYear()
+    this.setState({ mnth: n, date: dateH, year: year })
+    this.getPostData()
+
+  }
+
+  setLikeButton() {
+    if (this.state.checkLike) {
+      return (<IconButton onClick={this.setLike} style={{ color: 'red' }} aria-label="add to favorites">
+        <FavoriteIcon />
+      </IconButton>)
+    } else {
+      return (<IconButton onClick={this.setLike} aria-label="add to favorites">
+        <FavoriteIcon />
+      </IconButton>)
+    }
+  }
+
+  getCount() {
+    var self = this;
+    var mem;
+    var postId = this.state.id;
+    axios.get(`http://localhost:8087/forum/getCount`, { params: { idOfPost: postId } })
+      .then(res => {
+        mem = res.data;
+        self.setState({ count: mem })
+      })
+  }
+
+
+  getLikeStatus() {
+    var self = this;
+    var mem;
+    console.log(this.state.idOfUser);
+    axios.get(`http://localhost:8087/forum/checkLike`, { params: { idOfPost: self.state.id, idOfMember: Cookies.get('id') } })
+      .then(res => {
+        mem = res.data;
+        self.setState({ checkLike: mem })
+      })
+  }
+
+  setLike() {
+    var self = this;
+    var postId = this.state.id;
+    console.log(this.state.id);
+    axios.post('http://localhost:8087/forum/addLikes', null, { params: { idOfPost: postId, idOfMember: Cookies.get('id') } }).then(res => {
+      console.log(res.data);
+      if (res.data) {
+        self.setState({ checkLike: true })
+        self.setState({ count: self.state.count + 1 })
+      } else {
+        self.setState({ checkLike: false })
+        self.setState({ count: self.state.count - 1 })
+      }
+    })
+  }
+
+
+  getProfilePicture() {
+    var self = this;
+    var mem;
+    console.log(this.state.idOfUser);
+    axios.get(`http://localhost:8082/community/photos/` + this.state.idOfUser)
+      .then(res => {
+        mem = res.data;
+        self.setState({ profilePicture: mem })
+      })
+  }
+
+  getPostData() {
+    var ads;
+    var self = this;
+    axios.get(`http://localhost:8087/forum/getPostbyId`, { params: { id: this.state.id } })
+      .then(res => {
+
+        ads = res.data;
+        self.setState({ post: ads })
+        self.setState({ username: ads.userId })
+        self.setState({ image: ads.image.data })
+        self.setState({ idOfUser: ads.idOfUser })
+        console.log(ads);
+        ads.commentList.map((item, i) => {
+          self.setState({ commentList: [...self.state.commentList, <Comment name={item.userId} comment={item.commentBody} />] })
+        })
+        self.getProfilePicture()
+        self.getLikeStatus()
+        self.getCount();
+        console.log(self.state.checkLike);
+      })
+  }
+
   keyPress(e) {
     if (e.keyCode == 13) {
-      alert('sent: ' + this.state.comment)
-      this.setState({comment:''})
+      var self = this;
+      axios.post('http://localhost:8087/forum/addComment', {
+        "discussionId": this.props.id,
+        "commentBody": self.state.comment,
+        "userId": Cookies.get('username')
+      }).then(res => {
+        console.log(res.data);
+        self.setState({ commentList: [...self.state.commentList, <Comment name={Cookies.get('username')} comment={self.state.comment} />] })
+        self.setState({ comment: '' })
+      })
     }
   }
   handleExpandClick() {
@@ -64,7 +189,7 @@ class Post extends Component {
 
   render() {
     const { classes } = this.props;
-    
+
     const handleChane = (e) => {
       this.setState({ comment: e.target.value });
     }
@@ -72,37 +197,31 @@ class Post extends Component {
       <Card elevation={5} className={classes.root}>
         <CardHeader
           avatar={
-            <Avatar aria-label="recipe" className={classes.avatar}>
-              R
-          </Avatar>
+            <Avatar src={`data:image/jpeg;base64,${this.state.profilePicture}`} className={classes.avatar}>
+            </Avatar>
           }
-          action={
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
-          }
-          title="Shrimp and Chorizo Paella"
-          subheader="September 14, 2016"
+
+          title={this.state.username}
+          subheader={this.state.mnth + '  ' + this.state.date + ', ' + this.state.year}
         />
         <CardMedia
           className={classes.media}
-          image="/static/images/cards/paella.jpg"
+          image={`data:image/jpeg;base64,${this.state.image}`}
           title="Paella dish"
         />
         <CardContent>
           <Typography variant="h6" color="textSecondary" component="p">
-            Title
+            Title : {this.state.post.title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Description : This impressive paella is a perfect party dish and a fun meal to cook together with your
-            guests. Add 1 cup of frozen peas along with the mussels, if you like.
-            Add 1 cup of frozen peas along with the mussels, if you like.
-        </Typography>
+            Description : {this.state.post.description}
+          </Typography>
         </CardContent>
+
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton>
+          {this.setLikeButton()}
+          {this.state.count}
+
           <IconButton
             className={clsx(classes.expand, {
               [classes.expandOpen]: this.state.expanded,
@@ -119,10 +238,9 @@ class Post extends Component {
 
           <CardContent>
             <Typography paragraph>Discussion:</Typography>
-            <Comment name="Sanket Tupe" comment="hey I Liked your Post its nice" />
-            <Comment name="Sanket Tupe" comment="hey I Liked your Post its nice" />
-            <Comment name="Sanket Tupe" comment="hey I Liked your Post its nice" />
-            <Comment name="Sanket Tupe" comment="hey I Liked your Post its nice" />
+            <div>
+              {this.state.commentList.map(child => child)}
+            </div>
           </CardContent>
           <TextField
             style={{ width: '98%', margin: '1%' }}

@@ -22,6 +22,8 @@ export default function Logout() {
         Cookies.remove('isLoggedIn');
         Cookies.remove('type')
         Cookies.remove('id')
+        Cookies.remove('ad')
+        Cookies.remove('username')
         window.location = "/"
     }
     return (

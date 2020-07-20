@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
+import Cookies from 'js-cookie';
 const useStyles = makeStyles({
   root: {
     margin:20,
@@ -21,6 +21,7 @@ const useStyles = makeStyles({
 export default function Category(props) {
   const classes = useStyles();
   const gotoFeedSection=()=>{
+    Cookies.set('ad',props.name)
     window.location = "/communityDashboard/Feed/" + props.name
   }
   return (

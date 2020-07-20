@@ -11,7 +11,9 @@ import Cookies from 'js-cookie'
 const useStyles = theme => ({
   root: {
     width: "20%",
+    right: 0,
     position: 'fixed',
+    marginRight: 10,
   },
   media: {
     height: 340

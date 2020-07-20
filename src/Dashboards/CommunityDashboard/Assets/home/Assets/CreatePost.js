@@ -13,10 +13,12 @@ import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera'
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
+import axios from 'axios'
+import Cookies from 'js-cookie'
 const useStyles = theme => ({
     root: {
         width: '100%',
-        margin:'0%'
+        margin: '0%'
     },
 });
 
@@ -26,17 +28,63 @@ class CreatePost extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            question: "",
-            description: "",
-            AI: false,
-            networking: false,
-            web: false,
-            android: false,
-            other: false
+            selectedFile: null,
+            description: '',
+            title: '',
+            domain: props.postDomain
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.post = this.post.bind(this)
     }
+
+    post() {
+        var self = this;
+        const formData = new FormData();
+        formData.append('image', this.state.selectedFile);
+        var id;
+        console.log(this.state.selectedFile);
+        axios({
+            method: 'post',
+            url: 'http://localhost:8087/forum/createDiscussion',
+            data: formData,
+            headers: { 'Content-Type': 'multipart/form-data' }
+        }).then(res => {
+            id = res.data;
+            axios.post('http://localhost:8087/forum/createDiscussionInfo', {
+                "discussionId": id,
+                "description": this.state.description,
+                "header": this.state.adName,
+                "tag": this.state.domain,
+                "idOfUser":Cookies.get('id'),
+                "userId": Cookies.get('username')
+            }).then(res => {
+                console.log(res.data);
+                self.setState({title:'',description:'',})
+                window.location.reload();
+            })
+        })
+    }
+    onFileChange = event => {
+        // Update the state
+        this.setState({ selectedFile: event.target.files[0] });
+    };
+
+    fileData = () => {
+        if (this.state.selectedFile) {
+            return (
+                <div style={{ margin: 'auto' }}>
+                    <h6>Photo: {this.state.selectedFile.name}</h6>
+                </div>
+            );
+        } else {
+            return (
+                <div style={{ margin: 'auto' }}>
+                    <h6>You can post photo by clicking on camera button</h6>
+                </div>
+            );
+        }
+    };
 
 
     handleChange(e) {
@@ -62,37 +110,45 @@ class CreatePost extends React.Component {
             <div className={classes.root}>
                 <Card elevation={5}>
                     <form onSubmit={this.handleSubmit}>
-                        <div style={{ marginLeft: '35%', marginRight: 'auto', marginTop:'1%' }}><Typography variant="h6" gutterBottom>
+                        <div style={{ marginLeft: '35%', marginRight: 'auto', marginTop: '1%' }}><Typography variant="h6" gutterBottom>
                             Create Post
                         </Typography></div>
 
                         <Divider />
-                        <TextField type="text" name="question"
+                        <TextField type="text" name="title"
                             label="Title"
-                            value={this.state.question}
-                            onChange={this.handleChange}
+                            value={this.state.title}
+                            onChange={(event) => { this.setState({ title: event.target.value }) }}
                             style={{ width: '94%', marginLeft: '3%', marginTop: '1%', marginBottom: '1%' }}
 
                         />
                         <Divider />
-                        <input accept="image/*" style={{ display: 'none' }} id="icon-img-file" type="file" />
-                        <label htmlFor="icon-img-file">
-                            <IconButton style={{ margin: '10%' }} color="primary" aria-label="upload picture" component="span">
-                                <PhotoCamera />
-                            </IconButton>
+                        <div style={{ display: 'flex' }}>
+                            <input onChange={this.onFileChange} accept="image/*" style={{ display: 'none' }} id="icon-img-file" type="file" />
+                            <label htmlFor="icon-img-file">
+                                <IconButton style={{ margin: '10%' }} color="primary" aria-label="upload picture" component="span">
+                                    <PhotoCamera />
+                                </IconButton>
 
-                        </label>
+                            </label>
+                            {this.fileData()}
+                        </div>
                         <Divider />
                         <TextField
                             style={{ width: '94%', margin: '3%' }}
                             id="outlined-multiline-static"
                             label="Description"
                             multiline
-                            onChange={this.handleChange}
+                            onChange={(event) => { this.setState({ description: event.target.value }) }}
                             rows={4}
+                            value={this.state.description}
                             variant="outlined"
                         />
                         <br />
+                        <div style={{ display: 'flex', padding: '2%',color:'#455a64' }}>
+                            will be posted in : {this.props.postDomain}
+                            <Button onClick={this.post} style={{ marginLeft: 'auto' }}>post</Button>
+                        </div>
                     </form>
                 </Card>
             </div>
