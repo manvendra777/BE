@@ -7,6 +7,10 @@ import { withStyles } from "@material-ui/core/styles";
 import CardMedia from '@material-ui/core/CardMedia';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
+import Avatar from '@material-ui/core/Avatar';
+import CardHeader from '@material-ui/core/CardHeader';
+import Cookies from 'js-cookie'
+
 const useStyles = theme => ({
   root: {
       width:"15%",
@@ -17,6 +21,10 @@ const useStyles = theme => ({
   media:{
     height:140
   },
+  large: {
+    width: theme.spacing(10),
+    height: theme.spacing(10),
+  }
 });
 
 class Advertise extends Component {
@@ -24,12 +32,28 @@ class Advertise extends Component {
 		super(props);
 
 		this.state = {
-			members:[]
-		};
+      members:[],
+      image:null,
+    };
+    this.getImage  = this.getImage.bind(this);
   }
   
   componentWillMount(){
+    this.getImage()
   };
+
+  getImage() {
+    var self = this;
+    var mem;
+    axios.get(`http://localhost:8082/startup/photos/`+Cookies.get('id'))
+        .then(res => {
+            mem = res.data;
+            self.setState({ image: mem })
+        })
+}
+showImage() {
+    return (<img src={`data:image/jpeg;base64,${this.state.image}`} />)
+}
 
 
   render() {
@@ -38,24 +62,11 @@ class Advertise extends Component {
   return (
     <div className={classes.root}>
       <Card variant="outlined">
-      <Typography variant="h5" color='primary' style={{ margin: 10 }} gutterBottom>
-                        Advertise
-							</Typography>
-      <CardMedia
-          className={classes.media}
-          image="http://blog.clickdimensions.com/wp-content/uploads/2017/05/BlogFeatureImage-5-Types-of-Online-Advertising-to-Generate-Leads.png"
-          title="Contemplative Reptile"
+        <CardHeader
+          avatar={
+            <Avatar aria-label="Recipe" variant="circle" src={`data:image/jpeg;base64,${this.state.image}`} className={classes.large} style={{marginLeft: 35}}/>
+          }
         />
-        
-            <TextField style={{margin:10,width:"100%",paddingRight:20}}
-          id="outlined-multiline-static"
-          label="Feedback"
-          multiline
-          rows={4}
-          variant="outlined"
-        />
-      <Divider/>
-     <Button style={{margin:10,}}>send</Button>
       </Card>
       
     </div>
