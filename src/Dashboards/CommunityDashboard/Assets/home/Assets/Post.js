@@ -140,7 +140,7 @@ class Post extends Component {
     var self = this;
     var mem;
     console.log(this.state.idOfUser);
-    axios.get(`http://54.237.17.61/community/photos/` + this.state.idOfUser)
+    axios.get(`http://54.237.17.61/management/community/photos/` + this.state.idOfUser)
       .then(res => {
         mem = res.data;
         self.setState({ profilePicture: mem })

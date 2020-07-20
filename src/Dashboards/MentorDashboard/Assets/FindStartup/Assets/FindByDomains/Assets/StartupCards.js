@@ -36,7 +36,7 @@ class StartupCard extends Component {
     getImage() {
         var self = this;
         var mem;
-        axios.get(`http://54.237.17.61/startup/photos/` + this.props.id)
+        axios.get(`http://54.237.17.61/management/startup/photos/` + this.props.id)
             .then(res => {
                 mem = res.data;
                 self.setState({ image: mem })

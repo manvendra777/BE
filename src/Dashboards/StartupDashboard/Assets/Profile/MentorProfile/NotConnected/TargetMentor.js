@@ -84,7 +84,7 @@ class TargetMentor extends Component {
     getImage() {
         var self = this;
         var mem;
-        axios.get(`http://54.237.17.61/mentor/photos/` + this.props.match.params.id)
+        axios.get(`http://54.237.17.61/management/mentor/photos/` + this.props.match.params.id)
             .then(res => {
                 mem = res.data;
                 self.setState({ image: mem })
@@ -129,7 +129,7 @@ class TargetMentor extends Component {
     getInfo() {
         var id = this.props.match.params.id
         var persons;
-        axios.get(`http://54.237.17.61/mentor/profile/` + id)
+        axios.get(`http://54.237.17.61/management/mentor/profile/` + id)
             .then(res => {
                 persons = res.data;
                 this.setState({ myProfile: persons })

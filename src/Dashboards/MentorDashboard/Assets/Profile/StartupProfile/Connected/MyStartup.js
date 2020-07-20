@@ -73,7 +73,7 @@ class MyStartup extends Component {
     getImage() {
         var self = this;
         var mem;
-        axios.get(`http://54.237.17.61/startup/photos/` + this.props.match.params.id)
+        axios.get(`http://54.237.17.61/management/startup/photos/` + this.props.match.params.id)
             .then(res => {
                 mem = res.data;
                 self.setState({ image: mem })
@@ -82,7 +82,7 @@ class MyStartup extends Component {
     getInfo() {
         var id = this.props.match.params.id
         var persons;
-        axios.get(`http://54.237.17.61/startup/profile/` + id)
+        axios.get(`http://54.237.17.61/management/startup/profile/` + id)
             .then(res => {
                 persons = res.data;
                 this.setState({ myProfile: persons })

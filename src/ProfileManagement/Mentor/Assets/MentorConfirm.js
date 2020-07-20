@@ -32,7 +32,7 @@ class MentorConfirm extends React.Component {
         //Api calling
         // Code to set the user type.
 
-        axios.put('http://54.237.17.61/mentor/profile/add', {
+        axios.put('http://54.237.17.61/management/mentor/profile/add', {
             "id": this.state.id,
             "firstName": this.props.values.firstName,
             "lastName": this.props.values.lastName,

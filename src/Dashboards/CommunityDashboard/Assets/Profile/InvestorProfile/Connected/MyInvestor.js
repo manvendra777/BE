@@ -62,7 +62,7 @@ class TargetInvestor extends Component {
     getInfo() {
         var id = this.props.match.params.id
         var persons;
-        axios.get(`http://54.237.17.61/investor/profile/` + id)
+        axios.get(`http://54.237.17.61/management/investor/profile/` + id)
             .then(res => {
                 persons = res.data;
                 this.setState({ myProfile: persons })

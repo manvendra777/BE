@@ -75,7 +75,7 @@ class CreateAd extends Component {
   };
 
   onFileUpload = () => {
-    //54.237.17.61/community/uploadPhoto/5f1373f48888db417a8d0dcc
+    //54.237.17.61/management/community/uploadPhoto/5f1373f48888db417a8d0dcc
     const formData = new FormData();
     formData.append('image', this.state.selectedFile);
     var id;
