@@ -28,7 +28,7 @@ class FrontPage extends React.Component {
                                         "Courage is not final,<br />
                             failure is not fatal,<br />
                             It's courage to continue that counts."<br /> </h3>
-                                    <h2 style={{ fontWeight: "bold", marginLeft: 180, color: "#705d72", fontFamily: "serif" }}> ...Wiston Chirchil</h2>
+                                    <h2 style={{ fontWeight: "bold", marginLeft: 180, color: "#705d72", fontFamily: "serif" }}> ...Winston Churchill</h2>
 
                                     <br /><br />
                                     <h1 style={{ fontWeight: "bold", color: "#6f2232", fontFamily: "times roman" }}>Find your Kind</h1>

@@ -29,7 +29,7 @@ export default function ButtonAppBar() {
         <Toolbar>
          
           <Typography variant="h6" className={classes.title}>
-          Acquaintance
+          Kick Start up
           </Typography>
           <Link to= "./registrationPg"><Button variant="outlined"  style={{color:"white",margin:"5px"}}>Register</Button></Link>
           <Link to= "./LoginPg"><Button variant="outlined"  style={{color:"white",margin:"5px"}}>Login</Button></Link>
