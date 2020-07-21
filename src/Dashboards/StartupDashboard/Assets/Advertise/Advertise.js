@@ -11,6 +11,8 @@ import Avatar from '@material-ui/core/Avatar';
 import CardHeader from '@material-ui/core/CardHeader';
 import Cookies from 'js-cookie';
 import { shadows } from '@material-ui/system';
+import {Link} from 'react-router-dom'
+import { Container } from '@material-ui/core';
 
 const useStyles = theme => ({
   root: {
@@ -23,9 +25,10 @@ const useStyles = theme => ({
     height:140
   },
   large: {
-    width: theme.spacing(10),
-    height: theme.spacing(10)
-  }
+    width: theme.spacing(11),
+    height: theme.spacing(11)
+  },
+
 });
 
 class Advertise extends Component {
@@ -73,21 +76,33 @@ getName() {
 
   return (
     <div className={classes.root}>
-      <Card variant="outlined">
+      <Link to= "/startupDashboard/Profile">
+      <Card style={{marginTop:30}}>
         <CardHeader
           avatar={
-            <Avatar aria-label="Recipe" variant="circle" src={`data:image/jpeg;base64,${this.state.image}`} className={classes.large} style={{marginLeft: 35}}/>
+            <Avatar aria-label="Recipe" variant="circle" src={`data:image/jpeg;base64,${this.state.image}`} className={classes.large} style={{border:4, marginLeft: 37,  border: '2px solid rgba(0, 0, 0, 0.23)'}}/>
           }
         />
-         <Typography variant="h7" color= "primary">
-              <div style={{marginLeft: 35}}>  {' ' + this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}</div>
+        <center><Typography variant="h7" color= "primary" style={{fontWeight: "bold"}}>
+              <div >  {' ' + this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}</div>
             </Typography>
             <Typography variant="h7" >
-              <small style={{marginLeft: 45, color: "#696969"}}>  { this.state.myProfile.startupName}</small>
-            </Typography>
+              <small style={{ color: "#696969"}}>  { this.state.myProfile.startupName}</small>
+            </Typography></center> <br></br>
             <Divider />
+            
+            <Typography variant="h8" style={{ color: "#696969", marginLeft: 5}}>
+                Connections
+            </Typography><br/>
+            <Typography variant="h8" style={{marginLeft: 5, fontWeight: "bold"}}>
+                Mentor
+            </Typography><br/>
+            <Typography variant="h8" style={{marginLeft: 5, fontWeight: "bold"}}>
+                Investor
+            </Typography>
+          
       </Card>
-      
+      </Link>
     </div>
   );
 }
