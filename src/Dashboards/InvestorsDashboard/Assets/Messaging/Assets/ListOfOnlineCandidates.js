@@ -46,7 +46,7 @@ class ListOfOnlineCandidates extends Component {
     // Your code here
     var myid = Cookies.get('id')
     let mem=[];
-    axios.get(`http://localhost:8083/entityAction/user/myConnections`,{params: {id: myid}})
+    axios.get(`http://54.237.17.61/entityAction/user/myConnections`,{params: {id: myid}})
     .then(res => {
       mem = res.data;
       mem.map((item,i)=>{

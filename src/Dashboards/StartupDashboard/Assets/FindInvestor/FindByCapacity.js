@@ -47,10 +47,10 @@ class FindByCapacity extends Component {
     };
     getListData() {
         console.log(this.state.value);
-        //localhost:8082/investor/profile/find?min=100&max=199
+        //54.237.17.61/management/investor/profile/find?min=100&max=199
         this.setState({ InvestorList: [] })
         var investor;
-        axios.get(`http://localhost:8082/investor/profile/find`, { params: { min: this.state.value[0],max:this.state.value[1] } })
+        axios.get(`http://54.237.17.61/management/investor/profile/find`, { params: { min: this.state.value[0],max:this.state.value[1] } })
             .then(res => {
                 investor = res.data;
                 investor.map((item, i) => {

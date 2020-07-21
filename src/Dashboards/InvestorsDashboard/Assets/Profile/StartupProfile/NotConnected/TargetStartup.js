@@ -65,7 +65,7 @@ class TargetStartup extends Component {
     getImage() {
         var self = this;
         var mem;
-        axios.get(`http://localhost:8082/startup/photos/` + this.props.match.params.id)
+        axios.get(`http://54.237.17.61/management/startup/photos/` + this.props.match.params.id)
             .then(res => {
                 mem = res.data;
                 self.setState({ image: mem })
@@ -74,7 +74,7 @@ class TargetStartup extends Component {
     getInfo() {
         var id = this.props.match.params.id
         var persons;
-        axios.get(`http://localhost:8082/startup/profile/` + id)
+        axios.get(`http://54.237.17.61/management/startup/profile/` + id)
             .then(res => {
                 persons = res.data;
                 this.setState({ myProfile: persons })
@@ -90,7 +90,7 @@ class TargetStartup extends Component {
 
     getRating() {
         var avg;
-        axios.get(`http://localhost:8085/ratings/getRatingCount`, { params: { id: this.props.match.params.id } })
+        axios.get(`http://54.237.17.61/ratings/getRatingCount`, { params: { id: this.props.match.params.id } })
             .then(res => {
                 avg = res.data;
                 avg = avg.reverse()
@@ -99,7 +99,7 @@ class TargetStartup extends Component {
     }
     getRatingAv() {
         var rate;
-        axios.get(`http://localhost:8085/ratings/getRatingAverage`, { params: { id: this.props.match.params.id } })
+        axios.get(`http://54.237.17.61/ratings/getRatingAverage`, { params: { id: this.props.match.params.id } })
             .then(res => {
                 rate = res.data;
                 this.setState({ avg: rate })
@@ -109,7 +109,7 @@ class TargetStartup extends Component {
     sendRequest() {
         var myid = Cookies.get('id')
         var response;
-        axios.post('http://localhost:8083/entityAction/user/sendRequest', null, { params: { id: myid, target: this.props.match.params.id } })
+        axios.post('http://54.237.17.61/entityAction/user/sendRequest', null, { params: { id: myid, target: this.props.match.params.id } })
             .then(res => {
                 response = res.data
             })
@@ -117,7 +117,7 @@ class TargetStartup extends Component {
     checkSentReq() {
         var myid = Cookies.get('id')
         var response;
-        axios.get('http://localhost:8083/entityAction/user/checkRequest', { params: { id: myid, target: this.props.match.params.id } })
+        axios.get('http://54.237.17.61/entityAction/user/checkRequest', { params: { id: myid, target: this.props.match.params.id } })
             .then(res => {
                 response = res.data
                 this.setState({ setReq: response })

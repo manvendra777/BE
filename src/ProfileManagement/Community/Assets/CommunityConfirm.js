@@ -28,7 +28,7 @@ class CommunityConfirm extends React.Component {
 continue = e => {
   e.preventDefault();
   var self = this
-  axios.put('http://localhost:8082/community/profile/add', {
+  axios.put('http://54.237.17.61/management/community/profile/add', {
     "id": this.state.id,
     "firstName": this.props.values.firstName,
     "lastName": this.props.values.lastName,

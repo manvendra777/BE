@@ -31,7 +31,7 @@ class Feed extends Component {
   getPosts() {
     var ads;
     var self = this;
-    axios.get(`http://localhost:8087/forum/getPostsByDomain/`, { params: { tag:this.props.match.params.Domain } })
+    axios.get(`http://54.237.17.61/forum/getPostsByDomain/`, { params: { tag:this.props.match.params.Domain } })
       .then(res => {
         ads = res.data;
         console.log(ads);
@@ -41,9 +41,7 @@ class Feed extends Component {
       })
   }
 
-  addToCur(id,time){
-      this.setState({ postList: [<Post date ={time}id={id}/>,...this.state.postList, ] })
-  }
+
 
   render() {
     return (
@@ -51,7 +49,7 @@ class Feed extends Component {
         <div style={{ width: '50%', marginLeft: 'auto', marginRight: 'auto' }}>
           <h1>{this.props.match.params.Domain}</h1>
           <Divider />
-          <CreatePost method={this.addToCur} postDomain={this.props.match.params.Domain} />
+          <CreatePost postDomain={this.props.match.params.Domain} />
           <div style={{ marginTop: '2%' }}>
             {this.state.postList.map(child=>child)}
           </div>

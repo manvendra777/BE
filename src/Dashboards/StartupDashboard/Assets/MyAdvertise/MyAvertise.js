@@ -35,7 +35,7 @@ class MyAvertise extends Component {
 
     getMyAds(){
         var ads=[]
-        axios.get(`http://localhost:8086/advert/getMyAds`, { params: { id:Cookies.get('id') } })
+        axios.get(`http://54.237.17.61/advert/getMyAds`, { params: { id:Cookies.get('id') } })
             .then(res => {
                 ads = res.data;
                 ads.map((item, i) => {

@@ -47,7 +47,7 @@ class AdvertiseRight extends Component {
   getAdByDomain() {
     var ads;
     var self = this;
-    axios.get(`http://localhost:8086/advert/getAdByDomain`, { params: { domain: this.props.domain } })
+    axios.get(`http://54.237.17.61/advert/getAdByDomain`, { params: { domain: this.props.domain } })
       .then(res => {
         ads = res.data;
         self.setState({ Advert: ads })
@@ -58,7 +58,7 @@ class AdvertiseRight extends Component {
 
   sendFeedBack() {
     var self = this;
-    axios.post('http://localhost:8086/advert/addFeedback/', {
+    axios.post('http://54.237.17.61/advert/addFeedback/', {
       "username": Cookies.get('username'),
       "feedbackBody": self.state.feedback,
       "adId": self.state.adId

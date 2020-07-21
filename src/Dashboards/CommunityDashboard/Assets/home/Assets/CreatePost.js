@@ -46,12 +46,12 @@ class CreatePost extends React.Component {
         console.log(this.state.selectedFile);
         axios({
             method: 'post',
-            url: 'http://localhost:8087/forum/createDiscussion',
+            url: 'http://54.237.17.61/forum/createDiscussion',
             data: formData,
             headers: { 'Content-Type': 'multipart/form-data' }
         }).then(res => {
             id = res.data;
-            axios.post('http://localhost:8087/forum/createDiscussionInfo', {
+            axios.post('http://54.237.17.61/forum/createDiscussionInfo', {
                 "discussionId": id,
                 "description": this.state.description,
                 "header": this.state.adName,

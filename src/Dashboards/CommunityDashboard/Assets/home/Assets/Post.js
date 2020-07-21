@@ -100,7 +100,7 @@ class Post extends Component {
     var self = this;
     var mem;
     var postId = this.state.id;
-    axios.get(`http://localhost:8087/forum/getCount`, { params: { idOfPost: postId } })
+    axios.get(`http://54.237.17.61/forum/getCount`, { params: { idOfPost: postId } })
       .then(res => {
         mem = res.data;
         self.setState({ count: mem })
@@ -112,7 +112,7 @@ class Post extends Component {
     var self = this;
     var mem;
     console.log(this.state.idOfUser);
-    axios.get(`http://localhost:8087/forum/checkLike`, { params: { idOfPost: self.state.id, idOfMember: Cookies.get('id') } })
+    axios.get(`http://54.237.17.61/forum/checkLike`, { params: { idOfPost: self.state.id, idOfMember: Cookies.get('id') } })
       .then(res => {
         mem = res.data;
         self.setState({ checkLike: mem })
@@ -123,7 +123,7 @@ class Post extends Component {
     var self = this;
     var postId = this.state.id;
     console.log(this.state.id);
-    axios.post('http://localhost:8087/forum/addLikes', null, { params: { idOfPost: postId, idOfMember: Cookies.get('id') } }).then(res => {
+    axios.post('http://54.237.17.61/forum/addLikes', null, { params: { idOfPost: postId, idOfMember: Cookies.get('id') } }).then(res => {
       console.log(res.data);
       if (res.data) {
         self.setState({ checkLike: true })
@@ -140,7 +140,7 @@ class Post extends Component {
     var self = this;
     var mem;
     console.log(this.state.idOfUser);
-    axios.get(`http://localhost:8082/community/photos/` + this.state.idOfUser)
+    axios.get(`http://54.237.17.61/management/community/photos/` + this.state.idOfUser)
       .then(res => {
         mem = res.data;
         self.setState({ profilePicture: mem })
@@ -150,7 +150,7 @@ class Post extends Component {
   getPostData() {
     var ads;
     var self = this;
-    axios.get(`http://localhost:8087/forum/getPostbyId`, { params: { id: this.state.id } })
+    axios.get(`http://54.237.17.61/forum/getPostbyId`, { params: { id: this.state.id } })
       .then(res => {
 
         ads = res.data;
@@ -172,7 +172,7 @@ class Post extends Component {
   keyPress(e) {
     if (e.keyCode == 13) {
       var self = this;
-      axios.post('http://localhost:8087/forum/addComment', {
+      axios.post('http://54.237.17.61/forum/addComment', {
         "discussionId": this.props.id,
         "commentBody": self.state.comment,
         "userId": Cookies.get('username')

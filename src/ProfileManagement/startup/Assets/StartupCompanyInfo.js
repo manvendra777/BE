@@ -52,14 +52,14 @@ class StartupCompanyInfo extends React.Component {
 
 
   onFileUpload = () => {
-    //localhost:8082/community/uploadPhoto/5f1373f48888db417a8d0dcc
+    //54.237.17.61/management/community/uploadPhoto/5f1373f48888db417a8d0dcc
     const formData = new FormData();
     formData.append('image',this.state.selectedFile);
 
     console.log(this.state.selectedFile);
     axios({
       method:'post',
-      url:'http://localhost:8082/startup/uploadPhoto/'+Cookies.get('tempId'),
+      url:'http://54.237.17.61/management/startup/uploadPhoto/'+Cookies.get('tempId'),
       data:formData,
       headers: {'Content-Type': 'multipart/form-data' }
     })

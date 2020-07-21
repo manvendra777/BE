@@ -29,7 +29,7 @@ export default function Invitation(props) {
 
   const accept = () => {
     axios
-      .post("http://localhost:8083/entityAction/user/acceptRequest", null, {
+      .post("http://54.237.17.61/entityAction/user/acceptRequest", null, {
         params: { id: Cookies.get('id'), target: props.id },
       })
       .then((res) => {
@@ -38,7 +38,7 @@ export default function Invitation(props) {
   };
   const del = () => {
     axios
-      .post("http://localhost:8083/entityAction/user/deleteRequest", null, {
+      .post("http://54.237.17.61/entityAction/user/deleteRequest", null, {
         params: { id: Cookies.get('id'), target: props.id },
       })
       .then((res) => {

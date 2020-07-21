@@ -40,7 +40,7 @@ class Base extends Component {
 
   getUsers = async () => {
     let data = await axios
-      .get(`http://localhost:8083/entityAction/user/pendingRequests`, { params: { id: 2 } })
+      .get(`http://54.237.17.61/entityAction/user/pendingRequests`, { params: { id: 2 } })
       .then(({ data }) => data);
     this.setState({ invites: data });
     console.log(data);
