@@ -8,7 +8,7 @@ import Divider from '@material-ui/core/Divider'
 import PaymentIcon from '@material-ui/icons/Payment';
 import Dialog from '@material-ui/core/Dialog'
 import CreateAd from './Assets/CreateAd'
-import PayForMore from './Assets/PayForMore'
+import PayForMore from './Assets/Pricing'
 import Cookies from 'js-cookie'
 import axios from 'axios'
 class MyAvertise extends Component {
@@ -31,6 +31,9 @@ class MyAvertise extends Component {
     }
     componentWillMount(){
         this.getMyAds()
+    }
+    refreshPage(){
+        window.location.reload();
     }
 
     getMyAds(){
@@ -57,15 +60,15 @@ class MyAvertise extends Component {
                         <AddIcon />
                         Create Ad
                     </Fab>
-                    <Dialog open={this.state.isModelOpen} onClose={this.createAd}>
-                        <CreateAd method={this.createAd}/>
+                    <Dialog  open={this.state.isModelOpen} onClose={this.createAd}>
+                        <CreateAd refresh={this.refreshPage} method={this.createAd}/>
                     </Dialog>
                     <Fab variant="extended" onClick={this.createPayForMore} style={{ marginLeft: '3%' }}>
                         <PaymentIcon />
                         Pay for more !
                     </Fab>
-                    <Dialog open={this.state.isPayForeMoreOpen} onClose={this.createPayForMore}>
-                        <PayForMore method={this.createPayForMore}/>
+                    <Dialog fullWidth={true} maxWidth = {'md'} open={this.state.isPayForeMoreOpen} onClose={this.createPayForMore}>
+                        <PayForMore  method={this.createPayForMore}/>
                     </Dialog>
                     <div style={{display:'flex',marginLeft:'auto',}}>                   
                     <Typography variant="h5" color='primary' style={{marginRight:20}}>

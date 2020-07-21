@@ -53,7 +53,7 @@ class RegistrationPg extends React.Component {
                         axios.post('http://54.237.17.61/security/getId', data = data)
                             .then(function (response) {
                                 Cookies.set('tempId',response.data)
-                                window.location = "/profileFrontPg"
+                                window.location = "/register"
                             })
                             
                     }

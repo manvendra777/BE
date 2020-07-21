@@ -80,8 +80,7 @@ class CreateAd extends Component {
     formData.append('image', this.state.selectedFile);
     var id;
     console.log(this.state.selectedFile);
-   
-      
+    var self = this;
     axios({
       method: 'post',
       url: 'http://54.237.17.61/advert/createAd/',
@@ -89,7 +88,7 @@ class CreateAd extends Component {
       headers: { 'Content-Type': 'multipart/form-data' }
     }).then(res => {
       id = res.data;
-      axios.post('http://54.237.17.61/advert/createAdInfo/',{
+      axios.post('http://54.237.17.61/advert/createAdInfo/', {
         "adId": id,
         "description": this.state.adDiscription,
         "header": this.state.adName,
@@ -97,6 +96,7 @@ class CreateAd extends Component {
         "userId": Cookies.get('id')
       }).then(res => {
         console.log(res.data);
+        self.props.refresh()
       })
     })
   };

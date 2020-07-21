@@ -22,7 +22,6 @@ class Feed extends Component {
       postList: []
     }
     this.getPosts = this.getPosts.bind(this)
-    this.addToCur = this.addToCur.bind(this)
   }
   componentWillMount(){
     this.getPosts();

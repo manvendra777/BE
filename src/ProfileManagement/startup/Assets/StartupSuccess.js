@@ -18,18 +18,16 @@ class StartupSuccess extends React.Component {
       .then(res => {
         response = res.data
         console.log(response);
+        axios.post('http://54.237.17.61/security/setStartup?userName=' + Cookies.get('temp')).then(res => {
+          Cookies.remove('temp');
+          Cookies.remove('tempId');
+          window.location = "/loginPg"
+        })
       })
   }
 
   componentDidMount() {
     this.createDb();
-
-    axios.post('http://54.237.17.61/security/setStartup?userName=' + Cookies.get('temp')) //startup
-    // End of code
-    Cookies.remove('temp');
-    Cookies.remove('tempId');
-    window.location = "/loginPg"
-
   }
   render() {
 

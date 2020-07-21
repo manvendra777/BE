@@ -22,24 +22,13 @@ class DomainSet extends Component {
         this.getList = this.getList.bind(this)
     }
 
-    continue = e => {
-        e.preventDefault();
-        this.props.setDomain(this.state.domains)
-        this.props.setDomainC(this.state.domainsC)
-        this.props.nextStep();
-    }
-
-    back = e => {
-        e.preventDefault();
-        this.props.prevStep();
-    }
     getList = (event) => {
 
         let domain_list = this.state.domains;
-        
+
         let domain_c = this.state.domainsC;
         let check = event.target.checked;
-        
+
         let checked_domain = event.target.value;
 
         let n = event.target.name - 1;
@@ -93,7 +82,7 @@ class DomainSet extends Component {
                                                 <FormControlLabel onClick={this.getList} control={<Checkbox checked={this.state.domainsC[0]} name="1" value="Agriculture" color="primary" />} label="Agriculture" />
                                             </div>
 
-                                         
+
 
                                         </div>
                                         <Divider />
@@ -102,7 +91,7 @@ class DomainSet extends Component {
                                                 <FormControlLabel onClick={this.getList} control={<Checkbox checked={this.state.domainsC[1]} name="2" value="Artificial Intelligence" color="primary" />} label="Artificial Intelligence" />
                                             </div>
 
-                                           
+
                                         </div>
                                         <Divider />
                                         <div style={{ display: 'flex', width: '100%', marginTop: '2%' }}>
@@ -110,7 +99,7 @@ class DomainSet extends Component {
                                                 <FormControlLabel onClick={this.getList} control={<Checkbox checked={this.state.domainsC[2]} name="3" value="Art and Photography" color="primary" />} label="Art and Photography" />
                                             </div>
 
-                                          
+
 
                                         </div>
                                         <Divider />
@@ -119,7 +108,7 @@ class DomainSet extends Component {
                                                 <FormControlLabel onClick={this.getList} control={<Checkbox checked={this.state.domainsC[3]} name="4" value="Education" color="primary" />} label="Education" />
                                             </div>
 
-                                          
+
                                         </div>
                                         <Divider />
                                         <div style={{ display: 'flex', width: '100%', marginTop: '2%' }}>
@@ -127,7 +116,7 @@ class DomainSet extends Component {
                                                 <FormControlLabel onClick={this.getList} control={<Checkbox checked={this.state.domainsC[4]} name="5" value="Fashion" color="primary" />} label="Fashion" />
                                             </div>
 
-                                            
+
                                         </div>
                                         <Divider />
                                         <div style={{ display: 'flex', width: '100%', marginTop: '2%' }}>
@@ -135,7 +124,7 @@ class DomainSet extends Component {
                                                 <FormControlLabel onClick={this.getList} control={<Checkbox checked={this.state.domainsC[5]} name="6" value="Food and Beverages" color="primary" />} label="Food and Beverages" />
                                             </div>
 
-                                        
+
                                         </div>
                                         <Divider />
                                         <div style={{ display: 'flex', width: '100%', marginTop: '2%' }}>
@@ -143,7 +132,7 @@ class DomainSet extends Component {
                                                 <FormControlLabel onClick={this.getList} control={<Checkbox checked={this.state.domainsC[6]} name="7" value="Heathcare" color="primary" />} label="Heathcare" />
                                             </div>
 
-                                          
+
 
                                         </div>
                                         <Divider />
@@ -152,7 +141,7 @@ class DomainSet extends Component {
                                                 <FormControlLabel onClick={this.getList} control={<Checkbox checked={this.state.domainsC[7]} name="8" value="Marketing" color="primary" />} label="Marketing" />
                                             </div>
 
-                                          
+
 
                                         </div>
                                         <Divider />
@@ -161,7 +150,7 @@ class DomainSet extends Component {
                                                 <FormControlLabel onClick={this.getList} control={<Checkbox checked={this.state.domainsC[8]} name="9" value="Sports" color="primary" />} label="Sports" />
                                             </div>
 
-                                          
+
                                         </div>
                                         <Divider />
                                         <div style={{ display: 'flex', width: '100%', marginTop: '2%' }}>
@@ -169,7 +158,7 @@ class DomainSet extends Component {
                                                 <FormControlLabel onClick={this.getList} control={<Checkbox checked={this.state.domainsC[9]} name="10" value="Other" color="primary" />} label="Other" />
                                             </div>
 
-                                           
+
 
                                         </div>
                                         <Divider />
@@ -179,23 +168,6 @@ class DomainSet extends Component {
 
 
 
-                            </div>
-
-                            <div>
-                                <div style={{ marginLeft: '10%', marginRight: 'auto', marginBottom: '5%' }}>
-                                    <RaisedButton
-                                        label="Continue"
-                                        primary={true}
-                                        onClick={this.continue}
-                                        style={{ marginTop: 20 }}
-                                    />
-                                    <RaisedButton
-                                        label="Back"
-                                        primary={false}
-                                        onClick={this.back}
-                                        style={{ marginTop: 20, marginLeft: 20 }}
-                                    />
-                                </div>
                             </div>
                         </CardM>
                     </React.Fragment>

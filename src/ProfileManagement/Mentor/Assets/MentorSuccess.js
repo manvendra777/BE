@@ -19,11 +19,9 @@ class MentorSuccess extends React.Component {
     axios.post('http://54.237.17.61/entityAction/user/createRequestDB', null, { params: { id: myid } })
       .then(res => {
         response = res.data
-
         axios.post('http://54.237.17.61/security/setMentor?userName=' + Cookies.get('temp')).then(res => {
           Cookies.remove('temp');
           Cookies.remove('tempId');
-
           window.location = "/loginPg"
         }) //Mentor
 

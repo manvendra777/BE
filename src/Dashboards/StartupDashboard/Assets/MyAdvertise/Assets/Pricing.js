@@ -19,8 +19,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="http://54.237.17.61/">
+        Kick Startup
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -77,17 +77,18 @@ const tiers = [
   {
     title: 'Free',
     price: '0',
-    description: ['10 users included', '2 GB of storage', 'Help center access', 'Email support'],
+    description: ['10 Advertise', '2 Days advertise time', 'Help center access', 'Email support'],
     buttonText: 'Sign up for free',
     buttonVariant: 'outlined',
   },
   {
     title: 'Pro',
     subheader: 'Most popular',
-    price: '15',
+    price: '300',
     description: [
-      '20 users included',
-      '10 GB of storage',
+      '20 Advertise',
+      '15 Days advertise time',
+      'premium mentors access',
       'Help center access',
       'Priority email support',
     ],
@@ -96,11 +97,12 @@ const tiers = [
   },
   {
     title: 'Enterprise',
-    price: '30',
+    price: '1000',
     description: [
-      '50 users included',
-      '30 GB of storage',
+      '50 Advertise',
+      '30 Days advertise time',
       'Help center access',
+      'premium mentors access',
       'Phone & email support',
     ],
     buttonText: 'Contact us',
@@ -132,35 +134,14 @@ export default function Pricing() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
-        <Toolbar className={classes.toolbar}>
-          <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
-            Company name
-          </Typography>
-          <nav>
-            <Link variant="button" color="textPrimary" href="#" className={classes.link}>
-              Features
-            </Link>
-            <Link variant="button" color="textPrimary" href="#" className={classes.link}>
-              Enterprise
-            </Link>
-            <Link variant="button" color="textPrimary" href="#" className={classes.link}>
-              Support
-            </Link>
-          </nav>
-          <Button href="#" color="primary" variant="outlined" className={classes.link}>
-            Login
-          </Button>
-        </Toolbar>
-      </AppBar>
+
       {/* Hero unit */}
       <Container maxWidth="sm" component="main" className={classes.heroContent}>
         <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
           Pricing
         </Typography>
         <Typography variant="h5" align="center" color="textSecondary" component="p">
-          Quickly build an effective pricing table for your potential customers with this layout.
-          It&apos;s built with default Material-UI components with little customization.
+          Quickly publish an effective advertises for your potential customers with us.
         </Typography>
       </Container>
       {/* End hero unit */}
@@ -181,7 +162,7 @@ export default function Pricing() {
                 <CardContent>
                   <div className={classes.cardPricing}>
                     <Typography component="h2" variant="h3" color="textPrimary">
-                      ${tier.price}
+                      ₹{tier.price}
                     </Typography>
                     <Typography variant="h6" color="textSecondary">
                       /mo
@@ -206,29 +187,9 @@ export default function Pricing() {
         </Grid>
       </Container>
       {/* Footer */}
-      <Container maxWidth="md" component="footer" className={classes.footer}>
-        <Grid container spacing={4} justify="space-evenly">
-          {footers.map((footer) => (
-            <Grid item xs={6} sm={3} key={footer.title}>
-              <Typography variant="h6" color="textPrimary" gutterBottom>
-                {footer.title}
-              </Typography>
-              <ul>
-                {footer.description.map((item) => (
-                  <li key={item}>
-                    <Link href="#" variant="subtitle1" color="textSecondary">
-                      {item}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </Grid>
-          ))}
-        </Grid>
-        <Box mt={5}>
-          <Copyright />
-        </Box>
-      </Container>
+      <Box style={{ marginBottom: '3%' }} mt={5}>
+        <Copyright />
+      </Box>
       {/* End footer */}
     </React.Fragment>
   );

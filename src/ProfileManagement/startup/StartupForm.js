@@ -10,8 +10,8 @@ import DomainSet from './Assets/DomainSet';
 export class StartupForm extends Component {
     constructor(props) {
         super(props);
-    this.setDomain = this.setDomain.bind(this)
-    this.setDomainC = this.setDomainC.bind(this)
+        this.setDomain = this.setDomain.bind(this)
+        this.setDomainC = this.setDomainC.bind(this)
     }
     state = {
         step: 1,
@@ -32,7 +32,7 @@ export class StartupForm extends Component {
         websiteURL: "",
         profession: "",
         domain: [],
-        domainC:[false,false,false,false,false,false,false,false,false,false]
+        domainC: [false, false, false, false, false, false, false, false, false, false]
     }
 
     //proceed to next step
@@ -57,11 +57,11 @@ export class StartupForm extends Component {
         })
     }
 
-    setDomain(domain){
-        this.setState({domain:domain})
+    setDomain(domain) {
+        this.setState({ domain: domain })
     }
-    setDomainC(domainC){
-        this.setState({domainC:domainC})
+    setDomainC(domainC) {
+        this.setState({ domainC: domainC })
     }
 
     render() {
@@ -69,11 +69,11 @@ export class StartupForm extends Component {
 
         const { step } = this.state;
         const { firstName, lastName, age, email, qualification, phone_no, userID, domain, DIPP_no,
-            Address, city, country, postalCode, startupName, startupDescription, websiteURL, profession,domainC } = this.state;
+            Address, city, country, postalCode, startupName, startupDescription, websiteURL, profession, domainC } = this.state;
 
         const values = {
             firstName, lastName, age, email, qualification, phone_no, userID, domain, DIPP_no,
-            Address, city, country, postalCode, startupName, startupDescription, websiteURL, profession,domainC
+            Address, city, country, postalCode, startupName, startupDescription, websiteURL, profession, domainC
         }
 
         switch (step) {

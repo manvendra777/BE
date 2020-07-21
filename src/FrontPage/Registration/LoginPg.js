@@ -114,7 +114,7 @@ class LoginPg extends React.Component {
                       default:
                         Cookies.set('temp', self.state.username)
                         Cookies.set('tempId', id)
-                        window.location = "/profileFrontPg"
+                        window.location = "/register"
                     }
                   })
 

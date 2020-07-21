@@ -69,7 +69,7 @@ export class CommunityForm extends Component {
                     <CommunitySuccess/>
                 )
             }
-
+ 
     }
 }
 
