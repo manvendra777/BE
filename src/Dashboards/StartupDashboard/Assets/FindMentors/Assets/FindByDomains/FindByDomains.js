@@ -12,7 +12,8 @@ import axios from 'axios';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import Button from '@material-ui/core/Button';
-
+import Grid from '@material-ui/core/Grid';
+import Animate from './Assets/Animate'
 class FindByDomains extends Component {
     constructor(props) {
         super(props);
@@ -55,7 +56,7 @@ class FindByDomains extends Component {
             .then(res => {
                 mentors = res.data;
                 mentors.map((item, i) => {
-                    this.setState({ MentorList: [...this.state.MentorList, <MentorCards id={item.id} domain={item.domain} firstname={item.firstName} lastname={item.lastName} about={item.about_yourself} />] })
+                    this.setState({ MentorList: [...this.state.MentorList, <Animate id={item.id} domain={item.domain} firstname={item.firstName} lastname={item.lastName} about={item.about_yourself} />] })
                 })
             })
     }
@@ -63,7 +64,7 @@ class FindByDomains extends Component {
 
         return (
             <div>
-                <Card elevation={5} style={{ width: '84%', marginTop: 10,}}>
+                <Card elevation={5} style={{ width: '84%', marginTop: 10, }}>
                     <Typography variant="h5" color='primary' style={{ margin: 10 }} gutterBottom>
                         Find Mentor
 							</Typography>
@@ -86,15 +87,17 @@ class FindByDomains extends Component {
                                     <FormControlLabel control={<Checkbox onClick={this.getList} name="Sports" value="Sports" color="primary" />} label="Sports" />
                                     <FormControlLabel control={<Checkbox onClick={this.getList} name="Other" value="Other" color="primary" />} label="Other" />
                                 </FormGroup>
-                                <Button style={{ marginTop:30 }} variant="outlined" onClick={this.getListData}>find</Button>
+                                <Button style={{ marginTop: 30 }} variant="outlined" onClick={this.getListData}>find</Button>
                             </FormControl>
                         </div>
                         <Divider orientation="vertical" flexItem />
 
                         <div style={{ height: 700, display: 'block', width: '100%' }}>
-                            <div style={{ background: '#bfbfbf', display: 'flex', flexFlow: 'row wrap', justifyContent: 'space-around', minWidth: '100%', overflowY: 'scroll', height: '100%' }}>
-                                <div>
-                                    {this.state.MentorList.map(child => child)}
+                            <div style={{ background: '#bfbfbf', overflowY: 'scroll', height: '100%' }}>
+                                <div style={{ margin: 10 }}>
+                                    <Grid container spacing={0}>
+                                        {this.state.MentorList.map(child => child)}
+                                    </Grid>
                                 </div>
                             </div>
                         </div>

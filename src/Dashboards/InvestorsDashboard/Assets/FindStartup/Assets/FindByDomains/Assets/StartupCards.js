@@ -46,7 +46,7 @@ class StartupCard extends Component {
     render() {
         const { classes } = this.props;
         const openStartupPage = () => {
-            window.location = "/investorDashboard/TargetStartup/" + this.props.id
+            window.location = "/mentorDashboard/TargetStartup/" + this.props.id
         }
         return (
             <Card className={classes.root}>
@@ -57,14 +57,15 @@ class StartupCard extends Component {
                         title="Contemplative Reptile"
                     />
                     <CardContent >
+                    <Typography gutterBottom variant="h4" component="h2">
+                            {this.props.sname}
+                        </Typography>
                         <Typography gutterBottom variant="h5" component="h2">
                             {this.props.firstname + ' ' + this.props.lastname}
                         </Typography>
+                       
                         <Typography gutterBottom variant="h5" component="h2">
-                            {this.props.startupName}
-                        </Typography>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            {this.props.startupDescription}
+                            {this.props.des}
                         </Typography>
 
                         <div style={{ width: '100%', padding: 0, flex: 1, display: 'flex', overflow: 'hidden', position: 'relative' }}>

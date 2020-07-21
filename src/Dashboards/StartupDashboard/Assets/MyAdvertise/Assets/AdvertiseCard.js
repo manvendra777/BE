@@ -28,7 +28,7 @@ class AdvertiseCard extends Component {
 
     render() {
         return (
-            <div style={{ margin: '1%', width: '45%', height: '50%' }}>
+            <div style={{ margin: 10, width: 355, height: 355 }}>
                 <Card elevation={3} style={{ width: '100%', height: '100%', }}>
                     <CardActionArea style={{ width: '100%', height: '100%', margin: '0%' }} onClick={this.ViewMyAd}>
 

@@ -11,6 +11,8 @@ import CreateAd from './Assets/CreateAd'
 import PayForMore from './Assets/Pricing'
 import Cookies from 'js-cookie'
 import axios from 'axios'
+import Grid from '@material-ui/core/Grid';
+import Animate from './Assets/Animate'
 class MyAvertise extends Component {
     constructor(props) {
         super(props);
@@ -42,7 +44,7 @@ class MyAvertise extends Component {
             .then(res => {
                 ads = res.data;
                 ads.map((item, i) => {
-                    this.setState({ AdList: [...this.state.AdList, <AdvertiseCard id={item.adId} tags={item.tags} description={item.description} image={item.image} header={item.header} feedbackList={item.feedbackList} />] })
+                    this.setState({ AdList: [...this.state.AdList, <Animate id={item.adId} tags={item.tags} description={item.description} image={item.image} header={item.header} feedbackList={item.feedbackList} />] })
                 })
             })
     }
@@ -82,8 +84,10 @@ class MyAvertise extends Component {
                 <Divider />
                 <div >
                     <div style={{ height: 550, display: 'block', width: '100%', }}>
-                        <div style={{ display: 'flex', flexFlow: 'row wrap', justifyContent: 'space-around', minWidth: '100%', overflowY: 'scroll', height: '100%' }}>
+                        <div style={{display: 'flex',overflowY: 'scroll', height: '100%' }}>
+                        <Grid style={{marginLeft:10}} container spacing={0}>
                         {this.state.AdList.map(child => child)}
+                        </Grid>
                         </div>
                     </div>
                 </div>

@@ -13,6 +13,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import Button from '@material-ui/core/Button';
 import Slider from '@material-ui/core/Slider';
+import Grid from '@material-ui/core/Grid';
+import Animate from './Animate'
 class FindByCapacity extends Component {
     constructor(props) {
         super(props);
@@ -55,7 +57,7 @@ class FindByCapacity extends Component {
                 investor = res.data;
                 investor.map((item, i) => {
                     console.log(item);
-                    this.setState({ InvestorList: [...this.state.InvestorList, <InvestorCard id={item.id} domain={item.domain} firstname={item.firstName} lastname={item.lastName} about={"s"} />] })
+                    this.setState({ InvestorList: [...this.state.InvestorList, <Animate id={item.id} domain={item.domain} firstname={item.firstName} lastname={item.lastName} />] })
                 })
             })
     }
@@ -116,9 +118,11 @@ class FindByCapacity extends Component {
                         <Divider orientation="vertical" flexItem />
 
                         <div style={{ height: 550, display: 'block', width: '100%' }}>
-                            <div style={{ background: '#bfbfbf', display: 'flex', flexFlow: 'row wrap', justifyContent: 'space-around', minWidth: '100%', overflow: 'scroll', height: '100%' }}>
-                                <div>
+                            <div style={{ background: '#bfbfbf', overflow: 'scroll', height: '100%' }}>
+                                <div style={{margin:10}}>
+                                <Grid container spacing={0}>
                                     {this.state.InvestorList.map(child => child)}
+                                </Grid>
                                 </div>
                             </div>
                         </div>

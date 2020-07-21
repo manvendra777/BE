@@ -10,7 +10,8 @@ import axios from 'axios';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import Button from '@material-ui/core/Button';
-
+import Grid from '@material-ui/core/Grid'
+import Animate from './Assets/Animate'
 class FindByDomains extends Component {
     constructor(props) {
         super(props);
@@ -53,7 +54,7 @@ class FindByDomains extends Component {
             .then(res => {
                 startups = res.data;
                 startups.map((item, i) => {
-                    this.setState({ StartupList: [...this.state.StartupList, <StartupCards id={item.id} domain={item.domain} firstname={item.firstName} lastname={item.lastName} />] })
+                    this.setState({ StartupList: [...this.state.StartupList, <Animate de={item.startup} id={item.id} domain={item.domain} firstname={item.firstName} sname={item.startupName} lastname={item.lastName} />] })
                 })
             })
     }
@@ -61,11 +62,10 @@ class FindByDomains extends Component {
 
         return (
             <div>
-                <Card elevation={5} style={{ width: '84%', marginTop: 10,}}>
+                <Card elevation={5} style={{ width: '84%', marginTop: 10, }}>
                     <Typography variant="h5" color='primary' style={{ margin: 10 }} gutterBottom>
                         Find Startups
-						
-                        	</Typography>
+							</Typography>
                     <Divider />
                     <div style={{ display: 'flex' }}>
                         <div style={{ margin: 20, padding: 20 }}>
@@ -80,7 +80,7 @@ class FindByDomains extends Component {
                                     <FormControlLabel control={<Checkbox onClick={this.getList} name="Travel" value="Travel" color="primary" />} label="Travel" />
                                     <FormControlLabel control={<Checkbox onClick={this.getList} name="Armed-Vehicles" value="Armed-Vehicles" color="primary" />} label="Armed-Vehicles" />
                                 </FormGroup>
-                                <Button style={{ marginTop: 20 , color: "blue"}} variant="outlined" color="primary" onClick={this.getListData}>find</Button>
+                                <Button style={{ marginTop: 20, color: "blue" }} variant="outlined" color="primary" onClick={this.getListData}>find</Button>
                             </FormControl>
                         </div>
                         <Divider orientation="vertical" flexItem />
@@ -88,7 +88,11 @@ class FindByDomains extends Component {
                         <div style={{ height: 550, display: 'block', width: '100%' }}>
                             <div style={{ background: '#bfbfbf', display: 'flex', flexFlow: 'row wrap', justifyContent: 'space-around', minWidth: '100%', overflow: 'scroll', height: '100%' }}>
                                 <div>
-                                    {this.state.StartupList.map(child => child)}
+                                    <div style={{ margin: 10 }}>
+                                        <Grid container spacing={0}>
+                                            {this.state.StartupList.map(child => child)}
+                                        </Grid>
+                                    </div>
                                 </div>
                             </div>
                         </div>

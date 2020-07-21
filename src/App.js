@@ -21,7 +21,6 @@ import regS from './Registration/Startup/Startup'
 import regM from './Registration/Mentor/Mentor'
 import regI from './Registration/Investor/Investor'
 import regC from './Registration/Community/Community'
-
 function App() {
   const cookieValue = Cookies.get('isLoggedIn')
   const username = document.cookie.split('=')[0];
