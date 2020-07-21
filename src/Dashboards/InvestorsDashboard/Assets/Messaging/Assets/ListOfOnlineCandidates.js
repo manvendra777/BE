@@ -11,11 +11,12 @@ import Card from '@material-ui/core/Card';
 import User from './User';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
-import Cookies from 'js-cookie'
 import { withStyles } from "@material-ui/core/styles";
+import Container from '@material-ui/core/Container';
+
 const useStyles = theme => ({
   root: {
-    width: '15%',
+    width: '20%',
     height: "90%",
     position: "fixed",
     zIndex: 1,
@@ -38,20 +39,18 @@ class ListOfOnlineCandidates extends Component {
 		super(props);
 
 		this.state = {
-			members:[]
+			articles:[]
 		};
   }
   
   componentWillMount(){
-    // Your code here
-    var myid = Cookies.get('id')
-    let mem=[];
-    axios.get(`http://54.237.17.61/entityAction/user/myConnections`,{params: {id: myid}})
-    .then(res => {
-      mem = res.data;
-      mem.map((item,i)=>{
-        console.log(item);
-        this.setState({members:[...this.state.members,<User id={item}/>]})
+    fetch('http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=30c361b9a9cb481fa76cceb1beda8c1b')
+    .then((response)=>{
+      return response.json();
+    })
+    .then((myJson)=>{
+      this.setState({
+        articles: myJson.articles
       })
     })
   };
@@ -64,16 +63,17 @@ class ListOfOnlineCandidates extends Component {
     <div className={classes.root}>
       <Card className={classes.root} variant="outlined">
       <Typography variant="h5" color='primary' style={{ margin: 10 }} gutterBottom>
-                        Members
+                       <center>News</center> 
 							</Typography>
       <Divider/>
-      <div style={{width:'100%',height:'100%',overflow:'hidden'}}>
-      <div style={{overflowY: "auto",width:'100%',height:'100%',paddingRight:'15px',paddingLeft:'0px'}}>
-      <List component="nav" aria-label="main mailbox folders" >
-      {this.state.members.map(child=>child)}
-      </List>
-      </div>
-      </div>
+        <div>{this.state.articles.map((item, index)=>{
+            return(<Card>
+              <Container>
+              <h6 style={{color: "#696969"}}>{item.title}</h6>
+              <img src={item.urlToImage} style={{widht:100, height: 100}}/><br/>
+              <a href={item.url}>Read more</a><nr/></Container>
+            </Card>)
+        })}</div>
 
       </Card>
     </div>

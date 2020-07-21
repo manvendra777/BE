@@ -23,7 +23,7 @@ export default class StartupDashboard extends Component {
 		const theme = createMuiTheme({
 			palette: {
 			  primary:{
-				main:'#FF7d8b',
+				main: '#607d8b',
 			  }
 			}
 		  });
