@@ -93,7 +93,7 @@ class FindByDomains extends Component {
                         <Divider orientation="vertical" flexItem />
 
                         <div style={{ height: 700, display: 'block', width: '100%' }}>
-                            <div style={{ background: '#bfbfbf', overflowY: 'scroll', height: '100%' }}>
+                            <div style={{ background: '#DCDCDC', overflowY: 'scroll', height: '100%' }}>
                                 <div style={{ margin: 10 }}>
                                     <Grid container spacing={0}>
                                         {this.state.MentorList.map(child => child)}

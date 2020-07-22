@@ -16,7 +16,7 @@ import Container from '@material-ui/core/Container';
 
 const useStyles = theme => ({
   root: {
-    width: '20%',
+    width: '17%',
     height: "90%",
     position: "fixed",
     zIndex: 1,
