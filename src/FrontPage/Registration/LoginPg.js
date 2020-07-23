@@ -84,7 +84,7 @@ class LoginPg extends React.Component {
                 axios.get('http://54.237.17.61/security/getType?userName=' + self.state.username)  //Gets the type of user from database.
                   .then(function (response) {
                     var destination = response.data;  //store the type of user in variable
-                    console.log(response.data);
+                    //console.log(response.data);
                     switch (destination) {
                       case "S":
                         Cookies.set('id', id, { expires: 7 })
