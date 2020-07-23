@@ -21,6 +21,8 @@ import regM from './Registration/Mentor/Mentor'
 import regI from './Registration/Investor/Investor'
 import regC from './Registration/Community/Community'
 import Demo from './Demo'
+import FP from './SpringFP/FP'
+
 import { Spring } from 'react-spring/renderprops'
 import Loading from './Animations/Loading'
 function App() {
@@ -34,6 +36,9 @@ function App() {
 
     <div>
       <Router>
+        <ProtectedLogin exact path="/" component={FP} cookieValue={cookieValue} />
+        <ProtectedLogin path="/LoginPg" component={LoginPg} cookieValue={cookieValue} />
+        <ProtectedLogin path="/registrationPg" component={RegistrationPg} cookieValue={cookieValue} />
         <Spring
           from={{ opacity: 0 }}
           to={{ opacity: 1 }}
