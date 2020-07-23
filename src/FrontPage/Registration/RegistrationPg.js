@@ -31,7 +31,7 @@ class RegistrationPg extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         if (this.validateForm()) {
-            console.log(this.state);
+            
 
             var data = {
                 "username": this.state.username,
@@ -40,7 +40,7 @@ class RegistrationPg extends React.Component {
                 "type": this.state.type
             }
 
-            console.log(data);
+            
             var self = this;
             axios.post('http://54.237.17.61/security/addUser', data = data)
                 .then(function (response) {
