@@ -10,19 +10,16 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
   root: {
-    zIndex:1,
-    top:0,
-    left:0,
-    position:'absolute',
+    width:400,
+    height:330,
   },
   media: {
-    height: 140,
+    height: 300,
   },
 });
 
 export default function Cardback(props) {
   const classes = useStyles();
-
   return (
     <Card className={classes.root}>
       <CardActionArea>
