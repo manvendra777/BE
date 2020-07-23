@@ -25,14 +25,14 @@ export default function ButtonAppBar() {
 
   return (
     <div className={classes.root} >
-      <AppBar position="fixed" style= {{background: "#424242"}}>
+      <AppBar position="fixed" style= {{background: "#eeeeee"}}>
         <Toolbar>
          
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6" color="primary" className={classes.title}>
           Kick Start up
           </Typography>
-          <Link to= "./registrationPg"><Button variant="outlined"  style={{color:"white",margin:"5px"}}>Register</Button></Link>
-          <Link to= "./LoginPg"><Button variant="outlined"  style={{color:"white",margin:"5px"}}>Login</Button></Link>
+          <Link to= "./registrationPg"><Button variant="primary" >Register</Button></Link>
+          <Link to= "./LoginPg"><Button variant="primary"  >Login</Button></Link>
         </Toolbar>
       </AppBar>
     </div>

@@ -4,6 +4,7 @@ import {Parallax, ParallaxLayer} from 'react-spring/renderprops-addons'
 import './FrontPage.css'
 import { Container } from '@material-ui/core';
 import Footer from '../FrontPage/Footer'
+import photo from '../Photo/photo1.gif'
 
 // Little helpers ...
 const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
@@ -18,7 +19,7 @@ class SpringFrontPage extends React.Component {
   render() {
     return (
       <div >
-      <Parallax style={{backgroundColor:'#000000'}} ref={ref => (this.parallax = ref)} pages={3}>
+      <Parallax style={{backgroundColor:'#ffffff'}} ref={ref => (this.parallax = ref)} pages={3}>
         <ParallaxLayer offset={1} speed={1} style={{ backgroundColor: '#805E73' }} />
         <ParallaxLayer offset={2} speed={1} style={{ backgroundColor: '#87BCDE' }} />
 
@@ -74,7 +75,7 @@ class SpringFrontPage extends React.Component {
           onClick={() => this.parallax.scrollTo(1)}
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'left'}}>
           
-          <div style={{background: "url("+"https://cdn.dribbble.com/users/477729/screenshots/5774075/stop-copy-pasting-start-collaborating.gif"+")", width: '60%', height: '100%', marginTop: '10%' }} >
+          <div style={{backgroundImage: `url(${photo})`, width: '43%', height: '55%', marginTop: '10%' }} >
           </div>
           <div>
             <Container>
