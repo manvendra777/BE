@@ -1,7 +1,8 @@
 import React from 'react'
-import { Row, Col, Container, Button, Image, Card, figcaption } from 'react-bootstrap'
+import { Row, Col, Container,  Image, Card, figcaption } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Header from './header'
+import Button from '@material-ui/core/Button'
 import Footer from './Footer'
 
 
@@ -11,13 +12,17 @@ class FrontPage extends React.Component {
         this.state = {
             image: null
         };
-        
+
     }
 
     render() {
         return (
             <div>
+
                 <Header />
+
+
+
                 <div style={{ marginTop: 120 }}>
 
                     <Row>

@@ -6,7 +6,6 @@ import { Route, BrowserRouter as Router, Link, Redirect } from 'react-router-dom
 import RegistrationPg from './FrontPage/Registration/RegistrationPg';
 import LoginPg from './FrontPage/Registration/LoginPg'
 import StartupForm from './ProfileManagement/startup/StartupForm'
-
 import CommunityForm from './ProfileManagement/Community/CommunityForm';
 import InvestorForm from './ProfileManagement/Investor/InvestorForm';
 import MentorForm from './ProfileManagement/Mentor/MentorForm'
@@ -21,12 +20,15 @@ import regS from './Registration/Startup/Startup'
 import regM from './Registration/Mentor/Mentor'
 import regI from './Registration/Investor/Investor'
 import regC from './Registration/Community/Community'
+import Demo from './Demo'
+
 function App() {
   const cookieValue = Cookies.get('isLoggedIn')
   const username = document.cookie.split('=')[0];
   const getVal = () => {
     console.log(document.cookie)
   }
+
   return (
 
     <div>
@@ -42,12 +44,13 @@ function App() {
         <ProtectedLogin path="/communityform" component={CommunityForm} cookieValue={cookieValue} />
         */}
 
+
         <ProtectedLogin path="/register" component={Register} cookieValue={cookieValue} />
         <ProtectedLogin path="/registerStartup" component={regS} cookieValue={cookieValue} />
         <ProtectedLogin path="/registerMentor" component={regM} cookieValue={cookieValue} />
         <ProtectedLogin path="/registerInvestor" component={regI} cookieValue={cookieValue} />
         <ProtectedLogin path="/registerCommunity" component={regC} cookieValue={cookieValue} />
-
+        <ProtectedLogin path="/demo" component={Demo}  />
 
         <ProtectedRoute path="/startupDashboard" component={StartupDashboard} cookieValue={cookieValue} />
         <ProtectedRoute path="/MentorDashboard" component={MentorDashboard} cookieValue={cookieValue} />

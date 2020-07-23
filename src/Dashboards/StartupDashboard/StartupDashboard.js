@@ -44,7 +44,7 @@ export default class StartupDashboard extends Component {
 							<Advertise />
 							<div style={{ marginTop: "5%" }}>
 							</div>
-							<div style={{ marginLeft: '18.5%', width: '80%' }}>
+							<div style={{ marginLeft: '18.5%', width: '75%' }}>
 								<Route path="/startupDashboard/Profile" component={Profile} />
 								<Route path="/startupDashboard/Messaging" component={Messaging} />
 								<Route path="/startupDashboard/Connections" component={Connections} />

@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import ButtonM from '@material-ui/core/Button';
 import Cookies from 'js-cookie'
-
+import { Spring } from 'react-spring/renderprops'
 class RegistrationPg extends React.Component {
 
     constructor(props) {
@@ -31,7 +31,7 @@ class RegistrationPg extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         if (this.validateForm()) {
-            console.log(this.state);
+            
 
             var data = {
                 "username": this.state.username,
@@ -40,7 +40,7 @@ class RegistrationPg extends React.Component {
                 "type": this.state.type
             }
 
-            console.log(data);
+            
             var self = this;
             axios.post('http://54.237.17.61/security/addUser', data = data)
                 .then(function (response) {
@@ -49,13 +49,13 @@ class RegistrationPg extends React.Component {
                         self.setState({ exists: true })
                     } else {
                         Cookies.set('temp', data.username);
-                       
+
                         axios.post('http://54.237.17.61/security/getId', data = data)
                             .then(function (response) {
-                                Cookies.set('tempId',response.data)
+                                Cookies.set('tempId', response.data)
                                 window.location = "/register"
                             })
-                            
+
                     }
                 })
             if (this.resetForm) {
@@ -128,39 +128,46 @@ class RegistrationPg extends React.Component {
                         <Image style={{ width: 500, height: 600, marginTop: 0 }} src="assets/registration.png" />
                     </Col>
                     <Col >
-                        <CardM style={{ width: 500, marginTop: 120 }} elevation={10}>
+                        <Spring
+                            from={{ opacity: 0 }}
+                            to={{ opacity: 1 }}>
+                            {props => <div style={props}>  <CardM style={{ width: 500, marginTop: 120 }} elevation={10}>
 
-                            <Container>
+                                <Container>
 
-                                <Form className="RegistrationPg" method="post" onSubmit={this.handleSubmit} style={{ marginBottom: 40, marginTop: 20, marginLeft: 20 }}>
-                                    <Typography variant="h4" gutterBottom style={{ color: "#2F4F4F", fontWeight: "bold" }}>
-                                        Register
-                                    </Typography>
-                                    <div >
-                                        <div>
-                                            <TextField type="username" helperText={this.state.helperUsername} error={this.state.exists} style={{ marginBottom: 20, width: "60%" }} id="standard-basic" label="Enter username" onChange={(event) => { this.setState({ username: event.target.value }) }} />
+                                    <Form className="RegistrationPg" method="post" onSubmit={this.handleSubmit} style={{ marginBottom: 40, marginTop: 20, marginLeft: 20 }}>
+                                        <Typography variant="h4" gutterBottom style={{ color: "#2F4F4F", fontWeight: "bold" }}>
+                                            Register
+                                         </Typography>
+                                        <div >
+                                            <div>
+                                                <TextField type="username" helperText={this.state.helperUsername} error={this.state.exists} style={{ marginBottom: 20, width: "60%" }} id="standard-basic" label="Enter username" onChange={(event) => { this.setState({ username: event.target.value }) }} />
+                                            </div>
+                                            <div>
+                                                <TextField error={this.state.estateM} style={{ marginBottom: 20, width: "60%" }} helperText={this.state.errors.email} id="standard-basic" label="Enter your Email" onChange={(event) => { this.setState({ email: event.target.value }) }} />
+                                            </div>
+                                            <div>
+                                                <TextField type="password" error={this.state.estateP} style={{ marginBottom: 20, width: "60%" }} helperText={this.state.errors.password} id="standard-basic" label="Enter password" onChange={(event) => { this.setState({ password: event.target.value }) }} />
+                                            </div>
                                         </div>
-                                        <div>
-                                            <TextField error={this.state.estateM} style={{ marginBottom: 20, width: "60%" }} helperText={this.state.errors.email} id="standard-basic" label="Enter your Email" onChange={(event) => { this.setState({ email: event.target.value }) }} />
-                                        </div>
-                                        <div>
-                                            <TextField type="password" error={this.state.estateP} style={{ marginBottom: 20, width: "60%" }} helperText={this.state.errors.password} id="standard-basic" label="Enter password" onChange={(event) => { this.setState({ password: event.target.value }) }} />
-                                        </div>
-                                    </div>
 
-                                    <ButtonM type="submit" variant="contained" color="primary" style={{ marginTop: 20, background: "#2196f3" }}>
-                                        Sign up
-                                    </ButtonM>
-                                    <div style={{ display: "flex", marginTop: 20 }}>
-                                        <Typography variant="subtitle1" gutterBottom>Already have an account?</Typography>
-                                        <Link to="./loginPg">
-                                            <Typography style={{ marginLeft: 10 }} variant="subtitle1" gutterBottom>Sign in</Typography>
-                                        </Link>
-                                    </div>
-                                </Form>
-                            </Container>
+                                        <ButtonM type="submit" variant="contained" color="primary" style={{ marginTop: 20, background: "#2196f3" }}>
+                                            Sign up
+                                         </ButtonM>
+                                        <div style={{ display: "flex", marginTop: 20 }}>
+                                            <Typography variant="subtitle1" gutterBottom>Already have an account?</Typography>
+                                            <Link to="./loginPg">
+                                                <Typography style={{ marginLeft: 10 }} variant="subtitle1" gutterBottom>Sign in</Typography>
+                                            </Link>
+                                        </div>
+                                    </Form>
+                                </Container>
 
-                        </CardM>
+                            </CardM>
+                            </div>}
+                        </Spring>
+
+
                     </Col>
                 </Row>
             </div>
