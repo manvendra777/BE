@@ -49,7 +49,6 @@ class FindByDomains extends Component {
     getListData() {
         //54.237.17.61/management/mentor/profile/domain/findbylist?domain=Milk
         console.log(this.state.domains);
-
         this.setState({ MentorList: [] })
         var mentors;
         axios.get(`http://54.237.17.61/management/mentor/profile/domain/findbylist`, { params: { domain: this.state.domains + '' } })
@@ -71,8 +70,6 @@ class FindByDomains extends Component {
                     <Divider />
                     <div style={{ display: 'flex' }}>
                         <div style={{ margin: 20, padding: 20 }}>
-
-
                             <FormControl >
                                 <FormLabel >Domain</FormLabel>
                                 <FormGroup>
@@ -91,7 +88,6 @@ class FindByDomains extends Component {
                             </FormControl>
                         </div>
                         <Divider orientation="vertical" flexItem />
-
                         <div style={{ height: 700, display: 'block', width: '100%' }}>
                             <div style={{ background: '#bfbfbf', overflowY: 'scroll', height: '100%' }}>
                                 <div style={{ margin: 10 }}>
