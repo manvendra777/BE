@@ -21,6 +21,7 @@ import regM from './Registration/Mentor/Mentor'
 import regI from './Registration/Investor/Investor'
 import regC from './Registration/Community/Community'
 import Demo from './Demo'
+import FP from './SpringFP/FP'
 
 function App() {
   const cookieValue = Cookies.get('isLoggedIn')
@@ -33,7 +34,7 @@ function App() {
 
     <div>
       <Router>
-        <ProtectedLogin exact path="/" component={FrontPage} cookieValue={cookieValue} />
+        <ProtectedLogin exact path="/" component={FP} cookieValue={cookieValue} />
         <ProtectedLogin path="/LoginPg" component={LoginPg} cookieValue={cookieValue} />
         <ProtectedLogin path="/registrationPg" component={RegistrationPg} cookieValue={cookieValue} />
         {/*
