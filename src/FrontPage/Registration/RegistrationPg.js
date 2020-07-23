@@ -31,7 +31,7 @@ class RegistrationPg extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         if (this.validateForm()) {
-            
+
 
             var data = {
                 "username": this.state.username,
@@ -40,7 +40,7 @@ class RegistrationPg extends React.Component {
                 "type": this.state.type
             }
 
-            
+
             var self = this;
             axios.post('http://54.237.17.61/security/addUser', data = data)
                 .then(function (response) {
@@ -130,9 +130,9 @@ class RegistrationPg extends React.Component {
                     <Col >
                         <Spring
                             from={{ opacity: 0, transform: 'translate3d(0,-40px,0)' }}
-                            to={{ opacity: 1, transform:'translate3d(0,0px,0)' }}
+                            to={{ opacity: 1, transform: 'translate3d(0,0px,0)' }}
                             config={{ delay: 500 }}>
-                                
+
                             {props => <div style={props}>
                                 <CardM style={{ width: 500, marginTop: 120 }} elevation={10}>
 
@@ -144,13 +144,13 @@ class RegistrationPg extends React.Component {
                                          </Typography>
                                             <div >
                                                 <div>
-                                                    <TextField type="username" helperText={this.state.helperUsername} error={this.state.exists} style={{ marginBottom: 20, width: "60%" }} id="standard-basic" label="Enter username" onChange={(event) => { this.setState({ username: event.target.value }) }} />
+                                                    <TextField type="username" helperText={this.state.helperUsername} error={this.state.exists} style={{ marginBottom: 20, width: "100%" }} id="standard-basic" label="Enter username" onChange={(event) => { this.setState({ username: event.target.value }) }} />
                                                 </div>
                                                 <div>
-                                                    <TextField error={this.state.estateM} style={{ marginBottom: 20, width: "60%" }} helperText={this.state.errors.email} id="standard-basic" label="Enter your Email" onChange={(event) => { this.setState({ email: event.target.value }) }} />
+                                                    <TextField error={this.state.estateM} style={{ marginBottom: 20, width: "100%" }} helperText={this.state.errors.email} id="standard-basic" label="Enter your Email" onChange={(event) => { this.setState({ email: event.target.value }) }} />
                                                 </div>
                                                 <div>
-                                                    <TextField type="password" error={this.state.estateP} style={{ marginBottom: 20, width: "60%" }} helperText={this.state.errors.password} id="standard-basic" label="Enter password" onChange={(event) => { this.setState({ password: event.target.value }) }} />
+                                                    <TextField type="password" error={this.state.estateP} style={{ marginBottom: 20, width: "100%" }} helperText={this.state.errors.password} id="standard-basic" label="Enter password" onChange={(event) => { this.setState({ password: event.target.value }) }} />
                                                 </div>
                                             </div>
 

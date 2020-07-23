@@ -1,10 +1,12 @@
 :root
 {
 	--duration: 1.5s;
-	--container-size: 600px;
+	--container-size: 150px;
 	--box-size: 33px;
-	--box-border-radius: 15%;
+	--box-border-radius: 35%;
 }
+
+
 
 .container
 {
@@ -21,7 +23,7 @@
 	height: var(--box-size);
 	position: relative;
 	display: block;
-	transform-origin: -70% center;
+	transform-origin: -50% center;
 	border-radius: var(--box-border-radius);
 	
 	&:after

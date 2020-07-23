@@ -17,12 +17,13 @@ class Personal extends React.Component {
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={6}>
                         <TextField
-                            required
+                            required= {true}
                             id="firstName"
                             name="firstName"
-                            label="First name"
+                            label="First name mandatory"
                             fullWidth
                             onChange={handleChange('firstName')}
+                            
                             defaultValue={values.firstName}
                             autoComplete="given-name"
                         />

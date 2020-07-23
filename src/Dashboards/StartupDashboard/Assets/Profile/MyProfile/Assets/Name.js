@@ -69,22 +69,23 @@ class Name extends Component {
             startupDescription: "",
             websiteURL: "",
             profession: "",
-            image:null,
+            image: null,
+            showVe: false
         };
 
         this.mapDomain = this.mapDomain.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.toggleModal = this.handleModal.bind(this);
-        this.getImage  = this.getImage.bind(this);
+        this.getImage = this.getImage.bind(this);
 
     }
-    componentWillMount(){
+    componentWillMount() {
         this.getImage()
     }
     getImage() {
         var self = this;
         var mem;
-        axios.get(`http://54.237.17.61/management/startup/photos/`+Cookies.get('id'))
+        axios.get(`http://54.237.17.61/management/startup/photos/` + Cookies.get('id'))
             .then(res => {
                 mem = res.data;
                 self.setState({ image: mem })
@@ -114,6 +115,12 @@ class Name extends Component {
             websiteURL: props.data.websiteURL,
             profession: props.data.profession
         });
+        if (props.data.dipp_no) {
+            if(props.data.dipp_no){
+                this.setState({ showVe: true })
+            }
+            
+        }
     }
 
     mapDomain() {
@@ -157,12 +164,15 @@ class Name extends Component {
             .then(function (response) {
                 console.log(response.data);
             })
-
+            window.location.reload()
     }
     handleChange(e) {
         this.setState({ [e.target.name]: e.target.value });
     }
 
+    checkDipp = () => {
+
+    }
 
 
     render() {
@@ -289,17 +299,7 @@ class Name extends Component {
         );
 
 
-        const checkDipp = () => {
-            console.log(this.state.dipp_no.length > 3);
-            if (this.state.dipp_no) {
-                return (
-                    <div style={{ width: 80, marginLeft: 10, marginTop: 'auto', marginBottom: 'auto' }}>
-                        <div style={{ color: '#424242', display: 'flex' }}>
-                            <div><Checkmark size={19} color='#00b0ff' /></div>
-                        </div>
-                    </div>)
-            }
-        }
+
         return (
             <div className={classes.root}>
                 <Card elevation={3} style={{ display: 'flex', padding: '1%' }}>
@@ -308,7 +308,11 @@ class Name extends Component {
                     </div>
                     <div style={{ marginLeft: '3%' }}>
                         <Typography variant="h4" style={{ color: "#455a64" }} >
-                            <div style={{ display: 'flex' }}> {this.props.data.startupName}{checkDipp()}</div>
+                            <div style={{ display: 'flex' }}> {this.props.data.startupName}{this.state.showVe ? <div>{<div style={{ width: 80, marginLeft: 10, marginTop: 'auto', marginBottom: 'auto' }}>
+                                <div style={{ color: '#424242', display: 'flex' }}>
+                                    <div><Checkmark size={19} color='#00b0ff' /></div>
+                                </div>
+                            </div>}</div> : <div></div>}</div>
                         </Typography>
 
                         <Typography variant="h5" color="primary">

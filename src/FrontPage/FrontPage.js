@@ -32,9 +32,9 @@ class FrontPage extends React.Component {
                             <Row>
                                 <Col md={{ offset: 0 }}>
                                     <h3 style={{ color: "#8076a3", fontFamily: "serif", fontStyle: "italic", marginTop: 5 }}>
-                                        "Courage is not final,<br />
+                                        "Success is not final,<br />
                             failure is not fatal,<br />
-                            It's courage to continue that counts."<br /> </h3>
+                            it's the courage to continue that counts."<br /> </h3>
                                     <h2 style={{ fontWeight: "bold", marginLeft: 180, color: "#705d72", fontFamily: "serif" }}> ...Winston Churchill</h2>
 
                                     <br /><br />
@@ -42,13 +42,13 @@ class FrontPage extends React.Component {
                                     <Row>
                                         <Image style={{ width: 150, height: 150 }} src="assets/startup1.jpeg" roundedCircle />
                                         <Col><h1 style={{ fontFamily: "Arvo", color: "#e85a4f" }}>Startup</h1>
-                                            <p style={{ background: "#e5e5e5", padding: 10 }}>Boost your startup.<br /> Get experienced mentors guide. <br />Get a global market for your showcasing your creativity</p>
+                                            <p style={{ background: "#e5e5e5", padding: 10 }}>Boost your startup.<br /> Get experienced mentors. <br />Get a global market for showcasing your products.</p>
                                         </Col>
                                     </Row>
 
                                     <Row>
                                         <Col><br /><h1 style={{ fontFamily: "Arvo", color: "#e85a4f" }}>Mentor</h1>
-                                            <p style={{ background: "#e5e5e5", padding: 10 }}>Get paid for your knowlege.<br />Get rated and increase your popularity in your domain</p>
+                                            <p style={{ background: "#e5e5e5", padding: 10 }}>Get paid for your knowledge.<br />Get rated and increase your popularity in your domain</p>
                                         </Col>
                                         <Image style={{ width: 150, height: 150 }} src="assets/mentor.png" roundedCircle />
                                     </Row>
