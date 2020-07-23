@@ -129,41 +129,44 @@ class RegistrationPg extends React.Component {
                     </Col>
                     <Col >
                         <Spring
-                            from={{ opacity: 0 }}
-                            to={{ opacity: 1 }}>
-                            {props => <div style={props}>  <CardM style={{ width: 500, marginTop: 120 }} elevation={10}>
+                            from={{ opacity: 0, transform: 'translate3d(0,-40px,0)' }}
+                            to={{ opacity: 1, transform:'translate3d(0,0px,0)' }}
+                            config={{ delay: 500 }}>
+                                
+                            {props => <div style={props}>
+                                <CardM style={{ width: 500, marginTop: 120 }} elevation={10}>
 
-                                <Container>
+                                    <Container>
 
-                                    <Form className="RegistrationPg" method="post" onSubmit={this.handleSubmit} style={{ marginBottom: 40, marginTop: 20, marginLeft: 20 }}>
-                                        <Typography variant="h4" gutterBottom style={{ color: "#2F4F4F", fontWeight: "bold" }}>
-                                            Register
+                                        <Form className="RegistrationPg" method="post" onSubmit={this.handleSubmit} style={{ marginBottom: 40, marginTop: 20, marginLeft: 20 }}>
+                                            <Typography variant="h4" gutterBottom style={{ color: "#2F4F4F", fontWeight: "bold" }}>
+                                                Register
                                          </Typography>
-                                        <div >
-                                            <div>
-                                                <TextField type="username" helperText={this.state.helperUsername} error={this.state.exists} style={{ marginBottom: 20, width: "60%" }} id="standard-basic" label="Enter username" onChange={(event) => { this.setState({ username: event.target.value }) }} />
+                                            <div >
+                                                <div>
+                                                    <TextField type="username" helperText={this.state.helperUsername} error={this.state.exists} style={{ marginBottom: 20, width: "60%" }} id="standard-basic" label="Enter username" onChange={(event) => { this.setState({ username: event.target.value }) }} />
+                                                </div>
+                                                <div>
+                                                    <TextField error={this.state.estateM} style={{ marginBottom: 20, width: "60%" }} helperText={this.state.errors.email} id="standard-basic" label="Enter your Email" onChange={(event) => { this.setState({ email: event.target.value }) }} />
+                                                </div>
+                                                <div>
+                                                    <TextField type="password" error={this.state.estateP} style={{ marginBottom: 20, width: "60%" }} helperText={this.state.errors.password} id="standard-basic" label="Enter password" onChange={(event) => { this.setState({ password: event.target.value }) }} />
+                                                </div>
                                             </div>
-                                            <div>
-                                                <TextField error={this.state.estateM} style={{ marginBottom: 20, width: "60%" }} helperText={this.state.errors.email} id="standard-basic" label="Enter your Email" onChange={(event) => { this.setState({ email: event.target.value }) }} />
-                                            </div>
-                                            <div>
-                                                <TextField type="password" error={this.state.estateP} style={{ marginBottom: 20, width: "60%" }} helperText={this.state.errors.password} id="standard-basic" label="Enter password" onChange={(event) => { this.setState({ password: event.target.value }) }} />
-                                            </div>
-                                        </div>
 
-                                        <ButtonM type="submit" variant="contained" color="primary" style={{ marginTop: 20, background: "#2196f3" }}>
-                                            Sign up
+                                            <ButtonM type="submit" variant="contained" color="primary" style={{ marginTop: 20, background: "#2196f3" }}>
+                                                Sign up
                                          </ButtonM>
-                                        <div style={{ display: "flex", marginTop: 20 }}>
-                                            <Typography variant="subtitle1" gutterBottom>Already have an account?</Typography>
-                                            <Link to="./loginPg">
-                                                <Typography style={{ marginLeft: 10 }} variant="subtitle1" gutterBottom>Sign in</Typography>
-                                            </Link>
-                                        </div>
-                                    </Form>
-                                </Container>
+                                            <div style={{ display: "flex", marginTop: 20 }}>
+                                                <Typography variant="subtitle1" gutterBottom>Already have an account?</Typography>
+                                                <Link to="./loginPg">
+                                                    <Typography style={{ marginLeft: 10 }} variant="subtitle1" gutterBottom>Sign in</Typography>
+                                                </Link>
+                                            </div>
+                                        </Form>
+                                    </Container>
 
-                            </CardM>
+                                </CardM>
                             </div>}
                         </Spring>
 

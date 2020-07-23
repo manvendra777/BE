@@ -1,10 +1,10 @@
 import React from 'react'
-import { Row, Col, Container,  Image, Card, figcaption } from 'react-bootstrap'
+import { Row, Col, Container, Image, Card, figcaption } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Header from './header'
 import Button from '@material-ui/core/Button'
 import Footer from './Footer'
-
+import { Transition } from 'react-spring/renderprops'
 
 class FrontPage extends React.Component {
     constructor(props) {
@@ -45,7 +45,6 @@ class FrontPage extends React.Component {
                                             <p style={{ background: "#e5e5e5", padding: 10 }}>Boost your startup.<br /> Get experienced mentors guide. <br />Get a global market for your showcasing your creativity</p>
                                         </Col>
                                     </Row>
-
 
                                     <Row>
                                         <Col><br /><h1 style={{ fontFamily: "Arvo", color: "#e85a4f" }}>Mentor</h1>
@@ -102,7 +101,7 @@ class FrontPage extends React.Component {
                         <figcaption>Nagesh Salunke</figcaption></center>
                     </Container>
                 </div>
-                <Footer/>
+                <Footer />
             </div >
         );
     }

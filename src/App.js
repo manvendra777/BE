@@ -23,6 +23,8 @@ import regC from './Registration/Community/Community'
 import Demo from './Demo'
 import FP from './SpringFP/FP'
 
+import { Spring } from 'react-spring/renderprops'
+import Loading from './Animations/Loading'
 function App() {
   const cookieValue = Cookies.get('isLoggedIn')
   const username = document.cookie.split('=')[0];
@@ -37,6 +39,29 @@ function App() {
         <ProtectedLogin exact path="/" component={FP} cookieValue={cookieValue} />
         <ProtectedLogin path="/LoginPg" component={LoginPg} cookieValue={cookieValue} />
         <ProtectedLogin path="/registrationPg" component={RegistrationPg} cookieValue={cookieValue} />
+        <Spring
+          from={{ opacity: 0 }}
+          to={{ opacity: 1 }}
+          config={{ duration: 200 }}>
+          {props => <div style={props}><ProtectedLogin exact path="/" component={FrontPage} cookieValue={cookieValue} /></div>}
+        </Spring>
+
+
+        <Spring
+          from={{ opacity: 0 }}
+          to={{ opacity: 1 }}
+          config={{ duration: 200 }}>
+          {props => <div style={props}> <ProtectedLogin path="/LoginPg" component={LoginPg} cookieValue={cookieValue} /></div>}
+        </Spring>
+
+        <Spring
+          from={{ opacity: 0 }}
+          to={{ opacity: 1 }}
+          config={{ duration: 200 }}>
+          {props => <div style={props}> <ProtectedLogin path="/registrationPg" component={RegistrationPg} cookieValue={cookieValue} /></div>}
+        </Spring>
+
+
         {/*
         <ProtectedLogin path="/profileFrontPg" component={Register} cookieValue={cookieValue} />
         <ProtectedLogin path="/startupform" component={StartupForm} cookieValue={cookieValue} />
@@ -46,12 +71,42 @@ function App() {
         */}
 
 
-        <ProtectedLogin path="/register" component={Register} cookieValue={cookieValue} />
-        <ProtectedLogin path="/registerStartup" component={regS} cookieValue={cookieValue} />
-        <ProtectedLogin path="/registerMentor" component={regM} cookieValue={cookieValue} />
-        <ProtectedLogin path="/registerInvestor" component={regI} cookieValue={cookieValue} />
-        <ProtectedLogin path="/registerCommunity" component={regC} cookieValue={cookieValue} />
-        <ProtectedLogin path="/demo" component={Demo}  />
+        <Spring
+          from={{ opacity: 0 }}
+          to={{ opacity: 1 }}
+          config={{ duration: 200 }}>
+          {props => <div style={props}> <ProtectedLogin path="/register" component={Register} cookieValue={cookieValue} /></div>}
+        </Spring>
+
+        <Spring
+          from={{ opacity: 0 }}
+          to={{ opacity: 1 }}
+          config={{ duration: 200 }}>
+          {props => <div style={props}> <ProtectedLogin path="/registerStartup" component={regS} cookieValue={cookieValue} /></div>}
+        </Spring>
+
+        <Spring
+          from={{ opacity: 0 }}
+          to={{ opacity: 1 }}
+          config={{ duration: 200 }}>
+          {props => <div style={props}><ProtectedLogin path="/registerMentor" component={regM} cookieValue={cookieValue} /></div>}
+        </Spring>
+
+        <Spring
+          from={{ opacity: 0 }}
+          to={{ opacity: 1 }}
+          config={{ duration: 200 }}>
+          {props => <div style={props}><ProtectedLogin path="/registerInvestor" component={regI} cookieValue={cookieValue} /></div>}
+        </Spring>
+        <Spring
+          from={{ opacity: 0 }}
+          to={{ opacity: 1 }}
+          config={{ duration: 200 }}>
+          {props => <div style={props}> <ProtectedLogin path="/registerCommunity" component={regC} cookieValue={cookieValue} /></div>}
+        </Spring>
+
+
+
 
         <ProtectedRoute path="/startupDashboard" component={StartupDashboard} cookieValue={cookieValue} />
         <ProtectedRoute path="/MentorDashboard" component={MentorDashboard} cookieValue={cookieValue} />
@@ -59,6 +114,9 @@ function App() {
         <ProtectedRoute path="/CommunityDashboard" component={CommunityDashboard} cookieValue={cookieValue} />
       </Router>
     </div>
+
+
+
   );
 }
 

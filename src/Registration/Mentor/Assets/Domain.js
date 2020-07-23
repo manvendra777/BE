@@ -11,6 +11,18 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import Button from '@material-ui/core/Button';
 import Slider from '@material-ui/core/Slider';
+import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = theme => ({
+    root: {
+      '& .MuiTextField-root': {
+        margin: theme.spacing(1),
+        width: '25ch',
+      },
+    },
+  });
+
 class DomainSet extends Component {
     constructor(props) {
         super(props);
@@ -75,13 +87,14 @@ class DomainSet extends Component {
 
     render() {
         const { values, handleChange } = this.props;
+        const { classes } = this.props;
         return (
             <div>
 
                 <MuiThemeProvider>
-                    <React.Fragment>
+                    <React.Fragment className={classes.root}>
 
-                                <FormGroup>
+                                <FormGroup className>
 
                                     <div style={{ display: 'flex', width: '100%', }}>
                                         <div style={{ width: '40%', }}>
@@ -300,19 +313,17 @@ class DomainSet extends Component {
                                             Incentive Expectation
                                                 </div>
 
-                                        <Slider
-                                            style={{ width: '50%', marginTop: 'auto', marginBottom: 'auto' }}
-                                            defaultValue={this.state.Incentive}
-                                            //getAriaValueText={valuetext}
-                                            aria-labelledby="discrete-slider"
-                                            valueLabelDisplay="auto"
-                                            step={1000}
-                                            marks
-                                            min={0}
-                                            max={10000}
+                                      <TextField
+                                            required
+                                            className ={classes.root}
+                                            id="outlined-required"
+                                            label="Required"
+                                            placeholder = "Amount"
+                                            variant="outlined"
                                             onChange={(e, val) => this.setIncentive(val)}
                                         />
-
+                                    
+                                      
                                     </div>
                                 </FormGroup>
                     </React.Fragment>
@@ -325,4 +336,4 @@ class DomainSet extends Component {
 }
 
 
-export default DomainSet;
+export default withStyles(styles)(DomainSet);
