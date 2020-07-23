@@ -99,10 +99,6 @@ function App() {
           config={{ duration: 200 }}>
           {props => <div style={props}> <ProtectedLogin path="/registerCommunity" component={regC} cookieValue={cookieValue} /></div>}
         </Spring>
-
-
-
-
         <ProtectedRoute path="/startupDashboard" component={StartupDashboard} cookieValue={cookieValue} />
         <ProtectedRoute path="/MentorDashboard" component={MentorDashboard} cookieValue={cookieValue} />
         <ProtectedRoute path="/investorDashboard" component={InvestorDashboard} cookieValue={cookieValue} />

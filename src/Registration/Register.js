@@ -16,7 +16,7 @@ export class Register extends Component {
           <div style={{ marginLeft: 'auto', marginRight: 'auto', display: 'flex' }}>
 
             <Cardo
-            method={this.gotoRegistration}
+              method={this.gotoRegistrations}
               style={{ position: "absolute" }}
               info="Startup mentor is person who help you establish your startup in the very initial days. As a startup founder one may have many things to figure out depending upon what kind of business it is. And founders are not equally skilled in all aspects. So, they seek for person who have done the same."
               type="Mentor"
