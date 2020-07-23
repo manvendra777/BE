@@ -299,7 +299,6 @@ class DomainSet extends Component {
                                         <div style={{ width: '40%', }}>
                                             Incentive Expectation
                                                 </div>
-
                                         <Slider
                                             style={{ width: '50%', marginTop: 'auto', marginBottom: 'auto' }}
                                             defaultValue={this.state.Incentive}
@@ -312,7 +311,6 @@ class DomainSet extends Component {
                                             max={10000}
                                             onChange={(e, val) => this.setIncentive(val)}
                                         />
-
                                     </div>
                                 </FormGroup>
                     </React.Fragment>

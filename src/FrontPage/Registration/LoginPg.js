@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import ButtonM from '@material-ui/core/Button';
 import Cookies from 'js-cookie';
-
+import { Spring } from 'react-spring/renderprops'
 class LoginPg extends React.Component {
 
   constructor(props) {
@@ -108,7 +108,7 @@ class LoginPg extends React.Component {
                         Cookies.set('id', id, { expires: 7 })
                         Cookies.set('isLoggedIn', true, { expires: 7 })
                         Cookies.set('type', destination)
-                        Cookies.set('username',self.state.username)
+                        Cookies.set('username', self.state.username)
                         window.location = "/CommunityDashboard/Home"
                         break;
                       default:
@@ -135,32 +135,39 @@ class LoginPg extends React.Component {
           <Col >
             <Image style={{ width: 500, height: 600 }} src="assets/login.png" />        </Col>
           <Col>
-            <CardM style={{ width: 400, marginTop: 150, marginRight: 100 }} elevation={10}>
-              <Container>
-                <Form onSubmit={this.handleSubmit} method="post" style={{ marginBottom: 40, marginTop: 20, marginLeft: 20 }} >
-                  <Typography variant="h4" gutterBottom style={{ color: "#2F4F4F", fontWeight: "bold" }}>
-                    Sign In
-        </Typography>
-                  <div >
-                    <div>
-                      <TextField error={this.state.estateM} type="text" name="username" style={{ marginBottom: 20, width: "90%" }} id="standard-basic" label="Enter your username" onChange={(event) => { this.setState({ username: event.target.value }) }} />
-                    </div>
-                    <div>
-                      <TextField error={this.state.estateM} helperText={this.state.errors.username} type="password" name="password" style={{ marginBottom: 20, width: "90%" }} id="standard-basic" label="Enter your password" onChange={(event) => { this.setState({ password: event.target.value }) }} />
-                    </div>
-                  </div>
-                  <div className="Login" style={{ marginBottom: 20 }}>
-                    <ButtonM type="submit" variant="contained" color="primary" style={{ marginTop: 20, background: "#2196f3" }}>
-                      Login
-              </ButtonM>
-                    <Link to="/registrationPg">
-                      <Typography style={{ marginTop: 20 }} variant="subtitle1" gutterBottom>Create your Account</Typography>
-                    </Link>
-                  </div>
-                </Form>
-              </Container>
-            </CardM>
+            <Spring
+              from={{ opacity: 0, transform: 'translate3d(0,-40px,0)' }}
+              to={{ opacity: 1, transform: 'translate3d(0,0px,0)' }}
+              config={{ delay: 500 }}>
 
+              {props => <div style={props}>
+                <CardM style={{ width: 400, marginTop: 150, marginRight: 100 }} elevation={10}>
+                  <Container>
+                    <Form onSubmit={this.handleSubmit} method="post" style={{ marginBottom: 40, marginTop: 20, marginLeft: 20 }} >
+                      <Typography variant="h4" gutterBottom style={{ color: "#2F4F4F", fontWeight: "bold" }}>
+                        Sign In
+                      </Typography>
+                      <div >
+                        <div>
+                          <TextField error={this.state.estateM} type="text" name="username" style={{ marginBottom: 20, width: "90%" }} id="standard-basic" label="Enter your username" onChange={(event) => { this.setState({ username: event.target.value }) }} />
+                        </div>
+                        <div>
+                          <TextField error={this.state.estateM} helperText={this.state.errors.username} type="password" name="password" style={{ marginBottom: 20, width: "90%" }} id="standard-basic" label="Enter your password" onChange={(event) => { this.setState({ password: event.target.value }) }} />
+                        </div>
+                      </div>
+                      <div className="Login" style={{ marginBottom: 20 }}>
+                        <ButtonM type="submit" variant="contained" color="primary" style={{ marginTop: 20, background: "#2196f3" }}>
+                          Login
+                        </ButtonM>
+                        <Link to="/registrationPg">
+                          <Typography style={{ marginTop: 20 }} variant="subtitle1" gutterBottom>Create your Account</Typography>
+                        </Link>
+                      </div>
+                    </Form>
+                  </Container>
+                </CardM>
+              </div>}
+            </Spring>
           </Col>
         </Row>
       </div>
