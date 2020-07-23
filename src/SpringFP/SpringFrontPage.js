@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import {Parallax, ParallaxLayer} from 'react-spring/renderprops-addons'
 import './FrontPage.css'
 import { Container } from '@material-ui/core';
+import Footer from '../FrontPage/Footer'
 
 // Little helpers ...
 const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
@@ -101,7 +102,9 @@ class SpringFrontPage extends React.Component {
           onClick={() => this.parallax.scrollTo(0)}>
           <img src={url('clients-main')} style={{ width: '40%' }} />
         </ParallaxLayer>
+        
       </Parallax>
+      
       </div>
     )
   }

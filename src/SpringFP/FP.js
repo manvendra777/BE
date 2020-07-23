@@ -1,17 +1,17 @@
 import React from 'react'
 import Header from './header'
 import SpringFrontPage from './SpringFrontPage'
+import Footer from '../FrontPage/Footer'
 
 class FP extends React.Component {
 
-    render(){
-        return(
+    render() {
+        return (
             <div >
-                <Header/>
+                <Header />
                 <div>
-                <SpringFrontPage/>
+                    <SpringFrontPage />
                 </div>
-
             </div>
         )
     }
