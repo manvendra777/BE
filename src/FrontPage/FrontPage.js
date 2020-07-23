@@ -2,6 +2,8 @@ import React from 'react'
 import { Row, Col, Container, Button, Image, Card, figcaption } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Header from './header'
+import Footer from './Footer'
+
 
 class FrontPage extends React.Component {
     constructor(props) {
@@ -95,6 +97,7 @@ class FrontPage extends React.Component {
                         <figcaption>Nagesh Salunke</figcaption></center>
                     </Container>
                 </div>
+                <Footer/>
             </div >
         );
     }
