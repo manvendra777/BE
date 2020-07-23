@@ -13,7 +13,7 @@ class Recommendation extends Component {
 							</Typography>
                 <Divider/>
                 <div style={{ width: '100%',padding: 0, flex: 1, display: 'flex', overflow: 'auto', }}>
-                    <div style={{ display: 'flex', overflowX: 'scroll',background:'#bfbfbf',padding:10 }}>
+                    <div style={{ display: 'flex', overflowX: 'scroll',background:'#DCDCDC',padding:10 }}>
                         <MentorCard />
                         <MentorCard />
                         <MentorCard />
