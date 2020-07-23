@@ -79,9 +79,9 @@ class SpringFrontPage extends React.Component {
           <div>
             <Container>
           <h3 style={{ color: "#eeeeee", fontFamily: "serif", fontStyle: "italic" }}>
-                            "Courage is not final,<br />
+                            "Success is not final,<br />
                             failure is not fatal,<br />
-                            It's courage to continue that counts."<br /> </h3>
+                            it's the courage to continue that counts."<br /> </h3>
           <h2 style={{ fontWeight: "bold", color: "#705d72", fontFamily: "serif" }}> ...Winston Churchill</h2>
           </Container>
           </div>

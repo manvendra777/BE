@@ -113,6 +113,7 @@ function App() {
           {props => <div style={props}> <ProtectedLogin path="/registerCommunity" component={regC} cookieValue={cookieValue} /></div>}
         </Spring>
 
+        <ProtectedLogin path="/loading" component ={Loading} />
         <ProtectedRoute path="/startupDashboard" component={StartupDashboard} cookieValue={cookieValue} />
         <ProtectedRoute path="/MentorDashboard" component={MentorDashboard} cookieValue={cookieValue} />
         <ProtectedRoute path="/investorDashboard" component={InvestorDashboard} cookieValue={cookieValue} />
