@@ -33,7 +33,7 @@ const useStyles = (theme) => ({
 class Advertise extends Component {
   constructor(props) {
     super(props);
-
+    console.log(Cookies.get("id"));
     this.state = {
       members: [],
       image: null,
