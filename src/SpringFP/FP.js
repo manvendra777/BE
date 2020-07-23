@@ -8,8 +8,7 @@ class FP extends React.Component {
         return(
             <div >
                 <Header/>
-                
-                <div style={{backgroundColor: "pink"}}>
+                <div>
                 <SpringFrontPage/>
                 </div>
 

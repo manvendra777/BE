@@ -16,8 +16,8 @@ const Gray = ({ children }) => <span style={{ color: '#909090' }}>{children}</sp
 class SpringFrontPage extends React.Component {
   render() {
     return (
-      <div style={{ background: 'pink' }}>
-      <Parallax ref={ref => (this.parallax = ref)} pages={3}>
+      <div >
+      <Parallax style={{backgroundColor:'#000000'}} ref={ref => (this.parallax = ref)} pages={3}>
         <ParallaxLayer offset={1} speed={1} style={{ backgroundColor: '#805E73' }} />
         <ParallaxLayer offset={2} speed={1} style={{ backgroundColor: '#87BCDE' }} />
 

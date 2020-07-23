@@ -36,28 +36,30 @@ function App() {
 
     <div>
       <Router>
-        <ProtectedLogin exact path="/" component={FP} cookieValue={cookieValue} />
-        <ProtectedLogin path="/LoginPg" component={LoginPg} cookieValue={cookieValue} />
-        <ProtectedLogin path="/registrationPg" component={RegistrationPg} cookieValue={cookieValue} />
+        {/* <ProtectedLogin exact path="/" component={FP} cookieValue={cookieValue} />*/}
         <Spring
           from={{ opacity: 0 }}
           to={{ opacity: 1 }}
           config={{ duration: 200 }}>
-          {props => <div style={props}><ProtectedLogin exact path="/" component={FrontPage} cookieValue={cookieValue} /></div>}
+
+          {props => <div style={props} ><ProtectedLogin exact path="/" component={FP} cookieValue={cookieValue} /></div>}
         </Spring>
 
 
-        <Spring
-          from={{ opacity: 0 }}
-          to={{ opacity: 1 }}
-          config={{ duration: 200 }}>
-          {props => <div style={props}> <ProtectedLogin path="/LoginPg" component={LoginPg} cookieValue={cookieValue} /></div>}
+        <Spring from={{ opacity: 0 }} to={{ opacity: 1 }} config={{ duration: 200 }} >
+          {
+            props =>
+              <div style={props}>
+                <ProtectedLogin path="/LoginPg" component={LoginPg} cookieValue={cookieValue} />
+              </div>
+          }
         </Spring>
 
         <Spring
           from={{ opacity: 0 }}
           to={{ opacity: 1 }}
           config={{ duration: 200 }}>
+
           {props => <div style={props}> <ProtectedLogin path="/registrationPg" component={RegistrationPg} cookieValue={cookieValue} /></div>}
         </Spring>
 
@@ -75,7 +77,12 @@ function App() {
           from={{ opacity: 0 }}
           to={{ opacity: 1 }}
           config={{ duration: 200 }}>
-          {props => <div style={props}> <ProtectedLogin path="/register" component={Register} cookieValue={cookieValue} /></div>}
+          {
+            props =>
+              <div style={props}>
+                <ProtectedLogin path="/register" component={Register} cookieValue={cookieValue} />
+              </div>
+          }
         </Spring>
 
         <Spring
@@ -98,18 +105,21 @@ function App() {
           config={{ duration: 200 }}>
           {props => <div style={props}><ProtectedLogin path="/registerInvestor" component={regI} cookieValue={cookieValue} /></div>}
         </Spring>
+
         <Spring
           from={{ opacity: 0 }}
           to={{ opacity: 1 }}
           config={{ duration: 200 }}>
           {props => <div style={props}> <ProtectedLogin path="/registerCommunity" component={regC} cookieValue={cookieValue} /></div>}
         </Spring>
+
         <ProtectedRoute path="/startupDashboard" component={StartupDashboard} cookieValue={cookieValue} />
         <ProtectedRoute path="/MentorDashboard" component={MentorDashboard} cookieValue={cookieValue} />
         <ProtectedRoute path="/investorDashboard" component={InvestorDashboard} cookieValue={cookieValue} />
         <ProtectedRoute path="/CommunityDashboard" component={CommunityDashboard} cookieValue={cookieValue} />
+
       </Router>
-    </div>
+    </div >
 
 
 
