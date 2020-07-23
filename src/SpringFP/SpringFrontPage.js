@@ -56,18 +56,11 @@ class SpringFrontPage extends React.Component {
           </ParallaxLayer>
 
           <ParallaxLayer offset={2.5} speed={-0.4} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
-            <img src={url('earth')} style={{ width: '60%' }} />
+            <img src={url('earth')} style={{ width: '30%' }} />
           </ParallaxLayer>
 
-          <ParallaxLayer
-            offset={2}
-            speed={-0.3}
-            style={{
-              backgroundSize: '80%',
-              backgroundPosition: 'center',
-              backgroundImage: url('clients', true)
-            }}
-          />
+        
+        {/* PARALLAX PAGES STARTING FROM HERE ! */}
 
           <ParallaxLayer
             offset={0}
