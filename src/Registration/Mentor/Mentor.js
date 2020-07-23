@@ -133,7 +133,6 @@ class Startup extends Component {
     var self = this;
     axios.put('http://54.237.17.61/management/mentor/profile/add', {
       "id": this.state.id,
-
       "firstName": this.state.firstName,
       "lastName": this.state.lastName,
       "domain": this.state.domain,
