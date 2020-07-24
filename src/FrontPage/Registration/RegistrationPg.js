@@ -8,7 +8,9 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import ButtonM from '@material-ui/core/Button';
 import Cookies from 'js-cookie'
-import { Spring } from 'react-spring/renderprops'
+import { Spring } from 'react-spring/renderprops';
+import {trackPromise} from 'react-promise-tracker';
+
 class RegistrationPg extends React.Component {
 
     constructor(props) {
@@ -25,7 +27,13 @@ class RegistrationPg extends React.Component {
             helperUsername: ''
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.sleep = this.sleep.bind(this);
     }
+
+    sleep(time){
+        return new Promise((resolve)=>setTimeout(resolve,time)
+      )
+  }
 
 
     handleSubmit(event) {
@@ -42,6 +50,9 @@ class RegistrationPg extends React.Component {
 
 
             var self = this;
+
+            trackPromise(
+                this.sleep(2000).then(()=>{
             axios.post('http://54.237.17.61/security/addUser', data = data)
                 .then(function (response) {
                     if (response.data == "exists") {
@@ -58,6 +69,8 @@ class RegistrationPg extends React.Component {
 
                     }
                 })
+            })
+            )
             if (this.resetForm) {
                 console.log("true");
             }

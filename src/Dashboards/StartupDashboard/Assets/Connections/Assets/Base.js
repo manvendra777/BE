@@ -73,7 +73,10 @@ class Base extends Component {
             </List>
           </div>
         </Paper>
+        <div style={{marginTop: 20}}>
         <ConnectedMentor/>
+        </div>
+        
       </div>
     );
   }
