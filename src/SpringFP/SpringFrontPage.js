@@ -9,6 +9,7 @@ import photo2 from '../Photo/photo2.gif'
 import photo3 from '../Photo/photo3.gif'
 import photo4 from '../Photo/photo4.jpg'
 
+
 // Little helpers ...
 const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
 const Pink = ({ children }) => <span style={{ color: '#FF6AC1' }}>{children}</span>
@@ -75,7 +76,7 @@ class SpringFrontPage extends React.Component {
             </div>
             <div>
               <Container>
-                <h3 style={{ color: "#eeeeee", fontFamily: "serif", fontStyle: "italic" }}>
+                <h3 style={{ color: "#757575", fontFamily: "serif", fontStyle: "italic" }}>
                   "Success is not final,<br />
                             failure is not fatal,<br />
                             it's the courage to continue that counts."<br /> </h3>

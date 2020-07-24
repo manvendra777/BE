@@ -84,7 +84,7 @@ class FindByDomains extends Component {
                                     <FormControlLabel control={<Checkbox onClick={this.getList} name="Sports" value="Sports" color="primary" />} label="Sports" />
                                     <FormControlLabel control={<Checkbox onClick={this.getList} name="Other" value="Other" color="primary" />} label="Other" />
                                 </FormGroup>
-                                <Button style={{ marginTop: 30 }} variant="outlined" onClick={this.getListData}>find</Button>
+                                <Button style={{ marginTop: 30 }} variant="contained" color= "primary" onClick={this.getListData}>find</Button>
                             </FormControl>
                         </div>
                         <Divider orientation="vertical" flexItem />

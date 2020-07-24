@@ -22,7 +22,7 @@ import regI from './Registration/Investor/Investor'
 import regC from './Registration/Community/Community'
 import Demo from './Demo'
 import FP from './SpringFP/FP'
-
+import HeaderText from './SpringFP/HeaderText'
 import { Spring } from 'react-spring/renderprops'
 import Loading from './Animations/Loading'
 function App() {
@@ -118,6 +118,7 @@ function App() {
         <ProtectedRoute path="/MentorDashboard" component={MentorDashboard} cookieValue={cookieValue} />
         <ProtectedRoute path="/investorDashboard" component={InvestorDashboard} cookieValue={cookieValue} />
         <ProtectedRoute path="/CommunityDashboard" component={CommunityDashboard} cookieValue={cookieValue} />
+       
 
       </Router>
     </div >

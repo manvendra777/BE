@@ -62,6 +62,7 @@ class Post extends Component {
       mnth: '',
       date: '',
       year: '',
+      title: ''
     };
     this.keyPress = this.keyPress.bind(this)
     this.handleExpandClick = this.handleExpandClick.bind(this)
@@ -158,6 +159,7 @@ class Post extends Component {
         self.setState({ username: ads.userId })
         self.setState({ image: ads.image.data })
         self.setState({ idOfUser: ads.idOfUser })
+        self.setState({title: ads.header})
         console.log(ads);
         ads.commentList.map((item, i) => {
           self.setState({ commentList: [...self.state.commentList, <Comment name={item.userId} comment={item.commentBody} />] })
@@ -211,7 +213,7 @@ class Post extends Component {
         />
         <CardContent>
           <Typography variant="h6" color="textSecondary" component="p">
-            Title : {this.state.post.title}
+            Title : {this.state.title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             Description : {this.state.post.description}
