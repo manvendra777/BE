@@ -29,6 +29,7 @@ class CreatePost extends React.Component {
         super(props);
         this.state = {
             selectedFile: null,
+            adNamme: '',
             description: '',
             title: '',
             domain: props.postDomain
@@ -54,7 +55,7 @@ class CreatePost extends React.Component {
             axios.post('http://54.237.17.61/forum/createDiscussionInfo', {
                 "discussionId": id,
                 "description": this.state.description,
-                "header": this.state.adName,
+                "header": this.state.title,
                 "tag": this.state.domain,
                 "idOfUser":Cookies.get('id'),
                 "userId": Cookies.get('username')
@@ -113,7 +114,6 @@ class CreatePost extends React.Component {
                         <div style={{ marginLeft: '35%', marginRight: 'auto', marginTop: '1%' }}><Typography variant="h6" gutterBottom>
                             Create Post
                         </Typography></div>
-
                         <Divider />
                         <TextField type="text" name="title"
                             label="Title"
