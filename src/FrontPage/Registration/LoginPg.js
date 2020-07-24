@@ -28,7 +28,7 @@ class LoginPg extends React.Component {
       errors: {},
       estateM: false,
       stat: false,
-      showPass:false
+      showPass: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onError = this.onError.bind(this);
@@ -203,18 +203,18 @@ class LoginPg extends React.Component {
                           </div>
                           <div>
                             <TextField
-                           InputProps={{
-                            endAdornment:
-                                <InputAdornment position="end">
+                              InputProps={{
+                                endAdornment:
+                                  <InputAdornment position="end">
                                     <IconButton
-                                    onClick={()=>{this.setState({showPass:!this.state.showPass})}}
-                                        aria-label="toggle password visibility"
-                                        edge="end">
-                                            {this.state.showPass ?    <Visibility /> : <VisibilityOff />}
-                                       
+                                      onClick={() => { this.setState({ showPass: !this.state.showPass }) }}
+                                      aria-label="toggle password visibility"
+                                      edge="end">
+                                      {this.state.showPass ? <Visibility /> : <VisibilityOff />}
+
                                     </IconButton>
-                                </InputAdornment>
-                        }} variant="outlined" error={this.state.estateM} helperText={this.state.errors.username} type={this.state.showPass ? 'text' :'password'} name="password" style={{ marginBottom: 20, width: "100%" }} id="standard-basic" label="Enter your password" onChange={(event) => { this.setState({ password: event.target.value }) }} />
+                                  </InputAdornment>
+                              }} variant="outlined" error={this.state.estateM} helperText={this.state.errors.username} type={this.state.showPass ? 'text' : 'password'} name="password" style={{ marginBottom: 20, width: "100%" }} id="standard-basic" label="Enter your password" onChange={(event) => { this.setState({ password: event.target.value }) }} />
                           </div>
                         </div>
                         <div className="Login" style={{ marginBottom: 20 }}>
