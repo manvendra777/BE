@@ -19,6 +19,7 @@ const useStyles = (theme) => ({
     width: "100%",
     height: "100%",
     overflowY: "scroll",
+    overflowX:'hidden',
     paddingRight:
       "17px" /* Increase/decrease this value for cross-browser compatibility */,
     boxSizing: "content-box" /* So the width will be 100% + 17px */,
@@ -43,7 +44,7 @@ class Base extends Component {
       .get(`http://54.237.17.61/entityAction/user/pendingRequests`, { params: { id: Cookies.get('id') } })
       .then(({ data }) => data);
     this.setState({ invites: data });
-    console.log(data);
+    console.log('hi');
   };
   render() {
     const { classes } = this.props;
