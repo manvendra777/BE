@@ -57,14 +57,15 @@ class StartupCard extends Component {
                         title="Contemplative Reptile"
                     />
                     <CardContent >
-                    <Typography gutterBottom variant="h4" component="h2">
+                        <Typography gutterBottom variant="h5" component="h2">
                             {this.props.sname}
                         </Typography>
-                        <Typography gutterBottom variant="h5" component="h2">
+                        <Typography variant="subtitle1" gutterBottom>
                             {this.props.firstname + ' ' + this.props.lastname}
                         </Typography>
-                       
-                        <Typography gutterBottom variant="h5" component="h2">
+
+                        <Typography variant="body2" color="textSecondary" component="p" >
+
                             {this.props.des}
                         </Typography>
 

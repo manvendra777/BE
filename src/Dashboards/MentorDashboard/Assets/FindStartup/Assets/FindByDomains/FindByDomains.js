@@ -54,7 +54,8 @@ class FindByDomains extends Component {
             .then(res => {
                 startups = res.data;
                 startups.map((item,i) => {
-                    this.setState({ StartupList: [...this.state.StartupList, <Animate key={i} de={item.startup} id={item.id} domain={item.domain} firstname={item.firstName} sname={item.startupName} lastname={item.lastName} />] })
+                    console.log(item);
+                    this.setState({ StartupList: [...this.state.StartupList, <Animate key={i} des={item.startupDescription} id={item.id} domain={item.domain} firstname={item.firstName} sname={item.startupName} lastname={item.lastName} />] })
                 })
             })
     }
