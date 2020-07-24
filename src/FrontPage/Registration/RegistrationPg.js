@@ -12,7 +12,6 @@ import { Spring } from 'react-spring/renderprops';
 import { trackPromise } from 'react-promise-tracker';
 import loginPhoto from '../../Photo/clock_trans.gif'
 class RegistrationPg extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {

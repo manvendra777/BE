@@ -34,7 +34,6 @@ export default function ButtonAppBar() {
     <div className={classes.root} >
       <AppBar position="fixed" style={{ background: "#501d1b" }}>
         <Toolbar>
-
           <Typography variant="h6" className={classes.title}>
             Kick Start up
           </Typography>
