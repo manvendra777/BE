@@ -144,7 +144,7 @@ class LoginPg extends React.Component {
           {props => <div style={props}>
 
 
-            <CardM elevation={5} style={{ display: 'flex', flexWrap: 'wrap' }}>
+            <CardM elevation={10} style={{ display: 'flex', flexWrap: 'wrap' }}>
               <div style={{ display: 'flex', width: '92%' }}>
                 <div style={{ width: '70%', marginLeft: '5%' }}>
                   <Image style={{ marginTop: '1%', marginLeft: '0%', width: '100%' }} src={loginPhoto} />
