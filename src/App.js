@@ -46,15 +46,9 @@ function App() {
         </Spring>
 
 
-        <Spring from={{ opacity: 0 }} to={{ opacity: 1 }} config={{ duration: 200 }} >
-          {
-            props =>
-              <div style={props}>
+        
                 <ProtectedLogin path="/LoginPg" component={LoginPg} cookieValue={cookieValue} />
-              </div>
-          }
-        </Spring>
-
+            
         <Spring
           from={{ opacity: 0 }}
           to={{ opacity: 1 }}
