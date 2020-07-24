@@ -14,7 +14,7 @@ const useStyles = theme => ({
   root: {
     width: "20%",
     position: 'fixed',
-    right: 0
+    right:0
   },
   media: {
     height: 340
@@ -24,7 +24,7 @@ const useStyles = theme => ({
 class AdvertiseRight extends Component {
   constructor(props) {
     super(props);
-    this.child = React.createRef();
+
     this.state = {
       Advert: {},
       image: null,
@@ -37,10 +37,6 @@ class AdvertiseRight extends Component {
     this.sendFeedBack = this.sendFeedBack.bind(this)
   }
 
-  onClick = () => {
-    this.child.current.callMeth();
-  };
-
   componentDidMount() {
 
   }
@@ -48,12 +44,9 @@ class AdvertiseRight extends Component {
 
   }
   componentWillMount() {
-    console.log(this.child);
+
   };
 
-  click = () => {
-    console.log(this.child);
-  }
 
   getAdByDomain() {
     this.setState({ show: false })
@@ -71,7 +64,6 @@ class AdvertiseRight extends Component {
   keyPress = (e) => {
     if (e.keyCode == 13) {
       this.sendFeedBack()
-
     }
   }
 
@@ -84,7 +76,8 @@ class AdvertiseRight extends Component {
     })
       .then(function (response) {
         self.setState({ feedback: '' })
-        self.createNoti()
+        console.log(response.data);
+        alert(response.data)
       })
 
   }
@@ -142,13 +135,8 @@ class AdvertiseRight extends Component {
                 onKeyDown={this.keyPress}
                 onChange={(event) => { this.setState({ feedback: event.target.value }) }}
               />
-
               <Divider />
             </Card>
-
-
-
-            <Button onClick={this.click}>Notification</Button>
           </div>}
         </Spring>
       </div>
