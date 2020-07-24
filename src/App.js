@@ -24,7 +24,6 @@ import Demo from './Demo'
 import FP from './SpringFP/FP'
 import HeaderText from './SpringFP/HeaderText'
 import { Spring } from 'react-spring/renderprops'
-import Loading from './Animations/Loading'
 function App() {
   const cookieValue = Cookies.get('isLoggedIn')
   const username = document.cookie.split('=')[0];
@@ -113,7 +112,7 @@ function App() {
           {props => <div style={props}> <ProtectedLogin path="/registerCommunity" component={regC} cookieValue={cookieValue} /></div>}
         </Spring>
 
-        <ProtectedLogin path="/loading" component ={Loading} />
+      
         <ProtectedRoute path="/startupDashboard" component={StartupDashboard} cookieValue={cookieValue} />
         <ProtectedRoute path="/MentorDashboard" component={MentorDashboard} cookieValue={cookieValue} />
         <ProtectedRoute path="/investorDashboard" component={InvestorDashboard} cookieValue={cookieValue} />

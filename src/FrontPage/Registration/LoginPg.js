@@ -7,7 +7,9 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import ButtonM from '@material-ui/core/Button';
 import Cookies from 'js-cookie';
-import { Spring } from 'react-spring/renderprops'
+import { Spring } from 'react-spring/renderprops';
+import {trackPromise} from 'react-promise-tracker';
+
 class LoginPg extends React.Component {
 
   constructor(props) {
@@ -21,8 +23,13 @@ class LoginPg extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onError = this.onError.bind(this);
+    this.sleep = this.sleep.bind(this);
   }
 
+  sleep(time){
+    return new Promise((resolve)=>setTimeout(resolve,time)
+  )
+}
 
   validateForm() {
     let errors = {};
@@ -73,7 +80,10 @@ class LoginPg extends React.Component {
       password: this.state.password
     }
     var self = this;
+
     if (this.validateForm()) {
+      trackPromise(
+        this.sleep(4000).then(()=>{
       axios.post('http://54.237.17.61/security/login', data = data)   //Login
         .then(function (response) {
           if (response.data) {
@@ -127,6 +137,8 @@ class LoginPg extends React.Component {
             self.onError();
           }
         }).catch(function (error) { self.onError() })
+      })
+      )
     }
   };
 
