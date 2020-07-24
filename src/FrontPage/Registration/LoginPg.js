@@ -109,6 +109,9 @@ class LoginPg extends React.Component {
                         Cookies.set('isLoggedIn', true, { expires: 7 })
                         Cookies.set('type', destination)
                         Cookies.set('username', self.state.username)
+                        if(typeof Cookies.get('ad') == 'undefined'){
+                          Cookies.set('ad', 'Other')
+                        }
                         window.location = "/CommunityDashboard/Home"
                         break;
                       default:
