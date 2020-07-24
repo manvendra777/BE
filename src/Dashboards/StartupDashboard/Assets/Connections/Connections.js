@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import Base from "./Assets/Base"
+import Base from "./Assets/Base";
+import ConnectedMentor from './Assets/ConnectedMentor';
+import ConnectedInvestor from './Assets/ConnectedInvestor'
 class Connections extends Component {
     constructor(props) {
         super(props);
@@ -15,6 +17,7 @@ class Connections extends Component {
 render() {
         return (<div style={{width:'84%'}}>
             <Base m={this.update}/>
+            
             </div>
         );
     }
