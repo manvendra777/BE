@@ -10,7 +10,15 @@ import ButtonM from '@material-ui/core/Button';
 import Cookies from 'js-cookie'
 import { Spring } from 'react-spring/renderprops';
 import { trackPromise } from 'react-promise-tracker';
-import loginPhoto from '../../Photo/clock_trans.gif'
+import registerPhoto from '../../Photo/register.gif'
+import Input from '@material-ui/core/Input';
+import FilledInput from '@material-ui/core/FilledInput';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 class RegistrationPg extends React.Component {
     constructor(props) {
         super(props);
@@ -23,7 +31,8 @@ class RegistrationPg extends React.Component {
             estateM: false,
             estateP: false,
             exists: false,
-            helperUsername: ''
+            helperUsername: '',
+            showPass:false
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.sleep = this.sleep.bind(this);
@@ -148,20 +157,21 @@ class RegistrationPg extends React.Component {
 
 
                                 <div style={{ width: '70%', marginLeft: '5%' }}>
-                                    <Image style={{ marginTop: '1%', marginLeft: '0%', width: '100%' }} src={loginPhoto} />
+                                    <Image style={{ marginTop: '1%', marginLeft: '0%', width: '100%' }} src={registerPhoto} />
                                 </div>
 
 
-                                <div style={{ width: '30%', marginTop: '10%' }}>
+                                <div style={{ width: '30%', marginTop: '15%' }}>
                                     <div>
+                                        {/*
                                         <div>
                                             <Typography style={{ color: '#1c4083' }} variant="h3">
-                                                Welcome Back :)
-                 </Typography>
+                                                Create an account
+                                            </Typography>
                                         </div>
-                                        <Typography style={{ color: '#37474f' }} variant="h5">
+                                            <Typography style={{ color: '#37474f' }} variant="h5">
                                             To keep connected with us please login with your personal information by username and password
-                 </Typography>
+                                        </Typography> */}
                                     </div>
                                     <div style={{ marginTop: 20, width: 500, height: 400, position: 'relative', width: '80%' }} elevation={10}>
 
@@ -170,18 +180,30 @@ class RegistrationPg extends React.Component {
 
                                         <Container>
                                             <Form className="RegistrationPg" method="post" onSubmit={this.handleSubmit} style={{ marginBottom: 40, marginTop: 20, marginLeft: 20 }}>
-                                                <Typography variant="h4" gutterBottom style={{ color: "#2F4F4F", fontWeight: "bold" }}>
+                                                <Typography variant="h4" gutterBottom style={{ color: "#2F4F4F", fontWeight: "bold", }}>
                                                     Register
                                          </Typography>
-                                                <div >
+                                                <div style={{ marginTop: 30 }}>
                                                     <div>
-                                                        <TextField type="username" helperText={this.state.helperUsername} error={this.state.exists} style={{ marginBottom: 20, width: "100%" }} id="standard-basic" label="Enter username" onChange={(event) => { this.setState({ username: event.target.value }) }} />
+                                                        <TextField variant="outlined" type="username" helperText={this.state.helperUsername} error={this.state.exists} style={{ marginBottom: 20, width: "100%" }} id="standard-basic" label="Enter username" onChange={(event) => { this.setState({ username: event.target.value }) }} />
                                                     </div>
                                                     <div>
-                                                        <TextField error={this.state.estateM} style={{ marginBottom: 20, width: "100%" }} helperText={this.state.errors.email} id="standard-basic" label="Enter your Email" onChange={(event) => { this.setState({ email: event.target.value }) }} />
+                                                        <TextField variant="outlined" error={this.state.estateM} style={{ marginBottom: 20, width: "100%" }} helperText={this.state.errors.email} id="standard-basic" label="Enter your Email" onChange={(event) => { this.setState({ email: event.target.value }) }} />
                                                     </div>
                                                     <div>
-                                                        <TextField type="password" error={this.state.estateP} style={{ marginBottom: 20, width: "100%" }} helperText={this.state.errors.password} id="standard-basic" label="Enter password" onChange={(event) => { this.setState({ password: event.target.value }) }} />
+                                                        <TextField variant="outlined" type={this.state.showPass ? 'text' :'password'} error={this.state.estateP} style={{ marginBottom: 20, width: "100%" }} helperText={this.state.errors.password} id="standard-basic" label="Enter password" onChange={(event) => { this.setState({ password: event.target.value }) }}
+                                                            InputProps={{
+                                                                endAdornment:
+                                                                    <InputAdornment position="end">
+                                                                        <IconButton
+                                                                        onClick={()=>{this.setState({showPass:!this.state.showPass})}}
+                                                                            aria-label="toggle password visibility"
+                                                                            edge="end">
+                                                                                {this.state.showPass ?    <Visibility /> : <VisibilityOff />}
+                                                                           
+                                                                        </IconButton>
+                                                                    </InputAdornment>
+                                                            }} />
                                                     </div>
                                                 </div>
 

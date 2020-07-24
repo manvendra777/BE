@@ -10,7 +10,14 @@ import Cookies from 'js-cookie';
 import { Spring } from 'react-spring/renderprops';
 import { trackPromise } from 'react-promise-tracker';
 import loginPhoto from '../../Photo/clock_trans.gif'
-
+import Input from '@material-ui/core/Input';
+import FilledInput from '@material-ui/core/FilledInput';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 class LoginPg extends React.Component {
 
   constructor(props) {
@@ -20,7 +27,8 @@ class LoginPg extends React.Component {
       password: null,
       errors: {},
       estateM: false,
-      stat: false
+      stat: false,
+      showPass:false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onError = this.onError.bind(this);
@@ -168,8 +176,8 @@ class LoginPg extends React.Component {
                 <div style={{ width: '70%', marginLeft: '5%' }}>
                   <Image style={{ marginTop: '1%', marginLeft: '0%', width: '100%' }} src={loginPhoto} />
                 </div>
-                
-                
+
+
                 <div style={{ width: '30%', marginTop: '10%' }}>
                   <div>
                     <div>
@@ -182,8 +190,8 @@ class LoginPg extends React.Component {
                  </Typography>
                   </div>
                   <div style={{ marginTop: 20, width: 500, height: 400, position: 'relative', width: '80%' }} elevation={10}>
-                   
-                   
+
+
                     <Container style={{ marginTop: 'auto', marginBottom: 'auto', position: 'absolute', top: '7%', }}>
                       <Form onSubmit={this.handleSubmit} method="post" style={{ marginBottom: 40, marginTop: 20, marginLeft: 20 }} >
                         <Typography variant="h4" gutterBottom style={{ color: "#2F4F4F", fontWeight: "bold" }}>
@@ -191,10 +199,22 @@ class LoginPg extends React.Component {
                       </Typography>
                         <div >
                           <div>
-                            <TextField error={this.state.estateM} type="text" name="username" style={{ marginBottom: 20, width: "100%" }} id="standard-basic" label="Enter your username" onChange={(event) => { this.setState({ username: event.target.value }) }} />
+                            <TextField variant="outlined" error={this.state.estateM} type="text" name="username" style={{ marginBottom: 20, width: "100%" }} id="standard-basic" label="Enter your username" onChange={(event) => { this.setState({ username: event.target.value }) }} />
                           </div>
                           <div>
-                            <TextField error={this.state.estateM} helperText={this.state.errors.username} type="password" name="password" style={{ marginBottom: 20, width: "100%" }} id="standard-basic" label="Enter your password" onChange={(event) => { this.setState({ password: event.target.value }) }} />
+                            <TextField
+                           InputProps={{
+                            endAdornment:
+                                <InputAdornment position="end">
+                                    <IconButton
+                                    onClick={()=>{this.setState({showPass:!this.state.showPass})}}
+                                        aria-label="toggle password visibility"
+                                        edge="end">
+                                            {this.state.showPass ?    <Visibility /> : <VisibilityOff />}
+                                       
+                                    </IconButton>
+                                </InputAdornment>
+                        }} variant="outlined" error={this.state.estateM} helperText={this.state.errors.username} type={this.state.showPass ? 'text' :'password'} name="password" style={{ marginBottom: 20, width: "100%" }} id="standard-basic" label="Enter your password" onChange={(event) => { this.setState({ password: event.target.value }) }} />
                           </div>
                         </div>
                         <div className="Login" style={{ marginBottom: 20 }}>
@@ -209,7 +229,7 @@ class LoginPg extends React.Component {
                     </Container>
 
 
-                    
+
                   </div>
                 </div>
 
@@ -220,7 +240,7 @@ class LoginPg extends React.Component {
 
 
             </CardM>
-          
+
           </div>
 
           }
