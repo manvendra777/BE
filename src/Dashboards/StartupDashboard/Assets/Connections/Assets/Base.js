@@ -9,6 +9,8 @@ import Invitation from "./Invitation";
 import axios from "axios";
 import Connections from "../Connections";
 import Cookies from 'js-cookie'
+import ConnectedMentor from './ConnectedMentor';
+
 const useStyles = (theme) => ({
   root: {
   },
@@ -71,6 +73,7 @@ class Base extends Component {
             </List>
           </div>
         </Paper>
+        <ConnectedMentor/>
       </div>
     );
   }
