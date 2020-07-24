@@ -53,8 +53,9 @@ class FindByDomains extends Component {
         axios.get(`http://54.237.17.61/management/startup/profile/domain/findbylist`, { params: { domain: this.state.domains + '' } })
             .then(res => {
                 startups = res.data;
-                startups.map((item, i) => {
-                    this.setState({ StartupList: [...this.state.StartupList, <Animate de={item.startup} id={item.id} domain={item.domain} firstname={item.firstName} sname={item.startupName} lastname={item.lastName} />] })
+                startups.map((item,i) => {
+                    console.log(item);
+                    this.setState({ StartupList: [...this.state.StartupList, <Animate key={i} des={item.startupDescription} id={item.id} domain={item.domain} firstname={item.firstName} sname={item.startupName} lastname={item.lastName} />] })
                 })
             })
     }
