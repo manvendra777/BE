@@ -4,7 +4,10 @@ import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
 import './FrontPage.css'
 import { Container } from '@material-ui/core';
 import Footer from '../FrontPage/Footer'
-import photo from '../Photo/photo1.gif'
+import photo1 from '../Photo/photo1.gif'
+import photo2 from '../Photo/photo2.gif'
+import photo3 from '../Photo/photo3.gif'
+import photo4 from '../Photo/photo4.jpg'
 
 
 // Little helpers ...
@@ -60,8 +63,8 @@ class SpringFrontPage extends React.Component {
             <img src={url('earth')} style={{ width: '30%' }} />
           </ParallaxLayer>
 
-        
-        {/* PARALLAX PAGES STARTING FROM HERE ! */}
+
+          {/* PARALLAX PAGES STARTING FROM HERE ! */}
 
           <ParallaxLayer
             offset={0}
@@ -69,7 +72,7 @@ class SpringFrontPage extends React.Component {
             onClick={() => this.parallax.scrollTo(1)}
             style={{ display: 'flex', alignItems: 'center', justifyContent: 'left' }}>
 
-            <div style={{ backgroundImage: `url(${photo})`, width: '43%', height: '55%', marginTop: '10%' }} >
+            <div style={{backgroundRepeat:'no-repeat', backgroundImage: `url(${photo1})`,backgroundSize:'contain', width: '45%', height: '55%', marginTop: '10%' }} >
             </div>
             <div>
               <Container>
@@ -87,7 +90,9 @@ class SpringFrontPage extends React.Component {
             speed={0.1}
             onClick={() => this.parallax.scrollTo(2)}
             style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <img src={url('bash')} style={{ width: '40%' }} />
+            {/*<img src={url('bash')} style={{ width: '40%' }} />*/}
+
+            <div style={{ backgroundRepeat:'no-repeat',backgroundColor:'white',backgroundImage: `url(${photo2})`, backgroundSize:'contain',width: '43%', height: '55%', borderRadius: 25 }} ></div>
           </ParallaxLayer>
 
           <ParallaxLayer
@@ -95,7 +100,8 @@ class SpringFrontPage extends React.Component {
             speed={-0}
             style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             onClick={() => this.parallax.scrollTo(3)}>
-            <img src={url('clients-main')} style={{ width: '40%' }} />
+            {/* <img src={url('clients-main')} style={{ width: '40%' }} />*/}
+            <div style={{backgroundRepeat:'no-repeat',backgroundSize:'contain', backgroundColor:'white',backgroundImage: `url(${photo3})`,width: '43%', height: '55%', borderRadius: 25 }} ></div>
           </ParallaxLayer>
 
           <ParallaxLayer
@@ -103,7 +109,10 @@ class SpringFrontPage extends React.Component {
             speed={-0}
             style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             onClick={() => this.parallax.scrollTo(4)}>
-            <img src={url('clients-main')} style={{ width: '40%' }} />
+            {/* <img src={url('clients-main')} style={{ width: '40%' }} />*/}
+            <div  >
+              <img style={{ width: '43%', height: '55%', borderRadius: 25}} src='assets/photo4.jpg'></img>
+            </div>
           </ParallaxLayer>
 
           <ParallaxLayer
@@ -111,7 +120,8 @@ class SpringFrontPage extends React.Component {
             speed={-0}
             style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             onClick={() => this.parallax.scrollTo(5)}>
-            <img src={url('clients-main')} style={{ width: '40%' }} />
+            {/* <img src={url('clients-main')} style={{ width: '40%' }} />*/}
+            <div style={{ backgroundSize:'contain', backgroundColor:'white',backgroundImage: `url(${photo1})`, width: '43%', height: '55%', borderRadius: 25 }} ></div>
           </ParallaxLayer>
 
           <ParallaxLayer
@@ -119,7 +129,8 @@ class SpringFrontPage extends React.Component {
             speed={-0}
             style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             onClick={() => this.parallax.scrollTo(0)}>
-            <img src={url('clients-main')} style={{ width: '40%' }} />
+           {/* <img src={url('clients-main')} style={{ width: '40%' }} />*/}
+           <div style={{ backgroundSize:'contain', backgroundColor:'white',backgroundImage: `url(${photo1})`, width: '43%', height: '55%', borderRadius: 25 }} ></div>
           </ParallaxLayer>
 
         </Parallax>

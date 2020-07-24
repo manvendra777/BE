@@ -43,7 +43,6 @@ export default class StartupDashboard extends Component {
 						<div style={{ margin: '75px', marginLeft: '10px' }}>
 							<Advertise domain={Cookies.get('ad')} />
 							<AdvertiseRight domain={Cookies.get('ad')} />
-							<AdvertiseRight domain={Cookies.get('ad')} />
 							<div style={{ marginTop: "5%" }}>
 							</div>
 							<div style={{ marginLeft: '18.5%', width: '80%' }}>
