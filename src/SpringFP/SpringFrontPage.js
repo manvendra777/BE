@@ -6,6 +6,7 @@ import { Container } from '@material-ui/core';
 import Footer from '../FrontPage/Footer'
 import photo from '../Photo/photo1.gif'
 
+
 // Little helpers ...
 const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
 const Pink = ({ children }) => <span style={{ color: '#FF6AC1' }}>{children}</span>
@@ -72,7 +73,7 @@ class SpringFrontPage extends React.Component {
             </div>
             <div>
               <Container>
-                <h3 style={{ color: "#eeeeee", fontFamily: "serif", fontStyle: "italic" }}>
+                <h3 style={{ color: "#757575", fontFamily: "serif", fontStyle: "italic" }}>
                   "Success is not final,<br />
                             failure is not fatal,<br />
                             it's the courage to continue that counts."<br /> </h3>
