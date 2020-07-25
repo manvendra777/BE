@@ -5,21 +5,7 @@
     padding: 0;
     background-color: #253237;
 }
-.container > div > div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #253237;
-  }
 
-  .text {
-    pointer-events: none;
-    justify-content: start !important;
-    font-family: 'Kanit', sans-serif;
-    line-height: 0px;
-    text-transform: uppercase;
-  }
-  
   .number {
     font-size: 450px;
     color: #373c4c;

@@ -15,6 +15,8 @@ import Company from './Assets/Professional';
 import Review from './Assets/Review';
 import Cookies from 'js-cookie'
 import axios from 'axios'
+import plant from './Assets/plants.png'
+import moon from './Assets/moon.png'
 import { render } from '@testing-library/react';
 
 function Copyright() {
@@ -92,7 +94,7 @@ class Startup extends Component {
   componentWillMount() {
     document.body.style.backgroundColor = "#fbe9e7";
     this.setId();
-    
+
   }
   setId() {
     this.setState({ id: Cookies.get('tempId') })
@@ -188,6 +190,14 @@ class Startup extends Component {
           </Typography>
           </Toolbar>
         </AppBar>
+        <div style={{ overflowX: 'hidden', display: 'inline-block', opacity: 1, position: 'absolute', top: 0, bottom: 0, zIndex: -100, width: '100%' }}>
+          <img style={{ width: '17%', marginTop: '3%', marginLeft: '86%' }} src={moon}></img>
+          <div style={{ display: 'flex' }}>
+            <img style={{ width: '40%', marginTop: '-2%', marginLeft: '12%' }} src={plant}></img>
+            <img style={{ width: '40%', marginTop: '-2%', marginLeft: '-8%', }} src={plant}></img>
+          </div>
+        </div>
+
         <main className={classes.layout}>
           <Paper className={classes.paper}>
             <Typography component="h1" variant="h4" align="center">

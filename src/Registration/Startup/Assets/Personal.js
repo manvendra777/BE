@@ -4,26 +4,27 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-
+import { Spring } from 'react-spring/renderprops'
 class Personal extends React.Component {
 
     render() {
         const { values, handleChange } = this.props;
         return (
+
             <React.Fragment>
                 <Typography variant="h6" gutterBottom>
                     Personal details
-      </Typography>
+                        </Typography>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={6}>
                         <TextField
-                            required= {true}
+                            required={true}
                             id="firstName"
                             name="firstName"
                             label="First name mandatory"
                             fullWidth
                             onChange={handleChange('firstName')}
-                            
+
                             defaultValue={values.firstName}
                             autoComplete="given-name"
                         />
@@ -101,6 +102,8 @@ class Personal extends React.Component {
                     </Grid>
                 </Grid>
             </React.Fragment>
+
+
         );
     }
 }
