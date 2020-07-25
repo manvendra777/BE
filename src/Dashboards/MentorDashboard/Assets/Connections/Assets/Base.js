@@ -11,6 +11,7 @@ import Invitation from "./Invitation";
 import axios from "axios";
 import Connections from "../Connections";
 import Cookies from "js-cookie";
+
 const useStyles = (theme) => ({
   root: {},
   listSection: {
@@ -46,7 +47,7 @@ class Base extends Component {
       })
       .then(({ data }) => data);
     this.setState({ invites: data });
-    console.log(data);
+    console.log(this.state.invites);
   };
 
   render() {

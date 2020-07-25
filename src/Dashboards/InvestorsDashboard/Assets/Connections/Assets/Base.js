@@ -9,6 +9,7 @@ import RefreshIcon from "@material-ui/icons/Refresh";
 import Invitation from "./Invitation";
 import axios from "axios";
 import Connections from "../Connections";
+import Getname from "./Getname";
 import Cookies from "js-cookie";
 const useStyles = (theme) => ({
   root: {},
@@ -77,12 +78,7 @@ class Base extends Component {
           <div className={classes.notiList}>
             <List className={classes.listSection}>
               {this.state.invites.map((item) => (
-                <Invitation
-                  key={item}
-                  name={item}
-                  id={item}
-                  de={this.getUsers}
-                />
+                <Getname dem={this.getUsers} id={item} />
               ))}
             </List>
           </div>
