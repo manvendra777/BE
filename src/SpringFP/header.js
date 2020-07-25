@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {Link} from 'react-router-dom'
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -22,17 +23,22 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonAppBar() {
   const classes = useStyles();
-
+  const gotoReg = () => {
+    window.location = "registrationPg"
+  }
+  const gotoLog = () => {
+    window.location = "LoginPg"
+  }
   return (
     <div className={classes.root} >
-      <AppBar position="fixed" style= {{background: "#eeeeee"}}>
+      <AppBar position="fixed" style={{ background: "#eeeeee" }}>
         <Toolbar>
-         
+
           <Typography variant="h6" color="primary" className={classes.title}>
             Kick Start Up
           </Typography>
-          <Link to= "./registrationPg"><Button variant="primary" >Register</Button></Link>
-          <Link to= "./LoginPg"><Button variant="primary"  >Login</Button></Link>
+          <Button variant="primary" onClick={gotoReg} >Register</Button>
+          <Button variant="primary" onClick={gotoLog} >Login</Button>
         </Toolbar>
       </AppBar>
     </div>

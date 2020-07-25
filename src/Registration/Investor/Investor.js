@@ -90,7 +90,9 @@ class Startup extends Component {
   }
 
   componentWillMount() {
+    document.body.style.backgroundColor = "#fbe9e7";
     this.setId();
+    
   }
   setId() {
     this.setState({ id: Cookies.get('tempId') })

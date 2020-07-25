@@ -103,6 +103,7 @@ class Startup extends Component {
   }
 
   componentWillMount() {
+    document.body.style.backgroundColor = "#fbe9e7";
     this.setId();
   }
   setId() {
@@ -211,8 +212,9 @@ class Startup extends Component {
       this.setState({ activeStep: this.state.activeStep - 1 });
     };
     return (
+     
       <React.Fragment>
-        <CssBaseline />
+        <CssBaseline  />
         <AppBar position="absolute" color="default" className={classes.appBar}>
           <Toolbar>
             <Typography variant="h6" color="inherit" noWrap>
@@ -221,7 +223,7 @@ class Startup extends Component {
           </Toolbar>
         </AppBar>
         <main className={classes.layout}>
-          <Paper className={classes.paper}>
+          <Paper elevation={10} className={classes.paper}>
             <Typography component="h1" variant="h4" align="center">
               Registration
           </Typography>

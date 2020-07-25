@@ -10,7 +10,7 @@ function Cardo(props) {
     config: { mass: 5, tension: 500, friction: 80 },
   });
   return (
-    <div onClick={props.method} style={{ position: "relative", margin: 15 }}>
+    <div onClick={props.method} style={{ position: "relative", margin: 20 }}>
       <div
         onMouseEnter={() => set((state) => !state)}
         onMouseLeave={() => set((state) => !state)}
