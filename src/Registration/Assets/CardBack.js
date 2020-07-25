@@ -10,21 +10,26 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
   root: {
-    width: 300,
-    height: 250,
+    width: 350,
+    height: 350,
   },
   media: {
-    height: 190,
+    height: 250,
   },
 });
 
 export default function Cardback(props) {
   const classes = useStyles();
   return (
-    <Card elevation={5} className={classes.root}>
-      <CardActionArea>
-        <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
+    <Card style={{
+      overflow: 'hidden',
+      position: 'relative',
+      width: '100 %',
+    }} elevation={5} className={classes.root}>
+
+      <CardActionArea style={{height:'100%'}}>
+        <CardContent >
+          <Typography variant="body1" color="textSecondary" component="p">
             {props.info}
           </Typography>
         </CardContent>

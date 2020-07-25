@@ -9,7 +9,13 @@ import RefreshIcon from "@material-ui/icons/Refresh";
 import Invitation from "./Invitation";
 import axios from "axios";
 import Connections from "../Connections";
+<<<<<<< HEAD
 import Cookies from "js-cookie";
+=======
+import Cookies from 'js-cookie'
+import ConnectedMentor from './ConnectedMentor';
+
+>>>>>>> a9b5b0c648616518167a83cbcf5564840c38081a
 const useStyles = (theme) => ({
   root: {},
   hd: {
@@ -90,6 +96,10 @@ class Base extends Component {
             </List>
           </div>
         </Paper>
+        <div style={{marginTop: 20}}>
+        <ConnectedMentor/>
+        </div>
+        
       </div>
     );
   }

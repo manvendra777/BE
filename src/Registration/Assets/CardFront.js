@@ -10,11 +10,11 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
   root: {
-    width: 300,
-    height: 250,
+    width: 350,
+    height: 350,
   },
   media: {
-    height: 190,
+    height: 290,
   },
 });
 
@@ -30,14 +30,16 @@ export default function Cards(props) {
           title="Contemplative Reptile"
         />
         <CardContent>
-          <Typography
-            gutterBottom
-            variant="h5"
-            component="h2"
-            style={{ margin: 5 }}
-          >
-            {props.type}
-          </Typography>
+          <div style={{ display: 'flex', textAlign: 'center' }}>
+            <Typography
+              style={{ flexGrow: 1, align: 'center',color:'#37474f' }}
+              gutterBottom
+              variant="h4"
+             
+            >
+              {props.type}
+            </Typography>
+          </div>
         </CardContent>
       </CardActionArea>
     </Card>

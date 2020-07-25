@@ -4,6 +4,7 @@ import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import axios from "axios";
 import { withStyles } from "@material-ui/core/styles";
+<<<<<<< HEAD
 import CardMedia from "@material-ui/core/CardMedia";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
@@ -11,6 +12,16 @@ import Cookies from "js-cookie";
 import ReactInterval from "react-interval";
 import { Spring } from "react-spring/renderprops";
 const useStyles = (theme) => ({
+=======
+import CardMedia from '@material-ui/core/CardMedia';
+import TextField from '@material-ui/core/TextField';
+import { Button } from '@material-ui/core';
+import Cookies from 'js-cookie'
+import ReactInterval from 'react-interval';
+import { Spring } from 'react-spring/renderprops'
+import { ToastContainer, toast } from 'react-toastify';
+const useStyles = theme => ({
+>>>>>>> a9b5b0c648616518167a83cbcf5564840c38081a
   root: {
     width: "20%",
     position: "fixed",
@@ -71,10 +82,25 @@ class AdvertiseRight extends Component {
         adId: self.state.adId,
       })
       .then(function (response) {
+<<<<<<< HEAD
         self.setState({ feedback: "" });
         console.log(response.data);
         alert(response.data);
       });
+=======
+        self.setState({ feedback: '' })
+        toast.success("feedback sent successfully !", {
+          position: "bottom-right",
+          autoClose: 7000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })
+      })
+
+>>>>>>> a9b5b0c648616518167a83cbcf5564840c38081a
   }
 
   componentWillMount() {
@@ -112,6 +138,7 @@ class AdvertiseRight extends Component {
         />
 
         <Spring
+<<<<<<< HEAD
           from={{ opacity: 0, transform: "translate3d(-100px,0px,0)" }}
           to={{
             opacity: this.state.show ? 1 : 0,
@@ -165,7 +192,47 @@ class AdvertiseRight extends Component {
               </Card>
             </div>
           )}
+=======
+          from={{ opacity: 0, transform: 'translate3d(-100px,0px,0)' }}
+          to={{ opacity: this.state.show ? 1 : 0, transform: this.state.show ? 'translate3d(0,0px,0)' : 'translate3d(-100px,0px,0)' }}
+          config={{ delay: 500 }}>
+          {props => <div style={props}>
+            <Card onMouseOver={this.pauseAds} onMouseOut={this.startAds} variant="outlined">
+              <Typography variant="h5" color='primary' style={{ margin: 10 }} gutterBottom>
+                {this.state.Advert.header}
+              </Typography>
+              <CardMedia
+                className={classes.media}
+                image={`data:image/jpeg;base64,${this.state.image}`}
+                title="Contemplative Reptile"
+              />
+              <Typography style={{ padding: '2%' }} variant="body2" color="textSecondary" component="p">
+                {this.state.Advert.description}
+              </Typography>
+              <Divider />
+              <TextField style={{ margin: 10, width: "100%", paddingRight: 20 }}
+                id="outlined-multiline-static"
+                label="Feedback"
+                value={this.state.feedback}
+                rows={2}
+                variant="outlined"
+                onKeyDown={this.keyPress}
+                onChange={(event) => { this.setState({ feedback: event.target.value }) }}
+              />
+            </Card>
+          </div>}
+>>>>>>> a9b5b0c648616518167a83cbcf5564840c38081a
         </Spring>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={7000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover />
       </div>
     );
   }

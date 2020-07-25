@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react'
 import { render } from 'react-dom'
 import { useTransition, animated } from 'react-spring'
-import './HeaderText.css'
 
 function HeaderText() {
   const ref = useRef([])
