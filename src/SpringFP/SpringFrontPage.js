@@ -9,8 +9,10 @@ import photo2 from '../Photo/photo2.gif'
 import photo3 from '../Photo/photo3.gif'
 import photo4 from '../Photo/photo4.jpg'
 import photo5 from '../Photo/photo5.gif'
+import logo from '../Photo/logo.png'
 import './Button/styles2.scss'
 import Typography from '@material-ui/core/Typography';
+import './Text/styles3.scss'
 
 // Little helpers ...
 const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
@@ -124,9 +126,25 @@ class SpringFrontPage extends React.Component {
             onClick={() => this.parallax.scrollTo(1)}
             style={{ display: 'flex', alignItems: 'center', justifyContent: 'left' }}>
 
-            <div style={{ backgroundRepeat: 'no-repeat', backgroundImage: `url(${photo1})`, backgroundSize: 'contain', width: '45%', height: '55%', marginTop: '10%' }} >
+            <div style={{ backgroundRepeat: 'no-repeat', backgroundImage: `url(${photo1})`, backgroundSize: 'contain', width: '45%', height: '55%', marginTop: '10%' }} ></div>
+
+            <img style={{ marginLeft: '0%',marginBottom:'22%', width: '10%', }} src={logo}></img>
+
+            <div style={{}}>
+              <div class="animated-title">
+                <div class="text-top">
+                  <div>
+                    <span>one Stop platform for</span>
+                    <span> startups, mentors, investors</span>
+                  </div>
+                </div>
+                <div class="text-bottom">
+                  <div>and stakeholders !</div>
+                </div>
+              </div>
             </div>
-            <div>
+
+            <div style={{ marginLeft: 'auto', marginTop: '35%' }}>
               <Container>
                 <h3 style={{ color: "#757575", fontFamily: "serif", fontStyle: "italic" }}>
                   "Success is not final,<br />
@@ -149,7 +167,7 @@ class SpringFrontPage extends React.Component {
               {/*<img src={url('bash')} style={{ width: '40%' }} />*/}
 
 
-              <div style={{ marginLeft: '-4%', backgroundRepeat: 'no-repeat',backgroundPositionX:'50%' ,backgroundColor: 'white', backgroundImage: `url(${photo2})`, backgroundSize: 'contain', width: '43%', height: '55%', borderRadius: 25 }} ></div>
+              <div style={{ marginLeft: '-4%', backgroundRepeat: 'no-repeat', backgroundPositionX: '50%', backgroundColor: 'white', backgroundImage: `url(${photo2})`, backgroundSize: 'contain', width: '43%', height: '55%', borderRadius: 25 }} ></div>
 
               <div style={{ marginLeft: '7%', marginBottom: '0%', width: '30%' }}>
                 <div>
@@ -201,7 +219,7 @@ class SpringFrontPage extends React.Component {
                 </div>
               </div>
 
-              <div style={{ marginLeft: '8%', backgroundRepeat: 'no-repeat',backgroundPositionX:'50%', backgroundSize: 'contain', backgroundColor: 'white', backgroundImage: `url(${photo3})`, width: '43%', height: '55%', borderRadius: 25 }} ></div>
+              <div style={{ marginLeft: '8%', backgroundRepeat: 'no-repeat', backgroundPositionX: '50%', backgroundSize: 'contain', backgroundColor: 'white', backgroundImage: `url(${photo3})`, width: '43%', height: '55%', borderRadius: 25 }} ></div>
             </ParallaxLayer>
 
 
@@ -255,7 +273,7 @@ class SpringFrontPage extends React.Component {
             </Typography>
                 </div>
               </div>
-              <div style={{ marginLeft: '8%', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundColor: 'white', backgroundPositionX:'50%',backgroundImage: `url(${photo5})`, width: '43%', height: '55%', borderRadius: 25 }} ></div>
+              <div style={{ marginLeft: '8%', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundColor: 'white', backgroundPositionX: '50%', backgroundImage: `url(${photo5})`, width: '43%', height: '55%', borderRadius: 25 }} ></div>
             </ParallaxLayer>
 
             <ParallaxLayer
@@ -284,7 +302,7 @@ class SpringFrontPage extends React.Component {
           </div>
         </Parallax>
 
-      </div>
+      </div >
     )
   }
 }
