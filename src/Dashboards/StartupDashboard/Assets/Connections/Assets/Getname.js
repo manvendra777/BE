@@ -26,7 +26,7 @@ class Getname extends Component {
         var persons;
         axios
           .get(
-            `http://54.237.17.61/management/` +
+            `http://54.237.17.61/management/` + 
               this.state.usertype +
               `/profile/` +
               this.props.id

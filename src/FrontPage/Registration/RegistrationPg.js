@@ -173,7 +173,7 @@ class RegistrationPg extends React.Component {
                                             To keep connected with us please login with your personal information by username and password
                                         </Typography> */}
                                     </div>
-                                    <div style={{ marginTop: 15, width: 500, height: 400, position: 'relative', width: '80%' }} elevation={10}>
+                                    <div style={{ marginTop: 15, width: 500, height: '50%', position: 'relative', width: '90%' }} elevation={10}>
 
 
 
