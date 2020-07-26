@@ -15,12 +15,13 @@ import axios from 'axios';
 import Container from '@material-ui/core/Container';
 import { withStyles } from "@material-ui/core/styles";
 import Cookies from 'js-cookie'
-
+import SendIcon from '@material-ui/icons/Send';
+import photo from './Assets/Messages/img/chat_trans.png'
 const useStyles = theme => ({
   root: {
-    margin: '1%',
-    width: '60%',
-    height: "56vmin"
+    marginTop: '1%',
+    width: '60vmin',
+    height: "59vmin"
   },
   r: {
 
@@ -39,7 +40,7 @@ const useStyles = theme => ({
   boxP: {
     width: '100%',
     position: 'relative',
-    height: '100%',
+    height: '86%',
     overflow: 'hidden',
     background: '#eeeeee',
     marginTop: '1%'
@@ -76,6 +77,7 @@ class MessagesFinal extends Component {
       buffer: [],
       members: [],
       addedUserId: '',
+      selected: false,
       myId: Cookies.get('id'),
     };
     this.keyPress = this.keyPress.bind(this);
@@ -88,6 +90,7 @@ class MessagesFinal extends Component {
       msg: [],
       msgTypo: '',
       buffer: [],
+      selected: true,
     })
   }
 
@@ -100,10 +103,29 @@ class MessagesFinal extends Component {
         mem = res.data;
         mem.map((item, i) => {
           console.log(item);
-          this.setState({ members: [...this.state.members, <Added id={item} method={this.setAddedUser} />] })
-          if (i == 0) {
-            this.setState({ addedUserId: item })
-          }
+          var userids = item
+          var userType;
+          axios
+            .get("http://54.237.17.61/security/getTypeById?id=" + userids)
+            .then((res) => {
+              userType = res.data;
+              var persons;
+              axios
+                .get(
+                  `http://54.237.17.61/management/` +
+                  userType +
+                  `/profile/` +
+                  userids
+                )
+                .then((res) => {
+                  persons = res.data;
+                  
+                  this.setState({ members: [...this.state.members, <Added name={persons.firstName +' '+ persons.lastName} id={userids} method={this.setAddedUser} />] })
+                });
+            });
+
+
+
         })
       })
   }
@@ -114,8 +136,11 @@ class MessagesFinal extends Component {
     }
   }
   scrollToBottom = () => {
-    const { messageList } = this.refs;
-    messageList.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+    if (this.state.selected) {
+      const { messageList } = this.refs;
+      messageList.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+    }
+
   }
   recMsg() {
     this.scrollToBottom();
@@ -157,9 +182,16 @@ class MessagesFinal extends Component {
       this.recMsg();
     }
   }
-  componentDidMount() {
 
+
+  getName() {
+
+  }
+
+
+  componentDidMount() {
     this.getUsers();
+
     this.recMsg();
     this.interval = setInterval(() => {
       this.recMsg();
@@ -180,15 +212,16 @@ class MessagesFinal extends Component {
       this.setState({ msgTypo: e.target.value });
     }
     return (
-      <div style={{ display: 'flex', height: "90%", width: "50%", position: 'fixed' }}>
+      <div style={{ display: 'flex', height: "90%", width: "50%", position: 'fixed', }}>
         <div className={classes.r}>
-          <Paper elevation={5} style={{ height: '8%', padding: '2%', backgroundColor: '#e8eaf6' }}>
+
+          <Paper elevation={5} style={{ backgroundColor: '#e8eaf6', height: '8.5%' }}>
             <Typography variant="h5" color='primary' style={{ backgroundColor: '#e8eaf6', padding: '2%' }} gutterBottom>
               <center>Inbox</center>
             </Typography>
           </Paper>
 
-          <Paper elevation={5} style={{ height: '100%', marginTop: '1%', backgroundColor: '#eeeeee' }}  >
+          <Paper elevation={5} style={{ height: '100%', marginTop: '0.5%', backgroundColor: '#eeeeee' }}  >
             <div className={classes.bP}>
               <div className={classes.b}>
                 {this.state.members.map(child => child)}
@@ -199,14 +232,12 @@ class MessagesFinal extends Component {
             </div>
           </Paper>
         </div>
-
-        <Paper className={classes.root}>
-
-
+        {this.state.selected ? <Paper style={{ backgroundColor: '#eeeeee' }} className={classes.root}>
           <Paper elevation={5} style={{ zIndex: 10, backgroundColor: '#e8eaf6' }}>
-            <User style={{ color: '#e8eaf6' }} id={this.state.addedUserId} />
+            <User show={this.state.selected} style={{ color: '#e8eaf6', }} id={this.state.addedUserId} />
           </Paper>
-          <Paper elevation={5} style={{ height: '100%', marginTop: '0.1%' }}>
+
+          <Paper elevation={5} style={{ height: '120%', marginTop: '-0.5%' }}>
             <div className={classes.boxP}>
               <div className={classes.box}>
                 <div ref="messageList">
@@ -219,30 +250,29 @@ class MessagesFinal extends Component {
                 ref={(el) => { this.messagesEnd = el; }}>
               </div>
             </div>
+
+            <div elevation={5} style={{ padding: '2%', overflow: 'hidden', display: 'flex', marginTop: '1%', }} >
+              <TextField
+                style={{ width: '100%', }}
+                id="outlined-basic"
+                label="write something here"
+                value={this.state.msgTypo}
+                defaultValue=""
+                type="text"
+                onChange={handleChane}
+                onKeyDown={this.keyPress}
+                variant="outlined" />
+              <div style={{ float: "right", marginTop: '0%', }}>
+                <Button style={{ marginTop: 10 }} color="primary" onClick={() => this.sendMsg()} ><SendIcon /></Button>
+              </div>
+            </div>
           </Paper>
 
 
+        </Paper> : <div style={{ padding: '2%' }}><Paper elevation={5} style={{ backgroundColor: '#eeeeee', width: '60vmin', height: '76vmin', display: 'flex' }} >
+          <img style={{ width: '100%', marginTop: 'auto', marginBottom: '35%' }} src={photo}></img>
+        </Paper></div>}
 
-
-          <div elevation={5} style={{ padding: '2%', overflow: 'hidden', marginTop: '2%' }} >
-            <TextField
-              style={{ marginTop: 17, width: '100%', }}
-              id="outlined-basic"
-              label="write something here"
-              rows={4}
-              value={this.state.msgTypo}
-              defaultValue=""
-              type="text"
-              onChange={handleChane}
-              onKeyDown={this.keyPress}
-              variant="outlined" />
-            <div style={{ float: "right" }}>
-
-              <Button style={{ marginTop: 10 }} color="primary" onClick={() => this.sendMsg()} >Send</Button>
-            </div>
-          </div>
-
-        </Paper>
 
       </div>
     );
