@@ -13,7 +13,7 @@ import logo from '../Photo/logo.png'
 import './Button/styles2.scss'
 import Typography from '@material-ui/core/Typography';
 import './Text/styles3.scss'
-
+import { Spring, config } from 'react-spring/renderprops'
 // Little helpers ...
 const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
 const Pink = ({ children }) => <span style={{ color: '#FF6AC1' }}>{children}</span>
@@ -128,7 +128,27 @@ class SpringFrontPage extends React.Component {
 
             <div style={{ backgroundRepeat: 'no-repeat', backgroundImage: `url(${photo1})`, backgroundSize: 'contain', width: '45%', height: '55%', marginTop: '10%' }} ></div>
 
-            <img style={{ marginLeft: '0%',marginBottom:'22%', width: '10%', }} src={logo}></img>
+            <div style={{ marginLeft: '0%', marginBottom: '22%', width: '10%', }}>
+              <Spring
+                delay={2500}
+                config={config.default}
+                from={{
+                  opacity: 0, transform:
+                    'translate3d(0,50px,0)',
+                }}
+                to={{
+                  opacity: 1, transform:
+                    'translate3d(0px,0,0)',
+                }}>
+
+                {props => <div style={props}>
+                  <img src={logo}></img>
+                </div>
+                }</Spring>
+
+            </div>
+
+
 
             <div style={{}}>
               <div class="animated-title">
@@ -145,14 +165,35 @@ class SpringFrontPage extends React.Component {
             </div>
 
             <div style={{ marginLeft: 'auto', marginTop: '35%' }}>
-              <Container>
-                <h3 style={{ color: "#757575", fontFamily: "serif", fontStyle: "italic" }}>
-                  "Success is not final,<br />
+              <Spring
+                delay={1000}
+                config={config.slow}
+                from={{
+                  opacity: 0, transform:
+                    'translate3d(100px,0,0)',
+                }}
+                to={{
+                  opacity: 1, transform:
+                    'translate3d(0px,0,0)',
+                }}>
+
+                {props => <div style={props}>
+                  <div >
+                    <Container>
+                      <h3 style={{ color: "#757575", fontFamily: "serif", fontStyle: "italic" }}>
+                        "Success is not final,<br />
                             failure is not fatal,<br />
                             it's the courage to continue that counts."<br /> </h3>
-                <h2 style={{ fontWeight: "bold", color: "#705d72", fontFamily: "serif" }}> ...Winston Churchill</h2>
-              </Container>
+                      <h2 style={{ fontWeight: "bold", color: "#705d72", fontFamily: "serif" }}> ...Winston Churchill</h2>
+                    </Container>
+                  </div>
+                </div>}
+              </Spring>
             </div>
+
+
+
+
           </ParallaxLayer>
 
 
