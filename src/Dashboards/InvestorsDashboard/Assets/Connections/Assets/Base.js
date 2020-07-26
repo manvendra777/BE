@@ -11,6 +11,9 @@ import axios from "axios";
 import Connections from "../Connections";
 import Getname from "./Getname";
 import Cookies from "js-cookie";
+import ConnectedStartup from './ConnectedStartup';
+
+
 const useStyles = (theme) => ({
   root: {},
   listSection: {
@@ -83,6 +86,9 @@ class Base extends Component {
             </List>
           </div>
         </Paper>
+        <div style={{marginTop: 20}}>
+        <ConnectedStartup/>
+        </div>
       </div>
     );
   }
