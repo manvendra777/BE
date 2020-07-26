@@ -77,6 +77,7 @@ class MessagesFinal extends Component {
       buffer: [],
       members: [],
       addedUserId: '',
+      addedUserName:'',
       selected: false,
       myId: Cookies.get('id'),
     };
@@ -84,11 +85,12 @@ class MessagesFinal extends Component {
     this.setAddedUser = this.setAddedUser.bind(this)
   }
 
-  setAddedUser = (addedUser) => {
+  setAddedUser = (addedUser,name) => {
     this.setState({
       addedUserId: addedUser,
+      addedUserName:name,
       msg: [],
-      msgTypo: '',
+      msgTypo: '', 
       buffer: [],
       selected: true,
     })
@@ -102,30 +104,23 @@ class MessagesFinal extends Component {
       .then(res => {
         mem = res.data;
         mem.map((item, i) => {
-          console.log(item);
-          var userids = item
-          var userType;
+          var id=item;
           axios
-            .get("http://54.237.17.61/security/getTypeById?id=" + userids)
+            .get("http://54.237.17.61/security/getTypeById?id=" + id)
             .then((res) => {
               userType = res.data;
               var persons;
+              var userType;
               axios
                 .get(
-                  `http://54.237.17.61/management/` +
-                  userType +
-                  `/profile/` +
-                  userids
+                  `http://54.237.17.61/management/` + userType + `/profile/` +id
                 )
                 .then((res) => {
                   persons = res.data;
-                  
-                  this.setState({ members: [...this.state.members, <Added name={persons.firstName +' '+ persons.lastName} id={userids} method={this.setAddedUser} />] })
+                  console.log(persons);
+                  this.setState({ members: [...this.state.members, <Added name={persons.firstName + ' '+persons.lastName} id={item} method={this.setAddedUser} />] })
                 });
             });
-
-
-
         })
       })
   }
@@ -143,28 +138,31 @@ class MessagesFinal extends Component {
 
   }
   recMsg() {
-    this.scrollToBottom();
-    // Your code here
-    let persons = [];
-    let up = [];
-    axios.get(`http://54.237.17.61/communication/message/find`, { params: { senderId: this.state.myId, receiverId: this.state.addedUserId } })
-      .then(res => {
-        persons = res.data;
-        persons.map((item, i) => {
-          if (i > this.state.buffer.length - 1) {
-            if (item.senderId == this.state.myId) {
-              this.setState({
-                msg: [...this.state.msg, <Sent msg={item.text} time={new Date(item.timestamp)} />]
-              })
-            } else {
-              this.setState({
-                msg: [...this.state.msg, <Rec msg={item.text} time={new Date(item.timestamp)} />]
-              })
+    if (this.state.selected) {
+      this.scrollToBottom();
+      // Your code here
+      let persons = [];
+      let up = [];
+      axios.get(`http://54.237.17.61/communication/message/find`, { params: { senderId: this.state.myId, receiverId: this.state.addedUserId } })
+        .then(res => {
+          persons = res.data;
+          persons.map((item, i) => {
+            if (i > this.state.buffer.length - 1) {
+              if (item.senderId == this.state.myId) {
+                this.setState({
+                  msg: [...this.state.msg, <Sent msg={item.text} time={new Date(item.timestamp)} />]
+                })
+              } else {
+                this.setState({
+                  msg: [...this.state.msg, <Rec msg={item.text} time={new Date(item.timestamp)} />]
+                })
+              }
             }
-          }
+          })
+          this.setState({ buffer: persons })
         })
-        this.setState({ buffer: persons })
-      })
+    }
+
   }
 
   sendMsg = () => {
@@ -182,12 +180,6 @@ class MessagesFinal extends Component {
       this.recMsg();
     }
   }
-
-
-  getName() {
-
-  }
-
 
   componentDidMount() {
     this.getUsers();
@@ -234,7 +226,7 @@ class MessagesFinal extends Component {
         </div>
         {this.state.selected ? <Paper style={{ backgroundColor: '#eeeeee' }} className={classes.root}>
           <Paper elevation={5} style={{ zIndex: 10, backgroundColor: '#e8eaf6' }}>
-            <User show={this.state.selected} style={{ color: '#e8eaf6', }} id={this.state.addedUserId} />
+            <User show={this.state.selected} style={{ color: '#e8eaf6', }} id={this.state.addedUserId} name={this.state.addedUserName} />
           </Paper>
 
           <Paper elevation={5} style={{ height: '120%', marginTop: '-0.5%' }}>

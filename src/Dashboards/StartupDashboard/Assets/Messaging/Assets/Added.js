@@ -6,7 +6,8 @@ import { Divider, Link } from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button'
-
+import axios from 'axios'
+import { useState,useEffect } from 'react';
 const StyledBadge = withStyles((theme) => ({
   badge: {
     backgroundColor: '#44b700',
@@ -49,7 +50,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Added(props) {
   const classes = useStyles();
   const changeChatWindow = () => {
-    props.method(props.id);
+    props.method(props.id,props.name);
+   
   }
   return (
     <div className={classes.root}>
@@ -65,7 +67,7 @@ export default function Added(props) {
         >
           <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
         </StyledBadge>
-        <ListItemText style={{ marginLeft: "16px", }} primary={props.id} />
+        <ListItemText style={{ marginLeft: "16px", }} primary={props.name } />
       </ListItem>
 
 

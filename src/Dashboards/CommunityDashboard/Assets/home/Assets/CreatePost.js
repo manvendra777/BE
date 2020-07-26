@@ -57,11 +57,11 @@ class CreatePost extends React.Component {
                 "description": this.state.description,
                 "header": this.state.title,
                 "tag": this.state.domain,
-                "idOfUser":Cookies.get('id'),
+                "idOfUser": Cookies.get('id'),
                 "userId": Cookies.get('username')
             }).then(res => {
                 console.log(res.data);
-                self.setState({title:'',description:'',})
+                self.setState({ title: '', description: '', })
                 window.location.reload();
             })
         })
@@ -145,9 +145,15 @@ class CreatePost extends React.Component {
                             variant="outlined"
                         />
                         <br />
-                        <div style={{ display: 'flex', padding: '2%',color:'#455a64' }}>
-                            will be posted in : {this.props.postDomain}
-                            <Button onClick={this.post} style={{ marginLeft: 'auto' }}>post</Button>
+                        <div style={{ display: 'flex', padding: '2%', color: '#455a64' }}>
+                            <div>
+                                will be posted in : {this.props.postDomain}
+                            </div>
+
+
+                        </div>
+                        <div style={{ marginLeft: 'auto',marginRight:'3%' }}>
+                            <Button onClick={this.post}>post</Button>
                         </div>
                     </form>
                 </Card>

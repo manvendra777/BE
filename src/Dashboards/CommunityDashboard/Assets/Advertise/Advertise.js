@@ -54,7 +54,9 @@ class AdvertiseRight extends Component {
         self.setState({ Advert: ads });
         self.setState({ adId: ads.adId });
         self.setState({ image: ads.image.data });
-        self.setState({ show: true });
+        setTimeout(function () { //Start the timer //After 1 second, set render to true
+          self.setState({ show: true })
+        }.bind(this),2000)
       });
   }
   keyPress = (e) => {
@@ -134,7 +136,7 @@ class AdvertiseRight extends Component {
                 image={`data:image/jpeg;base64,${this.state.image}`}
                 title="Contemplative Reptile"
               />
-              <Typography style={{ padding: '2%' }} variant="body2" color="textSecondary" component="p">
+              <Typography style={{ padding: '2%' }} variant="h5" color="textSecondary" component="p">
                 {this.state.Advert.description}
               </Typography>
               <Divider />

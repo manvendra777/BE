@@ -12,73 +12,73 @@ import User from './User';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
 import { withStyles } from "@material-ui/core/styles";
-import Cookies from 'js-cookie';
+import Container from '@material-ui/core/Container';
 const useStyles = theme => ({
   root: {
-    width: '15%',
-    height: "90%",
+    width: '20%',
+    height: "87%",
     position: "fixed",
     zIndex: 1,
-    backgroundColor: "#111",
     overflowY: "hidden",
-    overflow:"hidden",
-    right:0,
+    right: 3,
     backgroundColor: theme.palette.background.paper,
   },
-  listItem:{
-    margin:theme.spacing(0,0,0,0),
+  listItem: {
+    margin: theme.spacing(0, 0, 0, 0),
   },
-  hd:{
-    margin:theme.spacing(1,1,1,1),
+  hd: {
+    margin: theme.spacing(1, 1, 1, 1),
   }
 });
 
 class ListOfOnlineCandidates extends Component {
   constructor(props) {
-		super(props);
+    super(props);
 
-		this.state = {
-			members:[]
-		};
+    this.state = {
+      articles: []
+    };
   }
-  
-  componentWillMount(){
-    // Your code here
-    var myid = Cookies.get('id')
-    let mem=[];
-    axios.get(`http://54.237.17.61/entityAction/user/myConnections`,{params: {id: myid}})
-    .then(res => {
-      mem = res.data;
-      mem.map((item,i)=>{
-        console.log(item);
-        this.setState({members:[...this.state.members,<User id={item}/>]})
+
+  componentWillMount() {
+    fetch('http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=30c361b9a9cb481fa76cceb1beda8c1b')
+      .then((response) => {
+        return response.json();
       })
-    })
+      .then((myJson) => {
+        this.setState({
+          articles: myJson.articles
+        })
+      })
   };
 
 
   render() {
     const { classes } = this.props;
 
-  return (
-    <div className={classes.root}>
-      <Card className={classes.root} variant="outlined">
-      <Typography variant="h5" color='primary' style={{ margin: 10 }} gutterBottom>
-                        Members
-							</Typography>
-      <Divider/>
-      <div style={{width:'100%',height:'100%',overflow:'hidden'}}>
-      <div style={{overflowY: "auto",width:'100%',height:'100%',paddingRight:'15px',paddingLeft:'0px'}}>
-      <List component="nav" aria-label="main mailbox folders" >
-      {this.state.members.map(child=>child)}
-      </List>
-      </div>
-      </div>
+    return (
+      <div>
+        <Card className={classes.root} variant="outlined">
+          <Typography variant="h5" color='primary' style={{ backgroundColor: '#e8eaf6',padding:'2%' }} gutterBottom>
+            <center>Today’s news</center>
+          </Typography>
 
-      </Card>
-    </div>
-  );
-}
+
+          <div>{this.state.articles.map((item, index) => {
+            return (
+              <div style={{ marginTop: '2%', padding: '1%' ,}}>
+                <Container>
+                  <h6 style={{ color: "#696969" }}>{item.title}</h6>
+                  <a href={item.url}>...Read more</a><nr /></Container>
+                <Divider />
+              </div>
+            )
+          })}</div>
+
+        </Card>
+      </div>
+    );
+  }
 }
 export default withStyles(useStyles)(ListOfOnlineCandidates);
 

@@ -61,7 +61,11 @@ class AdvertiseRight extends Component {
         self.setState({ Advert: ads })
         self.setState({ adId: ads.adId })
         self.setState({ image: ads.image.data })
-        self.setState({ show: true })
+        setTimeout(function () { //Start the timer //After 1 second, set render to true
+          self.setState({ show: true })
+        }.bind(this),2000)
+
+
       })
   }
   keyPress = (e) => {
@@ -112,7 +116,7 @@ class AdvertiseRight extends Component {
   resume = () => {
     setTimeout(function () { //Start the timer //After 1 second, set render to true
       this.startAds()
-    }.bind(this), 5000)
+    }.bind(this), 3000)
   }
 
   render() {
@@ -126,7 +130,7 @@ class AdvertiseRight extends Component {
         <Spring
           from={{ opacity: 0, transform: 'translate3d(100px,0px,0)' }}
           to={{ opacity: this.state.show ? 1 : 0, transform: this.state.show ? 'translate3d(0,0px,0)' : 'translate3d(100px,0px,0)' }}
-          config={{ delay: 500 }}>
+          config={{ delay: 200 }}>
           {props => <div style={props}>
             <Card onMouseOver={this.pauseAds} onMouseOut={this.startAds} variant="outlined">
               <Typography variant="h5" color='primary' style={{ margin: 10 }} gutterBottom>
@@ -137,8 +141,8 @@ class AdvertiseRight extends Component {
                 image={`data:image/jpeg;base64,${this.state.image}`}
                 title="Contemplative Reptile"
               />
-              
-              <Typography style={{ padding: '2%' }} variant="body2" color="textSecondary" component="p">
+
+              <Typography style={{ padding: '2%' }} variant="h5" color="textSecondary" component="p">
                 {this.state.Advert.description}
               </Typography>
               <Divider />
@@ -151,7 +155,7 @@ class AdvertiseRight extends Component {
                 onKeyDown={this.keyPress}
                 onChange={(event) => { this.setState({ feedback: event.target.value }) }}
               />
-             
+
             </Card>
           </div>}
         </Spring>
