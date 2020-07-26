@@ -20,13 +20,13 @@ const useStyles = theme => ({
   root: {
     margin: '1%',
     width: '60%',
-    height: "60%"
+    height: "56vmin"
   },
   r: {
 
     margin: '1%',
     width: '40%',
-    height: "75%"
+    height: "71.5vmin"
 
   },
   box: {
@@ -38,11 +38,11 @@ const useStyles = theme => ({
   },
   boxP: {
     width: '100%',
-    position:'relative',
-    height:'100%',
+    position: 'relative',
+    height: '100%',
     overflow: 'hidden',
-    background: '#e5eaea',
-    marginTop:'1%'
+    background: '#eeeeee',
+    marginTop: '1%'
   },
   b: {
     overflowX: 'hidden',
@@ -61,7 +61,7 @@ const useStyles = theme => ({
     margin: theme.spacing(2, 1, 0, 1),
     height: theme.spacing(17),
   },
-  
+
   hd: {
     margin: theme.spacing(1, 1, 1, 2),
   }
@@ -182,11 +182,13 @@ class MessagesFinal extends Component {
     return (
       <div style={{ display: 'flex', height: "90%", width: "50%", position: 'fixed' }}>
         <div className={classes.r}>
-          <Paper elevation={5} style={{height:'8%',padding:'2%'}}>
-          All message
+          <Paper elevation={5} style={{ height: '8%', padding: '2%', backgroundColor: '#e8eaf6' }}>
+            <Typography variant="h5" color='primary' style={{ backgroundColor: '#e8eaf6', padding: '2%' }} gutterBottom>
+              <center>Inbox</center>
+            </Typography>
           </Paper>
-        
-          <Paper elevation={5} style={{height:'100%',marginTop:'1%'}}  >
+
+          <Paper elevation={5} style={{ height: '100%', marginTop: '1%', backgroundColor: '#eeeeee' }}  >
             <div className={classes.bP}>
               <div className={classes.b}>
                 {this.state.members.map(child => child)}
@@ -198,11 +200,13 @@ class MessagesFinal extends Component {
           </Paper>
         </div>
 
-        <div className={classes.root}>
-          <Paper elevation={5} style={{zIndex:10}}>
-            <User id={this.state.addedUserId} />
-            </Paper>
-            <Paper elevation={5}  style={{height:'100%',marginTop:'0.1%'}}>
+        <Paper className={classes.root}>
+
+
+          <Paper elevation={5} style={{ zIndex: 10, backgroundColor: '#e8eaf6' }}>
+            <User style={{ color: '#e8eaf6' }} id={this.state.addedUserId} />
+          </Paper>
+          <Paper elevation={5} style={{ height: '100%', marginTop: '0.1%' }}>
             <div className={classes.boxP}>
               <div className={classes.box}>
                 <div ref="messageList">
@@ -216,9 +220,13 @@ class MessagesFinal extends Component {
               </div>
             </div>
           </Paper>
-          <Paper elevation={5} style={{padding:'2%',overflow:'hidden',marginTop:'2%'}} >
+
+
+
+
+          <div elevation={5} style={{ padding: '2%', overflow: 'hidden', marginTop: '2%' }} >
             <TextField
-              style={{ marginTop: 17,width:'100%',}}
+              style={{ marginTop: 17, width: '100%', }}
               id="outlined-basic"
               label="write something here"
               rows={4}
@@ -230,11 +238,11 @@ class MessagesFinal extends Component {
               variant="outlined" />
             <div style={{ float: "right" }}>
 
-              <Button style={{marginTop:10}} color="primary" onClick={() => this.sendMsg()} >Send</Button>
+              <Button style={{ marginTop: 10 }} color="primary" onClick={() => this.sendMsg()} >Send</Button>
             </div>
-          </Paper>
+          </div>
 
-        </div>
+        </Paper>
 
       </div>
     );

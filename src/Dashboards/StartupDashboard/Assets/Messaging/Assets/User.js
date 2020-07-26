@@ -64,7 +64,7 @@ export default function User(props) {
         >
           <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
         </StyledBadge>
-        <ListItemText style={{ marginLeft: "16px", }} primary={props.id} />
+        <ListItemText style={{ marginLeft: "16px", color: '#5c6bc0', zoom:1.3}} primary={props.id} />
       </ListItem>
 
 
