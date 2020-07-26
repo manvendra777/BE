@@ -20,7 +20,7 @@ const useStyles = theme => ({
   root: {
     margin: '1%',
     width: '60%',
-    height: "70%"
+    height: "60%"
   },
   r: {
 
