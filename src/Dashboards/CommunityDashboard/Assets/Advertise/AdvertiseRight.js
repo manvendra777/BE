@@ -10,11 +10,14 @@ import { Button } from '@material-ui/core';
 import Cookies from 'js-cookie'
 import ReactInterval from 'react-interval';
 import { Spring } from 'react-spring/renderprops'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const useStyles = theme => ({
   root: {
     width: "20%",
     position: 'fixed',
-    right:0
+    right: 0
   },
   media: {
     height: 340
@@ -64,6 +67,7 @@ class AdvertiseRight extends Component {
   keyPress = (e) => {
     if (e.keyCode == 13) {
       this.sendFeedBack()
+
     }
   }
 
@@ -76,11 +80,21 @@ class AdvertiseRight extends Component {
     })
       .then(function (response) {
         self.setState({ feedback: '' })
-        console.log(response.data);
-        alert(response.data)
+        toast.success("feedback sent successfully !", {
+          position: "bottom-right",
+          autoClose: 7000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })
+
       })
 
   }
+
+
 
   componentWillMount() {
     this.getAdByDomain()
@@ -123,9 +137,11 @@ class AdvertiseRight extends Component {
                 image={`data:image/jpeg;base64,${this.state.image}`}
                 title="Contemplative Reptile"
               />
+              
               <Typography style={{ padding: '2%' }} variant="body2" color="textSecondary" component="p">
                 {this.state.Advert.description}
               </Typography>
+              <Divider />
               <TextField style={{ margin: 10, width: "100%", paddingRight: 20 }}
                 id="outlined-multiline-static"
                 label="Feedback"
@@ -135,10 +151,20 @@ class AdvertiseRight extends Component {
                 onKeyDown={this.keyPress}
                 onChange={(event) => { this.setState({ feedback: event.target.value }) }}
               />
-              <Divider />
+             
             </Card>
           </div>}
         </Spring>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={7000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover />
       </div>
     );
   }

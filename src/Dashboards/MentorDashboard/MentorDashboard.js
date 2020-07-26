@@ -9,6 +9,7 @@ import TargetStartup from "./Assets/Profile/StartupProfile/NotConnected/TargetSt
 import MyStartup from "./Assets/Profile/StartupProfile/Connected/MyStartup";
 import { Route, BrowserRouter as Router, Link } from "react-router-dom";
 import Advertise from "./Assets/Advertise/Advertise";
+import Cookies from "js-cookie";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 export default class StartupDashboard extends Component {
   constructor(props) {

@@ -139,9 +139,7 @@ class LoginPg extends React.Component {
                             window.location = "/register"
                         }
                       })
-
                   })
-
               } else {
                 self.onError();
               }

@@ -16,6 +16,8 @@ import Review from './Assets/Review';
 import Domain from './Assets/Domain'
 import Cookies from 'js-cookie'
 import axios from 'axios'
+import plant from './Assets/plants.png'
+import moon from './Assets/moon.png'
 import { render } from '@testing-library/react';
 
 function Copyright() {
@@ -212,64 +214,76 @@ class Startup extends Component {
       this.setState({ activeStep: this.state.activeStep - 1 });
     };
     return (
-     
-      <React.Fragment>
-        <CssBaseline  />
-        <AppBar position="absolute" color="default" className={classes.appBar}>
-          <Toolbar>
-            <Typography variant="h6" color="inherit" noWrap>
-              Startup
+      <div>
+
+        <React.Fragment>
+          <CssBaseline />
+          <AppBar position="absolute" color="default" className={classes.appBar}>
+            <Toolbar>
+              <Typography variant="h6" color="inherit" noWrap>
+                Startup
           </Typography>
-          </Toolbar>
-        </AppBar>
-        <main className={classes.layout}>
-          <Paper elevation={10} className={classes.paper}>
-            <Typography component="h1" variant="h4" align="center">
-              Registration
+            </Toolbar>
+          </AppBar>
+
+          <div style={{ overflowX: 'hidden', display: 'inline-block', opacity: 1, position: 'absolute', top: 0, bottom: 0, zIndex: -100, width: '100%' }}>
+            <img style={{ width: '17%', marginTop: '3%', marginLeft: '86%' }} src={moon}></img>
+            <div style={{ display: 'flex' }}>
+              <img style={{ width: '40%', marginTop: '-2%', marginLeft: '12%' }} src={plant}></img>
+              <img style={{ width: '40%', marginTop: '-2%', marginLeft: '-8%', }} src={plant}></img>
+            </div>
+          </div>
+
+
+          <main className={classes.layout}>
+            <Paper elevation={10} className={classes.paper}>
+              <Typography component="h1" variant="h4" align="center">
+                Registration
           </Typography>
-            <Stepper activeStep={this.state.activeStep} className={classes.stepper}>
-              {steps.map((label) => (
-                <Step key={label}>
-                  <StepLabel>{label}</StepLabel>
-                </Step>
-              ))}
-            </Stepper>
-            <React.Fragment>
-              {this.state.activeStep === steps.length ? (
-                <React.Fragment>
-                  {this.submitForm()}
-                  <Typography variant="h5" gutterBottom>
-                    Thank you for Registering with us.
-                </Typography>
-                  <Typography variant="subtitle1">
-                    Your username is :  {Cookies.get('temp')}.
-                </Typography>
-                </React.Fragment>
-              ) : (
+              <Stepper activeStep={this.state.activeStep} className={classes.stepper}>
+                {steps.map((label) => (
+                  <Step key={label}>
+                    <StepLabel>{label}</StepLabel>
+                  </Step>
+                ))}
+              </Stepper>
+              <React.Fragment>
+                {this.state.activeStep === steps.length ? (
                   <React.Fragment>
-                    {getStepContent(this.state.activeStep)}
-                    <div className={classes.buttons}>
-                      {this.state.activeStep !== 0 && (
-                        <Button onClick={handleBack} className={classes.button}>
-                          Back
-                        </Button>
-                      )}
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleNext}
-                        className={classes.button}
-                      >
-                        {this.state.activeStep === steps.length - 1 ? 'Submit' : 'Next'}
-                      </Button>
-                    </div>
+                    {this.submitForm()}
+                    <Typography variant="h5" gutterBottom>
+                      Thank you for Registering with us.
+                </Typography>
+                    <Typography variant="subtitle1">
+                      Your username is :  {Cookies.get('temp')}.
+                </Typography>
                   </React.Fragment>
-                )}
-            </React.Fragment>
-          </Paper>
-          <Copyright />
-        </main>
-      </React.Fragment>
+                ) : (
+                    <React.Fragment>
+                      {getStepContent(this.state.activeStep)}
+                      <div className={classes.buttons}>
+                        {this.state.activeStep !== 0 && (
+                          <Button onClick={handleBack} className={classes.button}>
+                            Back
+                          </Button>
+                        )}
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={handleNext}
+                          className={classes.button}
+                        >
+                          {this.state.activeStep === steps.length - 1 ? 'Submit' : 'Next'}
+                        </Button>
+                      </div>
+                    </React.Fragment>
+                  )}
+              </React.Fragment>
+            </Paper>
+            <Copyright />
+          </main>
+        </React.Fragment>
+      </div>
     );
   }
 }
