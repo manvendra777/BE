@@ -46,7 +46,7 @@ class StartupCard extends Component {
     render() {
         const { classes } = this.props;
         const openStartupPage = () => {
-            window.location = "/mentorDashboard/TargetStartup/" + this.props.id
+            window.location = "/investorDashboard/TargetStartup/" + this.props.id
         }
         return (
             <Card className={classes.root}>
