@@ -32,7 +32,7 @@ class RegistrationPg extends React.Component {
             estateP: false,
             exists: false,
             helperUsername: '',
-            showPass:false
+            showPass: false
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.sleep = this.sleep.bind(this);
@@ -173,7 +173,7 @@ class RegistrationPg extends React.Component {
                                             To keep connected with us please login with your personal information by username and password
                                         </Typography> */}
                                     </div>
-                                    <div style={{ marginTop: 20, width: 500, height: 400, position: 'relative', width: '80%' }} elevation={10}>
+                                    <div style={{ marginTop: 15, width: 500, height: 400, position: 'relative', width: '80%' }} elevation={10}>
 
 
 
@@ -191,16 +191,16 @@ class RegistrationPg extends React.Component {
                                                         <TextField variant="outlined" error={this.state.estateM} style={{ marginBottom: 20, width: "100%" }} helperText={this.state.errors.email} id="standard-basic" label="Enter your Email" onChange={(event) => { this.setState({ email: event.target.value }) }} />
                                                     </div>
                                                     <div>
-                                                        <TextField variant="outlined" type={this.state.showPass ? 'text' :'password'} error={this.state.estateP} style={{ marginBottom: 20, width: "100%" }} helperText={this.state.errors.password} id="standard-basic" label="Enter password" onChange={(event) => { this.setState({ password: event.target.value }) }}
+                                                        <TextField variant="outlined" type={this.state.showPass ? 'text' : 'password'} error={this.state.estateP} style={{ marginBottom: 20, width: "100%" }} helperText={this.state.errors.password} id="standard-basic" label="Enter password" onChange={(event) => { this.setState({ password: event.target.value }) }}
                                                             InputProps={{
                                                                 endAdornment:
                                                                     <InputAdornment position="end">
                                                                         <IconButton
-                                                                        onClick={()=>{this.setState({showPass:!this.state.showPass})}}
+                                                                            onClick={() => { this.setState({ showPass: !this.state.showPass }) }}
                                                                             aria-label="toggle password visibility"
                                                                             edge="end">
-                                                                                {this.state.showPass ?    <Visibility /> : <VisibilityOff />}
-                                                                           
+                                                                            {this.state.showPass ? <Visibility /> : <VisibilityOff />}
+
                                                                         </IconButton>
                                                                     </InputAdornment>
                                                             }} />
