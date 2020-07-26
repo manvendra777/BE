@@ -15,6 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import './Text/styles3.scss'
 import { Spring, config } from 'react-spring/renderprops'
 import AutoScale from 'react-auto-scale';
+
 // Little helpers ...
 const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
 const Pink = ({ children }) => <span style={{ color: '#FF6AC1' }}>{children}</span>
@@ -328,7 +329,7 @@ class SpringFrontPage extends React.Component {
               {/* <img src={url('clients-main')} style={{ width: '40%' }} />*/}
               {/* <div style={{ backgroundSize: 'contain', backgroundColor: 'white', backgroundImage: `url(${photo1})`, width: '43%', height: '55%', borderRadius: 25 }} ></div>*/}
               <div style={{ position: 'absolute', bottom: 0, width: '100%', height: 300, backgroundColor: 'white' }}>
-                <img style={{ width: '100%', height: '100%', }} src='assets/foot.png'></img>
+                {/* <Footer/>  */ } 
               </div>
               <div style={{ marginLeft: '13%', marginBottom: '18%' }}>
                 <div>
