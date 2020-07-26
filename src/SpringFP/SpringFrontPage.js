@@ -14,6 +14,7 @@ import './Button/styles2.scss'
 import Typography from '@material-ui/core/Typography';
 import './Text/styles3.scss'
 import { Spring, config } from 'react-spring/renderprops'
+import AutoScale from 'react-auto-scale';
 // Little helpers ...
 const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
 const Pink = ({ children }) => <span style={{ color: '#FF6AC1' }}>{children}</span>
@@ -27,6 +28,8 @@ class SpringFrontPage extends React.Component {
   render() {
     return (
       <div >
+
+
         <Parallax style={{ backgroundColor: '#cbeaed' }} ref={ref => (this.parallax = ref)} pages={6}>
 
           <ParallaxLayer offset={0} speed={1} style={{ backgroundColor: '#eceff1' }} />
@@ -126,9 +129,9 @@ class SpringFrontPage extends React.Component {
             onClick={() => this.parallax.scrollTo(1)}
             style={{ display: 'flex', alignItems: 'center', justifyContent: 'left' }}>
 
-            <div style={{ backgroundRepeat: 'no-repeat', backgroundImage: `url(${photo1})`, backgroundSize: 'contain', width: '45%', height: '55%', marginTop: '10%' }} ></div>
+            <div style={{ backgroundRepeat: 'no-repeat', backgroundImage: `url(${photo1})`, backgroundSize: 'contain', marginLeft: '1%', width: '70vmin', height: '60vmin', marginTop: '10%' }} ></div>
 
-            <div style={{ marginLeft: '0%', marginBottom: '22%', width: '10%', }}>
+            <div style={{ marginLeft: '10%', marginBottom: '22%', width: '20vmin', }}>
               <Spring
                 delay={2500}
                 config={config.default}
@@ -142,7 +145,7 @@ class SpringFrontPage extends React.Component {
                 }}>
 
                 {props => <div style={props}>
-                  <img src={logo}></img>
+                  <img style={{ width: '20vmin' }} src={logo}></img>
                 </div>
                 }</Spring>
 
@@ -164,7 +167,7 @@ class SpringFrontPage extends React.Component {
               </div>
             </div>
 
-            <div style={{ marginLeft: 'auto', marginTop: '35%' }}>
+            <div style={{ marginLeft: 'auto', marginTop: '35%', }}>
               <Spring
                 delay={1000}
                 config={config.slow}
@@ -176,15 +179,14 @@ class SpringFrontPage extends React.Component {
                   opacity: 1, transform:
                     'translate3d(0px,0,0)',
                 }}>
-
                 {props => <div style={props}>
                   <div >
                     <Container>
-                      <h3 style={{ color: "#757575", fontFamily: "serif", fontStyle: "italic" }}>
+                      <Typography style={{ color: "#757575", fontFamily: "serif", fontStyle: "italic", fontSize: '2.7vmin' }}>
                         "Success is not final,<br />
                             failure is not fatal,<br />
-                            it's the courage to continue that counts."<br /> </h3>
-                      <h2 style={{ fontWeight: "bold", color: "#705d72", fontFamily: "serif" }}> ...Winston Churchill</h2>
+                            it's the courage to continue that counts."<br /> </Typography>
+                      <Typography style={{ fontWeight: "bold", color: "#705d72", fontFamily: "serif", fontSize: '3vmin' }}> ...Winston Churchill</Typography>
                     </Container>
                   </div>
                 </div>}
@@ -210,18 +212,19 @@ class SpringFrontPage extends React.Component {
 
               <div style={{ marginLeft: '-4%', backgroundRepeat: 'no-repeat', backgroundPositionX: '50%', backgroundColor: 'white', backgroundImage: `url(${photo2})`, backgroundSize: 'contain', width: '43%', height: '55%', borderRadius: 25 }} ></div>
 
-              <div style={{ marginLeft: '7%', marginBottom: '0%', width: '30%' }}>
+              <div style={{ marginLeft: '7%', marginBottom: '0%', width:'63vmin'}}>
+
                 <div>
                   <Typography style={{ fontFamily: 'Special Elite' }} variant="h3" gutterBottom>
                     Don't think out of the box
-               </Typography>
+                    </Typography>
                 </div>
                 <div>
                   <Typography style={{ fontFamily: 'Special Elite' }} variant="h4" gutterBottom>
                     leave the box,<br />
                   break the box,<br />
                   build your own.
-            </Typography>
+                    </Typography>
                   <div style={{ marginTop: 50 }}>
                     <Typography style={{ fontFamily: 'Special Elite' }} variant="h5" gutterBottom>
                       Register today to get connected to mentors and investors and kickstart your startup
@@ -233,6 +236,7 @@ class SpringFrontPage extends React.Component {
                   </a>
                   </div>
                 </div>
+
               </div>
             </ParallaxLayer>
 

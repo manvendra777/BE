@@ -9,6 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from 'react-router-dom'
 import './styles.scss';
 import logo from '../Photo/name.png'
+import AutoScale from 'react-auto-scale';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
-    color: '#767676'
+    color: '#767676',
   },
 }));
 
@@ -33,30 +34,33 @@ export default function ButtonAppBar() {
   }
   return (
     <div className={classes.root} >
-      <AppBar position="fixed" style={{ background: "#eeeeee" }}>
-        <Toolbar>
-          <div className={classes.title}>
-            <img style={{width: '10%', }} src={logo}></img>
-          </div>
+      <AppBar position="fixed" style={{ background: "#eeeeee", height: '6.5vmin' }}>
 
+        <div style={{ display: 'flex', marginTop: 'auto', marginBottom: 'auto', marginLeft: '3vmin', marginRight: '3vmin' }}>
+          <div className={classes.title}>
+            <img style={{ width: '17vmin', height: '4vmin', marginTop: 'auto', marginBottom: 'auto' }} src={logo}></img>
+          </div>
           {/* <Typography variant="h6" color="primary" >
             Kick Start Up
           </Typography>*/}
-          <Button style={{ marginRight: 20 }} variant="primary" onClick={gotoLog} >Login</Button>
-
-          <div style={{ zoom: 0.9 }}>
-            <button onClick={gotoReg} class="learn-more">
-              <span class="circle" aria-hidden="true">
-                <span class="icon arrow"></span>
-              </span>
-              <span class="button-text">Register</span>
-            </button>
-
+          <div style={{ marginRight: 20, width: '8vmin', height: '4vmin', marginTop: 'auto', marginBottom: 'auto' }}>
+            <AutoScale>
+              <Button variant="primary" onClick={gotoLog} >Login</Button>
+            </AutoScale>
           </div>
-
-
-        </Toolbar>
+          <div style={{ marginRight: 20, width: '14vmin', height: '4vmin', marginTop: 'auto', marginBottom: 'auto' }}>
+            <AutoScale>
+              <button onClick={gotoReg} class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow"></span>
+                </span>
+                <span class="button-text">Register</span>
+              </button>
+            </AutoScale>
+          </div>
+        </div>
       </AppBar>
+
     </div>
   );
 }
