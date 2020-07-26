@@ -8,7 +8,9 @@ import List from "@material-ui/core/List";
 import Invitation from "./Invitation";
 import axios from "axios";
 import Connections from "../Connections";
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
+import ConnectedStartup from './ConnectedStartup';
+
 const useStyles = (theme) => ({
   root: {
   },
@@ -68,6 +70,9 @@ class Base extends Component {
             </List>
           </div>
         </Paper>
+        <div style={{marginTop: 20}}>
+        <ConnectedStartup/>
+        </div>
       </div>
     );
   }
