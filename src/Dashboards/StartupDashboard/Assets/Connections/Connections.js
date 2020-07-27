@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Base from "./Assets/Base";
-import ConnectedMentor from './Assets/ConnectedMentor';
-import ConnectedInvestor from './Assets/ConnectedInvestor'
 class Connections extends Component {
     constructor(props) {
         super(props);

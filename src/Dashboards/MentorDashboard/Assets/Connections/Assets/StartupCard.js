@@ -63,7 +63,7 @@ getImage() {
 render(){
     const { classes } = this.props;
     const showProfile = () => {
-      window.location = "/mentorDashboard/TargetStartup/" + this.props.id
+      window.location = "/mentorDashboard/MyStartup/" + this.props.id
     }
   return (
     <div>

@@ -22,7 +22,7 @@ media: {
 },
 });
 
- class StartupCard extends React.Component {
+ class MentorCard extends React.Component {
 
   constructor(props) {
 		super(props);
@@ -37,8 +37,9 @@ media: {
 	componentDidMount() {
 		var id = this.props.id
 		var persons;
-
-		axios.get(`http://54.237.17.61/management/startup/profile/` + id)
+    console.log("called33");
+    console.log(this.props.id)
+		axios.get(`http://54.237.17.61/management/mentor/profile/` + id)
 			.then(res => {
 				persons = res.data;
 				console.log(persons);
@@ -52,7 +53,7 @@ componentWillMount() {
 getImage() {
     var self = this;
     var mem;
-    axios.get(`http://54.237.17.61/management/startup/photos/` + this.props.id)
+    axios.get(`http://54.237.17.61/management/mentor/photos/` + this.props.id)
         .then(res => {
             mem = res.data;
             self.setState({ image: mem })
@@ -63,7 +64,7 @@ getImage() {
 render(){
     const { classes } = this.props;
     const showProfile = () => {
-      window.location = "/investorDashboard/MyStartup/" + this.props.id
+      window.location = "/startupDashboard/MyMentor/" + this.props.id
     }
   return (
     <div>
@@ -96,4 +97,4 @@ render(){
 }
 }
 
-export default withStyles(useStyles)(StartupCard);
+export default withStyles(useStyles)(MentorCard);
