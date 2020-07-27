@@ -13,7 +13,8 @@ import Cookies from 'js-cookie';
 import { shadows } from '@material-ui/system';
 import { Link } from 'react-router-dom'
 import { Container } from '@material-ui/core';
-import Sidebar from './SideProfileUI/Sidebar'
+import './sidebar.css'
+
 const useStyles = theme => ({
   root: {
     width: "15%",
@@ -76,37 +77,23 @@ class Advertise extends Component {
 
     return (
       <div className={classes.root}>
-        <Sidebar/>
-        {/*
-         <Link to="/startupDashboard/Profile">
-          <Card style={{ marginTop: 30 }}>
-            <CardHeader
-              avatar={
-                <Avatar aria-label="Recipe" variant="circle" src={`data:image/jpeg;base64,${this.state.image}`} className={classes.large} style={{ border: 4, marginLeft: 37, border: '2px solid rgba(0, 0, 0, 0.23)' }} />
-              }
-            />
-            <center><Typography variant="h7" color="primary" style={{ fontWeight: "bold" }}>
-              <div >  {' ' + this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}</div>
-            </Typography>
-              <Typography variant="h7" >
-                <small style={{ color: "#696969" }}>  {this.state.myProfile.startupName}</small>
-              </Typography></center> <br></br>
-            <Divider />
-
-            <Typography variant="h8" style={{ color: "#696969", marginLeft: 5 }}>
-              Connections
-            </Typography><br />
-            <Typography variant="h8" style={{ marginLeft: 5, fontWeight: "bold" }}>
-              Mentor
-            </Typography><br />
-            <Typography variant="h8" style={{ marginLeft: 5, fontWeight: "bold" }}>
-              Investor
-            </Typography>
-
-          </Card>
+        <Link to="/startupDashboard/Profile">
+          <div className="container d-flex justify-content-center">
+            <div className="card p-3 py-5" style={{ background: "white" }}>
+              <div className="text-center"> <img src={`data:image/jpeg;base64,${this.state.image}`} style={{ height: 100, width: 100 }} className="rounded-circle" />
+                <h3 className="mt-2"> {" "}{" " + this.state.myProfile.firstName + " " + this.state.myProfile.lastName}</h3> <span className="mt-1 clearfix">{this.state.myProfile.startupName}</span>
+                <Divider variant="middle" /><br />
+                <small className="mt-4">{this.state.myProfile.startupDescription}</small>
+                <div className="social-buttons mt-5">
+                  <a href="https://www.linkedin.com/" target="_blank"><button className="neo-button" onclick="location.href='http://www.example.com'" type="button"><i className="fa fa-linkedin fa-1x"></i> </button> </a>
+                  <a href="https://www.google.com/" target="_blank"><button className="neo-button"><i className="fa fa-google fa-1x"></i> </button></a>
+                  <a href="https://www.youtube.com/" target="_blank">   <button className="neo-button"><i className="fa fa-youtube fa-1x"></i> </button></a>
+                  <a href="https://www.twitter.com/" target="_blank"><button className="neo-button"><i className="fa fa-twitter fa-1x"></i> </button></a>
+                </div>
+              </div>
+            </div>
+          </div>
         </Link>
-        */}
-
       </div>
     );
   }
