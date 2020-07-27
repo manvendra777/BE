@@ -24,12 +24,15 @@ export default class StartupDashboard extends Component {
 		};
 
 	}
+	componentWillMount(){
+		document.body.style.backgroundColor = "#eeeeee";
+	}
 
 	render() {
 		const theme = createMuiTheme({
 			palette: {
 				primary: {
-					main: '#2196f3',
+					main: '#5c6bc0',
 				}
 			}
 		});
@@ -40,7 +43,7 @@ export default class StartupDashboard extends Component {
 					<Router >
 						<Header />
 						<div style={{ margin: '75px', marginLeft: '10px' }}>
-							<ListOfOnlineCandidates />
+							{<ListOfOnlineCandidates />}
 							<Advertise />
 							<div style={{ marginTop: "5%" }}>
 							</div>

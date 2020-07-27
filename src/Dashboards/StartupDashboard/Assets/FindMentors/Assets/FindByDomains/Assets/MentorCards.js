@@ -50,7 +50,7 @@ class MentorCard extends Component {
             window.location = "/startupDashboard/TargetMentor/" + this.props.id
         }
         return (
-            <Card className={classes.root}>
+            <Card elevation={5} className={classes.root}>
                 <CardActionArea onClick={openMentorPage}>
                     <CardMedia
                         className={classes.media}

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link, Route } from 'react-router-dom';
 import './RegistrationPg.css';
@@ -173,10 +174,7 @@ class RegistrationPg extends React.Component {
                                             To keep connected with us please login with your personal information by username and password
                                         </Typography> */}
                                     </div>
-                                    <div style={{ marginTop: 15, width: 500, height: 400, position: 'relative', width: '80%' }} elevation={10}>
-
-
-
+                                    <div style={{ marginTop: 0, position: 'relative', width: '80%' }} elevation={10}>
 
                                         <Container>
                                             <Form className="RegistrationPg" method="post" onSubmit={this.handleSubmit} style={{ marginBottom: 40, marginTop: 20, marginLeft: 20 }}>

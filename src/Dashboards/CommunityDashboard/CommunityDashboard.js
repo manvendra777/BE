@@ -24,12 +24,16 @@ export default class StartupDashboard extends Component {
 		};
 
 	}
+	componentWillMount(){
+		document.body.style.backgroundColor = "#eeeeee";
+	}
+	
 
 	render() {
 		const theme = createMuiTheme({
 			palette: {
 				primary: {
-					main: '#f9fe20',
+					main: '#7e57c2',
 				}
 			}
 		});

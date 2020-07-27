@@ -84,7 +84,7 @@ class MyAvertise extends Component {
             style={{ marginLeft: "3%" }}
           >
             <PaymentIcon />
-            Pay for more !
+            Get premium
           </Fab>
           <Dialog
             fullWidth={true}

@@ -23,7 +23,7 @@ const useStyles =  theme => ({
     render() {
       const { classes } = this.props;
     return (
-      <div style={{marginRight:'30%',marginBottom:10,marginTop:10}}><Card elevation={5} style={{color:'#435a7b',background:'#FFFFFF',marginTop:5,marginBottom:5,textAlign:'left',padding:7,paddingLeft:25 ,borderBottomLeftRadius:25,borderTopRightRadius:25,borderBottomRightRadius:25,}}>{this.props.msg}</Card></div> 
+      <div style={{marginRight:'40%',marginBottom:10,marginTop:10}}><Card elevation={5} style={{color:'#435a7b',background:'#FFFFFF',marginTop:5,marginBottom:5,textAlign:'left',padding:7,paddingLeft:25 ,borderBottomLeftRadius:25,borderTopRightRadius:25,borderBottomRightRadius:25,}}>{this.props.msg}</Card></div> 
       );
   }}
   export default withStyles(useStyles)(Rec);

@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
 import './FrontPage.css'
 import { Container } from '@material-ui/core';
-import Footer from '../FrontPage/Footer'
 import photo1 from '../Photo/photo1_trans.gif'
 import photo2 from '../Photo/photo2.gif'
 import photo3 from '../Photo/photo3.gif'
@@ -15,6 +14,8 @@ import Typography from '@material-ui/core/Typography';
 import './Text/styles3.scss'
 import { Spring, config } from 'react-spring/renderprops'
 import AutoScale from 'react-auto-scale';
+import Footer from './Footer/Footer'
+
 // Little helpers ...
 const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
 const Pink = ({ children }) => <span style={{ color: '#FF6AC1' }}>{children}</span>
@@ -212,7 +213,7 @@ class SpringFrontPage extends React.Component {
 
               <div style={{ marginLeft: '-4%', backgroundRepeat: 'no-repeat', backgroundPositionX: '50%', backgroundColor: 'white', backgroundImage: `url(${photo2})`, backgroundSize: 'contain', width: '43%', height: '55%', borderRadius: 25 }} ></div>
 
-              <div style={{ marginLeft: '7%', marginBottom: '0%', width:'63vmin'}}>
+              <div style={{ marginLeft: '7%', marginBottom: '0%', width: '63vmin' }}>
 
                 <div>
                   <Typography style={{ fontFamily: 'Special Elite' }} variant="h3" gutterBottom>
@@ -236,7 +237,6 @@ class SpringFrontPage extends React.Component {
                   </a>
                   </div>
                 </div>
-
               </div>
             </ParallaxLayer>
 
@@ -324,16 +324,24 @@ class SpringFrontPage extends React.Component {
             <ParallaxLayer
               offset={5}
               speed={-0}
-              onClick={() => this.parallax.scrollTo(0)}>
+              >
               {/* <img src={url('clients-main')} style={{ width: '40%' }} />*/}
               {/* <div style={{ backgroundSize: 'contain', backgroundColor: 'white', backgroundImage: `url(${photo1})`, width: '43%', height: '55%', borderRadius: 25 }} ></div>*/}
               <div style={{ position: 'absolute', bottom: 0, width: '100%', height: 300, backgroundColor: 'white' }}>
-                <img style={{ width: '100%', height: '100%', }} src='assets/foot.png'></img>
+                {/* <Footer/>  */}
+                <Footer />
               </div>
-              <div style={{ marginLeft: '13%', marginBottom: '18%' }}>
+
+
+              {/* CODE START FROM HERE */}
+
+              <div >
+
+                {/* PHOTO INSIDE THIS */}
+                       
                 <div>
                   <Typography style={{ fontFamily: 'Special Elite' }} variant="h3" gutterBottom>
-
+                    kjajklsf
                   </Typography>
                 </div>
                 <div>
@@ -341,7 +349,12 @@ class SpringFrontPage extends React.Component {
 
                   </Typography>
                 </div>
+
+
               </div>
+
+
+
             </ParallaxLayer>
 
           </div>

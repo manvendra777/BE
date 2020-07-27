@@ -18,6 +18,9 @@ export default class StartupDashboard extends Component {
 		};
 
 	}
+	componentWillMount(){
+		document.body.style.backgroundColor = "#eeeeee";
+	}
 
 	render() {
 		const theme = createMuiTheme({

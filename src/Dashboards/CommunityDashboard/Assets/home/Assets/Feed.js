@@ -10,6 +10,7 @@ import Post from './Post'
 import Divider from '@material-ui/core/Divider';
 import Advertise from '../../Advertise/Advertise'
 import axios from 'axios'
+import Typography from '@material-ui/core/Typography';
 const useStyles = theme => ({
 
 });
@@ -23,35 +24,38 @@ class Feed extends Component {
     }
     this.getPosts = this.getPosts.bind(this)
   }
-  componentWillMount(){
+  componentWillMount() {
+    
+    
     this.getPosts();
   }
 
   getPosts() {
     var ads;
     var self = this;
-    axios.get(`http://54.237.17.61/forum/getPostsByDomain/`, { params: { tag:this.props.match.params.Domain } })
+    axios.get(`http://54.237.17.61/forum/getPostsByDomain/`, { params: { tag: this.props.match.params.Domain } })
       .then(res => {
         ads = res.data;
         console.log(ads);
         ads.map((item, i) => {
-          self.setState({ postList: [...self.state.postList, <Post date ={item.dateOfCreation}id={item.discussionId}/>] })
+          self.setState({ postList: [...self.state.postList, <Post date={item.dateOfCreation} id={item.discussionId} />] })
         })
       })
   }
 
-
-
   render() {
     return (
-     
+
       <div style={{ width: '84%', padding: '1%' }}>
         <div style={{ width: '50%', marginLeft: 'auto', marginRight: 'auto' }}>
-          <h1>{this.props.match.params.Domain}</h1>
+          <Typography variant="h4" color="primary" gutterBottom>
+            {this.props.match.params.Domain}
+          </Typography>
+
           <Divider />
           <CreatePost postDomain={this.props.match.params.Domain} />
           <div style={{ marginTop: '2%' }}>
-            {this.state.postList.map(child=>child)}
+            {this.state.postList.map(child => child)}
           </div>
         </div>
       </div>
