@@ -13,7 +13,7 @@ import Cookies from 'js-cookie';
 import { shadows } from '@material-ui/system';
 import { Link } from 'react-router-dom'
 import { Container } from '@material-ui/core';
-import Ui from './SideProfileUI/Sidebar'
+
 const useStyles = theme => ({
   root: {
     width: "15%",
@@ -76,40 +76,33 @@ class Advertise extends Component {
 
     return (
       <div className={classes.root}>
-        <Ui/>
-        {/**
-       * 
-       * 
-       *  
-       <Link to= "/startupDashboard/Profile">
-      <Card style={{marginTop:30}}>
-        <CardHeader
-          avatar={
-            <Avatar aria-label="Recipe" variant="circle" src={`data:image/jpeg;base64,${this.state.image}`} className={classes.large} style={{border:4, marginLeft: 37,  border: '2px solid rgba(0, 0, 0, 0.23)'}}/>
-          }
-        />
-        <center><Typography variant="h7" color= "primary" style={{fontWeight: "bold"}}>
+        <Link to="/startupDashboard/Profile">
+          <Card style={{ marginTop: 30 }}>
+            <CardHeader
+              avatar={
+                <Avatar aria-label="Recipe" variant="circle" src={`data:image/jpeg;base64,${this.state.image}`} className={classes.large} style={{ border: 4, marginLeft: 37, border: '2px solid rgba(0, 0, 0, 0.23)' }} />
+              }
+            />
+            <center><Typography variant="h7" color="primary" style={{ fontWeight: "bold" }}>
               <div >  {' ' + this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}</div>
             </Typography>
-            <Typography variant="h7" >
-              <small style={{ color: "#696969"}}>  { this.state.myProfile.startupName}</small>
-            </Typography></center> <br></br>
+              <Typography variant="h7" >
+                <small style={{ color: "#696969" }}>  {this.state.myProfile.startupName}</small>
+              </Typography></center> <br></br>
             <Divider />
-            
-            <Typography variant="h8" style={{ color: "#696969", marginLeft: 5}}>
-                Connections
-            </Typography><br/>
-            <Typography variant="h8" style={{marginLeft: 5, fontWeight: "bold"}}>
-                Mentor
-            </Typography><br/>
-            <Typography variant="h8" style={{marginLeft: 5, fontWeight: "bold"}}>
-                Investor
-            </Typography>
-          
-      </Card>
-      </Link>
-       */}
 
+            <Typography variant="h8" style={{ color: "#696969", marginLeft: 5 }}>
+              Connections
+            </Typography><br />
+            <Typography variant="h8" style={{ marginLeft: 5, fontWeight: "bold" }}>
+              Mentor
+            </Typography><br />
+            <Typography variant="h8" style={{ marginLeft: 5, fontWeight: "bold" }}>
+              Investor
+            </Typography>
+
+          </Card>
+        </Link>
       </div>
     );
   }
