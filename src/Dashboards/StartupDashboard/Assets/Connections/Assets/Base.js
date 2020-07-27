@@ -11,7 +11,7 @@ import axios from "axios";
 import Connections from "../Connections";
 import Getname from "./Getname";
 import Cookies from "js-cookie";
-import ConnectedMentor from "./ConnectedMentor";
+import ConnectedPeople from "./ConnectedPeople";
 
 const useStyles = (theme) => ({
   root: {},
@@ -89,7 +89,7 @@ class Base extends Component {
           </div>
         </Paper>
         <div style={{ marginTop: 20 }}>
-          <ConnectedMentor />
+          <ConnectedPeople />
         </div>
       </div>
     );
