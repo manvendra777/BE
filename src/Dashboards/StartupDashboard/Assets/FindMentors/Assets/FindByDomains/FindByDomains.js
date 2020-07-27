@@ -13,14 +13,10 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-<<<<<<< HEAD
 import Animate from './Assets/Animate';
 import {trackPromise} from 'react-promise-tracker';
-=======
-import Animate from './Assets/Animate'
 import photo from './Assets/workbench_trnas.png'
 import Paper from '@material-ui/core/Paper';
->>>>>>> 0ca3d8c85d4022440818bc72dbe93dd48b22808b
 class FindByDomains extends Component {
     constructor(props) {
         super(props);
@@ -34,15 +30,11 @@ class FindByDomains extends Component {
         this.getListData = this.getListData.bind(this)
     }
 
-<<<<<<< HEAD
     
   sleep(time) {
     return new Promise((resolve) => setTimeout(resolve, time)
     )
   }
-=======
-
->>>>>>> 0ca3d8c85d4022440818bc72dbe93dd48b22808b
 
     getList = (event) => {
 

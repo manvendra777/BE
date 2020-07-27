@@ -14,9 +14,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import Button from '@material-ui/core/Button';
 import Slider from '@material-ui/core/Slider';
 import Grid from '@material-ui/core/Grid';
-import Animate from './Animate';
 import {trackPromise} from 'react-promise-tracker';
-
 import Animate from './Animate'
 import photo from './investor_find.png'
 class FindByCapacity extends Component {
@@ -61,12 +59,8 @@ class FindByCapacity extends Component {
         //54.237.17.61/management/investor/profile/find?min=100&max=199
         this.setState({ InvestorList: [] })
         var investor;
-<<<<<<< HEAD
         trackPromise(
             axios.get(`http://54.237.17.61/management/investor/profile/find`, { params: { min: this.state.value[0],max:this.state.value[1] } })
-=======
-        axios.get(`http://54.237.17.61/management/investor/profile/find`, { params: { min: this.state.value[0], max: this.state.value[1] } })
->>>>>>> 0ca3d8c85d4022440818bc72dbe93dd48b22808b
             .then(res => {
                 investor = res.data;
                 investor.map((item, i) => {

@@ -11,18 +11,18 @@ import Avatar from '@material-ui/core/Avatar';
 import CardHeader from '@material-ui/core/CardHeader';
 import Cookies from 'js-cookie';
 import { shadows } from '@material-ui/system';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Container } from '@material-ui/core';
-
+import Ui from './SideProfileUI/Sidebar'
 const useStyles = theme => ({
   root: {
-      width:"15%",
-      margin:0,
-      position:'fixed',
-      height: "90%",
+    width: "15%",
+    margin: 0,
+    position: 'fixed',
+    height: "90%",
   },
-  media:{
-    height:140
+  media: {
+    height: 140
   },
   large: {
     width: theme.spacing(11),
@@ -33,17 +33,17 @@ const useStyles = theme => ({
 
 class Advertise extends Component {
   constructor(props) {
-		super(props);
+    super(props);
 
-		this.state = {
-      members:[],
-      image:null,
+    this.state = {
+      members: [],
+      image: null,
       myProfile: {}
     };
-    this.getImage  = this.getImage.bind(this);
+    this.getImage = this.getImage.bind(this);
   }
-  
-  componentWillMount(){
+
+  componentWillMount() {
     this.getImage()
     this.getName()
   };
@@ -51,32 +51,37 @@ class Advertise extends Component {
   getImage() {
     var self = this;
     var mem;
-    axios.get(`http://54.237.17.61/management/startup/photos/`+Cookies.get('id'))
-        .then(res => {
-            mem = res.data;
-            self.setState({ image: mem })
-        })
-}
-showImage() {
+    axios.get(`http://54.237.17.61/management/startup/photos/` + Cookies.get('id'))
+      .then(res => {
+        mem = res.data;
+        self.setState({ image: mem })
+      })
+  }
+  showImage() {
     return (<img src={`data:image/jpeg;base64,${this.state.image}`} />)
-}
+  }
 
-getName() {
-  var persons  
-  axios.get(`http://54.237.17.61/management/startup/profile/`+Cookies.get('id'))
+  getName() {
+    var persons
+    axios.get(`http://54.237.17.61/management/startup/profile/` + Cookies.get('id'))
       .then(res => {
         persons = res.data;
-				console.log(persons);
-				this.setState({ myProfile: persons })
+        console.log(persons);
+        this.setState({ myProfile: persons })
       })
-}
+  }
 
   render() {
     const { classes } = this.props;
 
-  return (
-    <div className={classes.root}>
-      <Link to= "/startupDashboard/Profile">
+    return (
+      <div className={classes.root}>
+        <Ui/>
+        {/**
+       * 
+       * 
+       *  
+       <Link to= "/startupDashboard/Profile">
       <Card style={{marginTop:30}}>
         <CardHeader
           avatar={
@@ -103,8 +108,10 @@ getName() {
           
       </Card>
       </Link>
-    </div>
-  );
-}
+       */}
+
+      </div>
+    );
+  }
 }
 export default withStyles(useStyles)(Advertise);
