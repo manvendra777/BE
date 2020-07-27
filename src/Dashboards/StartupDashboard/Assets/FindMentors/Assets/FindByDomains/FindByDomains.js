@@ -13,8 +13,14 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+<<<<<<< HEAD
 import Animate from './Assets/Animate';
 import {trackPromise} from 'react-promise-tracker';
+=======
+import Animate from './Assets/Animate'
+import photo from './Assets/workbench_trnas.png'
+import Paper from '@material-ui/core/Paper';
+>>>>>>> 0ca3d8c85d4022440818bc72dbe93dd48b22808b
 class FindByDomains extends Component {
     constructor(props) {
         super(props);
@@ -23,15 +29,20 @@ class FindByDomains extends Component {
             domains: [],
             value: [],
             MentorList: [],
+            isEmpty: true,
         };
         this.getListData = this.getListData.bind(this)
     }
 
+<<<<<<< HEAD
     
   sleep(time) {
     return new Promise((resolve) => setTimeout(resolve, time)
     )
   }
+=======
+
+>>>>>>> 0ca3d8c85d4022440818bc72dbe93dd48b22808b
 
     getList = (event) => {
 
@@ -69,12 +80,22 @@ class FindByDomains extends Component {
         )
       
     }
+
+    showData = () => {
+        if (this.state.MentorList.length > 0) {
+            return (this.state.MentorList.map(child => child))
+        } else {
+            return (<div><div elevation={5} style={{width: '100%', height: '100%', display: 'flex' }} >
+                <img style={{ width: '100%', marginTop: 'auto', }} src={photo}></img>
+            </div></div>)
+        }
+    }
     render() {
 
         return (
             <div>
                 <Card elevation={5} style={{ width: '84%', marginTop: 10, }}>
-                    <Typography variant="h5" color='primary' style={{ margin: 10 }} gutterBottom>
+                    <Typography variant="h5" color='primary' style={{ backgroundColor: '#e8eaf6', padding: 10 }} >
                         Find Mentor
 							</Typography>
                     <Divider />
@@ -94,7 +115,7 @@ class FindByDomains extends Component {
                                     <FormControlLabel control={<Checkbox onClick={this.getList} name="Sports" value="Sports" color="primary" />} label="Sports" />
                                     <FormControlLabel control={<Checkbox onClick={this.getList} name="Other" value="Other" color="primary" />} label="Other" />
                                 </FormGroup>
-                                <Button style={{ marginTop: 30 }} variant="contained" color= "primary" onClick={this.getListData}>find</Button>
+                                <Button style={{ marginTop: 30 }} variant="contained" color="primary" onClick={this.getListData}>find</Button>
                             </FormControl>
                         </div>
                         <Divider orientation="vertical" flexItem />
@@ -102,7 +123,7 @@ class FindByDomains extends Component {
                             <div style={{ background: '#ffffff', overflowY: 'scroll', height: '100%' }}>
                                 <div style={{ margin: 10 }}>
                                     <Grid container spacing={0}>
-                                        {this.state.MentorList.map(child => child)}
+                                        {this.showData()}
                                     </Grid>
                                 </div>
                             </div>

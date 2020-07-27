@@ -66,19 +66,23 @@ class MyAvertise extends Component {
   render() {
     return (
       <Paper style={{ width: "80%", marginLeft: "2%", height: "100%" }}>
-        <Typography variant="h5" color="primary" style={{ padding: "1%" }}>
-          My Advertise
+        <Typography variant="h5" color="primary" style={{ padding: "1%", backgroundColor: '#e8eaf6', }}>
+          My advertise
         </Typography>
         <Divider />
         <div style={{ marginLeft: "1%", padding: "2%", display: "flex" }}>
-          <Fab variant="extended" onClick={this.createAd}>
+
+
+          <Fab color='primary' variant="extended" onClick={this.createAd}>
             <AddIcon />
             Create Ad
           </Fab>
           <Dialog open={this.state.isModelOpen} onClose={this.createAd}>
             <CreateAd refresh={this.refreshPage} method={this.createAd} />
           </Dialog>
+
           <Fab
+            color='primary'
             variant="extended"
             onClick={this.createPayForMore}
             style={{ marginLeft: "3%" }}
@@ -86,6 +90,8 @@ class MyAvertise extends Component {
             <PaymentIcon />
             Get premium
           </Fab>
+
+
           <Dialog
             fullWidth={true}
             maxWidth={"md"}

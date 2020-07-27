@@ -7,23 +7,23 @@ class Recommendation extends Component {
     render() {
         return (
             <div>
-                <Card style={{width: '84%'}} elevation={5}>
-                <Typography variant="h5" color='primary' style={{margin:10}} gutterBottom>
-								Recommendation
+                <Card style={{ width: '84%' }} elevation={5}>
+                    <Typography variant="h5" color='primary' style={{ backgroundColor: '#e8eaf6',padding:10 }} >
+                        Recommendation
 							</Typography>
-                <Divider/>
-                <div style={{ width: '100%',padding: 0, flex: 1, display: 'flex', overflow: 'auto', }}>
-                    <div style={{ display: 'flex', overflowX: 'scroll',background:'#DCDCDC',padding:10 }}>
-                        <MentorCard />
-                        <MentorCard />
-                        <MentorCard />
-                        <MentorCard />
-                        <MentorCard />
-                        <MentorCard />
-                        <MentorCard />
-                        <MentorCard />
+                    <Divider />
+                    <div style={{ width: '100%', padding: 0, flex: 1, display: 'flex', overflow: 'auto', }}>
+                        <div style={{ display: 'flex', overflowX: 'scroll', padding: 10 }}>
+                            <MentorCard />
+                            <MentorCard />
+                            <MentorCard />
+                            <MentorCard />
+                            <MentorCard />
+                            <MentorCard />
+                            <MentorCard />
+                            <MentorCard />
+                        </div>
                     </div>
-                </div>
                 </Card >
             </div >
         );

@@ -14,16 +14,21 @@ import FormGroup from '@material-ui/core/FormGroup';
 import Button from '@material-ui/core/Button';
 import Slider from '@material-ui/core/Slider';
 import Grid from '@material-ui/core/Grid';
+<<<<<<< HEAD
 import Animate from './Animate';
 import {trackPromise} from 'react-promise-tracker';
 
+=======
+import Animate from './Animate'
+import photo from './investor_find.png'
+>>>>>>> 0ca3d8c85d4022440818bc72dbe93dd48b22808b
 class FindByCapacity extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             domains: [],
-            value: [0,1000],
+            value: [0, 1000],
             InvestorList: [],
         };
         this.getListData = this.getListData.bind(this)
@@ -59,8 +64,12 @@ class FindByCapacity extends Component {
         //54.237.17.61/management/investor/profile/find?min=100&max=199
         this.setState({ InvestorList: [] })
         var investor;
+<<<<<<< HEAD
         trackPromise(
             axios.get(`http://54.237.17.61/management/investor/profile/find`, { params: { min: this.state.value[0],max:this.state.value[1] } })
+=======
+        axios.get(`http://54.237.17.61/management/investor/profile/find`, { params: { min: this.state.value[0], max: this.state.value[1] } })
+>>>>>>> 0ca3d8c85d4022440818bc72dbe93dd48b22808b
             .then(res => {
                 investor = res.data;
                 investor.map((item, i) => {
@@ -72,11 +81,21 @@ class FindByCapacity extends Component {
     
     }
 
+    showData = () => {
+        if (this.state.InvestorList.length > 0) {
+            return (this.state.InvestorList.map(child => child))
+        } else {
+            return (<div><div elevation={5} style={{ width: '70%', height: '70%', display: 'flex',marginRight:'auto',marginLeft:'auto' }} >
+                <img style={{ width: '100%', marginTop: 'auto', }} src={photo}></img>
+            </div></div>)
+        }
+    }
+
 
     valuetext = (value) => {
         return '${value}°C';
     }
-   
+
     render() {
         const marks = [
             {
@@ -119,20 +138,20 @@ class FindByCapacity extends Component {
                                     max={10000}
                                     min={0}
                                     step={100}
-                                    onChange={ (e, val) => this.setState({value:val}) }
+                                    onChange={(e, val) => this.setState({ value: val })}
                                 />
 
-                                <Button style={{ marginTop: 20 }} variant="outlined" onClick={this.getListData}>find</Button>
+                                <Button style={{ marginTop: 20 }} variant="contained" color="primary" onClick={this.getListData}>find</Button>
                             </FormControl>
                         </div>
                         <Divider orientation="vertical" flexItem />
 
                         <div style={{ height: 550, display: 'block', width: '100%' }}>
-                            <div style={{ background: '#bfbfbf', overflow: 'scroll', height: '100%' }}>
-                                <div style={{margin:10}}>
-                                <Grid container spacing={0}>
-                                    {this.state.InvestorList.map(child => child)}
-                                </Grid>
+                            <div style={{ overflowY: 'scroll', height: '100%' }}>
+                                <div style={{ margin: 10 }}>
+                                    <Grid container spacing={0}>
+                                        {this.showData()}
+                                    </Grid>
                                 </div>
                             </div>
                         </div>
