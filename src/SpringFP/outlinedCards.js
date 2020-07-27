@@ -7,6 +7,9 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { render } from "@testing-library/react";
+import { Avatar } from "@material-ui/core";
+import { Divider } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
 const useStyles = (theme) => ({
   root: {
@@ -18,11 +21,15 @@ const useStyles = (theme) => ({
     transform: "scale(0.8)",
   },
   title: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: "Special Elite",
   },
   pos: {
     marginBottom: 12,
+  },
+  large: {
+    width: theme.spacing(10),
+    height: theme.spacing(10),
   },
 });
 
@@ -43,8 +50,7 @@ class OutlinedCard extends Component {
                 <Typography
                   style={{
                     fontFamily: "Special Elite",
-                    marginLeft: "auto",
-                    marginRight: "auto",
+                    textAlign: "center",
                   }}
                   variant="h4"
                   gutterBottom
@@ -52,25 +58,148 @@ class OutlinedCard extends Component {
                   Developers
                 </Typography>
               </div>
-              <div variant="h5" component="h2">
-                <Typography>benevolent</Typography>
-              </div>
-              <div className={classes.pos} color="textSecondary">
-                <Typography>adjective</Typography>
-              </div>
-              <div variant="body2" component="p">
-                <Typography>
-                  well meaning and kindly.
-                  <br />
-                  {'"a benevolent smile"'}
+              <Grid container direction="row">
+                <div
+                  style={{
+                    marginLeft: "auto",
+                    marginRight: "5%",
+                    marginBottom: "2%",
+                    fontSize: "10",
+                  }}
+                >
+                  <Typography>
+                    <Avatar
+                      style={{ marginLeft: "auto", marginRight: "auto" }}
+                      src="assets/sanket.png"
+                      className={classes.large}
+                    />
+                    Sanket Tupe
+                  </Typography>
+                </div>
+                <div
+                  style={{
+                    marginRight: "5%",
+                    marginBottom: "2%",
+                    fontSize: "1",
+                  }}
+                >
+                  <Typography>
+                    <Avatar
+                      style={{ marginLeft: "auto", marginRight: "auto" }}
+                      src="assets/manvendra.png"
+                      className={classes.large}
+                    />
+                    Manvendra Chavan
+                  </Typography>
+                </div>
+
+                <div
+                  style={{
+                    marginRight: "5%",
+                    marginBottom: "2%",
+                    fontSize: "10",
+                  }}
+                >
+                  <Typography>
+                    <Avatar
+                      style={{ marginLeft: "auto", marginRight: "auto" }}
+                      src="assets/chaitrali.png"
+                      className={classes.large}
+                    />
+                    Chaitrali Shinde
+                  </Typography>
+                </div>
+                <div
+                  style={{
+                    marginRight: "5%",
+                    marginBottom: "2%",
+                    fontSize: "10",
+                  }}
+                >
+                  <Typography>
+                    <Avatar
+                      style={{ marginLeft: "auto", marginRight: "auto" }}
+                      src="assets/shubhankar.jpeg"
+                      className={classes.large}
+                    />
+                    Shubhankar Deshmukh
+                  </Typography>
+                </div>
+                <div
+                  style={{
+                    marginRight: "5%",
+                    marginBottom: "2%",
+                    fontSize: "10",
+                  }}
+                >
+                  <Typography>
+                    <Avatar
+                      style={{ marginLeft: "auto", marginRight: "auto" }}
+                      src="assets/harshal.jpg"
+                      className={classes.large}
+                    />
+                    Harshal Sabale
+                  </Typography>
+                </div>
+                <div style={{ marginRight: "auto", fontSize: "10" }}>
+                  <Typography>
+                    <Avatar
+                      style={{
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        marginBottom: "2%",
+                      }}
+                      src="assets/daksh.png"
+                      className={classes.large}
+                    />
+                    Daksh Chaudhary
+                  </Typography>
+                </div>
+              </Grid>
+              <Divider />
+              <div className={classes.title} color="textSecondary" gutterBottom>
+                <Typography
+                  style={{
+                    fontFamily: "Special Elite",
+                    textAlign: "center",
+                  }}
+                  variant="h4"
+                  gutterBottom
+                >
+                  Mentors
                 </Typography>
               </div>
+              <Grid container direction="row">
+                <div
+                  style={{
+                    marginLeft: "auto",
+                    marginRight: "5%",
+                    marginBottom: "3%",
+                    fontSize: "10",
+                  }}
+                >
+                  <Typography>
+                    <Avatar
+                      style={{ marginLeft: "auto", marginRight: "auto" }}
+                      src="assets/nageshsir.jpeg"
+                      className={classes.large}
+                    />
+                    Nagesh Salunke
+                  </Typography>
+                </div>
+
+                <div style={{ marginRight: "auto", fontSize: "10" }}>
+                  <Typography>
+                    <Avatar
+                      style={{ marginLeft: "auto", marginRight: "auto" }}
+                      src="assets/santoshsir.jfif"
+                      className={classes.large}
+                    />
+                    Santosh Nagargoje
+                  </Typography>
+                </div>
+              </Grid>
             </CardContent>
-          </div>
-          <div>
-            <CardActions>
-              <Button size="small">Learn More</Button>
-            </CardActions>
           </div>
         </Card>
       </div>
