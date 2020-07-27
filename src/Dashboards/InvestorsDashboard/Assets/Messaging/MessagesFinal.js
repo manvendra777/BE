@@ -77,25 +77,34 @@ class MessagesFinal extends Component {
       buffer: [],
       members: [],
       addedUserId: '',
-      addedUserName:'',
+      addedUserName: '',
       selected: false,
+      addedUserImage:'',
+      addedUserType:'',
+      sel:'',
+      a:'b',
+      userSelected: true,
       myId: Cookies.get('id'),
     };
     this.keyPress = this.keyPress.bind(this);
     this.setAddedUser = this.setAddedUser.bind(this)
   }
 
-  setAddedUser = (addedUser,name) => {
+  setAddedUser = (addedUser, name,type,ima) => {
     this.setState({
       addedUserId: addedUser,
-      addedUserName:name,
+      addedUserName: name,
+      addedUserType:type,
+      addedUserImage:ima,
       msg: [],
       msgTypo: '',
       buffer: [],
       selected: true,
     })
   }
-
+componentDidUpdate(){
+  this.setAddedUser()
+}
 
   getUsers() {
     var myid = Cookies.get('id');
@@ -104,7 +113,7 @@ class MessagesFinal extends Component {
       .then(res => {
         mem = res.data;
         mem.map((item, i) => {
-          var id=item;
+          var id = item;
           axios
             .get("http://54.237.17.61/security/getTypeById?id=" + id)
             .then((res) => {
@@ -113,12 +122,17 @@ class MessagesFinal extends Component {
               var userType;
               axios
                 .get(
-                  `http://54.237.17.61/management/` + userType + `/profile/` +id
+                  `http://54.237.17.61/management/` + userType + `/profile/` + id
                 )
                 .then((res) => {
                   persons = res.data;
-                  console.log(persons);
-                  this.setState({ members: [...this.state.members, <Added name={persons.firstName + ' '+persons.lastName} id={item} method={this.setAddedUser} />] })
+                  var self = this;
+                  var mem;
+                  axios.get(`http://54.237.17.61/management/` + userType + `/photos/` + id)
+                    .then(res => {
+                      mem = res.data;
+                      this.setState({ members: [...this.state.members, <Added a={this.state.a} selected={'sle '+i} image={mem} type={userType} name={persons.firstName + ' ' + persons.lastName} id={item} method={this.setAddedUser} />] })
+                    })
                 });
             });
         })
@@ -226,7 +240,7 @@ class MessagesFinal extends Component {
         </div>
         {this.state.selected ? <Paper style={{ backgroundColor: '#eeeeee' }} className={classes.root}>
           <Paper elevation={5} style={{ zIndex: 10, backgroundColor: '#e8eaf6' }}>
-            <User show={this.state.selected} style={{ color: '#e8eaf6', }} id={this.state.addedUserId} name={this.state.addedUserName} />
+            <User show={this.state.selected} style={{ color: '#e8eaf6', }} id={this.state.addedUserId} name={this.state.addedUserName} image={this.state.addedUserImage} type={this.state.addedUserType} />
           </Paper>
 
           <Paper elevation={5} style={{ height: '120%', marginTop: '-0.5%' }}>

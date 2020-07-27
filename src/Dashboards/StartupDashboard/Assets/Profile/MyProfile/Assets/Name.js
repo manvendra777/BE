@@ -116,10 +116,10 @@ class Name extends Component {
             profession: props.data.profession
         });
         if (props.data.dipp_no) {
-            if(props.data.dipp_no){
+            if (props.data.dipp_no) {
                 this.setState({ showVe: true })
             }
-            
+
         }
     }
 
@@ -164,17 +164,17 @@ class Name extends Component {
             .then(function (response) {
                 console.log(response.data);
             })
-            window.location.reload()
+        window.location.reload()
     }
     handleChange(e) {
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    checkDipp = () => {
-
+    showDomain = () => {
+        if (typeof this.props.data.domain !== 'undefined') {
+            return (this.props.data.domain.map((item, i) => (<Chip color="primary" style={{ marginLeft: 7 }} label={item} />)))
+        }
     }
-
-
     render() {
         const { classes } = this.props;
         const loginForm = (
@@ -184,9 +184,10 @@ class Name extends Component {
                         Edit your Details
                     </Typography>
                     <Divider />
-                    <div style={{ padding: '2%' }}>
+                    <div style={{ padding: '2%', marginLeft: 'auto', marginRight: 'auto' }}>
                         <form onSubmit={this.handleSubmit}>
                             <TextField
+                                style={{ margin: 5 }}
                                 label="Firstname"
                                 defaultValue={this.state.firstName}
                                 name="firstName"
@@ -194,6 +195,7 @@ class Name extends Component {
                             />
                             <br />
                             <TextField
+                                style={{ margin: 5 }}
                                 label="Lastname"
                                 name="lastName"
                                 defaultValue={this.state.lastName}
@@ -201,6 +203,7 @@ class Name extends Component {
                             />
                             <br />
                             <TextField
+                                style={{ margin: 5 }}
                                 defaultValue={this.state.age}
                                 name="age"
                                 type="number"
@@ -210,6 +213,7 @@ class Name extends Component {
                             />
                             <br />
                             <TextField
+                                style={{ margin: 5 }}
                                 defaultValue={this.state.email}
                                 type="email"
                                 label="Email"
@@ -219,6 +223,7 @@ class Name extends Component {
                             />
                             <br />
                             <TextField
+                                style={{ margin: 5 }}
                                 defaultValue={this.state.qualification}
                                 label="Qualification"
                                 name="qualification"
@@ -226,6 +231,7 @@ class Name extends Component {
                             />
                             <br />
                             <TextField
+                                style={{ margin: 5 }}
                                 defaultValue={this.state.phone_no}
                                 type="number"
                                 label="Phone No."
@@ -233,6 +239,7 @@ class Name extends Component {
                                 onChange={this.handleChange.bind(this)}
                             />
                             <TextField
+                                style={{ margin: 5 }}
                                 defaultValue={this.state.profession}
                                 label="Profession"
                                 name="profession"
@@ -240,6 +247,7 @@ class Name extends Component {
                             />
                             <br />
                             <TextField
+                                style={{ margin: 5 }}
                                 defaultValue={this.state.startupName}
                                 label="Company Name"
                                 name="startupName"
@@ -247,6 +255,7 @@ class Name extends Component {
                             />
                             <br />
                             <TextField
+                                style={{ margin: 5 }}
                                 defaultValue={this.state.startupDescription}
                                 label="Desciption"
                                 name="startupDescription"
@@ -254,6 +263,7 @@ class Name extends Component {
                             />
                             <br />
                             <TextField
+                                style={{ margin: 5 }}
                                 defaultValue={this.state.websiteURL}
                                 label="URL"
                                 name="websiteURL"
@@ -261,30 +271,35 @@ class Name extends Component {
                             />   <br />
 
                             <TextField
+                                style={{ margin: 5 }}
                                 defaultValue={this.state.dipp_no}
                                 label="Dipp No."
                                 name="dipp_no"
                                 onChange={this.handleChange.bind(this)}
                             />   <br />
                             <TextField
+                                style={{ margin: 5 }}
                                 defaultValue={this.state.address}
                                 label="Address"
                                 name="address"
                                 onChange={this.handleChange.bind(this)}
                             />   <br />
                             <TextField
+                                style={{ margin: 5 }}
                                 defaultValue={this.state.city}
                                 label="City"
                                 name="city"
                                 onChange={this.handleChange.bind(this)}
                             />   <br />
                             <TextField
+                                style={{ margin: 5 }}
                                 defaultValue={this.state.country}
                                 label="Country"
                                 name="country"
                                 onChange={this.handleChange.bind(this)}
                             />   <br />
                             <TextField
+                                style={{ margin: 5 }}
                                 defaultValue={this.state.postalCode}
                                 label="Postal Code"
                                 name="postalCode"
@@ -297,9 +312,6 @@ class Name extends Component {
 
             </div>
         );
-
-
-
         return (
             <div className={classes.root}>
                 <Card elevation={3} style={{ display: 'flex', padding: '1%' }}>
@@ -326,6 +338,9 @@ class Name extends Component {
                                 {" " + this.props.data.city}, {this.props.data.country}
                             </Typography>
                         </div>
+                        <div style={{ margin: 10 }}>
+                            {this.showDomain()}
+                        </div>
                     </div>
                     <Edit edit={this.toggleModal} />
                 </Card>
@@ -343,53 +358,53 @@ class Name extends Component {
                     <Table>
                         <TableBody>
                             <TableRow>
-                                <TableCell><h6 style={{ color: "#1a237e" }}>Description</h6></TableCell>
+                                <TableCell><h5 style={{ color: "#5c6bc0" }}>Description</h5></TableCell>
                                 <TableCell>{this.props.data.startupDescription}</TableCell>
                             </TableRow>
-                            <Typography variant="h7" gutterBottom >
-                                Website: <a style={{ color: "#01579b" }}>{this.props.data.websiteURL}</a>
-                            </Typography>
+
                             <TableRow>
-                                <TableCell><h6 style={{ color: "#1a237e" }}>Dipp No.</h6></TableCell>
+                                <TableCell><h5 style={{ color: "#5c6bc0" }}>  Website:</h5></TableCell>
+                                <TableCell> {this.props.data.websiteURL}</TableCell>
+                            </TableRow>
+
+                            <TableRow>
+                                <TableCell><h5 style={{ color: "#5c6bc0" }}>Dipp No.</h5></TableCell>
                                 <TableCell>{this.props.data.dipp_no}</TableCell>
                             </TableRow>
+
                             <TableRow>
-                                <TableCell><h6 style={{ color: "#1a237e" }}>Profession</h6></TableCell>
+                                <TableCell><h5 style={{ color: "#5c6bc0" }}>Profession</h5></TableCell>
                                 <TableCell>{this.props.data.profession}</TableCell>
                             </TableRow>
+
                             <TableRow>
-                                <TableCell><h6 style={{ color: "#1a237e" }}>Qualification</h6></TableCell>
+                                <TableCell><h5 style={{ color: "#5c6bc0" }}>Qualification</h5></TableCell>
                                 <TableCell>{this.props.data.qualification}</TableCell>
                             </TableRow>
+
                         </TableBody>
+
                         <TableBody>
                             <TableRow>
-                                <TableCell><h6 style={{ color: "#1a237e" }}>Email</h6></TableCell>
+                                <TableCell><h5 style={{ color: "#5c6bc0" }}>Email</h5></TableCell>
                                 <TableCell>{this.props.data.email}</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell><h6 style={{ color: "#1a237e" }}>Phone</h6></TableCell>
+                                <TableCell><h5 style={{ color: "#5c6bc0" }}>Phone</h5></TableCell>
                                 <TableCell>{this.props.data.phone_no}</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell><h6 style={{ color: "#1a237e" }}>Age</h6></TableCell>
+                                <TableCell><h5 style={{ color: "#5c6bc0" }}>Age</h5></TableCell>
                                 <TableCell>{this.props.data.age}</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell><h6 style={{ color: "#1a237e" }}>Address</h6></TableCell>
+                                <TableCell><h5 style={{ color: "#5c6bc0" }}>Address</h5></TableCell>
                                 <TableCell>{this.props.data.address + ', ' + this.props.data.city + ', ' + this.props.data.postalCode + ', ' + this.props.data.country}</TableCell>
                             </TableRow>
-                        </TableBody></Table>
-                </Card>
-
-                <Card variant="outlined" style={{ marginTop: 20, color: "#1a237e" }}>
-                    <Container>
-                        <h4>Domain</h4>
-                        <Chip size="small"
-                            label="hello" />
-                    </Container>
-                </Card>
-            </div>
+                        </TableBody>
+                    </Table>
+                </Card >
+            </div >
         );
     }
 }

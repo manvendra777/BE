@@ -6,9 +6,9 @@ import StartupCard from './StartupCard';
 import axios from "axios";
 import Cookies from "js-cookie";
 import Grid from '@material-ui/core/Grid'
-
-
-const useStyles = (theme)=>({
+import Card from '@material-ui/core/Card'
+import Animate from './Animate'
+const useStyles = (theme) => ({
   root: {
     minWidth: 200,
   },
@@ -20,19 +20,19 @@ const useStyles = (theme)=>({
 
 class ConnectedMentor extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       connections: []
     }
-    this.getConnection= this.getConnection.bind(this);
+    this.getConnection = this.getConnection.bind(this);
   }
 
-  componentWillMount(){
+  componentWillMount() {
     this.getConnection()
   }
 
-  getConnection(){
+  getConnection() {
     var myid = Cookies.get('id')
     let mem = [];
     axios.get(`http://54.237.17.61/entityAction/user/myConnections`, { params: { id: myid } })
@@ -40,32 +40,41 @@ class ConnectedMentor extends Component {
         mem = res.data;
         mem.map((item, i) => {
           console.log(item);
-          this.setState({ connections:[...this.state.connections, <StartupCard id={item}/>]})
+          this.setState({ connections: [...this.state.connections, <Animate id={item} />] })
           console.log("called")
         })
       })
-      console.log(this.state.connections)
-      console.log("called2")
+    console.log(this.state.connections)
+    console.log("called2")
   }
   render() {
-  const { classes } = this.props;
+    const { classes } = this.props;
 
-  return (
-    <div>
-       <Typography gutterBottom variant="h5" component="h2">
-            Startup
-          </Typography>
-          <Divider style={{marginBottom: 5}}/> 
-          <div style={{ width: '100%', height: 350, padding: 0, flex: 1, display: 'flex', overflow: 'auto', }}>
-          <div style={{ display: 'flex', overflow: 'auto',background:'#bfbfbf',padding:10 }}>
-            <Grid container spacing={0}>
-            {this.state.connections.map(child => child)}
-            </Grid>
-            </div></div>
+    return (
+      <div>
+
+        <Card elevation={5} style={{ width: '100%', marginTop: 10, margin: 4 }}>
+          <Typography variant="h5" color='primary' style={{ backgroundColor: '#eceff1', padding: 10 }} >
+            My Startups
+							</Typography>
+          <Divider />
+          <div style={{ height: 600, display: 'block', width: '100%' }}>
+            <div style={{ background: '#ffffff', overflowY: 'scroll', height: '100%' }}>
+              <div style={{ margin: 40 }}>
+                <Grid>
+                  {this.state.connections.map(child => child)}
+                </Grid>
+
+              </div>
             </div>
-    
-  );
-}
+          </div>
+        </Card>
+
+
+      </div>
+
+    );
+  }
 }
 
 export default withStyles(useStyles)(ConnectedMentor);

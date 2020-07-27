@@ -12,6 +12,8 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import IconButton from '@material-ui/core/IconButton';
 import Feedback from './Feedback';
 import AnimateFeedback from './AnimateFeedback'
+
+import { ToastContainer, toast } from 'react-toastify';
 const useStyles = theme => ({
   root: {
     width: '84%',
@@ -35,6 +37,18 @@ class ViewAd extends Component {
       feedback: []
     };
     this.getMyAd = this.getMyAd.bind(this)
+  }
+
+  showToast=()=>{
+    toast.success("connection request sent successfully !", {
+      position: "bottom-right",
+      autoClose: 7000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+  })
   }
 
   componentWillMount() {
@@ -105,7 +119,16 @@ class ViewAd extends Component {
 
           </Paper>
         </div>
-
+        <ToastContainer
+                    position="bottom-right"
+                    autoClose={7000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover />
       </div>
     );
   }

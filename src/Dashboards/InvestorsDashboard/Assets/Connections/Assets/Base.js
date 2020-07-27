@@ -6,11 +6,11 @@ import Typography from "@material-ui/core/Typography";
 import { spacing } from "@material-ui/system";
 import List from "@material-ui/core/List";
 import RefreshIcon from "@material-ui/icons/Refresh";
+import Getname from "./Getname";
 import Invitation from "./Invitation";
 import axios from "axios";
 import Connections from "../Connections";
-import Getname from "./Getname";
-import Cookies from "js-cookie";
+import Cookies from 'js-cookie';
 import ConnectedStartup from './ConnectedStartup';
 
 
@@ -49,7 +49,7 @@ class Base extends Component {
       })
       .then(({ data }) => data);
     this.setState({ invites: data });
-    console.log(data);
+    console.log(this.state.invites);
   };
 
   render() {
@@ -66,6 +66,7 @@ class Base extends Component {
             >
               Your Invitations
             </Typography>
+
             <RefreshIcon
               style={{
                 cursor: "pointer",

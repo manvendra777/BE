@@ -5,12 +5,13 @@ import Divider from "@material-ui/core/Divider";
 import axios from "axios";
 import Cookies from "js-cookie";
 import Grid from '@material-ui/core/Grid'
-import InvestorCard from './InvestorCard'
-import MentorCard from './MentorCard'
 import StartupCard from "../../../../InvestorsDashboard/Assets/Connections/Assets/StartupCard";
-import {trackPromise} from 'react-promise-tracker';
+import { trackPromise } from 'react-promise-tracker';
+import Card from '@material-ui/core/Card'
 
-const useStyles = (theme)=>({
+import AnimateM from './Assets/Mentor/Animate'
+import AnimateI from './Assets/Investor/Animate'
+const useStyles = (theme) => ({
   root: {
     minWidth: 200,
   },
@@ -22,88 +23,95 @@ const useStyles = (theme)=>({
 
 class ConnectedPeople extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       connections: [],
       MentorList: [],
       InvestorList: [],
       userType: ""
     };
-    this.getConnection= this.getConnection.bind(this);
-  
+    this.getConnection = this.getConnection.bind(this);
+
 
   }
 
-  componentWillMount(){
+  componentWillMount() {
     this.getConnection();
-    
+
   }
 
-  getConnection(){
+  getConnection() {
     var myid = Cookies.get('id')
     let mem = [];
     trackPromise(
       axios.get(`http://54.237.17.61/entityAction/user/myConnections`, { params: { id: myid } })
-      .then(res => {
-        mem = res.data;
-        mem.map((item, i) => {
-          console.log(item)
-          var userType;
-          axios
-            .get("http://54.237.17.61/security/getTypeById?id=" + item)
-            .then((res) => {
-              userType = res.data;
-              if(userType=="mentor"){
-                console.log("mentor")
-                this.setState({
-                  MentorList: [...this.state.MentorList, <MentorCard id={item}/>]
-                })
-              }else{
-                console.log("investor")
-                this.setState({
-                  InvestorList: [...this.state.InvestorList, <InvestorCard id={item}/>]
-                })
-              }
+        .then(res => {
+          mem = res.data;
+          mem.map((item, i) => {
+            console.log(item)
+            var userType;
+            axios
+              .get("http://54.237.17.61/security/getTypeById?id=" + item)
+              .then((res) => {
+                userType = res.data;
+                if (userType == "mentor") {
+                  console.log("mentor")
+                  this.setState({
+                    MentorList: [...this.state.MentorList, <AnimateM id={item} />]
+                  })
+                } else {
+                  console.log("investor")
+                  this.setState({
+                    InvestorList: [...this.state.InvestorList, <AnimateI id={item} />]
+                  })
+                }
+              })
+          })
+
+          console.log(this.state.connections);
         })
-      })
-      
-     console.log(this.state.connections);
-  })
     )
-   
-}
+
+  }
 
 
   render() {
-  const { classes } = this.props;
+    const { classes } = this.props;
 
-  return (
-    <div>
-       <Typography gutterBottom variant="h5" component="h2">
-           Connected Mentors
-          </Typography>
-          <Divider style={{marginBottom: 5}}/> 
-          <div style={{ width: '100%', height: 270, padding: 0, flex: 1, display: 'flex', overflow: 'auto', }}>
-          <div style={{ display: 'flex', overflow: 'auto',background:'#f5f5f5',padding:10 }}>
-            <Grid container spacing={0}>
-            {this.state.MentorList.map(child => child)}
-            </Grid>
-            </div></div>
-            <Typography gutterBottom variant="h5" component="h2">
-           Connected Investor
-          </Typography>
-          <Divider style={{marginBottom: 5}}/> 
-            <div style={{ width: '100%', height: 350, padding: 0, flex: 1, display: 'flex', overflow: 'auto', }}>
-          <div style={{ display: 'flex', overflow: 'auto',background:'#f5f5f5',padding:10 }}>
-            <Grid container spacing={0}>
-            {this.state.InvestorList.map(child => child)}
-            </Grid>
-            </div></div>
+    return (
+      <div>
+        <div style={{ display: 'flex' }}>
+          <Card elevation={5} style={{ width: '50%', marginTop: 10, margin: 4 }}>
+            <Typography variant="h5" color='primary' style={{ backgroundColor: '#e8eaf6', padding: 10 }} >
+              My Mentors
+							</Typography>
+            <Divider />
+            <div style={{ height: 700, display: 'block', width: '100%' }}>
+              <div style={{ background: '#ffffff', overflowY: 'scroll', height: '100%' }}>
+                <div style={{ margin: 40 }}>
+                   {this.state.MentorList.map(child => child)}
+                </div>
+              </div>
             </div>
-    
-  );
-}
+          </Card>
+          <Card elevation={5} style={{ width: '50%', marginTop: 10, margin: 4 }}>
+            <Typography variant="h5" color='primary' style={{ backgroundColor: '#e8eaf6', padding: 10 }} >
+              My Investors
+							</Typography>
+            <Divider />
+            <div style={{ height: 700, display: 'block', width: '100%' }}>
+              <div style={{ background: '#ffffff', overflowY: 'scroll', height: '100%' }}>
+                <div style={{ margin: 40 }}>
+                  {this.state.InvestorList.map(child => child)}
+                </div>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default withStyles(useStyles)(ConnectedPeople);

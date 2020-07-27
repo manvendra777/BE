@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
 import axios from 'axios'
+import Cookies from 'js-cookie'
 const styles = theme => ({
     root: {
         width: 400,
@@ -46,7 +47,19 @@ class StartupCard extends Component {
     render() {
         const { classes } = this.props;
         const openStartupPage = () => {
-            window.location = "/investorDashboard/TargetStartup/" + this.props.id
+            var myid = Cookies.get('id');
+            var response;
+            axios.get('http://54.237.17.61/entityAction/user/checkIfAdded', { params: { id: myid, target: this.props.id } })
+                .then(res => {
+                    response = res.data
+                    if (response) {
+                        window.location = "/investorDashboard/MyStartup/" + this.props.id
+                    } else {
+                        window.location = "/investorDashboard/TargetStartup/" + this.props.id
+                    }
+
+                })
+           
         }
         return (
             <Card className={classes.root}>

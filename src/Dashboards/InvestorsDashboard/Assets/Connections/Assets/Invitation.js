@@ -98,10 +98,7 @@ class Invitation extends Component {
                     <BeachAccessIcon />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText
-                  primary={this.props.name}
-                  secondary={this.props.id}
-                />
+                <ListItemText primary={this.props.name} />
                 <ListItemSecondaryAction>
                   <Button style={{ margin: "12px" }} onClick={this.del}>
                     Delete

@@ -13,7 +13,7 @@ import RatingStats from './Rating/RatingStats'
 import Cookies from 'js-cookie'
 
 
-const styles = theme => ({
+const styles = theme => ({ 
     root: {
         display: "flex",
         flexWrap: "wrap",
@@ -51,17 +51,17 @@ class MyStartup extends Component {
             myProfile: [],
             val: [],
             avg: '',
-            setReq: false,
-            image: null
+            setReq:false,
+            image:null
         };
         this.mapDomain = this.mapDomain.bind(this);
         this.getInfo = this.getInfo.bind(this);
         this.getLogs = this.getLogs.bind(this)
-
+        this.getImage = this.getImage.bind(this)
         this.getRating = this.getRating.bind(this)
         this.getRatingAv = this.getRatingAv.bind(this)
         this.sendRequest = this.sendRequest.bind(this)
-        this.checkSentReq = this.checkSentReq.bind(this)
+        this.checkSentReq= this.checkSentReq.bind(this)
     }
     componentWillMount() {
         this.getInfo()
@@ -120,66 +120,85 @@ class MyStartup extends Component {
     sendRequest() {
         var myid = Cookies.get('id')
         var response;
-        axios.post('http://54.237.17.61/entityAction/user/sendRequest', null, { params: { id: myid, target: this.props.match.params.id } })
-            .then(res => {
-                response = res.data
+        axios.post('http://54.237.17.61/entityAction/user/sendRequest', null,{ params: { id: myid, target: this.props.match.params.id } })
+            .then(res => { 
+                response = res.data 
                 console.log(response);
-
+                
             })
     }
-    checkSentReq() {
+    checkSentReq(){
         var myid = Cookies.get('id')
         var response;
-        axios.get('http://54.237.17.61/entityAction/user/checkRequest', { params: { id: myid, target: this.props.match.params.id } })
-            .then(res => {
-                response = res.data
+        axios.get('http://54.237.17.61/entityAction/user/checkRequest',{ params: { id: myid, target: this.props.match.params.id } })
+            .then(res => { 
+                response = res.data 
                 console.log(response);
-                this.setState({ setReq: response })
+                this.setState({setReq:response})
             })
     }
-
+    removeMentor=()=>{
+        var myid = Cookies.get('id');
+            console.log('sent');
+            axios.post(`http://54.237.17.61/entityAction/user/removeConnection`, null, { params: { id: myid, target: this.props.match.params.id } })
+                .then(res => {
+                    window.location="/investorDashboard/FindStartup"
+                })
+    }
     render() {
         const { classes } = this.props;
         return (
             <div className={classes.root}>
                 <Card elevation={3}>
                     <Container className={classes.cont} style={{ marginBottom: 20 }}>
-                        <Avatar src={`data:image/jpeg;base64,${this.state.image}`} alt="Sanket" className={classes.large} />
+                        <Avatar alt="Sanket" src={`data:image/jpeg;base64,${this.state.image}`} className={classes.large} />
                         <Divider style={{ marginLeft: 10 }} orientation="vertical" flexItem />
                         <Container className={classes.spc}>
                             <Typography variant="h4" gutterBottom>
 
                             </Typography>
-                            <Typography variant="h5" gutterBottom>
-                                Mentor : {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}
+                            <Typography variant="h4" color="primary"  gutterBottom>
+                                {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}
                             </Typography>
-                            <Typography variant="subtitle2" gutterBottom>
-                                Id : {this.state.myProfile.id}
-                            </Typography>
-                            <Typography variant="subtitle1" gutterBottom>
+                          
+
+                            <Typography style={{color:'#424242'}} variant="h5" gutterBottom>
                                 Address: {this.state.myProfile.address + ', ' + this.state.myProfile.city + ', ' + this.state.myProfile.postalCode + ', ' + this.state.myProfile.country}
                             </Typography>
                             <div>{this.mapDomain()}</div>
                         </Container>
                         <Divider style={{ marginLeft: 10, marginRight: 20 }} orientation="vertical" flexItem />
 
-                        <RatingStats ratings={this.state.val} ratingAverage={Math.round(this.state.avg * 10) / 10} raterCount={this.state.val.reduce((a, b) => a + b, 0)} />,
-
+                       
                     </Container>
                     <Divider style={{ marginBottom: 10 }} />
-                    <Button disabled={this.state.setReq} style={{ marginLeft: 30 }} size="small" onClick={this.sendRequest} color="primary">Send Invitation</Button>
-                    <Divider style={{ marginTop: 10 }} />
+                   
+                    <Button style={{ marginLeft: 30 }} onClick={this.removeMentor} size="small" color="primary">Remove Startup</Button>
+                    <Button style={{ marginLeft: 30 }} onClick={()=>{window.location="/investorDashboard/Messaging"}} size="small" color="primary">Send Message</Button>
+
+                   <Divider style={{ marginTop: 10 }} />
                     <Container style={{ marginLeft: 10, marginTop: 10, display: 'block' }}>
 
-                        <Typography variant="subtitle2" gutterBottom>
-                            qualification: {this.state.myProfile.qualification}
-                        </Typography>
-                        <Typography variant="subtitle2" gutterBottom>
-                            email: {this.state.myProfile.email}
-                        </Typography>
-                        <Typography variant="subtitle2" gutterBottom>
-                            phone: {this.state.myProfile.phone_no}
-                        </Typography>
+                    <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                                Qualification:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7,color:'#424242' }}>  <h5>{this.state.myProfile.qualification}</h5></div>
+                        </div>
+
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                            Email:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7,color:'#424242' }}>  <h5>{this.state.myProfile.email}</h5></div>
+                        </div>
+                        
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                            Phone:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7,color:'#424242' }}>  <h5>{this.state.myProfile.phone_no}</h5></div>
+                        </div>
 
                     </Container>
 

@@ -59,7 +59,7 @@ class ListOfOnlineCandidates extends Component {
     return (
       <div>
         <Card className={classes.root} variant="outlined">
-          <Typography variant="h5" color='primary' style={{ backgroundColor: '#e8eaf6',padding:'2%' }} gutterBottom>
+          <Typography variant="h5" color='primary' style={{ backgroundColor: '#cfd8dc',padding:'2%' }} gutterBottom>
             <center>Today’s news</center>
           </Typography>
 

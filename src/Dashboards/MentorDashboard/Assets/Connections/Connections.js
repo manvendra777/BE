@@ -13,7 +13,7 @@ class Connections extends Component {
           
       }
 render() {
-        return (<div style={{width:'84%'}}>
+        return (<div style={{width:'76%'}}>
             <Base m={this.update}/>
             </div>
         );

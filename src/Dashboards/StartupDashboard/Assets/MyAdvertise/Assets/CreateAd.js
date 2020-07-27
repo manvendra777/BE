@@ -24,6 +24,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Cookies from 'js-cookie'
 
+
 class CreateAd extends Component {
   constructor(props) {
     super(props);
@@ -39,7 +40,7 @@ class CreateAd extends Component {
   }
   createAdvertise() {
     this.onFileUpload();
-    this.props.method();
+    this.props.method2();
   }
 
   onFileChange = event => {
@@ -96,7 +97,8 @@ class CreateAd extends Component {
         "userId": Cookies.get('id')
       }).then(res => {
         console.log(res.data);
-        self.props.refresh()
+        self.props.method()
+       self.props.refresh()
       })
     })
   };
@@ -171,6 +173,7 @@ class CreateAd extends Component {
           <Button style={{ marginLeft: 'auto' }} color="primary" onClick={this.createAdvertise}>Create</Button>
         </div>
         <Divider />
+       
       </Paper>
 
     );

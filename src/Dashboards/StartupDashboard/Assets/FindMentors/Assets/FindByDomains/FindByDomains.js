@@ -111,6 +111,7 @@ class FindByDomains extends Component {
                             </FormControl>
                         </div>
                         <Divider orientation="vertical" flexItem />
+                        
                         <div style={{ height: 700, display: 'block', width: '100%' }}>
                             <div style={{ background: '#ffffff', overflowY: 'scroll', height: '100%' }}>
                                 <div style={{ margin: 10 }}>
@@ -119,7 +120,7 @@ class FindByDomains extends Component {
                                     </Grid>
                                 </div>
                             </div>
-                        </div>
+                        </div> 
                     </div>
                 </Card>
             </div>

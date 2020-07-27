@@ -62,9 +62,9 @@ export default function User(props) {
           }}
           variant="dot"
         >
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+          <Avatar alt="Remy Sharp" src={`data:image/jpeg;base64,${props.image}`} />
         </StyledBadge>
-        <ListItemText style={{ marginLeft: "16px", color: '#5c6bc0', zoom:1.3}} primary={props.name} />
+        <ListItemText style={{ marginLeft: "16px", color: '#607d8b',}} primary={props.name} secondary={props.type} />
       </ListItem>
 
 

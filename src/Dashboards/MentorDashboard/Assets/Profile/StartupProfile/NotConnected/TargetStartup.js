@@ -11,16 +11,16 @@ import axios from 'axios';
 import Chip from '@material-ui/core/Chip';
 import RatingStats from './Rating/RatingStats'
 import Cookies from 'js-cookie'
+import { ToastContainer, toast } from 'react-toastify';
 
-
-const styles = theme => ({
+const styles = theme => ({ 
     root: {
         display: "flex",
         flexWrap: "wrap",
         "& > *": {
             margin: theme.spacing(1, 1, 1, 1),
             padding: theme.spacing(1, 0, 2, 0),
-            width: '80%',
+            width: '74%',
             marginLeft: '2%',
             marginTop: '5%',
         }
@@ -30,7 +30,7 @@ const styles = theme => ({
         margin: "5px 0px 0px 5px ",
         alignItems: "center",
         marginBotton: 200
-    },
+    }, 
     large: {
         width: theme.spacing(15),
         height: theme.spacing(15)
@@ -113,6 +113,15 @@ class TargetStartup extends Component {
         axios.post('http://54.237.17.61/entityAction/user/sendRequest', null, { params: { id: myid, target: this.props.match.params.id } })
             .then(res => {
                 response = res.data
+                toast.success("connection request sent successfully !", {
+                    position: "bottom-right",
+                    autoClose: 7000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                })
             })
     }
     checkSentReq() {
@@ -143,39 +152,58 @@ class TargetStartup extends Component {
                             <Typography variant="h4" gutterBottom>
 
                             </Typography>
-                            <Typography variant="h5" gutterBottom>
-                                Startup : {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}
+                            <Typography variant="h4" color="primary" gutterBottom>
+                                {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}
                             </Typography>
-                            <Typography variant="subtitle2" gutterBottom>
-                                Id : {this.state.myProfile.id}
-                            </Typography>
-                            <Typography variant="subtitle1" gutterBottom>
+                          
+
+                            <Typography style={{color:'#424242'}} variant="h5"  gutterBottom>
                                 Address: {this.state.myProfile.address + ', ' + this.state.myProfile.city + ', ' + this.state.myProfile.postalCode + ', ' + this.state.myProfile.country}
                             </Typography>
                             <div>{this.mapDomain()}</div>
                         </Container>
                         <Divider style={{ marginLeft: 10, marginRight: 20 }} orientation="vertical" flexItem />
 
-                        <RatingStats ratings={this.state.val} ratingAverage={Math.round(this.state.avg * 10) / 10} raterCount={this.state.val.reduce((a, b) => a + b, 0)} />,
-
+                        
                     </Container>
                     <Divider style={{ marginBottom: 10 }} />
                     <Button disabled={this.state.setReq} style={{ marginLeft: 30 }} size="small" onClick={this.sendRequest} color="primary">Send Invitation</Button>
                     <Divider style={{ marginTop: 10 }} />
                     <Container style={{ marginLeft: 10, marginTop: 10, display: 'block' }}>
 
-                        <Typography variant="subtitle2" gutterBottom>
-                            qualification: {this.state.myProfile.qualification}
-                        </Typography>
-                        <Typography variant="subtitle2" gutterBottom>
-                            email: {this.state.myProfile.email}
-                        </Typography>
-                        <Typography variant="subtitle2" gutterBottom>
-                            phone: {this.state.myProfile.phone_no}
-                        </Typography>
+                    <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                                Qualification:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7,color:'#424242' }}>  <h5>{this.state.myProfile.qualification}</h5></div>
+                        </div>
+
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                            Email:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7,color:'#424242' }}>  <h5>{this.state.myProfile.email}</h5></div>
+                        </div>
+                        
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                            Phone:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7,color:'#424242' }}>  <h5>{this.state.myProfile.phone_no}</h5></div>
+                        </div>
                     </Container>
 
                 </Card>
+                <ToastContainer
+                    position="bottom-right"
+                    autoClose={7000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover />
             </div>
         );
     }

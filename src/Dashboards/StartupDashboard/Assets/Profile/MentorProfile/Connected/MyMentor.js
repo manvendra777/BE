@@ -147,6 +147,15 @@ class MyMentor extends Component {
             })
     }
 
+    removeMentor=()=>{
+        var myid = Cookies.get('id');
+            console.log('sent');
+            axios.post(`http://54.237.17.61/entityAction/user/removeConnection`, null, { params: { id: myid, target: this.props.match.params.id } })
+                .then(res => {
+                    window.location="startupDashboard/FindMentors"
+                })
+    }
+
     getLogs() {
         console.log(this.state.myProfile);
     }
@@ -164,17 +173,14 @@ class MyMentor extends Component {
                         <Avatar src={`data:image/jpeg;base64,${this.state.image}`} alt="Sanket" className={classes.large} />
                         <Divider style={{ marginLeft: 10 }} orientation="vertical" flexItem />
                         <Container className={classes.spc}>
-                            <Typography variant="h4" gutterBottom>
+                          
+                            <Typography variant="h4" color="primary" gutterBottom>
+                             {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}
+                            </Typography>
 
-                            </Typography>
-                            <Typography variant="h5" gutterBottom>
-                                Mentor : {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}
-                            </Typography>
-                            <Typography variant="subtitle2" gutterBottom>
-                                Id : {this.state.myProfile.id}
-                            </Typography>
-                            <Typography variant="subtitle1" gutterBottom>
-                                Address: {this.state.myProfile.address + ', ' + this.state.myProfile.city + ', ' + this.state.myProfile.postalCode + ', ' + this.state.myProfile.country}
+                            
+                            <Typography style={{color:'#424242'}} variant="h5" gutterBottom>
+                                Address: {this.state.myProfile.address + ', ' + this.state.myProfile.city + ', '  + this.state.myProfile.country}
                             </Typography>
                             <div style={{width:100}}>
                             {this.state.isVerified ? <div style={{display:'flex'}}><Checkmark size={25}  color='blue'/>Verified</div> : <div></div>}
@@ -186,8 +192,8 @@ class MyMentor extends Component {
 
                     </Container>
                     <Divider style={{ marginBottom: 10 }} />
-                    <Button style={{ marginLeft: 30 }} size="small" color="primary">Remove as a Mentor</Button>
-                    <Button style={{ marginLeft: 30 }} size="small" color="primary">Send Message</Button>
+                    <Button style={{ marginLeft: 30 }} onClick={this.removeMentor} size="small" color="primary">Remove as a Mentor</Button>
+                    <Button style={{ marginLeft: 30 }} onClick={()=>{window.location="/startupDashboard/Messaging"}} size="small" color="primary">Send Message</Button>
 
                     <Rater style={{ marginLeft: 50, transform: "scale(1.5)" }} rating={this.state.myrating} total={5} interactive={true} onRate={({ rating }) => { this.setMyRating(rating) }} />
 
@@ -195,24 +201,48 @@ class MyMentor extends Component {
 
                     <Container style={{ marginLeft: 10, marginTop: 10, display: 'block' }}>
 
-                        <Typography variant="subtitle2" gutterBottom>
-                            qualification: {this.state.myProfile.qualification}
-                        </Typography>
-                        <Typography variant="subtitle2" gutterBottom>
-                            email: {this.state.myProfile.email}
-                        </Typography>
-                        <Typography variant="subtitle2" gutterBottom>
-                            phone: {this.state.myProfile.phone_no}
-                        </Typography>
-                        <Typography variant="subtitle2" gutterBottom>
-                            experience_in_domain:{this.state.myProfile.experience_in_domain}
-                        </Typography>
-                        <Typography variant="subtitle2" gutterBottom>
-                            Description: {this.state.myProfile.about_yourself}
-                        </Typography>
-                        <Typography variant="subtitle2" gutterBottom>
-                            method_of_contact: {this.state.myProfile.method_of_contact}
-                        </Typography>
+
+                    <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                                Qualification:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7,color:'#424242' }}>  <h5>{this.state.myProfile.qualification}</h5></div>
+                        </div>
+
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                                Email:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7 ,color:'#424242'}}>  <h5>{this.state.myProfile.email}</h5></div>
+                        </div>
+
+
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                                phone:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7,color:'#424242' }}>  <h5>{this.state.myProfile.phone_no}</h5></div>
+                        </div>
+
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                            Experience in domain:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7,color:'#424242' }}>  <h5>  {this.state.myProfile.experience_in_domain}</h5></div>
+                        </div>
+
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                            Description: 
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7 ,color:'#424242'}}>  <h5>  {this.state.myProfile.about_yourself}</h5></div>
+                        </div>
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                            Method of contact:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7 ,color:'#424242'}}>  <h5>   {this.state.myProfile.method_of_contact}</h5></div>
+                        </div>
                     </Container>
 
                 </Card>

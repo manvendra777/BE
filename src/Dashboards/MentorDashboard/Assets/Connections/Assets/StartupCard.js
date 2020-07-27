@@ -10,90 +10,90 @@ import Typography from '@material-ui/core/Typography';
 import Divider from "@material-ui/core/Divider";
 import axios from 'axios';
 
-const useStyles = (theme)=>({
+const useStyles = (theme) => ({
   root: {
-    width:300,
+    width: '100%',
     margin: 10,
     padding: 0,
-    whiteSpace:'normal'
-},
-media: {
-    minHeight: 100,
-},
+    whiteSpace: 'normal'
+  },
+  media: {
+    minHeight: 300,
+  },
 });
 
- class StartupCard extends React.Component {
+class StartupCard extends React.Component {
 
   constructor(props) {
-		super(props);
-		this.state = {
+    super(props);
+    this.state = {
       myProfile: {},
       image: null
     };
     this.getImage = this.getImage.bind(this);
-	
-	}
 
-	componentDidMount() {
-		var id = this.props.id
-		var persons;
+  }
 
-		axios.get(`http://54.237.17.61/management/startup/profile/` + id)
-			.then(res => {
-				persons = res.data;
-				console.log(persons);
-				this.setState({ myProfile: persons })
+  componentDidMount() {
+    var id = this.props.id
+    var persons;
+
+    axios.get(`http://54.237.17.61/management/startup/profile/` + id)
+      .then(res => {
+        persons = res.data;
+        console.log(persons);
+        this.setState({ myProfile: persons })
       })
   }
-  
-componentWillMount() {
+
+  componentWillMount() {
     this.getImage()
-}
-getImage() {
+  }
+  getImage() {
     var self = this;
     var mem;
     axios.get(`http://54.237.17.61/management/startup/photos/` + this.props.id)
-        .then(res => {
-            mem = res.data;
-            self.setState({ image: mem })
-        })
-}
+      .then(res => {
+        mem = res.data;
+        self.setState({ image: mem })
+      })
+  }
 
 
-render(){
+  render() {
     const { classes } = this.props;
     const showProfile = () => {
       window.location = "/mentorDashboard/MyStartup/" + this.props.id
     }
-  return (
-    <div>
-       
-    <Card className={classes.root} elevation={3}>
-      <CardActionArea>
-      <CardMedia
-          className={classes.media}
-          image={`data:image/jpeg;base64,${this.state.image}`}
-          title={this.state.myProfile.firstName}
-                    />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {this.state.myProfile.firstName} {this.state.myProfile.lastName}
-          </Typography>
-          <Typography gutterBottom variant="h8">
-            {this.state.myProfile.startupDescription}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button onClick={showProfile}>
-          Profile
+    return (
+      <div>
+
+        <Card className={classes.root} elevation={3}>
+          <CardActionArea>
+            <CardMedia
+              className={classes.media}
+              image={`data:image/jpeg;base64,${this.state.image}`}
+              title={this.state.myProfile.firstName}
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                {this.state.myProfile.firstName} {this.state.myProfile.lastName}
+              </Typography>
+              <Typography gutterBottom variant="h8">
+                {this.state.myProfile.startupDescription}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+          <CardActions>
+            <Button onClick={showProfile}>
+              Profile
         </Button>
-      </CardActions>
-    </Card>
-    </div>
-   
-  );
-}
+          </CardActions>
+        </Card>
+      </div>
+
+    );
+  }
 }
 
 export default withStyles(useStyles)(StartupCard);

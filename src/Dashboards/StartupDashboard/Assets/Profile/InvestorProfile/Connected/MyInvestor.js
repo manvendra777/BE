@@ -96,12 +96,21 @@ class TargetInvestor extends Component {
                 this.setState({ setReq: response })
             })
     }
+    removeInvestor=()=>{
+        var myid = Cookies.get('id');
+            console.log('sent');
+            axios.post(`http://54.237.17.61/entityAction/user/removeConnection`, null, { params: { id: myid, target: this.props.match.params.id } })
+                .then(res => {
+                    window.location="startupDashboard/FindMentors"
+                })
+    }
     componentWillMount(){
        
         this.checkSentReq()
         this.getImage()
         this.getInfo()
     }
+    //checkIfAdded
     render() {
         const { classes } = this.props;
         return (
@@ -111,42 +120,48 @@ class TargetInvestor extends Component {
                         <Avatar src={`data:image/jpeg;base64,${this.state.image}`} alt="Sanket" className={classes.large} />
                         <Divider style={{ marginLeft: 10 }} orientation="vertical" flexItem />
                         <Container className={classes.spc}>
-                            <Typography variant="h4" gutterBottom>
-
+                        <Typography variant="h4" color="primary" gutterBottom>
+                                {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}
                             </Typography>
-                            <Typography variant="h5" gutterBottom>
-                                Investor : {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}
-                            </Typography>
-                            <Typography variant="subtitle2" gutterBottom>
-                                Id : {this.state.myProfile.id}
-                            </Typography>
-                           
-                        
                         </Container>
-                        <Divider style={{ marginLeft: 10, marginRight: 20 }} orientation="vertical" flexItem />
-
-                     
+                        
                     </Container>
                     <Divider style={{ marginBottom: 10 }} />
+                    <Button style={{ marginLeft: 30 }} onClick={this.removeInvestor} size="small" color="primary">Remove as a Investor</Button>
+                    <Button style={{ marginLeft: 30 }} onClick={()=>{window.location="/startupDashboard/Messaging"}} size="small" color="primary">Send Message</Button>
                      <Divider style={{ marginTop: 10 }} />
                     <Container style={{ marginLeft: 10, marginTop: 10, display: 'block' }}>
+                    <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                                Min investment:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>{this.state.myProfile.min}</h5></div>
+                        </div>
 
-                        <Typography variant="subtitle2" gutterBottom>
-                            Min investment: {this.state.myProfile.min}
-                        </Typography>
-                        <Typography variant="subtitle2" gutterBottom>
-                            Max investment: {this.state.myProfile.max}
-                        </Typography>
-                        <Typography variant="subtitle2" gutterBottom>
-                            email: {this.state.myProfile.email}
-                        </Typography>
-                        <Typography variant="subtitle2" gutterBottom>
-                            phone: {this.state.myProfile.phone_no}
-                        </Typography>
-
-                        <Typography variant="subtitle2" gutterBottom>
-                            age: {this.state.myProfile.age}
-                        </Typography>
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                            Max investment:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>{this.state.myProfile.max}</h5></div>
+                        </div>
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                            Email:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5> {this.state.myProfile.email}</h5></div>
+                        </div>
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                            phone: 
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>   {this.state.myProfile.phone_no}</h5></div>
+                        </div>
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                            Age: 
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>   {this.state.myProfile.age}</h5></div>
+                        </div>
                       
                     </Container>
 

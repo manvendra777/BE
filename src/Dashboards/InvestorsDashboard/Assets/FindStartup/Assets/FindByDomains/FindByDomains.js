@@ -12,6 +12,8 @@ import FormGroup from '@material-ui/core/FormGroup';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid'
 import Animate from './Assets/Animate'
+import photo from './Assets/workbench_trnas.png'
+import {trackPromise} from 'react-promise-tracker';
 class FindByDomains extends Component {
     constructor(props) {
         super(props);
@@ -23,7 +25,11 @@ class FindByDomains extends Component {
         };
         this.getListData = this.getListData.bind(this)
     }
-
+    
+    sleep(time) {
+        return new Promise((resolve) => setTimeout(resolve, time)
+        )
+      }
     getList = (event) => {
 
         let domain_list = this.state.domains;
@@ -50,6 +56,7 @@ class FindByDomains extends Component {
 
         this.setState({ StartupList: [] })
         var startups;
+        trackPromise(
         axios.get(`http://54.237.17.61/management/startup/profile/domain/findbylist`, { params: { domain: this.state.domains + '' } })
             .then(res => {
                 startups = res.data;
@@ -57,13 +64,22 @@ class FindByDomains extends Component {
                     console.log(item);
                     this.setState({ StartupList: [...this.state.StartupList, <Animate key={i} des={item.startupDescription} id={item.id} domain={item.domain} firstname={item.firstName} sname={item.startupName} lastname={item.lastName} />] })
                 })
-            })
+            }))
+    }
+    showData = () => {
+        if (this.state.StartupList.length > 0) {
+            return (this.state.StartupList.map(child => child))
+        } else {
+            return (<div><div elevation={5} style={{width: '100%', height: '100%', display: 'flex' }} >
+                <img style={{ width: '100%', marginTop: 'auto', }} src={photo}></img>
+            </div></div>)
+        }
     }
     render() {
 
         return (
             <div>
-                <Card elevation={5} style={{ width: '84%', marginTop: 10, }}>
+                <Card elevation={5} style={{ width: '80%', marginTop: 10, }}>
                     <Typography variant="h5" color='primary' style={{ margin: 10 }} gutterBottom>
                         Find Startups
 							</Typography>
@@ -91,17 +107,16 @@ class FindByDomains extends Component {
                         </div>
                         <Divider orientation="vertical" flexItem />
 
-                        <div style={{ height: 550, display: 'block', width: '100%' }}>
-                            <div style={{ background: '#bfbfbf', display: 'flex', flexFlow: 'row wrap', justifyContent: 'space-around', minWidth: '100%', overflow: 'scroll', height: '100%' }}>
-                                <div>
-                                    <div style={{ margin: 10 }}>
-                                        <Grid container spacing={0}>
-                                            {this.state.StartupList.map(child => child)}
-                                        </Grid>
-                                    </div>
+                        
+                        <div style={{ height: 700, display: 'block', width: '100%' }}>
+                            <div style={{ background: '#ffffff', overflowY: 'scroll', height: '100%' }}>
+                                <div style={{ margin: 10 }}>
+                                    <Grid container spacing={0}>
+                                        {this.showData()}
+                                    </Grid>
                                 </div>
                             </div>
-                        </div>
+                        </div> 
                     </div>
                 </Card>
             </div>

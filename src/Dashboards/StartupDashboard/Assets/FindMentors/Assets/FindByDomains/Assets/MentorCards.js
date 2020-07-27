@@ -9,12 +9,12 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
 import axios from 'axios'
+import Cookies from 'js-cookie'
 const styles = theme => ({
     root: {
         width: 400,
         margin: 10,
         padding: 0,
-
         float: 'left'
     },
     media: {
@@ -46,9 +46,23 @@ class MentorCard extends Component {
 
     render() {
         const { classes } = this.props;
+        
         const openMentorPage = () => {
-            window.location = "/startupDashboard/TargetMentor/" + this.props.id
+            
+            var myid = Cookies.get('id');
+            var response;
+            axios.get('http://54.237.17.61/entityAction/user/checkIfAdded', { params: { id: myid, target: this.props.id } })
+                .then(res => {
+                    response = res.data
+                    if (response) {
+                        window.location = "/startupDashboard/MyMentor/" + this.props.id
+                    } else {
+                        window.location = "/startupDashboard/TargetMentor/" + this.props.id
+                    }
+
+                })
         }
+
         return (
             <Card elevation={5} className={classes.root}>
                 <CardActionArea onClick={openMentorPage}>

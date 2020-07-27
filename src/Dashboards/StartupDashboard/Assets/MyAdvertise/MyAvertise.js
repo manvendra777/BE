@@ -13,6 +13,8 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import Grid from "@material-ui/core/Grid";
 import Animate from "./Assets/Animate";
+
+import { ToastContainer, toast } from 'react-toastify';
 class MyAvertise extends Component {
   constructor(props) {
     super(props);
@@ -63,6 +65,18 @@ class MyAvertise extends Component {
         });
       });
   }
+
+  showToast=()=>{
+    toast.success("Ad uploaded successfully!", {
+      position: "bottom-right",
+      autoClose: 7000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+  })
+  }
   render() {
     return (
       <Paper style={{ width: "80%", marginLeft: "2%", height: "100%" }}>
@@ -78,7 +92,7 @@ class MyAvertise extends Component {
             Create Ad
           </Fab>
           <Dialog open={this.state.isModelOpen} onClose={this.createAd}>
-            <CreateAd refresh={this.refreshPage} method={this.createAd} />
+            <CreateAd   method2={this.showToast} refresh={this.refreshPage} method={this.createAd} />
           </Dialog>
 
           <Fab
@@ -97,6 +111,7 @@ class MyAvertise extends Component {
             maxWidth={"md"}
             open={this.state.isPayForeMoreOpen}
             onClose={this.createPayForMore}
+           
           >
             <Pricing method={this.createPayForMore} />
           </Dialog>
@@ -122,6 +137,16 @@ class MyAvertise extends Component {
             </div>
           </div>
         </div>
+        <ToastContainer
+                    position="bottom-right"
+                    autoClose={7000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover />
       </Paper>
     );
   }

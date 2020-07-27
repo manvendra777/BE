@@ -13,7 +13,7 @@ import Cookies from 'js-cookie';
 import { shadows } from '@material-ui/system';
 import { Link } from 'react-router-dom'
 import { Container } from '@material-ui/core';
-
+import Sidebar from './SideProfileUI/Sidebar'
 const useStyles = theme => ({
   root: {
     width: "15%",
@@ -76,7 +76,9 @@ class Advertise extends Component {
 
     return (
       <div className={classes.root}>
-        <Link to="/startupDashboard/Profile">
+        <Sidebar/>
+        {/*
+         <Link to="/startupDashboard/Profile">
           <Card style={{ marginTop: 30 }}>
             <CardHeader
               avatar={
@@ -103,6 +105,8 @@ class Advertise extends Component {
 
           </Card>
         </Link>
+        */}
+
       </div>
     );
   }

@@ -9,7 +9,7 @@ import { Button } from "@material-ui/core";
 import Divider from '@material-ui/core/Divider';
 import axios from 'axios';
 import Chip from '@material-ui/core/Chip';
-
+import { ToastContainer, toast } from 'react-toastify';
 import Cookies from 'js-cookie'
 
 
@@ -52,10 +52,10 @@ class TargetInvestor extends Component {
             val: [],
             avg: '',
             setReq: false,
-            image:null
+            image: null
         };
         this.getInfo = this.getInfo.bind(this);
-       
+
         this.sendRequest = this.sendRequest.bind(this)
         this.checkSentReq = this.checkSentReq.bind(this)
         this.getImage = this.getImage.bind(this)
@@ -79,13 +79,22 @@ class TargetInvestor extends Component {
                 console.log(this.state.myProfile);
             })
     }
-   
+
     sendRequest() {
         var myid = Cookies.get('id');
         var response;
         axios.post('http://54.237.17.61/entityAction/user/sendRequest', null, { params: { id: myid, target: this.props.match.params.id } })
             .then(res => {
                 response = res.data
+                toast.success("connection request sent successfully !", {
+                    position: "bottom-right",
+                    autoClose: 7000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                })
             })
     }
     checkSentReq() {
@@ -97,8 +106,8 @@ class TargetInvestor extends Component {
                 this.setState({ setReq: response })
             })
     }
-    componentWillMount(){
-       
+    componentWillMount() {
+
         this.checkSentReq()
         this.getImage()
         this.getInfo()
@@ -115,42 +124,63 @@ class TargetInvestor extends Component {
                             <Typography variant="h4" gutterBottom>
 
                             </Typography>
-                            <Typography variant="h5" gutterBottom>
-                                Investor : {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}
-                            </Typography>
-                            <Typography variant="subtitle2" gutterBottom>
-                                Id : {this.state.myProfile.id}
+                            <Typography variant="h4" color="primary" gutterBottom>
+                                {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}
                             </Typography>
                         </Container>
-                        <Divider style={{ marginLeft: 10, marginRight: 20 }} orientation="vertical" flexItem />
+                       
                     </Container>
                     <Divider style={{ marginBottom: 10 }} />
                     <Button disabled={this.state.setReq} style={{ marginLeft: 30 }} size="small" onClick={this.sendRequest} color="primary">Send Invitation</Button>
                     <Divider style={{ marginTop: 10 }} />
                     <Container style={{ marginLeft: 10, marginTop: 10, display: 'block' }}>
 
-                    <Typography variant="subtitle2" gutterBottom>
-                            Min investment: {this.state.myProfile.min}
-                        </Typography>
-                        <Typography variant="subtitle2" gutterBottom>
-                            Max investment: {this.state.myProfile.max}
-                        </Typography>
-                        <Typography variant="subtitle2" gutterBottom>
-                            email: {this.state.myProfile.email}
-                        </Typography>
-                        <Typography variant="subtitle2" gutterBottom>
-                            phone: {this.state.myProfile.phone_no}
-                        </Typography>
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                                Min investment:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>{this.state.myProfile.min}</h5></div>
+                        </div>
 
-                        <Typography variant="subtitle2" gutterBottom>
-                            age: {this.state.myProfile.age}
-                        </Typography>
-                      
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                            Max investment:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>{this.state.myProfile.max}</h5></div>
+                        </div>
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                            Email:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5> {this.state.myProfile.email}</h5></div>
+                        </div>
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                            phone: 
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>   {this.state.myProfile.phone_no}</h5></div>
+                        </div>
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                            Age: 
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>   {this.state.myProfile.age}</h5></div>
+                        </div>
                     </Container>
 
                 </Card>
+                <ToastContainer
+                    position="bottom-right"
+                    autoClose={7000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover />
             </div>
-       );
+        );
     }
 }
 export default withStyles(styles)(TargetInvestor);

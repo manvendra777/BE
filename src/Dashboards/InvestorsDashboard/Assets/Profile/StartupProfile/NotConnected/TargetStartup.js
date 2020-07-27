@@ -11,7 +11,7 @@ import axios from 'axios';
 import Chip from '@material-ui/core/Chip';
 import RatingStats from './Rating/RatingStats'
 import Cookies from 'js-cookie'
-
+import { ToastContainer, toast } from 'react-toastify';
 
 const styles = theme => ({
     root: {
@@ -52,7 +52,7 @@ class TargetStartup extends Component {
             val: [],
             avg: '',
             setReq: false,
-            image:null,
+            image: null
         };
         this.getInfo = this.getInfo.bind(this);
         this.mapDomain = this.mapDomain.bind(this);
@@ -71,6 +71,7 @@ class TargetStartup extends Component {
                 self.setState({ image: mem })
             })
     }
+
     getInfo() {
         var id = this.props.match.params.id
         var persons;
@@ -107,11 +108,21 @@ class TargetStartup extends Component {
     }
 
     sendRequest() {
+
         var myid = Cookies.get('id')
         var response;
         axios.post('http://54.237.17.61/entityAction/user/sendRequest', null, { params: { id: myid, target: this.props.match.params.id } })
             .then(res => {
                 response = res.data
+                toast.success("feedback sent successfully !", {
+                    position: "bottom-right",
+                    autoClose: 7000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                })
             })
     }
     checkSentReq() {
@@ -123,7 +134,7 @@ class TargetStartup extends Component {
                 this.setState({ setReq: response })
             })
     }
-    componentWillMount(){
+    componentWillMount() {
         this.getRating()
         this.checkSentReq()
         this.getRatingAv()
@@ -136,26 +147,24 @@ class TargetStartup extends Component {
             <div className={classes.root}>
                 <Card elevation={3}>
                     <Container className={classes.cont} style={{ marginBottom: 20 }}>
-                        <Avatar src={`data:image/jpeg;base64,${this.state.image}`} alt="Sanket" className={classes.large} />
+                        <Avatar alt="Sanket" src={`data:image/jpeg;base64,${this.state.image}`} className={classes.large} />
                         <Divider style={{ marginLeft: 10 }} orientation="vertical" flexItem />
                         <Container className={classes.spc}>
                             <Typography variant="h4" gutterBottom>
 
                             </Typography>
-                            <Typography variant="h5" gutterBottom>
-                                Startup : {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}
+                            <Typography variant="h4" color="primary" gutterBottom>
+                                {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}
                             </Typography>
-                            <Typography variant="subtitle2" gutterBottom>
-                                Id : {this.state.myProfile.id}
-                            </Typography>
-                            <Typography variant="subtitle1" gutterBottom>
+
+
+                            <Typography style={{ color: '#424242' }} variant="h5" gutterBottom>
                                 Address: {this.state.myProfile.address + ', ' + this.state.myProfile.city + ', ' + this.state.myProfile.postalCode + ', ' + this.state.myProfile.country}
                             </Typography>
                             <div>{this.mapDomain()}</div>
                         </Container>
                         <Divider style={{ marginLeft: 10, marginRight: 20 }} orientation="vertical" flexItem />
 
-                        <RatingStats ratings={this.state.val} ratingAverage={Math.round(this.state.avg * 10) / 10} raterCount={this.state.val.reduce((a, b) => a + b, 0)} />,
 
                     </Container>
                     <Divider style={{ marginBottom: 10 }} />
@@ -163,20 +172,41 @@ class TargetStartup extends Component {
                     <Divider style={{ marginTop: 10 }} />
                     <Container style={{ marginLeft: 10, marginTop: 10, display: 'block' }}>
 
-                        <Typography variant="subtitle2" gutterBottom>
-                            qualification: {this.state.myProfile.qualification}
-                        </Typography>
-                        <Typography variant="subtitle2" gutterBottom>
-                            email: {this.state.myProfile.email}
-                        </Typography>
-                        <Typography variant="subtitle2" gutterBottom>
-                            phone: {this.state.myProfile.phone_no}
-                        </Typography>
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                                Qualification:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>{this.state.myProfile.qualification}</h5></div>
+                        </div>
+
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                                Email:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>{this.state.myProfile.email}</h5></div>
+                        </div>
+
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                                Phone:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>{this.state.myProfile.phone_no}</h5></div>
+                        </div>
                     </Container>
 
                 </Card>
+                <ToastContainer
+                    position="bottom-right"
+                    autoClose={7000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover />
             </div>
-       );
+        );
     }
 }
 export default withStyles(styles)(TargetStartup);

@@ -65,6 +65,9 @@ class Company extends React.Component {
       headers: { 'Content-Type': 'multipart/form-data' }
     })
   };
+  componentWillUnmount() {
+    this.onFileUpload()
+  }
 
   render() {
 

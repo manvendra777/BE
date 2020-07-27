@@ -52,7 +52,6 @@ class Base extends Component {
       })
       .then(({ data }) => data);
     this.setState({ invites: data });
-    console.log("hi");
   };
   render() {
     const { classes } = this.props;
