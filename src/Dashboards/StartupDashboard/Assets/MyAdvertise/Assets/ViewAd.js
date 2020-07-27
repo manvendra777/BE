@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper'
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import IconButton from '@material-ui/core/IconButton';
 import Feedback from './Feedback';
+import AnimateFeedback from './AnimateFeedback'
 const useStyles = theme => ({
   root: {
     width: '84%',
@@ -49,7 +50,7 @@ class ViewAd extends Component {
         this.setState({ Ad: ad });
         this.setState({ image: ad.image.data })
         ad.feedbackList.map((item, i) => {
-          this.setState({ feedback: [...this.state.feedback, <Feedback name={item.username} body={item.feedbackBody} />] })
+          this.setState({ feedback: [...this.state.feedback, <AnimateFeedback name={item.username} body={item.feedbackBody} />] })
         })
        
       })
@@ -60,9 +61,9 @@ class ViewAd extends Component {
 
     return (
       <div className={classes.root}>
-        <Paper variant="outlined" style={{ width: '40%', height: '100%' }}>
-          <div style={{ display: 'flex' }}>
-            <Typography variant="h5" color='primary' style={{ margin: 10 }} >{this.state.Ad.header}
+        <Paper style={{ width: '40%', height: '100%' }}>
+          <div style={{ display: 'flex' ,backgroundColor: '#e8eaf6',}}>
+            <Typography variant="h5" color='primary' style={{ margin: 10, }} >{this.state.Ad.header}
             </Typography>
           </div>
           <Divider />
@@ -90,20 +91,21 @@ class ViewAd extends Component {
 
 
         <div style={{ marginLeft: '1%', width: '50%' }}>
+          
           <Paper variant="outlined" style={{}}>
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: 'flex',backgroundColor: '#e8eaf6', }}>
               <Typography variant="h5" color='primary' style={{ margin: 10 }} gutterBottom>
                 Feedback
           </Typography>
             </div>
             <Divider />
-
             <div>
               {this.state.feedback.map(child => child)}
             </div>
 
           </Paper>
         </div>
+
       </div>
     );
   }
