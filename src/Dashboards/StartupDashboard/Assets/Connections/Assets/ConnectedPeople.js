@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid'
 import InvestorCard from './InvestorCard'
 import MentorCard from './MentorCard'
 import StartupCard from "../../../../InvestorsDashboard/Assets/Connections/Assets/StartupCard";
+import {trackPromise} from 'react-promise-tracker';
 
 const useStyles = (theme)=>({
   root: {
@@ -42,7 +43,8 @@ class ConnectedPeople extends Component {
   getConnection(){
     var myid = Cookies.get('id')
     let mem = [];
-    axios.get(`http://54.237.17.61/entityAction/user/myConnections`, { params: { id: myid } })
+    trackPromise(
+      axios.get(`http://54.237.17.61/entityAction/user/myConnections`, { params: { id: myid } })
       .then(res => {
         mem = res.data;
         mem.map((item, i) => {
@@ -68,6 +70,8 @@ class ConnectedPeople extends Component {
       
      console.log(this.state.connections);
   })
+    )
+   
 }
 
 

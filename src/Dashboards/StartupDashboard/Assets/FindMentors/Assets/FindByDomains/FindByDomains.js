@@ -13,7 +13,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import Animate from './Assets/Animate'
+import Animate from './Assets/Animate';
+import {trackPromise} from 'react-promise-tracker';
 class FindByDomains extends Component {
     constructor(props) {
         super(props);
@@ -25,6 +26,12 @@ class FindByDomains extends Component {
         };
         this.getListData = this.getListData.bind(this)
     }
+
+    
+  sleep(time) {
+    return new Promise((resolve) => setTimeout(resolve, time)
+    )
+  }
 
     getList = (event) => {
 
@@ -51,13 +58,16 @@ class FindByDomains extends Component {
         console.log(this.state.domains);
         this.setState({ MentorList: [] })
         var mentors;
-        axios.get(`http://54.237.17.61/management/mentor/profile/domain/findbylist`, { params: { domain: this.state.domains + '' } })
+        trackPromise(
+            axios.get(`http://54.237.17.61/management/mentor/profile/domain/findbylist`, { params: { domain: this.state.domains + '' } })
             .then(res => {
                 mentors = res.data;
                 mentors.map((item, i) => {
                     this.setState({ MentorList: [...this.state.MentorList, <Animate id={item.id} domain={item.domain} firstname={item.firstName} lastname={item.lastName} about={item.about_yourself} />] })
                 })
             })
+        )
+      
     }
     render() {
 

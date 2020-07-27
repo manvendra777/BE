@@ -21,6 +21,7 @@ ReactDOM.render(
      <App />
      </MuiThemeProvider>
      <Loading/>
+     
   </React.StrictMode>,
   document.getElementById('root')
 );

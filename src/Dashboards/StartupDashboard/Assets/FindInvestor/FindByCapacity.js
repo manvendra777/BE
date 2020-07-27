@@ -14,7 +14,9 @@ import FormGroup from '@material-ui/core/FormGroup';
 import Button from '@material-ui/core/Button';
 import Slider from '@material-ui/core/Slider';
 import Grid from '@material-ui/core/Grid';
-import Animate from './Animate'
+import Animate from './Animate';
+import {trackPromise} from 'react-promise-tracker';
+
 class FindByCapacity extends Component {
     constructor(props) {
         super(props);
@@ -26,6 +28,11 @@ class FindByCapacity extends Component {
         };
         this.getListData = this.getListData.bind(this)
     }
+
+    sleep(time) {
+        return new Promise((resolve) => setTimeout(resolve, time)
+        )
+      }
 
     getList = (event) => {
 
@@ -52,7 +59,8 @@ class FindByCapacity extends Component {
         //54.237.17.61/management/investor/profile/find?min=100&max=199
         this.setState({ InvestorList: [] })
         var investor;
-        axios.get(`http://54.237.17.61/management/investor/profile/find`, { params: { min: this.state.value[0],max:this.state.value[1] } })
+        trackPromise(
+            axios.get(`http://54.237.17.61/management/investor/profile/find`, { params: { min: this.state.value[0],max:this.state.value[1] } })
             .then(res => {
                 investor = res.data;
                 investor.map((item, i) => {
@@ -60,6 +68,8 @@ class FindByCapacity extends Component {
                     this.setState({ InvestorList: [...this.state.InvestorList, <Animate id={item.id} domain={item.domain} firstname={item.firstName} lastname={item.lastName} />] })
                 })
             })
+        )
+    
     }
 
 
