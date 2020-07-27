@@ -593,22 +593,15 @@ class SpringFrontPage extends React.Component {
 
               <div
                 style={{
-                  marginTop: "8%",
+                  marginTop: "3%",
                   marginLeft: "auto",
                   marginRight: "auto",
 
                   marginBottom: "0%",
-                  width: "30%",
+                  width: "70%",
                 }}
               >
                 <OutlinedCard />
-                <Typography
-                  style={{ fontFamily: "Special Elite" }}
-                  variant="h4"
-                  gutterBottom
-                >
-                  Developers
-                </Typography>
               </div>
             </ParallaxLayer>
           </div>
