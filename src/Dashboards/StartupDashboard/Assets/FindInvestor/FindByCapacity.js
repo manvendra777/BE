@@ -14,14 +14,11 @@ import FormGroup from '@material-ui/core/FormGroup';
 import Button from '@material-ui/core/Button';
 import Slider from '@material-ui/core/Slider';
 import Grid from '@material-ui/core/Grid';
-<<<<<<< HEAD
 import Animate from './Animate';
 import {trackPromise} from 'react-promise-tracker';
 
-=======
 import Animate from './Animate'
 import photo from './investor_find.png'
->>>>>>> 0ca3d8c85d4022440818bc72dbe93dd48b22808b
 class FindByCapacity extends Component {
     constructor(props) {
         super(props);
