@@ -8,7 +8,7 @@ import Divider from "@material-ui/core/Divider";
 import PaymentIcon from "@material-ui/icons/Payment";
 import Dialog from "@material-ui/core/Dialog";
 import CreateAd from "./Assets/CreateAd";
-import PayForMore from "./Assets/Pricing";
+import Pricing from "./Assets/Pricing";
 import Cookies from "js-cookie";
 import axios from "axios";
 import Grid from "@material-ui/core/Grid";
@@ -92,7 +92,7 @@ class MyAvertise extends Component {
             open={this.state.isPayForeMoreOpen}
             onClose={this.createPayForMore}
           >
-            <PayForMore method={this.createPayForMore} />
+            <Pricing method={this.createPayForMore} />
           </Dialog>
           <div style={{ display: "flex", marginLeft: "auto" }}>
             <Typography
