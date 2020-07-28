@@ -101,6 +101,9 @@ class Header extends Component {
 		};
 	}
 	
+	home(){
+		window.location= "/mentorDashboard/Home"
+	}
 	findStartup() {
 		window.location = "/mentorDashboard/FindStartup"
 	}
@@ -117,6 +120,7 @@ class Header extends Component {
 	profile() {
 		window.location = "/mentorDashboard/Profile"
 	}
+
 	render() {
 		const { classes } = this.props;
 		
@@ -133,6 +137,7 @@ class Header extends Component {
 					</Typography>
 						</div>
 						<div className={classes.groupButtons}>
+						<Button onClick={this.home} style={{ color: "white", margin: "5px" }} >Home<SearchIcon style={{ marginLeft: 7 }} /></Button>
 							<Button onClick={this.findStartup} style={{ color: "white", margin: "5px" }} >Find Startup<SearchIcon style={{ marginLeft: 7 }} /></Button>
 							<Button onClick={this.connections} style={{ color: "white", margin: "5px" }} >Connections<PersonAddIcon style={{ marginLeft: 7 }} /></Button>
 							<Button onClick={this.messaging} style={{ color: "white", margin: "5px" }} >Messaging<MessageIcon style={{ marginLeft: 7 }} /></Button>

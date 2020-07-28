@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 export default function User(props) {
   const classes = useStyles();
   const openMentorPage = () => {
-    window.location = "/startupDashboard/TargetMentor/" + props.id
+    window.location = "/investorDashboard/MyStartup/" + props.id
   }
   return (
     <div className={classes.root}>
