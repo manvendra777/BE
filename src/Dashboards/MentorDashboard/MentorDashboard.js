@@ -11,6 +11,11 @@ import { Route, BrowserRouter as Router, Link } from "react-router-dom";
 import Advertise from "./Assets/Advertise/Advertise";
 import Cookies from "js-cookie";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import MyConnectedStartup from './Assets/Home/ConnectedStartup';
+import ConnectedStartup from "./Assets/Home/ConnectedStartup";
+import BookMarkedStartup from './Assets/Home/BookMarkedStartup'
+import Home from './Assets/Home/Home';
+
 export default class StartupDashboard extends Component {
   constructor(props) {
     super(props);
@@ -66,10 +71,17 @@ export default class StartupDashboard extends Component {
                 <Route
                   path="/mentorDashboard/Ads"
                   component={Advertise}
-                ></Route>
+                >
+                </Route>
+                <Route
+                  path="/mentorDashboard/Home"
+                  component={Home}
+                >
+                </Route>
               </div>
             </div>
           </Router>
+          
         </MuiThemeProvider>
       </div>
     );
