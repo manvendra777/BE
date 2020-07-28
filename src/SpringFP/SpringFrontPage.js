@@ -257,7 +257,7 @@ class SpringFrontPage extends React.Component {
 
             <div
               style={{
-                marginLeft: "10%",
+                marginLeft: "4%",
                 marginBottom: "22%",
                 width: "20vmin",
               }}
@@ -276,7 +276,7 @@ class SpringFrontPage extends React.Component {
               >
                 {(props) => (
                   <div style={props}>
-                    <img style={{ width: "20vmin" }} src={logo}></img>
+                    <img style={{ width: "35vmin" }} src={logo}></img>
                   </div>
                 )}
               </Spring>
