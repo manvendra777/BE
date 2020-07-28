@@ -58,7 +58,7 @@ class Base extends Component {
       <div className={classes.root}>
         <Paper elevation={3}>
           <div className={classes.hd}>
-            <Typography
+            <Typography 
               variant="h5"
               color="primary"
               style={{ margin: 15 }}

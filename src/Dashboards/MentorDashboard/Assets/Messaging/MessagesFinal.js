@@ -131,7 +131,7 @@ componentDidUpdate(){
                   axios.get(`http://54.237.17.61/management/` + userType + `/photos/` + id)
                     .then(res => {
                       mem = res.data;
-                      this.setState({ members: [...this.state.members, <Added a={this.state.a} selected={'sle '+i} image={mem} type={userType} name={persons.firstName + ' ' + persons.lastName} id={item} method={this.setAddedUser} />] })
+                      this.setState({ members: [...this.state.members, <Added  a={this.state.a} selected={'sle '+i} image={mem} type={userType} name={persons.firstName + ' ' + persons.lastName} id={item} method={this.setAddedUser} />] })
                     })
                 });
             });
