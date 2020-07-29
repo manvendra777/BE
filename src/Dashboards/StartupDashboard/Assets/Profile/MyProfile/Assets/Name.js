@@ -24,7 +24,8 @@ import Chip from "@material-ui/core/Chip";
 import Cookies from "js-cookie";
 import { Checkmark } from "react-checkmark";
 import Edit from "./Edit";
-
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 const styles = (theme) => ({
   root: {},
   cont: {
@@ -358,8 +359,8 @@ class Name extends Component {
                     }
                   </div>
                 ) : (
-                  <div></div>
-                )}
+                    <div></div>
+                  )}
               </div>
             </Typography>
 
@@ -384,7 +385,20 @@ class Name extends Component {
           </div>
           <Edit edit={this.toggleModal} />
         </Card>
+        <Card elevation={3} style={{ marginTop: 20, width: "100%" }}>
 
+          <Card >
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select">
+              <MenuItem value={10}>Ten</MenuItem>
+              <MenuItem value={20}>Twenty</MenuItem>
+              <MenuItem value={30}>Thirty</MenuItem>
+            </Select>
+          </Card>
+
+
+        </Card>
         <Card elevation={3} style={{ marginTop: 20, width: "100%" }}>
           <div style={{ marginTop: 1, marginLeft: 600 }}></div>
           <Dialog open={this.state.isModalOpen} onClose={this.toggleModal}>

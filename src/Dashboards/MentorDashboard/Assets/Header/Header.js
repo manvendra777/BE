@@ -137,11 +137,11 @@ class Header extends Component {
 					</Typography>
 						</div>
 						<div className={classes.groupButtons}>
-						<Button onClick={this.home} style={{ color: "white", margin: "5px" }} >Home<SearchIcon style={{ marginLeft: 7 }} /></Button>
-							<Button onClick={this.findStartup} style={{ color: "white", margin: "5px" }} >Find Startup<SearchIcon style={{ marginLeft: 7 }} /></Button>
-							<Button onClick={this.connections} style={{ color: "white", margin: "5px" }} >Connections<PersonAddIcon style={{ marginLeft: 7 }} /></Button>
-							<Button onClick={this.messaging} style={{ color: "white", margin: "5px" }} >Messaging<MessageIcon style={{ marginLeft: 7 }} /></Button>
-							<Button onClick={this.profile} style={{ color: "white", margin: "5px" }} > Profile <AccountCircle style={{ marginLeft: 7 }} /></Button>
+						<Button onClick={this.home} style={{ color: "white", margin: "5px" }} ><SearchIcon style={{ marginLeft: 7 }} />Home</Button>
+							<Button onClick={this.findStartup} style={{ color: "white", margin: "5px" }} ><SearchIcon style={{ marginLeft: 7 }} />Find Startup</Button>
+							<Button onClick={this.connections} style={{ color: "white", margin: "5px" }} ><PersonAddIcon style={{ marginLeft: 7 }} />Connections</Button>
+							<Button onClick={this.messaging} style={{ color: "white", margin: "5px" }} ><MessageIcon style={{ marginLeft: 7 }} />Messaging</Button>
+							<Button onClick={this.profile} style={{ color: "white", margin: "5px" }} >  <AccountCircle style={{ marginLeft: 7 }} />Profile</Button>
 							<LogoutButton	/>
 						</div>
 					</Toolbar>

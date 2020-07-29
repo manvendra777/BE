@@ -152,25 +152,28 @@ class TargetStartup extends Component {
             .then(res => {
                 response = res.data
                 console.log(response);
-                response.map((item, i) => {
-                    axios
-                        .get("http://54.237.17.61/security/getTypeById?id=" + item)
-                        .then((res) => {
-                            userType = res.data;
-                            var persons;
-                            var userType;
-                            axios
-                                .get(
-                                    `http://54.237.17.61/management/` + userType + `/profile/` + item
-                                )
-                                .then((res) => {
-                                    persons = res.data;
-                                    console.log(persons)
-                                    this.setState({ getMyPrevious: [...this.state.getMyPrevious, <div>{persons.firstName + "  " + persons.lastName}</div>] })
-                                })
-                        })
-                })
-
+                if(response != ''){
+                    response.map((item, i) => {
+                        axios
+                            .get("http://54.237.17.61/security/getTypeById?id=" + item)
+                            .then((res) => {
+                                userType = res.data;
+                                var persons;
+                                var userType;
+                                axios
+                                    .get(
+                                        `http://54.237.17.61/management/` + userType + `/profile/` + item
+                                    )
+                                    .then((res) => {
+                                        persons = res.data;
+                                        console.log(persons)
+                                        this.setState({ getMyPrevious: [...this.state.getMyPrevious, <div>{persons.firstName + "  " + persons.lastName}</div>] })
+                                    })
+                            })
+                    })
+    
+                }
+               
             })
     }
 
@@ -181,25 +184,28 @@ class TargetStartup extends Component {
         axios.get('http://54.237.17.61/entityAction/getMyCurrent', { params: { id: profileId } })
             .then(res => {
                 response = res.data
-                response.map((item, i) => {
-                    axios
-                        .get("http://54.237.17.61/security/getTypeById?id=" + item)
-                        .then((res) => {
-                            userType = res.data;
-                            var persons;
-                            var userType;
-                            axios
-                                .get(
-                                    `http://54.237.17.61/management/` + userType + `/profile/` + item
-                                )
-                                .then((res) => {
-                                    persons = res.data;
-                                    console.log(persons)
-                                    this.setState({ getMyCurrent: [...this.state.getMyCurrent, <div>{persons.firstName + "  " + persons.lastName +', '}</div>] })
-                                })
-                        })
-                })
-
+                if(response != ''){
+                    response.map((item, i) => {
+                        axios
+                            .get("http://54.237.17.61/security/getTypeById?id=" + item)
+                            .then((res) => {
+                                userType = res.data;
+                                var persons;
+                                var userType;
+                                axios
+                                    .get(
+                                        `http://54.237.17.61/management/` + userType + `/profile/` + item
+                                    )
+                                    .then((res) => {
+                                        persons = res.data;
+                                        console.log(persons)
+                                        this.setState({ getMyCurrent: [...this.state.getMyCurrent, <div>{persons.firstName + "  " + persons.lastName +', '}</div>] })
+                                    })
+                            })
+                    })
+    
+                }
+              
             })
     }
     render() {

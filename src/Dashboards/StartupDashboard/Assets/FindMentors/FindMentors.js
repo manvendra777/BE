@@ -5,8 +5,9 @@ class FindMentors extends Component {
     render() {
         return (
             <div>
-                <Recommendation/>
+                
                 <FindByDomain/>
+                <Recommendation/>
             </div>
         );
     }
