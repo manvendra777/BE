@@ -77,7 +77,7 @@ class MessagesFinal extends Component {
       buffer: [],
       members: [],
       addedUserId: '',
-      addedUserName:'',
+      addedUserName: '',
       selected: false,
       myId: Cookies.get('id'),
     };
@@ -85,10 +85,10 @@ class MessagesFinal extends Component {
     this.setAddedUser = this.setAddedUser.bind(this)
   }
 
-  setAddedUser = (addedUser,name) => {
+  setAddedUser = (addedUser, name) => {
     this.setState({
       addedUserId: addedUser,
-      addedUserName:name,
+      addedUserName: name,
       msg: [],
       msgTypo: '',
       buffer: [],
@@ -104,21 +104,16 @@ class MessagesFinal extends Component {
       .then(res => {
         mem = res.data;
         mem.map((item, i) => {
-          var id=item;
+          var id = item;
           axios
-            .get("http://54.237.17.61/security/getTypeById?id=" + id)
-            .then((res) => {
+            .get("http://54.237.17.61/security/getTypeById?id=" + id).then((res) => {
               userType = res.data;
               var persons;
               var userType;
-              axios
-                .get(
-                  `http://54.237.17.61/management/` + userType + `/profile/` +id
-                )
-                .then((res) => {
+              axios.get(`http://54.237.17.61/management/` + userType + `/profile/` + id).then((res) => {
                   persons = res.data;
                   console.log(persons);
-                  this.setState({ members: [...this.state.members, <Added name={persons.firstName + ' '+persons.lastName} id={item} method={this.setAddedUser} />] })
+                  this.setState({ members: [...this.state.members, <Added name={persons.firstName + ' ' + persons.lastName} id={item} method={this.setAddedUser} />] })
                 });
             });
         })
@@ -224,7 +219,11 @@ class MessagesFinal extends Component {
             </div>
           </Paper>
         </div>
-        {this.state.selected ? <Paper style={{ backgroundColor: '#eeeeee' }} className={classes.root}>
+        {/*
+        {
+          this.state.selected ? 
+        
+        <Paper style={{ backgroundColor: '#eeeeee' }} className={classes.root}>
           <Paper elevation={5} style={{ zIndex: 10, backgroundColor: '#e8eaf6' }}>
             <User show={this.state.selected} style={{ color: '#e8eaf6', }} id={this.state.addedUserId} name={this.state.addedUserName} />
           </Paper>
@@ -258,13 +257,11 @@ class MessagesFinal extends Component {
                 <Button style={{ marginTop: 10 }} color="primary" onClick={() => this.sendMsg()} ><SendIcon /></Button>
               </div>
             </div>
-          </Paper>
-
-
+         </Paper>
         </Paper> : <div style={{ padding: '2%' }}><Paper elevation={5} style={{ backgroundColor: '#eeeeee', width: '60vmin', height: '76vmin', display: 'flex' }} >
           <img style={{ width: '100%', marginTop: 'auto', marginBottom: '35%' }} src={photo}></img>
         </Paper></div>}
-
+*/}
 
       </div>
     );

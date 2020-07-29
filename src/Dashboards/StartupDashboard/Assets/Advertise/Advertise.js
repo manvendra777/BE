@@ -94,7 +94,7 @@ class Advertise extends Component {
             </div>
           </div>
         </Link>
-        <Link to="/startupDashboard/Profile">
+       
           <div style={{ marginTop: 10 }} className="container d-flex justify-content-center">
             <div className="card p-3 py-5" style={{ background: "white" }}>
               <div className="text-center">
@@ -102,13 +102,12 @@ class Advertise extends Component {
                 <Divider variant="middle" /><br />
                 <small className="mt-4">Get your startup up and running with our company</small>
                 <br /> <small className="mt-4"> We can provide you Equipments at 50% discount </small>
-
               <br/><div style={{marginTop:20}}> SUPPLIER Advertise HERE !</div>
               <large style={{marginTop:40}}>CALL ON : 975757575</large>
               </div>
             </div>
           </div>
-        </Link>
+    
       </div>
     );
   }

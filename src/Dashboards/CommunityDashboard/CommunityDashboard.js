@@ -16,6 +16,7 @@ import Advertise from './Assets/Advertise/Advertise'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Feed from './Assets/home/Assets/Feed'
 import AdvertiseRight from "./Assets/Advertise/AdvertiseRight.js";
+import Mail from './Assets/Mail/Inbox'
 export default class StartupDashboard extends Component {
 	constructor(props) {
 		super(props);
@@ -51,7 +52,7 @@ export default class StartupDashboard extends Component {
 							</div>
 							<div style={{ marginLeft: '18.5%', width: '80%' }}>
 								<Route path="/communityDashboard/Profile" component={Profile} />
-								<Route path="/communityDashboard/Messaging" component={Messaging} />
+								<Route path="/communityDashboard/Messaging" component={Mail} />
 								<Route path="/communityDashboard/Connections" component={Connections} />
 								<Route path="/communityDashboard/Home" component={Home} />
 

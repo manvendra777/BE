@@ -37,9 +37,9 @@ class AdvertiseRight extends Component {
     this.sendFeedBack = this.sendFeedBack.bind(this);
   }
 
-  componentDidMount() {}
-  componentWillUnmount() {}
-  componentWillMount() {}
+  componentDidMount() { }
+  componentWillUnmount() { }
+  componentWillMount() { }
 
   getAdByDomain() {
     this.setState({ show: false });
@@ -56,7 +56,7 @@ class AdvertiseRight extends Component {
         self.setState({ image: ads.image.data });
         setTimeout(function () { //Start the timer //After 1 second, set render to true
           self.setState({ show: true })
-        }.bind(this),2000)
+        }.bind(this), 2000)
       });
   }
   keyPress = (e) => {
@@ -69,9 +69,10 @@ class AdvertiseRight extends Component {
     var self = this;
     axios
       .post("http://54.237.17.61/advert/addFeedback/", {
-        username: Cookies.get("username"),
-        feedbackBody: self.state.feedback,
-        adId: self.state.adId,
+        "username": Cookies.get("username"),
+        "feedbackBody": self.state.feedback,
+        "userId": Cookies.get('id'),
+        "adId": self.state.adId,
       })
       .then(function (response) {
         self.setState({ feedback: '' })
