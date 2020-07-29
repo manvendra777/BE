@@ -83,6 +83,7 @@ class MessagesFinal extends Component {
       addedUserType:'',
       sel:'',
       a:'b',
+      addedUserStartup:'',
       userSelected: true,
       myId: Cookies.get('id'),
     };
@@ -90,7 +91,7 @@ class MessagesFinal extends Component {
     this.setAddedUser = this.setAddedUser.bind(this)
   }
 
-  setAddedUser = (addedUser, name,type,ima) => {
+  setAddedUser = (addedUser, name,type,ima,org) => {
     this.setState({
       addedUserId: addedUser,
       addedUserName: name,
@@ -100,6 +101,7 @@ class MessagesFinal extends Component {
       msgTypo: '',
       buffer: [],
       selected: true,
+      addedUserStartup:org,
     })
   }
 componentDidUpdate(){
@@ -131,7 +133,7 @@ componentDidUpdate(){
                   axios.get(`http://54.237.17.61/management/` + userType + `/photos/` + id)
                     .then(res => {
                       mem = res.data;
-                      this.setState({ members: [...this.state.members, <Added a={this.state.a} selected={'sle '+i} image={mem} type={userType} name={persons.firstName + ' ' + persons.lastName} id={item} method={this.setAddedUser} />] })
+                      this.setState({ members: [...this.state.members, <Added org={persons.startupName} selected={'sle '+i} image={mem} type={userType} name={persons.firstName + ' ' + persons.lastName} id={item} method={this.setAddedUser} />] })
                     })
                 });
             });
@@ -240,7 +242,7 @@ componentDidUpdate(){
         </div>
         {this.state.selected ? <Paper style={{ backgroundColor: '#eeeeee' }} className={classes.root}>
           <Paper elevation={5} style={{ zIndex: 10, backgroundColor: '#e8eaf6' }}>
-            <User show={this.state.selected} style={{ color: '#e8eaf6', }} id={this.state.addedUserId} name={this.state.addedUserName} image={this.state.addedUserImage} type={this.state.addedUserType} />
+            <User show={this.state.selected} style={{ color: '#e8eaf6', }} id={this.state.addedUserId} org={this.state.addedUserStartup}  name={this.state.addedUserName} image={this.state.addedUserImage} type={this.state.addedUserType} />
           </Paper>
 
           <Paper elevation={5} style={{ height: '120%', marginTop: '-0.5%' }}>

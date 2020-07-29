@@ -14,65 +14,68 @@ import BooKMarkCard from './BookMarkCard';
 import Grid from '@material-ui/core/Grid'
 
 const useStyles = (theme) => ({
-    root: {
-      width: '20%',
+  root: {
+    width: '20%',
 
-    },
-    media: {
-      height: '10%',
-    },
-  });
+  },
+  media: {
+    height: '10%',
+  },
+});
 
-class BookMarkedStartup extends React.Component{
+class BookMarkedStartup extends React.Component {
 
 
-    constructor(props) {
-        super(props);
-        this.state = {
-          connectedID: []
-        }
-        this.getConnectedID = this.getConnectedID.bind(this);
-      }
-    
-      componentWillMount() {
-        this.getConnectedID()
-      }
-
-      getConnectedID(){
-
-        let mem = [];
-        axios.get('http://54.237.17.61/entityAction/getBookmark?id='+Cookies.get("id"))
-        .then(res => {
-        mem = res.data;
-        mem.map((item, i) => {
-          console.log(item);
-          this.setState({ connectedID: [...this.state.connectedID, <BooKMarkCard id={item} />] })
-          console.log("here")
-        })
-        
-      })
-   
+  constructor(props) {
+    super(props);
+    this.state = {
+      connectedID: []
+    }
+    this.getConnectedID = this.getConnectedID.bind(this);
   }
-    render(){
-        const { classes } = this.props;
-        return(
-            <div>
-                <Card elevation={5} style={{ width: '30%', marginTop: 10, marginLeft: '50%' }}>
+
+  componentWillMount() {
+    this.getConnectedID()
+  }
+
+  getConnectedID() {
+
+    let mem = [];
+    axios.get('http://54.237.17.61/entityAction/getBookmark?id=' + Cookies.get("id"))
+      .then(res => {
+        mem = res.data;
+        console.log(mem);
+        if (mem != null) {
+          mem.map((item, i) => {
+            console.log(item);
+            this.setState({ connectedID: [...this.state.connectedID, <BooKMarkCard id={item} />] })
+            console.log("here")
+          }
+          )
+        }
+      })
+
+  }
+  render() {
+    const { classes } = this.props;
+    return (
+      <div>
+        <Card elevation={5} style={{ width: '30%', marginTop: 10, marginLeft: '50%' }}>
           <Typography variant="h5" color='primary' style={{ backgroundColor: '#eeeeee', padding: 10 }} >
-                BookMark
+            BookMark
 							</Typography>
           <Divider />
-        
-              <div style={{ margin: 40 }}>
-                <Grid>
-                  {this.state.connectedID.map(child => child)}
-                </Grid>
+
+          <div style={{ margin: 40 }}>
+            <Grid>
+              {this.state.connectedID.map(child => child)}
+            </Grid>
           </div>
         </Card>
-            </div>
+      </div>
 
-        )
-    }
+    )
+  }
 
 }
 export default withStyles(useStyles)(BookMarkedStartup);

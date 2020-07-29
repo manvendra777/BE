@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Added(props) {
   const classes = useStyles();
   const changeChatWindow = () => {
-    props.method(props.id, props.name, props.type, props.image);
+    props.method(props.id, props.name ,props.type, props.image,props.org);
   }
   return (
     <div className={classes.root}>
@@ -66,7 +66,7 @@ export default function Added(props) {
         >
           <Avatar alt="Remy Sharp" src={`data:image/jpeg;base64,${props.image}`} />
         </StyledBadge>
-        <ListItemText style={{ marginLeft: "16px", }} primary={props.name} secondary={props.type} />
+        <ListItemText style={{ marginLeft: "16px", }} primary={props.org} secondary={props.type + ': '+props.name} />
       </ListItem>
 
 

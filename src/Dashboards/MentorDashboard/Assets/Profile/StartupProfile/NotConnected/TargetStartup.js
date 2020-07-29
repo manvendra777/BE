@@ -13,7 +13,7 @@ import RatingStats from './Rating/RatingStats'
 import Cookies from 'js-cookie'
 import { ToastContainer, toast } from 'react-toastify';
 
-const styles = theme => ({ 
+const styles = theme => ({
     root: {
         display: "flex",
         flexWrap: "wrap",
@@ -30,7 +30,7 @@ const styles = theme => ({
         margin: "5px 0px 0px 5px ",
         alignItems: "center",
         marginBotton: 200
-    }, 
+    },
     large: {
         width: theme.spacing(15),
         height: theme.spacing(15)
@@ -52,7 +52,9 @@ class TargetStartup extends Component {
             val: [],
             avg: '',
             setReq: false,
-            image:null
+            image: null,
+            getMyCurrent: [],
+            getMyPrevious: [],
         };
         this.getInfo = this.getInfo.bind(this);
         this.mapDomain = this.mapDomain.bind(this);
@@ -138,7 +140,67 @@ class TargetStartup extends Component {
         this.checkSentReq()
         this.getRatingAv()
         this.getInfo()
+        this.getPrevious()
+        this.getCurrent()
         this.getImage()
+    }
+
+    getPrevious = () => {
+        var profileId = this.props.match.params.id
+        var response;
+        axios.get('http://54.237.17.61/entityAction/getMyPrevious', { params: { id: profileId } })
+            .then(res => {
+                response = res.data
+                console.log(response);
+                response.map((item, i) => {
+                    axios
+                        .get("http://54.237.17.61/security/getTypeById?id=" + item)
+                        .then((res) => {
+                            userType = res.data;
+                            var persons;
+                            var userType;
+                            axios
+                                .get(
+                                    `http://54.237.17.61/management/` + userType + `/profile/` + item
+                                )
+                                .then((res) => {
+                                    persons = res.data;
+                                    console.log(persons)
+                                    this.setState({ getMyPrevious: [...this.state.getMyPrevious, <div>{persons.firstName + "  " + persons.lastName}</div>] })
+                                })
+                        })
+                })
+
+            })
+    }
+
+
+    getCurrent = () => {
+        var profileId = this.props.match.params.id
+        var response;
+        axios.get('http://54.237.17.61/entityAction/getMyCurrent', { params: { id: profileId } })
+            .then(res => {
+                response = res.data
+                response.map((item, i) => {
+                    axios
+                        .get("http://54.237.17.61/security/getTypeById?id=" + item)
+                        .then((res) => {
+                            userType = res.data;
+                            var persons;
+                            var userType;
+                            axios
+                                .get(
+                                    `http://54.237.17.61/management/` + userType + `/profile/` + item
+                                )
+                                .then((res) => {
+                                    persons = res.data;
+                                    console.log(persons)
+                                    this.setState({ getMyCurrent: [...this.state.getMyCurrent, <div>{persons.firstName + "  " + persons.lastName +', '}</div>] })
+                                })
+                        })
+                })
+
+            })
     }
     render() {
         const { classes } = this.props;
@@ -155,42 +217,59 @@ class TargetStartup extends Component {
                             <Typography variant="h4" color="primary" gutterBottom>
                                 {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}
                             </Typography>
-                          
 
-                            <Typography style={{color:'#424242'}} variant="h5"  gutterBottom>
+
+                            <Typography style={{ color: '#424242' }} variant="h5" gutterBottom>
                                 Address: {this.state.myProfile.address + ', ' + this.state.myProfile.city + ', ' + this.state.myProfile.postalCode + ', ' + this.state.myProfile.country}
                             </Typography>
                             <div>{this.mapDomain()}</div>
                         </Container>
                         <Divider style={{ marginLeft: 10, marginRight: 20 }} orientation="vertical" flexItem />
 
-                        
+
                     </Container>
                     <Divider style={{ marginBottom: 10 }} />
                     <Button disabled={this.state.setReq} style={{ marginLeft: 30 }} size="small" onClick={this.sendRequest} color="primary">Send Invitation</Button>
                     <Divider style={{ marginTop: 10 }} />
                     <Container style={{ marginLeft: 10, marginTop: 10, display: 'block' }}>
 
-                    <div style={{ display: 'flex', alignText: 'center' }}>
+                        <div style={{ display: 'flex', alignText: 'center' }}>
                             <Typography variant="h5" color="primary" gutterBottom>
                                 Qualification:
                             </Typography>
-                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7,color:'#424242' }}>  <h5>{this.state.myProfile.qualification}</h5></div>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>{this.state.myProfile.qualification}</h5></div>
                         </div>
 
                         <div style={{ display: 'flex', alignText: 'center' }}>
                             <Typography variant="h5" color="primary" gutterBottom>
-                            Email:
+                                Email:
                             </Typography>
-                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7,color:'#424242' }}>  <h5>{this.state.myProfile.email}</h5></div>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>{this.state.myProfile.email}</h5></div>
                         </div>
-                        
+
                         <div style={{ display: 'flex', alignText: 'center' }}>
                             <Typography variant="h5" color="primary" gutterBottom>
-                            Phone:
+                                Phone:
                             </Typography>
-                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7,color:'#424242' }}>  <h5>{this.state.myProfile.phone_no}</h5></div>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>{this.state.myProfile.phone_no}</h5></div>
                         </div>
+
+
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                                Current:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5> {this.state.getMyCurrent.map(child=>child)}</h5></div>
+                        </div>
+
+
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                                Previous:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>{this.state.getMyPrevious.map(child=>child)}</h5></div>
+                        </div>
+
                     </Container>
 
                 </Card>
