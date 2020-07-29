@@ -373,7 +373,6 @@ class Name extends Component {
                   this.props.data.lastName}
               </div>
             </Typography>
-
             <div style={{ marginLeft: "1%" }}>
               <Typography>
                 <RoomIcon color="primary" />
