@@ -15,6 +15,10 @@ import Advertise from './Assets/Advertise/Advertise'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import MyAdvertise from './Assets/MyAdvertise/MyAvertise'
 import ViewAd from './Assets/MyAdvertise/Assets/ViewAd'
+import BusinessEvalution from './Assets/BusinessEvalution'
+import { Button } from "@material-ui/core";
+
+
 export default class StartupDashboard extends Component {
 	constructor(props) {
 		super(props);
@@ -25,6 +29,7 @@ export default class StartupDashboard extends Component {
 	componentWillMount(){
 		document.body.style.backgroundColor = "#eeeeee";
 	}
+
 
 	render() {
 		const theme = createMuiTheme({
@@ -58,11 +63,12 @@ export default class StartupDashboard extends Component {
 								<Route path="/startupDashboard/Ads" component={Advertise}></Route>
 								<Route path="/startupDashboard/MyAdvertise" component={MyAdvertise}></Route>
 								<Route path="/startupDashboard/viewAd/:id" component={ViewAd} />
+								<Route path= "/startupDashboard/BusinessEvalution" component= {BusinessEvalution}/>	
 							</div>
 						</div>
 
 					</Router>
-
+					
 				</MuiThemeProvider>
 			</div>);
 	}
