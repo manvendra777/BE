@@ -1,9 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'font-awesome/css/font-awesome.css';
-import 'bootstrap-social/bootstrap-social.css';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import {Loading} from './Animations/Loading'
 
@@ -18,7 +15,7 @@ const theme = createMuiTheme({
 ReactDOM.render(
   <React.StrictMode>
      <MuiThemeProvider theme={theme}>
-     <App />
+     <App/>
      </MuiThemeProvider>
      <Loading/>
      

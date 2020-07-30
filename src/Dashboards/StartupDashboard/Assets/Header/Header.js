@@ -141,13 +141,13 @@ class Header extends Component {
 					</Typography>
 						</div>
 						<div className={classes.groupButtons}>
-						<Button onClick={this.advertiseManagement} style={{ color: "white", margin: "5px" }} > Advertise Management <NoteAddIcon style={{ marginLeft: 7 }} /></Button>
+						<Button onClick={this.advertiseManagement} style={{ color: "white", margin: "5px" }} > <NoteAddIcon style={{ marginRight: 7 }} />Advertise Management </Button>
 						<Button onClick={this.open} style={{ color: "white", margin: "5px" }} > Calculate </Button>
-							<Button onClick={this.findMentor} style={{ color: "white", margin: "5px" }} >Find<SearchIcon style={{ marginLeft: 7 }} /></Button>
-							<Button onClick={this.findInvestor} style={{ color: "white", margin: "5px" }} >Find Investor<SearchIcon style={{ marginLeft: 7 }} /></Button>
-							<Button onClick={this.connections} style={{ color: "white", margin: "5px" }} >Connections<PersonAddIcon style={{ marginLeft: 7 }} /></Button>
-							<Button onClick={this.messaging} style={{ color: "white", margin: "5px" }} >Messaging<MessageIcon style={{ marginLeft: 7 }} /></Button>
-							<Button onClick={this.profile} style={{ color: "white", margin: "5px" }} > Profile <AccountCircle style={{ marginLeft: 7 }} /></Button>
+							<Button onClick={this.findMentor} style={{ color: "white", margin: "5px" }} ><SearchIcon style={{ marginRight: 7 }} />Find</Button>
+							<Button onClick={this.findInvestor} style={{ color: "white", margin: "5px" }} ><SearchIcon style={{ marginRight: 7 }} />Find Investor</Button>
+							<Button onClick={this.connections} style={{ color: "white", margin: "5px" }} ><PersonAddIcon style={{ marginRight: 7 }} />Connections</Button>
+							<Button onClick={this.messaging} style={{ color: "white", margin: "5px" }} ><MessageIcon style={{ marginRight: 7 }} />Messaging</Button>
+							<Button onClick={this.profile} style={{ color: "white", margin: "5px" }} >  <AccountCircle style={{ marginRight: 7 }} />Profile</Button>
 
 						
 							

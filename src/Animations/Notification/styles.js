@@ -4,17 +4,7 @@ import { animated } from 'react-spring'
 export const GlobalStyle = createGlobalStyle`
   html,
   body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    user-select: none;
-    font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto,
-      segoe ui, arial, sans-serif;
-    background: #f0f0f0;
   }
-
   #root {
     width: 100%;
     height: 100%;
@@ -78,20 +68,7 @@ export const Content = styled('div')`
 `
 
 export const Button = styled('button')`
-  cursor: pointer;
-  pointer-events: all;
-  outline: 0;
-  border: none;
-  background: transparent;
-  display: flex;
-  align-self: flex-end;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-  padding-bottom: 14px;
-  color: rgba(255, 255, 255, 0.5);
-  :hover {
-    color: rgba(255, 255, 255, 0.6);
+ 
   }
 `
 

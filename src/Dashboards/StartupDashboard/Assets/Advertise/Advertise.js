@@ -17,7 +17,6 @@ import './sidebar.css'
 
 const useStyles = theme => ({
   root: {
-    width: "15%",
     margin: 0,
     position: 'fixed',
     height: "90%",
@@ -78,8 +77,8 @@ class Advertise extends Component {
     return (
       <div className={classes.root}>
         <Link to="/startupDashboard/Profile">
-          <div className="container d-flex justify-content-center">
-            <div className="card p-3 py-5" style={{ background: "white" }}>
+          <div>
+            <Card elevation={2} style={{ background: "white",width:310,height:420}}>
               <div className="text-center"> <img src={`data:image/jpeg;base64,${this.state.image}`} style={{ height: 100, width: 100 }} className="rounded-circle" />
                 <h3 className="mt-2"> {" "}{" " + this.state.myProfile.firstName + " " + this.state.myProfile.lastName}</h3> <span className="mt-1 clearfix">{this.state.myProfile.startupName}</span>
                 <Divider variant="middle" /><br />
@@ -91,23 +90,23 @@ class Advertise extends Component {
                   <a href="https://www.twitter.com/" target="_blank"><button className="neo-button"><i className="fa fa-twitter fa-1x"></i> </button></a>
                 </div>
               </div>
-            </div>
+            </Card>
           </div>
         </Link>
-       
-          <div style={{ marginTop: 10 }} className="container d-flex justify-content-center">
-            <div className="card p-3 py-5" style={{ background: "white" }}>
-              <div className="text-center">
-                <h3 className="mt-2"> {" "}{" " + "Get your Equipments"}</h3> <span className="mt-1 clearfix">"The Equipment Company"</span>
-                <Divider variant="middle" /><br />
-                <small className="mt-4">Get your startup up and running with our company</small>
-                <br /> <small className="mt-4"> We can provide you Equipments at 50% discount </small>
-              <br/><div style={{marginTop:20}}> SUPPLIER Advertise HERE !</div>
-              <large style={{marginTop:40}}>CALL ON : 975757575</large>
-              </div>
+
+        <div>
+          <Card elevation={2} style={{ background: "white",width:310,height:420,marginTop:20}}>
+            <div className="text-center">
+              <h3 className="mt-2"> {" "}{" " + "Get your Equipments"}</h3> <span className="mt-1 clearfix">"The Equipment Company"</span>
+              <Divider variant="middle" /><br />
+              <small className="mt-4">Get your startup up and running with our company</small>
+              <br /> <small className="mt-4"> We can provide you Equipments at 50% discount </small>
+              <br /><div style={{ marginTop: 20 }}> SUPPLIER Advertise HERE !</div>
+              <large style={{ marginTop: 40 }}>CALL ON : 975757575</large>
             </div>
-          </div>
-    
+          </Card>
+        </div>
+
       </div>
     );
   }
