@@ -121,6 +121,10 @@ class Header extends Component {
 	profile() {
 		window.location = "/startupDashboard/Profile"
 	}
+
+	open(){
+		window.location= "/startupDashboard/BusinessEvalution"
+	}
 	render() {
 		const { classes } = this.props;
 		
@@ -138,13 +142,13 @@ class Header extends Component {
 						</div>
 						<div className={classes.groupButtons}>
 						<Button onClick={this.advertiseManagement} style={{ color: "white", margin: "5px" }} > Advertise Management <NoteAddIcon style={{ marginLeft: 7 }} /></Button>
-							
+						<Button onClick={this.open} style={{ color: "white", margin: "5px" }} > Calculate </Button>
 							<Button onClick={this.findMentor} style={{ color: "white", margin: "5px" }} >Find<SearchIcon style={{ marginLeft: 7 }} /></Button>
 							<Button onClick={this.findInvestor} style={{ color: "white", margin: "5px" }} >Find Investor<SearchIcon style={{ marginLeft: 7 }} /></Button>
 							<Button onClick={this.connections} style={{ color: "white", margin: "5px" }} >Connections<PersonAddIcon style={{ marginLeft: 7 }} /></Button>
 							<Button onClick={this.messaging} style={{ color: "white", margin: "5px" }} >Messaging<MessageIcon style={{ marginLeft: 7 }} /></Button>
 							<Button onClick={this.profile} style={{ color: "white", margin: "5px" }} > Profile <AccountCircle style={{ marginLeft: 7 }} /></Button>
-							
+
 							<LogoutButton	/>
 						</div>
 					</Toolbar>
