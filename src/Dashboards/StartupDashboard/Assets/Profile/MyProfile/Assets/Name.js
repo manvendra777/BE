@@ -26,6 +26,7 @@ import { Checkmark } from "react-checkmark";
 import Edit from "./Edit";
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import person from "material-ui/svg-icons/social/person";
 const styles = (theme) => ({
   root: {},
   cont: {
@@ -70,6 +71,7 @@ class Name extends Component {
       profession: "",
       image: null,
       showVe: false,
+      Mystatus:'',
     };
 
     this.mapDomain = this.mapDomain.bind(this);
@@ -79,7 +81,9 @@ class Name extends Component {
   }
   componentWillMount() {
     this.getImage();
+    this.getStatus()
   }
+
   getImage() {
     var self = this;
     var mem;
@@ -94,6 +98,22 @@ class Name extends Component {
     return <img src={`data:image/jpeg;base64,${this.state.image}`} />;
   }
 
+  setStatus=()=>{
+    axios.post(`http://54.237.17.61/management/startup/profile/setStatus` ,{ params: { id:Cookies.get("id")}})
+			.then(res => {
+				var persons = res.data;
+        console.log(persons);
+        this.setState({Mystatus:person})
+			})
+  }
+  getStatus=()=>{
+    axios.post(`http://54.237.17.61/management/startup/profile/getStatus` ,{ params: { id:Cookies.get("id")}})
+			.then(res => {
+				var persons = res.data;
+        console.log(persons);
+        this.setState({Mystatus:person})
+			})
+  }
   componentWillReceiveProps(props) {
     this.setState({
       firstName: props.data.firstName,
@@ -384,20 +404,22 @@ class Name extends Component {
           </div>
           <Edit edit={this.toggleModal} />
         </Card>
-        <Card elevation={3} style={{ marginTop: 20, width: "100%" }}>
 
-          <Card >
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select">
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-          </Card>
-
-
+        <Card elevation={3} style={{ display: 'flex', marginTop: 20, width: "100%", padding: 20 }}>
+          <div><h5 style={{ color: "#5c6bc0" }}>Current Status :</h5></div>
+          <Select
+            style={{ width: '40%' ,marginLeft:50}}
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            onChange={this.setStatus}>
+            <MenuItem value={'Looking for Mentors'}>Looking for Mentors</MenuItem>
+            <MenuItem value={'Looking for Investors'}>Looking for Investors</MenuItem>
+            <MenuItem value={'Not looking for mentoring'}>Not looking for mentoring</MenuItem>
+            <MenuItem value={'Not looking for investement'}>Not looking for investement</MenuItem>
+            <MenuItem value={'Looking for Hiring'}>Looking for Hiring</MenuItem>
+          </Select>
         </Card>
+
         <Card elevation={3} style={{ marginTop: 20, width: "100%" }}>
           <div style={{ marginTop: 1, marginLeft: 600 }}></div>
           <Dialog open={this.state.isModalOpen} onClose={this.toggleModal}>
