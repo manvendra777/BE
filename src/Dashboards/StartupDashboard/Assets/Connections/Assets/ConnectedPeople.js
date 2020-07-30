@@ -82,7 +82,7 @@ class ConnectedPeople extends Component {
     return (
       <div>
         <div style={{ display: 'flex' }}>
-          <Card elevation={5} style={{ width: '50%', marginTop: 10, margin: 4 }}>
+          <Card elevation={2} style={{ width: '50%', marginTop: 10, margin: 4 }}>
             <Typography variant="h5" color='primary' style={{ backgroundColor: '#e8eaf6', padding: 10 }} >
               My Mentors
 							</Typography>
@@ -95,7 +95,7 @@ class ConnectedPeople extends Component {
               </div>
             </div>
           </Card>
-          <Card elevation={5} style={{ width: '50%', marginTop: 10, margin: 4 }}>
+          <Card elevation={2} style={{ width: '50%', marginTop: 10, margin: 4 }}>
             <Typography variant="h5" color='primary' style={{ backgroundColor: '#e8eaf6', padding: 10 }} >
               My Investors
 							</Typography>

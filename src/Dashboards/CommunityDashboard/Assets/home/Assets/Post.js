@@ -196,7 +196,7 @@ class Post extends Component {
       this.setState({ comment: e.target.value });
     }
     return (
-      <Card elevation={5} className={classes.root}>
+      <Card elevation={2} className={classes.root}>
         <CardHeader
           avatar={
             <Avatar src={`data:image/jpeg;base64,${this.state.profilePicture}`} className={classes.avatar}>

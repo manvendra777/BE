@@ -70,7 +70,7 @@ class FindByDomains extends Component {
         if (this.state.StartupList.length > 0) {
             return (this.state.StartupList.map(child => child))
         } else {
-            return (<div><div elevation={5} style={{width: '100%', height: '100%', display: 'flex' }} >
+            return (<div><div elevation={2} style={{width: '100%', height: '100%', display: 'flex' }} >
                 <img style={{ width: '100%', marginTop: 'auto', }} src={photo}></img>
             </div></div>)
         }
@@ -79,7 +79,7 @@ class FindByDomains extends Component {
 
         return (
             <div>
-                <Card elevation={5} style={{ width: '80%', marginTop: 10, }}>
+                <Card elevation={2} style={{ width: '80%', marginTop: 10, }}>
                     <Typography variant="h5" color='primary' style={{ margin: 10 }} gutterBottom>
                         Find Startups
 							</Typography>

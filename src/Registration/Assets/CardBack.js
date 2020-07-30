@@ -25,7 +25,7 @@ export default function Cardback(props) {
       overflow: 'hidden',
       position: 'relative',
       width: '100 %',
-    }} elevation={5} className={classes.root}>
+    }} elevation={2} className={classes.root}>
 
       <CardActionArea style={{height:'100%'}}>
         <CardContent >

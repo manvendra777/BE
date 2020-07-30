@@ -76,7 +76,7 @@ class FindByCapacity extends Component {
         if (this.state.InvestorList.length > 0) {
             return (this.state.InvestorList.map(child => child))
         } else {
-            return (<div><div elevation={5} style={{ width: '70%', height: '70%', display: 'flex',marginRight:'auto',marginLeft:'auto' }} >
+            return (<div><div elevation={2} style={{ width: '70%', height: '70%', display: 'flex',marginRight:'auto',marginLeft:'auto' }} >
                 <img style={{ width: '100%', marginTop: 'auto', }} src={photo}></img>
             </div></div>)
         }
@@ -108,7 +108,7 @@ class FindByCapacity extends Component {
         ];
         return (
             <div>
-                <Card elevation={5} style={{ width: '84%', marginTop: 10 }}>
+                <Card elevation={2} style={{ width: '84%', marginTop: 10 }}>
                     <Typography variant="h5" color='primary' style={{ margin: 10 }} gutterBottom>
                         Find Investor
 							</Typography>

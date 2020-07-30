@@ -7,7 +7,7 @@ class Recommendation extends Component {
     render() {
         return (
             <div>
-                <Card style={{width: '77%',marginTop:30 }} elevation={5}>
+                <Card style={{width: '77%',marginTop:30 }} elevation={2}>
                 <Typography variant="h5" color='primary' style={{padding:10,backgroundColor: '#eceff1'}} >
 								Recommendation
 							</Typography>

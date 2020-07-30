@@ -38,7 +38,7 @@ class Feed extends Component {
         ads = res.data;
         console.log(ads);
         ads.map((item, i) => {
-          self.setState({ postList: [...self.state.postList, <Post date={item.dateOfCreation} id={item.discussionId} />] })
+          self.setState({ postList: [...self.state.postList, <Post id={item} />] })
         })
       })
   }
@@ -51,7 +51,6 @@ class Feed extends Component {
           <Typography variant="h4" color="primary" gutterBottom>
             {this.props.match.params.Domain}
           </Typography>
-
           <Divider />
           <CreatePost postDomain={this.props.match.params.Domain} />
           <div style={{ marginTop: '2%' }}>

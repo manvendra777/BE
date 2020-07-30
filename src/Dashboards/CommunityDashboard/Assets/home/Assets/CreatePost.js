@@ -109,7 +109,7 @@ class CreatePost extends React.Component {
 
         return (
             <div className={classes.root}>
-                <Card elevation={5}>
+                <Card elevation={2}>
                     <form onSubmit={this.handleSubmit}>
                         <div style={{ marginLeft: '35%', marginRight: 'auto', marginTop: '1%' }}><Typography variant="h6" gutterBottom>
                             Create Post

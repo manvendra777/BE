@@ -64,7 +64,7 @@ class BookMarkedStartup extends React.Component {
     return (
       <div>
         <Card
-          elevation={5}
+          elevation={2}
           style={{ width: "30%", marginTop: 10, marginLeft: "50%" }}
         >
           <Typography

@@ -126,22 +126,23 @@ class Header extends Component {
 	BusinessEvalution() {
 		window.location = "/startupDashboard/BusinessEvalution"
 	}
+	Home() {
+		window.location = '/startupDashboard/Home'
+	}
 	render() {
 		const { classes } = this.props;
-
 		return (
-
 			<div className={classes.grow}>
 
 				<AppBar position="fixed">
 					<Toolbar>
-
 						<div onClick={this.props.home} >
 							<Typography className={classes.title} variant="h6" noWrap>
 								Startup
-					</Typography>
+							</Typography>
 						</div>
 						<div className={classes.groupButtons}>
+							<Button onClick={this.Home} style={{ color: "white", margin: "5px" }} > <HomeIcon style={{ marginRight: 7 }} />Home </Button>
 							<Button onClick={this.advertiseManagement} style={{ color: "white", margin: "5px" }} > <NoteAddIcon style={{ marginRight: 7 }} />Advertise Management </Button>
 							<Button onClick={this.BusinessEvalution} style={{ color: "white", margin: "5px" }} ><FunctionsIcon style={{ marginRight: 7 }} />Calculator</Button>
 							<Button onClick={this.findMentor} style={{ color: "white", margin: "5px" }} ><SearchIcon style={{ marginRight: 7 }} />Find Mentor</Button>

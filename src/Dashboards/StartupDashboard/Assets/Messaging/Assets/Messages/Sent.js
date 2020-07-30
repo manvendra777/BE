@@ -26,7 +26,7 @@ class Sent extends Component {
           opacity: 1, transform:
             'translate3d(0px,0,0)',
         }}>
-        {props => <div style={props}><div style={{ marginLeft: '40%', marginTop: 10, marginBottom: 10 }}><Card elevation={5} style={{ color: '#FFFFFF', background: '#455a64', marginTop: 5, marginBottom: 5, textAlign: 'left', padding: 7, paddingLeft: 25, borderBottomLeftRadius: 14, borderTopRightRadius: 14, borderTopLeftRadius: 14, }}>
+        {props => <div style={props}><div style={{ marginLeft: '40%', marginTop: 10, marginBottom: 10 }}><Card elevation={2} style={{ color: '#FFFFFF', background: '#455a64', marginTop: 5, marginBottom: 5, textAlign: 'left', padding: 7, paddingLeft: 25, borderBottomLeftRadius: 14, borderTopRightRadius: 14, borderTopLeftRadius: 14, }}>
           {this.props.msg}
         </Card>
         </div></div>}

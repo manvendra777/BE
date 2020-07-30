@@ -38,7 +38,7 @@ class FindByDomains extends Component {
 
         return (
             <div>
-                <Card elevation={5} style={{ width: '84%', marginTop: 10, }}>
+                <Card elevation={2} style={{ width: '84%', marginTop: 10, }}>
                     <Typography variant="h5" color='primary' style={{ backgroundColor: '#e8eaf6', padding: 10 }} >
                         Find Investor
 							</Typography>

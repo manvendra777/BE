@@ -34,26 +34,23 @@ export default function Category(prop) {
       className={classes.root}
       onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calc(x, y) })}
       onMouseLeave={() => set({ xys: [0, 0, 1] })}
-
-      style={{ transform: props.xys.interpolate(trans) }}
-    >
-      <Card elevation={5} >
+      style={{ transform: props.xys.interpolate(trans) }}>
+      <Card elevation={2} >
         <CardActionArea onClick={gotoFeedSection}>
           <CardMedia
             className={classes.media}
             image={prop.img}
-            title="Contemplative Reptile"
-          />
-          <CardContent>
-            <Typography color="primary" gutterBottom variant="h5" component="h2">
-              {prop.name}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-            </Typography>
-          </CardContent>
+            title="Contemplative Reptile" />
+          <CardActions>
+            <CardContent>
+              <Typography color="primary" gutterBottom variant="h5" component="h2">
+                {prop.name}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+              </Typography>
+            </CardContent>
+          </CardActions>
         </CardActionArea>
-        <CardActions>
-        </CardActions>
       </Card>
     </animated.div>
   );

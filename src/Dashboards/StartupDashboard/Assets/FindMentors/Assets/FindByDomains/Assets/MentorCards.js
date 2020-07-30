@@ -64,7 +64,7 @@ class MentorCard extends Component {
         }
 
         return (
-            <Card elevation={5} className={classes.root}>
+            <Card elevation={2} className={classes.root}>
                 <CardActionArea onClick={openMentorPage}>
                     <CardMedia
                         className={classes.media}

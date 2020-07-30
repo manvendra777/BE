@@ -53,7 +53,7 @@ class ConnectedMentor extends Component {
     return (
       <div>
 
-        <Card elevation={5} style={{ width: '100%', marginTop: 10, margin: 4 }}>
+        <Card elevation={2} style={{ width: '100%', marginTop: 10, margin: 4 }}>
           <Typography variant="h5" color='primary' style={{ backgroundColor: '#eceff1', padding: 10 }} >
             My Startups
 							</Typography>

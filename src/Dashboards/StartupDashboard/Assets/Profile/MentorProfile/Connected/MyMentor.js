@@ -85,7 +85,7 @@ class MyMentor extends Component {
     axios
       .get(
         `http://54.237.17.61/management/mentor/photos/` +
-          this.props.match.params.id
+        this.props.match.params.id
       )
       .then((res) => {
         mem = res.data;
@@ -139,7 +139,7 @@ class MyMentor extends Component {
         providerId: myid,
         value: rating,
       })
-      .then((res) => {});
+      .then((res) => { });
   }
 
   getRating() {
@@ -199,9 +199,9 @@ class MyMentor extends Component {
                 axios
                   .get(
                     `http://54.237.17.61/management/` +
-                      userType +
-                      `/profile/` +
-                      item
+                    userType +
+                    `/profile/` +
+                    item
                   )
                   .then((res) => {
                     persons = res.data;
@@ -242,9 +242,9 @@ class MyMentor extends Component {
                 axios
                   .get(
                     `http://54.237.17.61/management/` +
-                      userType +
-                      `/profile/` +
-                      item
+                    userType +
+                    `/profile/` +
+                    item
                   )
                   .then((res) => {
                     persons = res.data;
@@ -330,8 +330,8 @@ class MyMentor extends Component {
                     Verified
                   </div>
                 ) : (
-                  <div></div>
-                )}
+                    <div></div>
+                  )}
               </div>
               <div>{this.mapDomain()}</div>
             </Container>
@@ -384,158 +384,173 @@ class MyMentor extends Component {
 
           <Divider style={{ marginTop: 10 }} />
 
-          <Container
-            style={{ marginLeft: 10, marginTop: 10, display: "block" }}
-          >
-            <div style={{ display: "flex", alignText: "center" }}>
-              <Typography variant="h5" color="primary" gutterBottom>
-                Qualification:
-              </Typography>
-              <div
-                style={{
-                  marginTop: "auto",
-                  marginBottom: "auto",
-                  marginLeft: 7,
-                  color: "#424242",
-                }}
-              >
-                {" "}
-                <h5>{this.state.myProfile.qualification}</h5>
-              </div>
-            </div>
+          <Container style={{ marginLeft: 10, marginTop: 10, display: "block" }}>
+            
+            <div style={{ display: 'flex' }}>
+              <div>
+                <div style={{ display: "flex", alignText: "center" }}>
 
-            <div style={{ display: "flex", alignText: "center" }}>
-              <Typography variant="h5" color="primary" gutterBottom>
-                Email:
-              </Typography>
-              <div
-                style={{
-                  marginTop: "auto",
-                  marginBottom: "auto",
-                  marginLeft: 7,
-                  color: "#424242",
-                }}
-              >
-                {" "}
-                <h5>{this.state.myProfile.email}</h5>
-              </div>
-            </div>
+                  <Typography variant="h5" color="primary" gutterBottom>
+                    Qualification:
+                  </Typography>
+                  <div
+                    style={{
+                      marginTop: "auto",
+                      marginBottom: "auto",
+                      marginLeft: 7,
+                      fontSize: 22,
+                      color: "#424242",
+                    }}
+                  >
+                    {" "}
+                    <h5>{this.state.myProfile.qualification}</h5>
+                  </div>
+                </div>
 
-            <div style={{ display: "flex", alignText: "center" }}>
-              <Typography variant="h5" color="primary" gutterBottom>
-                phone:
-              </Typography>
-              <div
-                style={{
-                  marginTop: "auto",
-                  marginBottom: "auto",
-                  marginLeft: 7,
-                  color: "#424242",
-                }}
-              >
-                {" "}
-                <h5>{this.state.myProfile.phone_no}</h5>
-              </div>
-            </div>
+                <div style={{ display: "flex", alignText: "center" }}>
+                  <Typography variant="h5" color="primary" gutterBottom>
+                    Email:
+                </Typography>
+                  <div
+                    style={{
+                      fontSize: 22,
+                      marginTop: "auto",
+                      marginBottom: "auto",
+                      marginLeft: 7,
+                      color: "#424242",
+                    }}
+                  >
+                    {" "}
+                    <h5>{this.state.myProfile.email}</h5>
+                  </div>
+                </div>
 
-            <div style={{ display: "flex", alignText: "center" }}>
-              <Typography variant="h5" color="primary" gutterBottom>
-                Experience in domain:
+                <div style={{ display: "flex", alignText: "center" }}>
+                  <Typography variant="h5" color="primary" gutterBottom>
+                    phone:
               </Typography>
-              <div
-                style={{
-                  marginTop: "auto",
-                  marginBottom: "auto",
-                  marginLeft: 7,
-                  color: "#424242",
-                }}
-              >
-                {" "}
-                <h5> {this.state.myProfile.experience_in_domain}</h5>
-              </div>
-            </div>
+                  <div
+                    style={{
+                      fontSize: 22,
+                      marginTop: "auto",
+                      marginBottom: "auto",
+                      marginLeft: 7,
+                      color: "#424242",
+                    }}
+                  >
+                    {" "}
+                    <h5>{this.state.myProfile.phone_no}</h5>
+                  </div>
+                </div>
 
-            <div style={{ display: "flex", alignText: "center" }}>
-              <Typography variant="h5" color="primary" gutterBottom>
-                Description:
+                <div style={{ display: "flex", alignText: "center" }}>
+                  <Typography variant="h5" color="primary" gutterBottom>
+                    Experience in domain:
               </Typography>
-              <div
-                style={{
-                  marginTop: "auto",
-                  marginBottom: "auto",
-                  marginLeft: 7,
-                  color: "#424242",
-                }}
-              >
-                {" "}
-                <h5> {this.state.myProfile.about_yourself}</h5>
-              </div>
-            </div>
-            <div style={{ display: "flex", alignText: "center" }}>
-              <Typography variant="h5" color="primary" gutterBottom>
-                About Previous Works:
-              </Typography>
-              <div
-                style={{
-                  marginTop: "auto",
-                  marginBottom: "auto",
-                  marginLeft: 7,
-                  color: "#424242",
-                }}
-              >
-                {" "}
-                <h5> {this.state.myProfile.aboutWork}</h5>
-              </div>
-            </div>
+                  <div
+                    style={{
+                      fontSize: 22,
+                      marginTop: "auto",
+                      marginBottom: "auto",
+                      marginLeft: 7,
+                      color: "#424242",
+                    }}
+                  >
+                    {" "}
+                    <h5> {this.state.myProfile.experience_in_domain}</h5>
+                  </div>
+                </div>
 
-            <div style={{ display: "flex", alignText: "center" }}>
-              <Typography variant="h5" color="primary" gutterBottom>
-                Current:
+                <div style={{ display: "flex", alignText: "center" }}>
+                  <Typography variant="h5" color="primary" gutterBottom>
+                    Description:
               </Typography>
-              <div
-                style={{
-                  marginTop: "auto",
-                  marginBottom: "auto",
-                  marginLeft: 7,
-                  color: "#424242",
-                }}
-              >
-                {" "}
-                <h5> {this.state.getMyCurrent.map((child) => child)}</h5>
-              </div>
-            </div>
+                  <div
+                    style={{
+                      fontSize: 22,
+                      marginTop: "auto",
+                      marginBottom: "auto",
+                      marginLeft: 7,
+                      color: "#424242",
+                    }}
+                  >
+                    {" "}
+                    <h5> {this.state.myProfile.about_yourself}</h5>
+                  </div>
+                </div>
+                <div style={{ display: "flex", alignText: "center" }}>
+                  <Typography variant="h5" color="primary" gutterBottom>
+                    About Previous Works:
+              </Typography>
+                  <div
+                    style={{
+                      fontSize: 22,
+                      marginTop: "auto",
+                      marginBottom: "auto",
+                      marginLeft: 7,
+                      color: "#424242",
+                    }}
+                  >
+                    {" "}
+                    <h5> {this.state.myProfile.aboutWork}</h5>
+                  </div>
+                </div>
 
-            <div style={{ display: "flex", alignText: "center" }}>
-              <Typography variant="h5" color="primary" gutterBottom>
-                Previous:
+                <div style={{ display: "flex", alignText: "center" }}>
+                  <Typography variant="h6" color="primary" gutterBottom>
+                    Incentive:
               </Typography>
-              <div
-                style={{
-                  marginTop: "auto",
-                  marginBottom: "auto",
-                  marginLeft: 7,
-                  color: "#424242",
-                }}
-              >
-                {" "}
-                <h5>{this.state.getMyPrevious.map((child) => child)}</h5>
+                  <div
+                    style={{
+                      fontSize: 22,
+                      marginTop: "auto",
+                      marginBottom: "auto",
+                      marginLeft: 7,
+                      color: "#424242",
+                    }}
+                  >
+                    {" "}
+                    <h5>{this.state.myProfile.incentive}</h5>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div style={{ display: "flex", alignText: "center" }}>
-              <Typography variant="h5" color="primary" gutterBottom>
-                Incentive:
-              </Typography>
-              <div
-                style={{
-                  marginTop: "auto",
-                  marginBottom: "auto",
-                  marginLeft: 7,
-                  color: "#424242",
-                }}
-              >
-                {" "}
-                <h5>{this.state.myProfile.incentive}</h5>
+             
+              <Divider style={{ marginRight: 'auto', marginLeft: 'auto' }} orientation="vertical" flexItem />
+              <div style={{ marginRight: 'auto',marginTop:'7%', }}>
+
+                <div style={{ display: "flex", alignText: "center" }}>
+                  <Typography variant="h5" color="primary" gutterBottom>
+                    Currently mentoring:
+                  </Typography>
+                  <div
+                    style={{
+                      fontSize: 22,
+                      marginLeft: 7,
+                      color: "#424242",
+                    }}
+                  >
+                    {" "}
+                    <h5> {this.state.getMyCurrent.map((child) => child)}</h5>
+                  </div>
+                </div>
+
+                <div style={{ display: "flex", alignText: "center",marginTop:20 }}>
+                  <Typography variant="h5" color="primary" gutterBottom>
+                    Previously mentored:
+                  </Typography>
+                  <div
+                    style={{
+                      fontSize: 22,
+                      marginLeft: 7,
+                      color: "#424242",
+                    }}
+                  >
+                    {" "}
+                    <h5>{this.state.getMyPrevious.map((child) => child)}</h5>
+                  </div>
+                </div>
               </div>
+
             </div>
           </Container>
         </Card>

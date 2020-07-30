@@ -24,9 +24,8 @@ const useStyles = theme => ({
     height: "59vmin"
   },
   r: {
-
     margin: '1%',
-    width: '40%',
+    width: '30%',
     height: "71.5vmin"
 
   },
@@ -221,16 +220,15 @@ componentDidUpdate(){
       this.setState({ msgTypo: e.target.value });
     }
     return (
-      <div style={{ display: 'flex', height: "90%", width: "50%", position: 'fixed', }}>
+      <div style={{ display: 'flex', height: "90%", width: "60%", position: 'fixed', marginLeft:'5%'}}>
         <div className={classes.r}>
 
-          <Paper elevation={5} style={{ backgroundColor: '#cfd8dc', height: '8.5%' }}>
+          <Paper elevation={2} style={{ backgroundColor: '#cfd8dc', height: '8.5%' }}>
             <Typography variant="h5" color='primary' style={{ backgroundColor: '#cfd8dc', padding: '2%' }} gutterBottom>
               <center>Inbox</center>
             </Typography>
           </Paper>
-
-          <Paper elevation={5} style={{ height: '100%', marginTop: '0.5%', backgroundColor: '#eeeeee' }}  >
+          <Paper elevation={2} style={{ height: '100%', marginTop: '0.5%', backgroundColor: '#eeeeee' }}  >
             <div className={classes.bP}>
               <div className={classes.b}>
                 {this.state.members.map(child => child)}
@@ -242,11 +240,11 @@ componentDidUpdate(){
           </Paper>
         </div>
         {this.state.selected ? <Paper style={{ backgroundColor: '#eeeeee' }} className={classes.root}>
-          <Paper elevation={5} style={{ zIndex: 10, backgroundColor: '#cfd8dc' }}>
+          <Paper elevation={2} style={{ zIndex: 10, backgroundColor: '#cfd8dc' }}>
             <User show={this.state.selected} style={{ color: '#cfd8dc', }} id={this.state.addedUserId} org={this.state.addedUserStartup} name={this.state.addedUserName} image={this.state.addedUserImage} type={this.state.addedUserType} />
           </Paper>
 
-          <Paper elevation={5} style={{ height: '120%', marginTop: '-0.5%' }}>
+          <Paper elevation={2} style={{ height: '120%', marginTop: '-0.5%' }}>
             <div className={classes.boxP}>
               <div className={classes.box}>
                 <div ref="messageList">
@@ -260,7 +258,7 @@ componentDidUpdate(){
               </div>
             </div>
 
-            <div elevation={5} style={{ padding: '2%', overflow: 'hidden', display: 'flex', marginTop: '1%', }} >
+            <div elevation={2} style={{ padding: '2%', overflow: 'hidden', display: 'flex', marginTop: '1%', }} >
               <TextField
                 style={{ width: '100%', }}
                 id="outlined-basic"
@@ -278,7 +276,7 @@ componentDidUpdate(){
           </Paper>
 
 
-        </Paper> : <div style={{ padding: '2%' }}><Paper elevation={5} style={{ backgroundColor: '#eeeeee', width: '60vmin', height: '76vmin', display: 'flex' }} >
+        </Paper> : <div style={{ padding: '2%' }}><Paper elevation={2} style={{ backgroundColor: '#eeeeee', width: '60vmin', height: '76vmin', display: 'flex' }} >
           <img style={{ width: '100%', marginTop: 'auto', marginBottom: '35%' }} src={photo}></img>
         </Paper></div>}
 

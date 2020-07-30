@@ -37,7 +37,7 @@ export default function Category(prop) {
 
       style={{ transform: props.xys.interpolate(trans) }}
     >
-      <Card elevation={5} >
+      <Card elevation={2} >
         <CardActionArea onClick={gotoFeedSection}>
           <CardMedia
             className={classes.media}

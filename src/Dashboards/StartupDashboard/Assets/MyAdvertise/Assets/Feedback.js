@@ -39,7 +39,7 @@ class Feedback extends Component {
     render() {
         return (
             <div>
-                <Paper elevation={5} style={{ width: '100%', padding: '5%', marginTop: '1%', marginBottom: '1%' }}>
+                <Paper elevation={2} style={{ width: '100%', padding: '5%', marginTop: '1%', marginBottom: '1%' }}>
                     <div>
                         <Typography color="primary" variant="h6" style={{ margin: '1%', display: 'flex', }} gutterBottom>
                             Name: {this.props.name}

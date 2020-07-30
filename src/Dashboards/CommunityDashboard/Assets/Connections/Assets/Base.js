@@ -57,7 +57,7 @@ class Base extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Paper elevation={3}>
+        <Paper elevation={2}>
           <div className={classes.hd}>
             <Typography
               variant="h5"

@@ -30,7 +30,7 @@ class Rec extends Component {
           'translate3d(0,200px,0)', }}
         to={{ opacity: 1, transform:
           'translate3d(0px,0,0)', }}>
-        {props => <div style={props}><div style={{ marginRight: '40%', marginBottom: 10, marginTop: 10 }}><Card elevation={5} style={{ color: '#435a7b', background: '#FFFFFF', marginTop: 5, marginBottom: 5, textAlign: 'left', padding: 7, paddingLeft: 25, borderBottomLeftRadius: 25, borderTopRightRadius: 25, borderBottomRightRadius: 25, }}>{this.props.msg}</Card></div> </div>}
+        {props => <div style={props}><div style={{ marginRight: '40%', marginBottom: 10, marginTop: 10 }}><Card elevation={2} style={{ color: '#435a7b', background: '#FFFFFF', marginTop: 5, marginBottom: 5, textAlign: 'left', padding: 7, paddingLeft: 25, borderBottomLeftRadius: 25, borderTopRightRadius: 25, borderBottomRightRadius: 25, }}>{this.props.msg}</Card></div> </div>}
       </Spring>
 
 

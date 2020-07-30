@@ -21,6 +21,7 @@ const useStyles = theme => ({
     margin: 0,
     position: 'fixed',
     height: "90%",
+    width:'16%'
   },
   media: {
     height: 140

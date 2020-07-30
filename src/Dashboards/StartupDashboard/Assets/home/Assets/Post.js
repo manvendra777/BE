@@ -62,7 +62,8 @@ class Post extends Component {
       mnth: '',
       date: '',
       year: '',
-      title: ''
+      title: '',
+      dateOfCreation: '',
     };
     this.keyPress = this.keyPress.bind(this)
     this.handleExpandClick = this.handleExpandClick.bind(this)
@@ -75,13 +76,9 @@ class Post extends Component {
   }
 
   componentWillMount() {
-    var d = new Date(this.props.date);
-    var mnth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    var n = mnth[d.getMonth()]
-    var dateH = d.getDate();
-    var year = d.getFullYear()
-    this.setState({ mnth: n, date: dateH, year: year })
     this.getPostData()
+
+
 
   }
 
@@ -112,7 +109,6 @@ class Post extends Component {
   getLikeStatus() {
     var self = this;
     var mem;
-    console.log(this.state.idOfUser);
     axios.get(`http://54.237.17.61/forum/checkLike`, { params: { idOfPost: self.state.id, idOfMember: Cookies.get('id') } })
       .then(res => {
         mem = res.data;
@@ -123,9 +119,7 @@ class Post extends Component {
   setLike() {
     var self = this;
     var postId = this.state.id;
-    console.log(this.state.id);
     axios.post('http://54.237.17.61/forum/addLikes', null, { params: { idOfPost: postId, idOfMember: Cookies.get('id') } }).then(res => {
-      console.log(res.data);
       if (res.data) {
         self.setState({ checkLike: true })
         self.setState({ count: self.state.count + 1 })
@@ -140,16 +134,15 @@ class Post extends Component {
   getProfilePicture() {
     var self = this;
     var mem;
-    console.log(this.state.idOfUser);
     axios.get("http://54.237.17.61/security/getTypeById?id=" + this.state.idOfUser)
-    .then((res) => {
+      .then((res) => {
         var type = res.data;
-        axios.get(`http://54.237.17.61/management/`+type+`/photos/` + this.state.idOfUser)
+        axios.get(`http://54.237.17.61/management/` + type + `/photos/` + this.state.idOfUser)
           .then(res => {
             mem = res.data;
             self.setState({ profilePicture: mem })
           })
-    })
+      })
   }
 
   getPostData() {
@@ -157,21 +150,25 @@ class Post extends Component {
     var self = this;
     axios.get(`http://54.237.17.61/forum/getPostbyId`, { params: { id: this.state.id } })
       .then(res => {
-
         ads = res.data;
+        console.log(ads);
         self.setState({ post: ads })
         self.setState({ username: ads.userId })
         self.setState({ image: ads.image.data })
         self.setState({ idOfUser: ads.idOfUser })
-        self.setState({title: ads.header})
-        console.log(ads);
+        self.setState({ title: ads.header })
+        var d = new Date(ads.dateOfCreation);
+        var mnth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        var n = mnth[d.getMonth()]
+        var dateH = d.getDate();
+        var year = d.getFullYear()
+        this.setState({ mnth: n, date: dateH, year: year })
         ads.commentList.map((item, i) => {
           self.setState({ commentList: [...self.state.commentList, <Comment name={item.userId} comment={item.commentBody} />] })
         })
         self.getProfilePicture()
         self.getLikeStatus()
         self.getCount();
-        console.log(self.state.checkLike);
       })
   }
 
@@ -183,7 +180,6 @@ class Post extends Component {
         "commentBody": self.state.comment,
         "userId": Cookies.get('username')
       }).then(res => {
-        console.log(res.data);
         self.setState({ commentList: [...self.state.commentList, <Comment name={Cookies.get('username')} comment={self.state.comment} />] })
         self.setState({ comment: '' })
       })
@@ -200,7 +196,7 @@ class Post extends Component {
       this.setState({ comment: e.target.value });
     }
     return (
-      <Card elevation={5} className={classes.root}>
+      <Card elevation={2} className={classes.root}>
         <CardHeader
           avatar={
             <Avatar src={`data:image/jpeg;base64,${this.state.profilePicture}`} className={classes.avatar}>

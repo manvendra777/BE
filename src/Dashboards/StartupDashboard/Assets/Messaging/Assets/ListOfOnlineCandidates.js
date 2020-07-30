@@ -53,18 +53,15 @@ class ListOfOnlineCandidates extends Component {
   };
   render() {
     const { classes } = this.props;
-
     return (
       <div>
         <Card className={classes.root} variant="outlined">
           <Typography variant="h5" color='primary' style={{ backgroundColor: '#e8eaf6',padding:'2%' }} gutterBottom>
             <center>Today’s news</center>
           </Typography>
-
-
           <div>{this.state.articles.map((item, index) => {
             return (
-              <div style={{ marginTop: '2%', padding: '1%' ,}}>
+              <div style={{ marginTop: '2%', marginBottom: '2%', padding: '2%',}}>
                 <Container>
                   <h6 style={{ color: "#696969",fontSize:15 }}>{item.title}</h6>
                   <a href={item.url}>...Read more</a><nr /></Container>

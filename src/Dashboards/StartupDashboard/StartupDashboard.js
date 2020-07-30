@@ -27,11 +27,9 @@ export default class StartupDashboard extends Component {
 		};
 
 	}
-	componentWillMount(){
+	componentWillMount() {
 		document.body.style.backgroundColor = "#eeeeee";
 	}
-
-
 	render() {
 		const theme = createMuiTheme({
 			palette: {
@@ -40,7 +38,6 @@ export default class StartupDashboard extends Component {
 				}
 			}
 		});
-
 		return (
 			<div>
 				<MuiThemeProvider theme={theme}>
@@ -64,15 +61,14 @@ export default class StartupDashboard extends Component {
 								<Route path="/startupDashboard/Ads" component={Advertise}></Route>
 								<Route path="/startupDashboard/MyAdvertise" component={MyAdvertise}></Route>
 								<Route path="/startupDashboard/viewAd/:id" component={ViewAd} />
-								<Route path= "/startupDashboard/BusinessEvalution" component= {BusinessEvalution}/>	
+								<Route path="/startupDashboard/BusinessEvalution" component={BusinessEvalution} />
 								<Route path="/startupDashboard/Feed/:Domain" component={Feed}></Route>
 								<Route path="/startupDashboard/Home" component={Home} />
-
 							</div>
 						</div>
 
 					</Router>
-					
+
 				</MuiThemeProvider>
 			</div>);
 	}

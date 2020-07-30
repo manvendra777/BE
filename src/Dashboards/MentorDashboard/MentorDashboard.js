@@ -16,8 +16,6 @@ import ConnectedStartup from "./Assets/Home/ConnectedStartup";
 import BookMarkedStartup from './Assets/Home/BookMarkedStartup'
 import Home from './Assets/Home/Home';
 
-
-
 export default class StartupDashboard extends Component {
   constructor(props) {
     super(props);
