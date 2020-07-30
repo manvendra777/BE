@@ -80,6 +80,7 @@ class AdvertiseRight extends Component {
     axios.post('http://54.237.17.61/advert/addFeedback/', {
       "username": Cookies.get('username'),
       "feedbackBody": self.state.feedback,
+      "userId":Cookies.get('id'),
       "adId": self.state.adId
     })
       .then(function (response) {

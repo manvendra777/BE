@@ -15,14 +15,16 @@ import Advertise from './Assets/Advertise/Advertise'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import MyAdvertise from './Assets/MyAdvertise/MyAvertise'
 import ViewAd from './Assets/MyAdvertise/Assets/ViewAd'
+<<<<<<< HEAD
 import BusinessEvalution from './Assets/BusinessEvalution'
 import { Button } from "@material-ui/core";
 
 
+=======
+>>>>>>> 13183a32757a624ff08433dbba54994fca67bd7d
 export default class StartupDashboard extends Component {
 	constructor(props) {
 		super(props);
-
 		this.state = {
 		};
 

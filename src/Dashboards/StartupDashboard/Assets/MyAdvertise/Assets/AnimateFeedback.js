@@ -16,7 +16,7 @@ function AnimateFeedback(xyz) {
 
             style={{ transform: props.xys.interpolate(trans) }}
         >
-            <Feedback name={xyz.name} body={xyz.body} />
+            <Feedback userId={xyz.userId} name={xyz.name} body={xyz.body} />
         </animated.div>
     )
 }

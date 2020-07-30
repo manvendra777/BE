@@ -55,7 +55,10 @@ class TargetMentor extends Component {
             myrating: 0,
             isVerified: false,
             sentReq: false,
-            image: null
+            image: null,
+            numberOfConn: 0,
+            getMyPrevious:[],
+            getMyCurrent:[]
         };
         this.mapDomain = this.mapDomain.bind(this);
         this.getInfo = this.getInfo.bind(this);
@@ -73,7 +76,7 @@ class TargetMentor extends Component {
         this.checkInvitation = this.checkInvitation.bind(this)
     }
     componentWillMount() {
-
+        this.getNumberOfConnections()
         this.getRating()
         this.getRatingAv()
         this.gateMyRating()
@@ -81,6 +84,9 @@ class TargetMentor extends Component {
         this.checkInvitation()
         this.getInfo()
         this.getImage()
+        this.getCurrent()
+        this.getPrevious()
+        
     }
     getImage() {
         var self = this;
@@ -124,6 +130,75 @@ class TargetMentor extends Component {
                 })
 
         }
+    }
+    getNumberOfConnections = () => {
+        axios.get(`http://54.237.17.61/entityAction/user/numberOfConnections`, { params: { id: this.props.match.params.id } })
+            .then(res => {
+                var numberOfConn = res.data;
+                console.log(numberOfConn);
+                this.setState({ numberOfConn: numberOfConn })
+            })
+
+    }
+    getPrevious = () => {
+        var profileId = this.props.match.params.id
+        var response;
+        axios.get('http://54.237.17.61/entityAction/getMyPrevious', { params: { id: profileId } })
+            .then(res => {
+                response = res.data
+                console.log(response);
+                if(response != ''){
+                    response.map((item, i) => {
+                        axios
+                            .get("http://54.237.17.61/security/getTypeById?id=" + item)
+                            .then((res) => {
+                                userType = res.data;
+                                var persons;
+                                var userType;
+                                axios
+                                    .get(
+                                        `http://54.237.17.61/management/` + userType + `/profile/` + item
+                                    )
+                                    .then((res) => {
+                                        persons = res.data;
+                                        console.log(persons)
+                                        this.setState({ getMyPrevious: [...this.state.getMyPrevious, <div>{persons.firstName + "  " + persons.lastName}</div>] })
+                                    })
+                            })
+                    })
+                }
+            })
+    }
+
+
+    getCurrent = () => {
+        var profileId = this.props.match.params.id
+        var response;
+        axios.get('http://54.237.17.61/entityAction/getMyCurrent', { params: { id: profileId } })
+            .then(res => {
+                response = res.data
+                console.log(response);
+                if(response != ''){
+                    response.map((item, i) => {
+                        axios
+                            .get("http://54.237.17.61/security/getTypeById?id=" + item)
+                            .then((res) => {
+                                userType = res.data;
+                                var persons;
+                                var userType;
+                                axios
+                                    .get(
+                                        `http://54.237.17.61/management/` + userType + `/profile/` + item
+                                    )
+                                    .then((res) => {
+                                        persons = res.data;
+                                        console.log(persons)
+                                        this.setState({ getMyCurrent: [...this.state.getMyCurrent, <div>{persons.firstName + "  " + persons.lastName +', '}</div>] })
+                                    })
+                            })
+                    })
+                }
+            })
     }
     isVerified() {
 
@@ -206,19 +281,19 @@ class TargetMentor extends Component {
                         <Avatar src={`data:image/jpeg;base64,${this.state.image}`} alt="Sanket" className={classes.large} />
                         <Divider style={{ marginLeft: 10 }} orientation="vertical" flexItem />
                         <Container className={classes.spc}>
-                           
+
                             <Typography variant="h4" color="primary" gutterBottom>
                                 {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}
                             </Typography>
-                           
-                            <Typography style={{color:'#424242'}} variant="h5" gutterBottom>
+
+                            <Typography style={{ color: '#424242' }} variant="h5" gutterBottom>
                                 Address: {this.state.myProfile.address + ', ' + this.state.myProfile.city + ', ' + this.state.myProfile.country}
                             </Typography>
-                           
+
                             <div style={{ width: 100 }}>
                                 {this.state.isVerified ? <div style={{ display: 'flex' }}><Checkmark size={25} color='blue' />Verified</div> : <div></div>}
                             </div>
-                           
+
                             <div>{this.mapDomain()}</div>
                         </Container>
                         <Divider style={{ marginLeft: 10, marginRight: 20 }} orientation="vertical" flexItem />
@@ -226,8 +301,9 @@ class TargetMentor extends Component {
 
                     </Container>
                     <Divider style={{ marginBottom: 10 }} />
-                    <Button disabled={this.state.sentReq} onClick={this.sendInvitation} style={{ marginLeft: 30 }} size="small" color="primary">Send Invitation</Button>
 
+                    <Button disabled={this.state.sentReq} onClick={this.sendInvitation} variant="contained" style={{ marginLeft: 30 }} size="small" color="primary">Send Invitation</Button>
+                    <span style={{marginLeft:30}}> Number of Connections : {this.state.numberOfConn}</span>
                     <Divider style={{ marginTop: 10 }} />
 
                     <Container style={{ marginLeft: 10, marginTop: 10, display: 'block' }}>
@@ -236,35 +312,51 @@ class TargetMentor extends Component {
                             <Typography variant="h5" color="primary" gutterBottom>
                                 Qualification:
                             </Typography>
-                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7,color:'#424242' }}>  <h5>{this.state.myProfile.qualification}</h5></div>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>{this.state.myProfile.qualification}</h5></div>
                         </div>
 
                         <div style={{ display: 'flex', alignText: 'center' }}>
                             <Typography variant="h5" color="primary" gutterBottom>
                                 Email:
                             </Typography>
-                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7 ,color:'#424242'}}>  <h5>{this.state.myProfile.email}</h5></div>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>{this.state.myProfile.email}</h5></div>
                         </div>
 
 
                         <div style={{ display: 'flex', alignText: 'center' }}>
                             <Typography variant="h5" color="primary" gutterBottom>
-                            Experience in domain:
+                                Experience in domain:
                             </Typography>
-                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7,color:'#424242' }}>  <h5>  {this.state.myProfile.experience_in_domain}</h5></div>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>  {this.state.myProfile.experience_in_domain}</h5></div>
                         </div>
 
                         <div style={{ display: 'flex', alignText: 'center' }}>
                             <Typography variant="h5" color="primary" gutterBottom>
-                            Description: 
+                                Description:
                             </Typography>
-                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7 ,color:'#424242'}}>  <h5>  {this.state.myProfile.about_yourself}</h5></div>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>  {this.state.myProfile.about_yourself}</h5></div>
                         </div>
                         <div style={{ display: 'flex', alignText: 'center' }}>
                             <Typography variant="h5" color="primary" gutterBottom>
-                            Method of contact:
+                                Method of contact:
                             </Typography>
-                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7 ,color:'#424242'}}>  <h5>   {this.state.myProfile.method_of_contact}</h5></div>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>   {this.state.myProfile.method_of_contact}</h5></div>
+                        </div>
+
+
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                                Current:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5> {this.state.getMyCurrent.map(child=>child)}</h5></div>
+                        </div>
+
+
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                                Previous:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>{this.state.getMyPrevious.map(child=>child)}</h5></div>
                         </div>
                     </Container>
 

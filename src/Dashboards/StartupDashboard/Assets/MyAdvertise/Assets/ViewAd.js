@@ -64,7 +64,8 @@ class ViewAd extends Component {
         this.setState({ Ad: ad });
         this.setState({ image: ad.image.data })
         ad.feedbackList.map((item, i) => {
-          this.setState({ feedback: [...this.state.feedback, <AnimateFeedback name={item.username} body={item.feedbackBody} />] })
+          console.log(item);
+          this.setState({ feedback: [...this.state.feedback, <AnimateFeedback userId={item.userId} name={item.username} body={item.feedbackBody} />] })
         })
        
       })

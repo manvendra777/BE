@@ -7,7 +7,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button'
 import axios from 'axios'
-import { useState, useEffect } from 'react';
+import { useState,useEffect } from 'react';
 const StyledBadge = withStyles((theme) => ({
   badge: {
     backgroundColor: '#44b700',
@@ -50,26 +50,15 @@ const useStyles = makeStyles((theme) => ({
 export default function Added(props) {
   const classes = useStyles();
   const changeChatWindow = () => {
-    props.method(props.id, props.name ,props.type, props.image,props.org);
+    props.method(props.name,props.text);
   }
+
   return (
     <div className={classes.root}>
-
-      <ListItem  onClick={changeChatWindow} className={classes.listItem} button>
-        <StyledBadge
-          overlap="circle"
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'right',
-          }}
-          variant="dot"
-        >
-          <Avatar alt="Remy Sharp" src={`data:image/jpeg;base64,${props.image}`} />
-        </StyledBadge>
-        <ListItemText style={{ marginLeft: "16px", }} primary={props.org} secondary={props.type + ': '+props.name} />
+      <ListItem onClick={changeChatWindow} className={classes.listItem} button>
+          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+        <ListItemText style={{ marginLeft: "16px", }} primary={props.name} secondary={props.founder} />
       </ListItem>
-
-
     </div>
   );
 }

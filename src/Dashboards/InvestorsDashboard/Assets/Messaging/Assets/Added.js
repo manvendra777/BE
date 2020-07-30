@@ -66,10 +66,8 @@ export default function Added(props) {
         >
           <Avatar alt="Remy Sharp" src={`data:image/jpeg;base64,${props.image}`} />
         </StyledBadge>
-        <ListItemText style={{ marginLeft: "16px", }} primary={props.name} secondary={props.type} />
+        <ListItemText style={{ marginLeft: "16px", }} primary={props.org} secondary={props.type+': '+props.name} />
       </ListItem>
-
-
     </div>
   );
 }

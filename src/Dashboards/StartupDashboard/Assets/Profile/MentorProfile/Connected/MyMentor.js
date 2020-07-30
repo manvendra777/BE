@@ -51,9 +51,12 @@ class MyMentor extends Component {
             myProfile: [],
             val: [],
             avg: '',
-            myrating:0,
-            isVerified:false,
-            image:null
+            myrating: 0,
+            isVerified: false,
+            image: null,
+            numberOfConn: 0,
+            getMyPrevious: [],
+            getMyCurrent: []
         };
         this.mapDomain = this.mapDomain.bind(this);
         this.getInfo = this.getInfo.bind(this);
@@ -67,13 +70,16 @@ class MyMentor extends Component {
         this.isVerified = this.isVerified.bind(this)
     }
     componentWillMount() {
+        this.getNumberOfConnections()
         this.getInfo()
         this.getRating()
         this.getRatingAv()
         this.gateMyRating()
         this.isVerified()
         this.getImage()
-        
+        this.getCurrent()
+        this.getPrevious()
+
     }
     getImage() {
         var self = this;
@@ -84,15 +90,15 @@ class MyMentor extends Component {
                 self.setState({ image: mem })
             })
     }
-    isVerified(){
-        
+    isVerified() {
+
         var id = this.props.match.params.id
         var isVerified;
-        axios.get(`http://54.237.17.61/ratings/isVerified`,{params:{id:this.props.match.params.id}} )
-        .then(res => {
-            isVerified = res.data;
-            this.setState({ isVerified: isVerified })
-        })
+        axios.get(`http://54.237.17.61/ratings/isVerified`, { params: { id: this.props.match.params.id } })
+            .then(res => {
+                isVerified = res.data;
+                this.setState({ isVerified: isVerified })
+            })
     }
     getInfo() {
         var id = this.props.match.params.id
@@ -106,18 +112,18 @@ class MyMentor extends Component {
 
     gateMyRating() {
         var myid = Cookies.get('id');
-        var my=0
-        axios.get(`http://54.237.17.61/ratings/get`, { params: { provider:myid ,entity:this.props.match.params.id} })
-        .then(res => {
-            my = res.data;
-            console.log(my);
-            
-            this.setState({ myrating: my })
-        })
+        var my = 0
+        axios.get(`http://54.237.17.61/ratings/get`, { params: { provider: myid, entity: this.props.match.params.id } })
+            .then(res => {
+                my = res.data;
+                console.log(my);
+
+                this.setState({ myrating: my })
+            })
     }
     setMyRating(rating) {
         var myid = Cookies.get('id');
-        var m=this.props.match.params.id
+        var m = this.props.match.params.id
         //54.237.17.61:8080/ratings/save
         axios.post('http://54.237.17.61/ratings/save', {
             "entityId": m,
@@ -147,15 +153,74 @@ class MyMentor extends Component {
             })
     }
 
-    removeMentor=()=>{
+    removeMentor = () => {
         var myid = Cookies.get('id');
-            console.log('sent');
-            axios.post(`http://54.237.17.61/entityAction/user/removeConnection`, null, { params: { id: myid, target: this.props.match.params.id } })
-                .then(res => {
-                    window.location="startupDashboard/FindMentors"
-                })
+        console.log('sent');
+        axios.post(`http://54.237.17.61/entityAction/user/removeConnection`, null, { params: { id: myid, target: this.props.match.params.id } })
+            .then(res => {
+                window.location = "/startupDashboard/FindMentors"
+            })
+    }
+    getPrevious = () => {
+        var profileId = this.props.match.params.id
+        var response;
+        axios.get('http://54.237.17.61/entityAction/getMyPrevious', { params: { id: profileId } })
+            .then(res => {
+                response = res.data
+                console.log(response);
+                if (response != '') {
+                    response.map((item, i) => {
+                        axios
+                            .get("http://54.237.17.61/security/getTypeById?id=" + item)
+                            .then((res) => {
+                                userType = res.data;
+                                var persons;
+                                var userType;
+                                axios
+                                    .get(
+                                        `http://54.237.17.61/management/` + userType + `/profile/` + item
+                                    )
+                                    .then((res) => {
+                                        persons = res.data;
+                                        console.log(persons)
+                                        this.setState({ getMyPrevious: [...this.state.getMyPrevious, <div>{persons.firstName + "  " + persons.lastName}</div>] })
+                                    })
+                            })
+                    })
+                }
+            })
     }
 
+
+    getCurrent = () => {
+        var profileId = this.props.match.params.id
+        var response;
+        axios.get('http://54.237.17.61/entityAction/getMyCurrent', { params: { id: profileId } })
+            .then(res => {
+                response = res.data
+                console.log(response);
+                if (response != '') {
+                    response.map((item, i) => {
+                        axios
+                            .get("http://54.237.17.61/security/getTypeById?id=" + item)
+                            .then((res) => {
+                                userType = res.data;
+                                var persons;
+                                var userType;
+                                axios
+                                    .get(
+                                        `http://54.237.17.61/management/` + userType + `/profile/` + item
+                                    )
+                                    .then((res) => {
+                                        persons = res.data;
+                                        console.log(persons)
+                                        this.setState({ getMyCurrent: [...this.state.getMyCurrent, <div>{persons.firstName + "  " + persons.lastName + ', '}</div>] })
+                                    })
+                            })
+                    })
+                }
+            })
+    }
     getLogs() {
         console.log(this.state.myProfile);
     }
@@ -163,6 +228,14 @@ class MyMentor extends Component {
         if (this.state.myProfile.domain != undefined) {
             return this.state.myProfile.domain.map((item, i) => (<Chip color="primary" style={{ marginLeft: 5, margin: 2 }} label={item} />))
         }
+    }
+    getNumberOfConnections = () => {
+        axios.get(`http://54.237.17.61/entityAction/user/numberOfConnections`, { params: { id: this.props.match.params.id } })
+            .then(res => {
+                var numberOfConn = res.data;
+                console.log(numberOfConn);
+                this.setState({ numberOfConn: numberOfConn })
+            })
     }
     render() {
         const { classes } = this.props;
@@ -173,17 +246,17 @@ class MyMentor extends Component {
                         <Avatar src={`data:image/jpeg;base64,${this.state.image}`} alt="Sanket" className={classes.large} />
                         <Divider style={{ marginLeft: 10 }} orientation="vertical" flexItem />
                         <Container className={classes.spc}>
-                          
+
                             <Typography variant="h4" color="primary" gutterBottom>
-                             {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}
+                                {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}
                             </Typography>
 
-                            
-                            <Typography style={{color:'#424242'}} variant="h5" gutterBottom>
-                                Address: {this.state.myProfile.address + ', ' + this.state.myProfile.city + ', '  + this.state.myProfile.country}
+
+                            <Typography style={{ color: '#424242' }} variant="h5" gutterBottom>
+                                Address: {this.state.myProfile.address + ', ' + this.state.myProfile.city + ', ' + this.state.myProfile.country}
                             </Typography>
-                            <div style={{width:100}}>
-                            {this.state.isVerified ? <div style={{display:'flex'}}><Checkmark size={25}  color='blue'/>Verified</div> : <div></div>}
+                            <div style={{ width: 100 }}>
+                                {this.state.isVerified ? <div style={{ display: 'flex' }}><Checkmark size={25} color='blue' />Verified</div> : <div></div>}
                             </div>
                             <div>{this.mapDomain()}</div>
                         </Container>
@@ -192,28 +265,28 @@ class MyMentor extends Component {
 
                     </Container>
                     <Divider style={{ marginBottom: 10 }} />
-                    <Button style={{ marginLeft: 30 }} onClick={this.removeMentor} size="small" color="primary">Remove as a Mentor</Button>
-                    <Button style={{ marginLeft: 30 }} onClick={()=>{window.location="/startupDashboard/Messaging"}} size="small" color="primary">Send Message</Button>
-
-                    <Rater style={{ marginLeft: 50, transform: "scale(1.5)" }} rating={this.state.myrating} total={5} interactive={true} onRate={({ rating }) => { this.setMyRating(rating) }} />
+                    <Button variant="contained" style={{ marginLeft: 30 }} onClick={this.removeMentor} size="small" color="primary">Remove as a Mentor</Button>
+                    <Button variant="contained" style={{ marginLeft: 30 }} onClick={() => { window.location = "/startupDashboard/Messaging" }} size="small" color="primary">Send Message</Button>
+                    <span style={{ marginLeft: 30 }}> Number of Connections : {this.state.numberOfConn}</span>
+                    <Rater style={{ marginLeft: 80, transform: "scale(1.5)" }} rating={this.state.myrating} total={5} interactive={true} onRate={({ rating }) => { this.setMyRating(rating) }} />
 
                     <Divider style={{ marginTop: 10 }} />
 
                     <Container style={{ marginLeft: 10, marginTop: 10, display: 'block' }}>
 
 
-                    <div style={{ display: 'flex', alignText: 'center' }}>
+                        <div style={{ display: 'flex', alignText: 'center' }}>
                             <Typography variant="h5" color="primary" gutterBottom>
                                 Qualification:
                             </Typography>
-                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7,color:'#424242' }}>  <h5>{this.state.myProfile.qualification}</h5></div>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>{this.state.myProfile.qualification}</h5></div>
                         </div>
 
                         <div style={{ display: 'flex', alignText: 'center' }}>
                             <Typography variant="h5" color="primary" gutterBottom>
                                 Email:
                             </Typography>
-                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7 ,color:'#424242'}}>  <h5>{this.state.myProfile.email}</h5></div>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>{this.state.myProfile.email}</h5></div>
                         </div>
 
 
@@ -221,27 +294,42 @@ class MyMentor extends Component {
                             <Typography variant="h5" color="primary" gutterBottom>
                                 phone:
                             </Typography>
-                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7,color:'#424242' }}>  <h5>{this.state.myProfile.phone_no}</h5></div>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>{this.state.myProfile.phone_no}</h5></div>
                         </div>
 
                         <div style={{ display: 'flex', alignText: 'center' }}>
                             <Typography variant="h5" color="primary" gutterBottom>
-                            Experience in domain:
+                                Experience in domain:
                             </Typography>
-                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7,color:'#424242' }}>  <h5>  {this.state.myProfile.experience_in_domain}</h5></div>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>  {this.state.myProfile.experience_in_domain}</h5></div>
                         </div>
 
                         <div style={{ display: 'flex', alignText: 'center' }}>
                             <Typography variant="h5" color="primary" gutterBottom>
-                            Description: 
+                                Description:
                             </Typography>
-                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7 ,color:'#424242'}}>  <h5>  {this.state.myProfile.about_yourself}</h5></div>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>  {this.state.myProfile.about_yourself}</h5></div>
                         </div>
                         <div style={{ display: 'flex', alignText: 'center' }}>
                             <Typography variant="h5" color="primary" gutterBottom>
-                            Method of contact:
+                                Method of contact:
                             </Typography>
-                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7 ,color:'#424242'}}>  <h5>   {this.state.myProfile.method_of_contact}</h5></div>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>   {this.state.myProfile.method_of_contact}</h5></div>
+                        </div>
+
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                                Current:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5> {this.state.getMyCurrent.map(child => child)}</h5></div>
+                        </div>
+
+
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                                Previous:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>{this.state.getMyPrevious.map(child => child)}</h5></div>
                         </div>
                     </Container>
 

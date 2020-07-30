@@ -53,6 +53,9 @@ class TargetInvestor extends Component {
             avg: '',
             setReq: false,
             image:null,
+            numberOfConn: 0,
+            getMyPrevious:[],
+            getMyCurrent:[]
         };
         this.getInfo = this.getInfo.bind(this);
         this.getImage = this.getImage.bind(this)
@@ -101,16 +104,89 @@ class TargetInvestor extends Component {
             console.log('sent');
             axios.post(`http://54.237.17.61/entityAction/user/removeConnection`, null, { params: { id: myid, target: this.props.match.params.id } })
                 .then(res => {
-                    window.location="startupDashboard/FindMentors"
+                    window.location="/startupDashboard/FindMentors"
                 })
     }
     componentWillMount(){
-       
+        this.getNumberOfConnections()
         this.checkSentReq()
         this.getImage()
         this.getInfo()
+        this.getCurrent()
+        this.getPrevious()
     }
     //checkIfAdded
+
+
+    getPrevious = () => {
+        var profileId = this.props.match.params.id
+        var response;
+        axios.get('http://54.237.17.61/entityAction/getMyPrevious', { params: { id: profileId } })
+            .then(res => {
+                response = res.data
+                console.log(response);
+                if (response != '') {
+                    response.map((item, i) => {
+                        axios
+                            .get("http://54.237.17.61/security/getTypeById?id=" + item)
+                            .then((res) => {
+                                userType = res.data;
+                                var persons;
+                                var userType;
+                                axios
+                                    .get(
+                                        `http://54.237.17.61/management/` + userType + `/profile/` + item
+                                    )
+                                    .then((res) => {
+                                        persons = res.data;
+                                        console.log(persons)
+                                        this.setState({ getMyPrevious: [...this.state.getMyPrevious, <div>{persons.firstName + "  " + persons.lastName}</div>] })
+                                    })
+                            })
+                    })
+                }
+            })
+    }
+
+
+    getCurrent = () => {
+        var profileId = this.props.match.params.id
+        var response;
+        axios.get('http://54.237.17.61/entityAction/getMyCurrent', { params: { id: profileId } })
+            .then(res => {
+                response = res.data
+                console.log(response);
+                if (response != '') {
+                    response.map((item, i) => {
+                        axios
+                            .get("http://54.237.17.61/security/getTypeById?id=" + item)
+                            .then((res) => {
+                                userType = res.data;
+                                var persons;
+                                var userType;
+                                axios
+                                    .get(
+                                        `http://54.237.17.61/management/` + userType + `/profile/` + item
+                                    )
+                                    .then((res) => {
+                                        persons = res.data;
+                                        console.log(persons)
+                                        this.setState({ getMyCurrent: [...this.state.getMyCurrent, <div>{persons.firstName + "  " + persons.lastName + ', '}</div>] })
+                                    })
+                            })
+                    })
+                }
+            })
+    }
+
+    getNumberOfConnections = () => {
+        axios.get(`http://54.237.17.61/entityAction/user/numberOfConnections`, { params: { id: this.props.match.params.id } })
+            .then(res => {
+                var numberOfConn = res.data;
+                console.log(numberOfConn);
+                this.setState({ numberOfConn: numberOfConn })
+            })
+    }
     render() {
         const { classes } = this.props;
         return (
@@ -127,8 +203,9 @@ class TargetInvestor extends Component {
                         
                     </Container>
                     <Divider style={{ marginBottom: 10 }} />
-                    <Button style={{ marginLeft: 30 }} onClick={this.removeInvestor} size="small" color="primary">Remove as a Investor</Button>
-                    <Button style={{ marginLeft: 30 }} onClick={()=>{window.location="/startupDashboard/Messaging"}} size="small" color="primary">Send Message</Button>
+                    <Button  variant="contained" style={{ marginLeft: 30 }} onClick={this.removeInvestor} size="small" color="primary">Remove as a Investor</Button>
+                    <Button  variant="contained" style={{ marginLeft: 30 }} onClick={()=>{window.location="/startupDashboard/Messaging"}} size="small" color="primary">Send Message</Button>
+                    <span style={{ marginLeft: 30 }}> Number of Connections : {this.state.numberOfConn}</span>
                      <Divider style={{ marginTop: 10 }} />
                     <Container style={{ marginLeft: 10, marginTop: 10, display: 'block' }}>
                     <div style={{ display: 'flex', alignText: 'center' }}>
@@ -161,6 +238,20 @@ class TargetInvestor extends Component {
                             Age: 
                             </Typography>
                             <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>   {this.state.myProfile.age}</h5></div>
+                        </div>
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                                Current:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5> {this.state.getMyCurrent.map(child => child)}</h5></div>
+                        </div>
+
+
+                        <div style={{ display: 'flex', alignText: 'center' }}>
+                            <Typography variant="h5" color="primary" gutterBottom>
+                                Previous:
+                            </Typography>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>{this.state.getMyPrevious.map(child => child)}</h5></div>
                         </div>
                       
                     </Container>

@@ -5,8 +5,9 @@ class FindStartup extends Component {
     render() {
         return (
             <div>
-                <Recommendation/>
                 <FindByDomain/>
+                <Recommendation/>
+                
             </div>
         );
     }
