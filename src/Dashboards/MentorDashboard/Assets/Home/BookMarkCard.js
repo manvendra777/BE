@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Divider from "@material-ui/core/Divider";
 import axios from 'axios';
 import Cookies from "js-cookie";
-
+import Link from '@material-ui/core/Link';
 
 const useStyles = (theme) => ({
   root: {
@@ -36,6 +36,7 @@ class BookMarkCard extends React.Component {
 
   componentDidMount() {
     this.getName();
+    var id = this.props.id
   }
   getName() {
  
@@ -54,17 +55,21 @@ class BookMarkCard extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const showProfile = () => {
+      window.location = "/mentorDashboard/MyStartup/" + this.props.id
+    }
 
     return (
       <div>
 
-        <Card className={classes.root} elevation={3}>
+       <Card className={classes.root} elevation={3}>
           <CardActionArea>
             <CardContent>
+            <Link onClick={showProfile}>
               <Typography gutterBottom variant="h5" component="h2">
               {" " +this.state.myProfile.firstName +" " +this.state.myProfile.lastName}
-              </Typography>
-             
+              </Typography> </Link>
+
             </CardContent>
           </CardActionArea>
          

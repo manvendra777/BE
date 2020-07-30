@@ -9,7 +9,10 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Divider from "@material-ui/core/Divider";
 import axios from 'axios';
-
+import { Icon } from "@material-ui/core";
+import Cookies from 'js-cookie';
+import BookmarkIcon from '@material-ui/icons/Bookmark';
+import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 const useStyles = (theme) => ({
   root: {
     width: '100%',
@@ -28,7 +31,8 @@ class StartupCard extends React.Component {
     super(props);
     this.state = {
       myProfile: {},
-      image: null
+      image: null,
+      isBooked:false
     };
     this.getImage = this.getImage.bind(this);
 
@@ -59,11 +63,28 @@ class StartupCard extends React.Component {
       })
   }
 
+  getIcon(){
+    if(this.state.isBooked){
+     return <BookmarkIcon theme="filled"/>
+    }
+    else{
+      return <BookmarkIcon theme="outlined"/>
+    }
+  }
 
   render() {
     const { classes } = this.props;
     const showProfile = () => {
       window.location = "/mentorDashboard/MyStartup/" + this.props.id
+    }
+
+
+    const bookMark=()=>{
+
+      axios.get('http://54.237.17.61/entityAction/setBookmark?id='+Cookies.get("id")+'&target='+ this.props.id)
+      .then(res=>{
+        console.log("done")
+      })
     }
     return (
       <div>
@@ -88,6 +109,11 @@ class StartupCard extends React.Component {
             <Button onClick={showProfile}>
               Profile
         </Button>
+        
+        <Button onClick={bookMark}>Bookmark</Button>
+
+      
+        
           </CardActions>
         </Card>
       </div>

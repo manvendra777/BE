@@ -109,18 +109,21 @@ class LoginPg extends React.Component {
                             Cookies.set('id', id, { expires: 7 })
                             Cookies.set('isLoggedIn', true, { expires: 7 })
                             Cookies.set('type', destination)
+                            Cookies.set('username', self.state.username)
                             window.location = "/StartupDashboard/Home";
                             break;
                           case "M":
                             Cookies.set('id', id, { expires: 7 })
                             Cookies.set('isLoggedIn', true, { expires: 7 })
                             Cookies.set('type', destination)
+                            Cookies.set('username', self.state.username)
                             window.location = "/MentorDashboard/Home"
                             break;
                           case "I":
                             Cookies.set('id', id, { expires: 7 })
                             Cookies.set('isLoggedIn', true, { expires: 7 })
                             Cookies.set('type', destination)
+                            Cookies.set('username', self.state.username)
                             window.location = "/InvestorDashboard/Home"
                             break;
                           case "C":

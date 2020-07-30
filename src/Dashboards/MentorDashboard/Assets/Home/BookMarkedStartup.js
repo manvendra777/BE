@@ -20,6 +20,7 @@ const useStyles = (theme) => ({
   media: {
     height: "10%",
   },
+  
 });
 
 class BookMarkedStartup extends React.Component {
@@ -44,7 +45,11 @@ class BookMarkedStartup extends React.Component {
       .then((res) => {
         mem = res.data;
         console.log(mem);
+<<<<<<< HEAD
+        if (mem != '') {
+=======
         if (mem != "") {
+>>>>>>> 04f1ba34dd65cbcc46b1b93a8099573638824631
           mem.map((item, i) => {
             console.log(item);
             this.setState({

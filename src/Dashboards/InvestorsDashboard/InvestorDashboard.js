@@ -10,6 +10,8 @@ import MyStartup from './Assets/Profile/StartupProfile/Connected/MyStartup'
 import { Route, BrowserRouter as Router, Link } from 'react-router-dom'
 import Advertise from './Assets/Advertise/Advertise'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import Home from "./Assets/home/Home"
+import Feed from './Assets/home/Assets/Feed'
 export default class StartupDashboard extends Component {
 	constructor(props) {
 		super(props);
@@ -51,6 +53,8 @@ export default class StartupDashboard extends Component {
 								<Route exact path="/investorDashboard/TargetStartup/:id" component={TargetStartup} />
 								<Route exact path="/investorDashboard/MyStartup/:id" component={MyStartup} />
 								<Route path="/investorDashboard/Ads" component={Advertise}></Route>
+								<Route path="/investorDashboard/Feed/:Domain" component={Feed}></Route>
+								<Route path="/investorDashboard/Home" component={Home} />
 							</div>
 						</div>
 

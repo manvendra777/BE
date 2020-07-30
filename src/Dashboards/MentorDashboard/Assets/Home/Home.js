@@ -7,7 +7,7 @@ class Home extends  React.Component{
 
         return(
             <div>
-                <ConnnectedStartup/>
+                
                 <BookMarkedStartup/>
                 
             </div>
