@@ -13,7 +13,7 @@ import RatingStats from './Rating/RatingStats'
 import Cookies from 'js-cookie'
 
 
-const styles = theme => ({ 
+const styles = theme => ({
     root: {
         display: "flex",
         flexWrap: "wrap",
@@ -51,8 +51,9 @@ class MyStartup extends Component {
             myProfile: [],
             val: [],
             avg: '',
-            setReq:false,
-            image:null
+            setReq: false,
+            image: null,
+            Mystatus:''
         };
         this.mapDomain = this.mapDomain.bind(this);
         this.getInfo = this.getInfo.bind(this);
@@ -61,7 +62,7 @@ class MyStartup extends Component {
         this.getRating = this.getRating.bind(this)
         this.getRatingAv = this.getRatingAv.bind(this)
         this.sendRequest = this.sendRequest.bind(this)
-        this.checkSentReq= this.checkSentReq.bind(this)
+        this.checkSentReq = this.checkSentReq.bind(this)
     }
     componentWillMount() {
         this.getInfo()
@@ -120,30 +121,40 @@ class MyStartup extends Component {
     sendRequest() {
         var myid = Cookies.get('id')
         var response;
-        axios.post('http://54.237.17.61/entityAction/user/sendRequest', null,{ params: { id: myid, target: this.props.match.params.id } })
-            .then(res => { 
-                response = res.data 
+        axios.post('http://54.237.17.61/entityAction/user/sendRequest', null, { params: { id: myid, target: this.props.match.params.id } })
+            .then(res => {
+                response = res.data
                 console.log(response);
-                
+
             })
     }
-    checkSentReq(){
+    checkSentReq() {
         var myid = Cookies.get('id')
         var response;
-        axios.get('http://54.237.17.61/entityAction/user/checkRequest',{ params: { id: myid, target: this.props.match.params.id } })
-            .then(res => { 
-                response = res.data 
+        axios.get('http://54.237.17.61/entityAction/user/checkRequest', { params: { id: myid, target: this.props.match.params.id } })
+            .then(res => {
+                response = res.data
                 console.log(response);
-                this.setState({setReq:response})
+                this.setState({ setReq: response })
             })
     }
-    removeMentor=()=>{
+    removeMentor = () => {
         var myid = Cookies.get('id');
-            console.log('sent');
-            axios.post(`http://54.237.17.61/entityAction/user/removeConnection`, null, { params: { id: myid, target: this.props.match.params.id } })
-                .then(res => {
-                    window.location="/mentorDashboard/FindStartup"
-                })
+        console.log('sent');
+        axios.post(`http://54.237.17.61/entityAction/user/removeConnection`, null, { params: { id: myid, target: this.props.match.params.id } })
+            .then(res => {
+                window.location = "/mentorDashboard/FindStartup"
+            })
+    }
+    getStatus = () => {
+        var myId =this.props.match.params.id
+        var self = this
+        axios.post(`http://54.237.17.61/management/startup/profile/getStatus`, null, { params: { id: myId } })
+            .then(res => {
+                var persons = res.data;
+                console.log(persons);
+                self.setState({ Mystatus: persons })
+            })
     }
     render() {
         const { classes } = this.props;
@@ -154,50 +165,48 @@ class MyStartup extends Component {
                         <Avatar alt="Sanket" src={`data:image/jpeg;base64,${this.state.image}`} className={classes.large} />
                         <Divider style={{ marginLeft: 10 }} orientation="vertical" flexItem />
                         <Container className={classes.spc}>
-                            <Typography variant="h4" gutterBottom>
-
+                            <Typography variant="h4" color="primary" gutterBottom>
+                                {this.state.myProfile.startupName}
                             </Typography>
-                            <Typography variant="h4" color="primary"  gutterBottom>
-                                {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}
+                            <Typography variant="h5" gutterBottom>
+                            {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName +' : ('+this.state.Mystatus+')'}
                             </Typography>
-                          
-
-                            <Typography style={{color:'#424242'}} variant="h5" gutterBottom>
+                            <Typography style={{ color: '#424242' }} variant="h5" gutterBottom>
                                 Address: {this.state.myProfile.address + ', ' + this.state.myProfile.city + ', ' + this.state.myProfile.postalCode + ', ' + this.state.myProfile.country}
                             </Typography>
                             <div>{this.mapDomain()}</div>
                         </Container>
                         <Divider style={{ marginLeft: 10, marginRight: 20 }} orientation="vertical" flexItem />
 
-                       
+
                     </Container>
                     <Divider style={{ marginBottom: 10 }} />
-                   
-                    <Button style={{ marginLeft: 30 }} onClick={this.removeMentor} size="small" color="primary">Remove Startup</Button>
-                    <Button style={{ marginLeft: 30 }} onClick={()=>{window.location="/mentorDashboard/Messaging"}} size="small" color="primary">Send Message</Button>
 
-                   <Divider style={{ marginTop: 10 }} />
+                    <Button variant="contained" style={{ marginLeft: 30 }} onClick={this.removeMentor} size="small" color="primary">Remove Startup</Button>
+                    <Button variant="contained" style={{ marginLeft: 30 }} onClick={() => { window.location = "/mentorDashboard/Messaging" }} size="small" color="primary">Send Message</Button>
+
+                    <Divider style={{ marginTop: 10 }} />
                     <Container style={{ marginLeft: 10, marginTop: 10, display: 'block' }}>
 
-                    <div style={{ display: 'flex', alignText: 'center' }}>
+                        <div style={{ display: 'flex', alignText: 'center' }}>
                             <Typography variant="h5" color="primary" gutterBottom>
                                 Qualification:
                             </Typography>
-                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7,color:'#424242' }}>  <h5>{this.state.myProfile.qualification}</h5></div>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>{this.state.myProfile.qualification}</h5></div>
                         </div>
 
                         <div style={{ display: 'flex', alignText: 'center' }}>
                             <Typography variant="h5" color="primary" gutterBottom>
-                            Email:
+                                Email:
                             </Typography>
-                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7,color:'#424242' }}>  <h5>{this.state.myProfile.email}</h5></div>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>{this.state.myProfile.email}</h5></div>
                         </div>
-                        
+
                         <div style={{ display: 'flex', alignText: 'center' }}>
                             <Typography variant="h5" color="primary" gutterBottom>
-                            Phone:
+                                Phone:
                             </Typography>
-                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7,color:'#424242' }}>  <h5>{this.state.myProfile.phone_no}</h5></div>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>{this.state.myProfile.phone_no}</h5></div>
                         </div>
 
                     </Container>

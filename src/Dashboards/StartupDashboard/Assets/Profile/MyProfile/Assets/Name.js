@@ -71,7 +71,7 @@ class Name extends Component {
       profession: "",
       image: null,
       showVe: false,
-      Mystatus:'',
+      Mystatus: 'h',
     };
 
     this.mapDomain = this.mapDomain.bind(this);
@@ -98,21 +98,24 @@ class Name extends Component {
     return <img src={`data:image/jpeg;base64,${this.state.image}`} />;
   }
 
-  setStatus=()=>{
-    axios.post(`http://54.237.17.61/management/startup/profile/setStatus` ,{ params: { id:Cookies.get("id")}})
-			.then(res => {
-				var persons = res.data;
+  setStatus = (value) => {
+    var myId =  Cookies.get("id")
+    this.setState({Mystatus:value})
+    axios.post(`http://54.237.17.61/management/startup/profile/setStatus`, null,{ params: { id: myId, status: value } })
+      .then(res => {
+        var persons = res.data;
         console.log(persons);
-        this.setState({Mystatus:person})
-			})
+      })
   }
-  getStatus=()=>{
-    axios.post(`http://54.237.17.61/management/startup/profile/getStatus` ,{ params: { id:Cookies.get("id")}})
-			.then(res => {
-				var persons = res.data;
+  getStatus = () => {
+    var myId =  Cookies.get("id")
+    var self = this
+    axios.post(`http://54.237.17.61/management/startup/profile/getStatus`, null,{ params: { id: myId } })
+      .then(res => {
+        var persons = res.data;
         console.log(persons);
-        this.setState({Mystatus:person})
-			})
+        this.setState({Mystatus:persons})
+      })
   }
   componentWillReceiveProps(props) {
     this.setState({
@@ -408,10 +411,11 @@ class Name extends Component {
         <Card elevation={3} style={{ display: 'flex', marginTop: 20, width: "100%", padding: 20 }}>
           <div><h5 style={{ color: "#5c6bc0" }}>Current Status :</h5></div>
           <Select
-            style={{ width: '40%' ,marginLeft:50}}
+            style={{ width: '40%', marginLeft: 50 }}
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            onChange={this.setStatus}>
+            value={this.state.Mystatus}
+            onChange={(e)=>{this.setStatus(e.target.value)}}>
             <MenuItem value={'Looking for Mentors'}>Looking for Mentors</MenuItem>
             <MenuItem value={'Looking for Investors'}>Looking for Investors</MenuItem>
             <MenuItem value={'Not looking for mentoring'}>Not looking for mentoring</MenuItem>

@@ -52,7 +52,8 @@ class TargetStartup extends Component {
             val: [],
             avg: '',
             setReq: false,
-            image: null
+            image: null,
+            Mystatus:''
         };
         this.getInfo = this.getInfo.bind(this);
         this.mapDomain = this.mapDomain.bind(this);
@@ -140,6 +141,17 @@ class TargetStartup extends Component {
         this.getRatingAv()
         this.getInfo()
         this.getImage()
+        this.getStatus()
+    }
+    getStatus = () => {
+        var myId =this.props.match.params.id
+        var self = this
+        axios.post(`http://54.237.17.61/management/startup/profile/getStatus`, null, { params: { id: myId } })
+            .then(res => {
+                var persons = res.data;
+                console.log(persons);
+                self.setState({ Mystatus: persons })
+            })
     }
     render() {
         const { classes } = this.props;
@@ -150,13 +162,12 @@ class TargetStartup extends Component {
                         <Avatar alt="Sanket" src={`data:image/jpeg;base64,${this.state.image}`} className={classes.large} />
                         <Divider style={{ marginLeft: 10 }} orientation="vertical" flexItem />
                         <Container className={classes.spc}>
-                            <Typography variant="h4" gutterBottom>
-
+                        <Typography variant="h4" color="primary" gutterBottom>
+                                {this.state.myProfile.startupName}
                             </Typography>
-                            <Typography variant="h4" color="primary" gutterBottom>
-                                {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}
+                            <Typography variant="h5" gutterBottom>
+                                {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName + ': (' +this.state.Mystatus+')'}
                             </Typography>
-
 
                             <Typography style={{ color: '#424242' }} variant="h5" gutterBottom>
                                 Address: {this.state.myProfile.address + ', ' + this.state.myProfile.city + ', ' + this.state.myProfile.postalCode + ', ' + this.state.myProfile.country}

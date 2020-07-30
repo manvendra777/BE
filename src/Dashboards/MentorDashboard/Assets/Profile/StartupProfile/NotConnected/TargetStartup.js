@@ -55,6 +55,7 @@ class TargetStartup extends Component {
             image: null,
             getMyCurrent: [],
             getMyPrevious: [],
+            Mystatus:''
         };
         this.getInfo = this.getInfo.bind(this);
         this.mapDomain = this.mapDomain.bind(this);
@@ -143,6 +144,7 @@ class TargetStartup extends Component {
         this.getPrevious()
         this.getCurrent()
         this.getImage()
+        this.getStatus()
     }
 
     getPrevious = () => {
@@ -152,7 +154,7 @@ class TargetStartup extends Component {
             .then(res => {
                 response = res.data
                 console.log(response);
-                if(response != ''){
+                if (response != '') {
                     response.map((item, i) => {
                         axios
                             .get("http://54.237.17.61/security/getTypeById?id=" + item)
@@ -171,9 +173,9 @@ class TargetStartup extends Component {
                                     })
                             })
                     })
-    
+
                 }
-               
+
             })
     }
 
@@ -184,7 +186,7 @@ class TargetStartup extends Component {
         axios.get('http://54.237.17.61/entityAction/getMyCurrent', { params: { id: profileId } })
             .then(res => {
                 response = res.data
-                if(response != ''){
+                if (response != '') {
                     response.map((item, i) => {
                         axios
                             .get("http://54.237.17.61/security/getTypeById?id=" + item)
@@ -199,13 +201,23 @@ class TargetStartup extends Component {
                                     .then((res) => {
                                         persons = res.data;
                                         console.log(persons)
-                                        this.setState({ getMyCurrent: [...this.state.getMyCurrent, <div>{persons.firstName + "  " + persons.lastName +', '}</div>] })
+                                        this.setState({ getMyCurrent: [...this.state.getMyCurrent, <div>{persons.firstName + "  " + persons.lastName + ', '}</div>] })
                                     })
                             })
                     })
-    
+
                 }
-              
+
+            })
+    }
+    getStatus = () => {
+        var myId =this.props.match.params.id
+        var self = this
+        axios.post(`http://54.237.17.61/management/startup/profile/getStatus`, null, { params: { id: myId } })
+            .then(res => {
+                var persons = res.data;
+                console.log(persons);
+                self.setState({ Mystatus: persons })
             })
     }
     render() {
@@ -217,11 +229,11 @@ class TargetStartup extends Component {
                         <Avatar alt="Sanket" src={`data:image/jpeg;base64,${this.state.image}`} className={classes.large} />
                         <Divider style={{ marginLeft: 10 }} orientation="vertical" flexItem />
                         <Container className={classes.spc}>
-                            <Typography variant="h4" gutterBottom>
-
-                            </Typography>
                             <Typography variant="h4" color="primary" gutterBottom>
-                                {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName}
+                                {this.state.myProfile.startupName}
+                            </Typography>
+                            <Typography variant="h5" gutterBottom>
+                                {this.state.myProfile.firstName + ' ' + this.state.myProfile.lastName + ': (' +this.state.Mystatus+')'}
                             </Typography>
 
 
@@ -235,7 +247,7 @@ class TargetStartup extends Component {
 
                     </Container>
                     <Divider style={{ marginBottom: 10 }} />
-                    <Button disabled={this.state.setReq} style={{ marginLeft: 30 }} size="small" onClick={this.sendRequest} color="primary">Send Invitation</Button>
+                    <Button variant="contained" disabled={this.state.setReq} style={{ marginLeft: 30 }} size="small" onClick={this.sendRequest} color="primary">Send Invitation</Button>
                     <Divider style={{ marginTop: 10 }} />
                     <Container style={{ marginLeft: 10, marginTop: 10, display: 'block' }}>
 
@@ -265,7 +277,7 @@ class TargetStartup extends Component {
                             <Typography variant="h5" color="primary" gutterBottom>
                                 Current:
                             </Typography>
-                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5> {this.state.getMyCurrent.map(child=>child)}</h5></div>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5> {this.state.getMyCurrent.map(child => child)}</h5></div>
                         </div>
 
 
@@ -273,7 +285,7 @@ class TargetStartup extends Component {
                             <Typography variant="h5" color="primary" gutterBottom>
                                 Previous:
                             </Typography>
-                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>{this.state.getMyPrevious.map(child=>child)}</h5></div>
+                            <div style={{ marginTop: 'auto', marginBottom: 'auto', marginLeft: 7, color: '#424242' }}>  <h5>{this.state.getMyPrevious.map(child => child)}</h5></div>
                         </div>
 
                     </Container>
