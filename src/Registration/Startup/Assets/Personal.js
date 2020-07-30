@@ -116,8 +116,8 @@ class Personal extends React.Component {
               helperText="Don't add '%' sign"
               fullWidth
               type="number"
-              onChange={handleChange("percentOfOwnership")}
-              defaultValue={values.percentOfOwnership}
+              onChange={handleChange("percentageOfOwnership")}
+              defaultValue={values.percentageOfOwnership}
             />
           </Grid>
         </Grid>
