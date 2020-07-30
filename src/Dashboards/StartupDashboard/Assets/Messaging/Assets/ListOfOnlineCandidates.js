@@ -51,8 +51,6 @@ class ListOfOnlineCandidates extends Component {
         })
       })
   };
-
-
   render() {
     const { classes } = this.props;
 
@@ -68,7 +66,7 @@ class ListOfOnlineCandidates extends Component {
             return (
               <div style={{ marginTop: '2%', padding: '1%' ,}}>
                 <Container>
-                  <h6 style={{ color: "#696969" }}>{item.title}</h6>
+                  <h6 style={{ color: "#696969",fontSize:15 }}>{item.title}</h6>
                   <a href={item.url}>...Read more</a><nr /></Container>
                 <Divider />
               </div>

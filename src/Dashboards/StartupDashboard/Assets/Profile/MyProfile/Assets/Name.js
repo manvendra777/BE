@@ -454,8 +454,8 @@ class Name extends Component {
                     }
                   </div>
                 ) : (
-                  <div></div>
-                )}
+                    <div></div>
+                  )}
               </div>
             </Typography>
 
@@ -482,13 +482,13 @@ class Name extends Component {
 
         <Card
           elevation={3}
-          style={{ display: "flex", marginTop: 20, width: "100%", padding: 20 }}
+          style={{ display: "flex", marginTop: 20, width: "100%", padding: 20, fontSize: 20 }}
         >
           <div>
             <h5 style={{ color: "#5c6bc0" }}>Current Status :</h5>
           </div>
           <Select
-            style={{ width: "40%", marginLeft: 50 }}
+            style={{ width: "40%", marginLeft: 75 }}
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={this.state.Mystatus}
@@ -512,7 +512,7 @@ class Name extends Component {
           </Select>
         </Card>
 
-        <Card elevation={3} style={{ marginTop: 20, width: "100%" }}>
+        <Card elevation={3} style={{ marginTop: 20, width: "100%", }}>
           <div style={{ marginTop: 1, marginLeft: 600 }}></div>
           <Dialog open={this.state.isModalOpen} onClose={this.toggleModal}>
             {loginForm}
@@ -522,59 +522,59 @@ class Name extends Component {
             <TableBody>
               <TableRow>
                 <TableCell>
-                  <h5 style={{ color: "#5c6bc0" }}>Description</h5>
+                  <h5 style={{ color: "#5c6bc0", fontSize: 15 }}>Description</h5>
                 </TableCell>
                 <TableCell>{this.props.data.startupDescription}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>
-                  <h5 style={{ color: "#5c6bc0" }}>Year Of Foundation</h5>
+                  <h5 style={{ color: "#5c6bc0", fontSize: 15 }}>Year Of Foundation</h5>
                 </TableCell>
                 <TableCell>{this.props.data.yearOfFoundation}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>
-                  <h5 style={{ color: "#5c6bc0" }}>Expectations</h5>
+                  <h5 style={{ color: "#5c6bc0", fontSize: 15 }}>Expectations</h5>
                 </TableCell>
                 <TableCell>{this.props.data.expectations}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>
-                  <h5 style={{ color: "#5c6bc0" }}>Percentage Of Ownership</h5>
+                  <h5 style={{ color: "#5c6bc0", fontSize: 15 }}>Percentage Of Ownership</h5>
                 </TableCell>
                 <TableCell>{this.props.data.percentageOfOwnership}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>
-                  <h5 style={{ color: "#5c6bc0" }}>Valuation</h5>
+                  <h5 style={{ color: "#5c6bc0", fontSize: 15 }}>Valuation</h5>
                 </TableCell>
                 <TableCell>{this.props.data.valuation}</TableCell>
               </TableRow>
 
               <TableRow>
                 <TableCell>
-                  <h5 style={{ color: "#5c6bc0" }}> Website:</h5>
+                  <h5 style={{ color: "#5c6bc0", fontSize: 15 }}> Website:</h5>
                 </TableCell>
                 <TableCell> {this.props.data.websiteURL}</TableCell>
               </TableRow>
 
               <TableRow>
                 <TableCell>
-                  <h5 style={{ color: "#5c6bc0" }}>Dipp No.</h5>
+                  <h5 style={{ color: "#5c6bc0", fontSize: 15 }}>Dipp No.</h5>
                 </TableCell>
                 <TableCell>{this.props.data.dipp_no}</TableCell>
               </TableRow>
 
               <TableRow>
                 <TableCell>
-                  <h5 style={{ color: "#5c6bc0" }}>Profession</h5>
+                  <h5 style={{ color: "#5c6bc0", fontSize: 15 }}>Profession</h5>
                 </TableCell>
                 <TableCell>{this.props.data.profession}</TableCell>
               </TableRow>
 
               <TableRow>
                 <TableCell>
-                  <h5 style={{ color: "#5c6bc0" }}>Qualification</h5>
+                  <h5 style={{ color: "#5c6bc0", fontSize: 15 }}>Qualification</h5>
                 </TableCell>
                 <TableCell>{this.props.data.qualification}</TableCell>
               </TableRow>
@@ -583,25 +583,25 @@ class Name extends Component {
             <TableBody>
               <TableRow>
                 <TableCell>
-                  <h5 style={{ color: "#5c6bc0" }}>Email</h5>
+                  <h5 style={{ color: "#5c6bc0", fontSize: 15 }}>Email</h5>
                 </TableCell>
                 <TableCell>{this.props.data.email}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>
-                  <h5 style={{ color: "#5c6bc0" }}>Phone</h5>
+                  <h5 style={{ color: "#5c6bc0", fontSize: 15 }}>Phone</h5>
                 </TableCell>
                 <TableCell>{this.props.data.phone_no}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>
-                  <h5 style={{ color: "#5c6bc0" }}>Age</h5>
+                  <h5 style={{ color: "#5c6bc0", fontSize: 15 }}>Age</h5>
                 </TableCell>
                 <TableCell>{this.props.data.age}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>
-                  <h5 style={{ color: "#5c6bc0" }}>Address</h5>
+                  <h5 style={{ color: "#5c6bc0", fontSize: 15 }}>Address</h5>
                 </TableCell>
                 <TableCell>
                   {this.props.data.address +

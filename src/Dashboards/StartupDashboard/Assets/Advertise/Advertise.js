@@ -13,6 +13,7 @@ import Cookies from 'js-cookie';
 import { shadows } from '@material-ui/system';
 import { Link } from 'react-router-dom'
 import { Container } from '@material-ui/core';
+import CardActionArea from '@material-ui/core/CardActionArea'
 import './sidebar.css'
 
 const useStyles = theme => ({
@@ -38,7 +39,8 @@ class Advertise extends Component {
     this.state = {
       members: [],
       image: null,
-      myProfile: {}
+      myProfile: {},
+      Mystatus: ''
     };
     this.getImage = this.getImage.bind(this);
   }
@@ -71,6 +73,20 @@ class Advertise extends Component {
       })
   }
 
+  getStatus = () => {
+    var myId = Cookies.get("id");
+    var self = this;
+    axios
+      .post(`http://54.237.17.61/management/startup/profile/getStatus`, null, {
+        params: { id: myId },
+      })
+      .then((res) => {
+        var persons = res.data;
+        console.log(persons);
+        this.setState({ Mystatus: persons });
+      });
+  };
+
   render() {
     const { classes } = this.props;
 
@@ -78,34 +94,43 @@ class Advertise extends Component {
       <div className={classes.root}>
 
         <div style={{ width: '100%' }}>
-          <Card onClick={() => { window.location = '/startupDashboard/Profile' }} elevation={2} style={{ background: "white", width: '100%', height: 400, textAlign: 'center', padding: 20 }}>
-            <div className="text-center"> <img src={`data:image/jpeg;base64,${this.state.image}`} style={{ height: 100, width: 100 }} className="rounded-circle" />
-              <h3 className="mt-2"> {" "}{" " + this.state.myProfile.firstName + " " + this.state.myProfile.lastName}</h3> <span className="mt-1 clearfix">{this.state.myProfile.startupName}</span>
-              <Divider variant="middle" /><br />
-              <small className="mt-4">{this.state.myProfile.startupDescription}</small>
-              <div className="social-buttons mt-5">
-                <a href="https://www.linkedin.com/" target="_blank"><button className="neo-button" onclick="location.href='http://www.example.com'" type="button"><i className="fa fa-linkedin fa-1x"></i> </button> </a>
-                <a href="https://www.google.com/" target="_blank"><button className="neo-button"><i className="fa fa-google fa-1x"></i> </button></a>
-                <a href="https://www.youtube.com/" target="_blank">   <button className="neo-button"><i className="fa fa-youtube fa-1x"></i> </button></a>
-                <a href="https://www.twitter.com/" target="_blank"><button className="neo-button"><i className="fa fa-twitter fa-1x"></i> </button></a>
+          <Card onClick={() => { window.location = '/startupDashboard/Profile' }} elevation={2} >
+            <CardActionArea style={{ background: "white", width: '100%', height: 400, textAlign: 'center', padding: 20 }}>
+              <div className="text-center"> <img src={`data:image/jpeg;base64,${this.state.image}`} style={{ height: 100, width: 100 }} className="rounded-circle" />
+                <h3 className="mt-2"> {" "}{" " + this.state.myProfile.firstName + " " + this.state.myProfile.lastName}</h3> <span style={{ color: '#5c6bc0' }} className="mt-1 clearfix">{this.state.myProfile.startupName}</span>
+                <Divider variant="middle" /><br />
+                <small className="mt-4">{this.state.myProfile.startupDescription}</small>
+                <div className="social-buttons mt-5">
+                  <div>
+                    {this.state.myProfile.status}
+                  </div>
+                  <div>
+                    {this.state.myProfile.email}
+                  </div>
+                  <div>
+                    {this.state.myProfile.Mystatus}
+                  </div>
+                </div>
               </div>
-            </div>
-          </Card>
-        </div>
+            </CardActionArea >
+          </Card >
+        </div >
         <div>
-          <Card elevation={2} style={{ background: "white", width: 310, height: 420, marginTop: 20, textAlign: 'center', padding: 20 }}>
-            <div className="text-center">
-              <h3 className="mt-2"> {" "}{" " + "Get your Equipments"}</h3> <span className="mt-1 clearfix">"The Equipment Company"</span>
-              <Divider variant="middle" /><br />
-              <small className="mt-4">Get your startup up and running with our company</small>
-              <br /> <small className="mt-4"> We can provide you Equipments at 50% discount </small>
-              <br /><div style={{ marginTop: 20 }}> SUPPLIER Advertise HERE !</div>
-              <large style={{ marginTop: 40 }}>CALL ON : 975757575</large>
-            </div>
+          <Card elevation={2} style={{ marginTop: 20 }}>
+            <CardActionArea style={{ background: "white", width: '100%', height: 400, textAlign: 'center', padding: 20 }}>
+              <div className="text-center">
+                <h3 className="mt-2"> {" "}{" " + "Get your Equipments"}</h3> <span style={{ color: '#5c6bc0', fontSize: 20 }} className="mt-1 clearfix">"The Equipment Company"</span>
+                <Divider variant="middle" /><br />
+                <small className="mt-4">Get your startup up and running with our company</small>
+                <br /> <small className="mt-4"> We can provide you Equipments at 50% discount </small>
+                <br /><div style={{ marginTop: 20 }}> SUPPLIER Advertise HERE !</div>
+                <large style={{ marginTop: 40 }}>CALL ON : 975757575</large>
+              </div>
+            </CardActionArea>
           </Card>
         </div>
 
-      </div>
+      </div >
     );
   }
 }
