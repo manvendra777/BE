@@ -19,12 +19,13 @@ class StartupConfirm extends React.Component {
         lastName,
         email,
         phone_no,
-        experience_in_Domain,
+        experience_in_domain,
         qualification,
         method_of_contact,
         what_makes_you_a_great_mentor,
         about_yourself,
         address,
+        postalCode,
         city,
         country,
         Incentive,
@@ -56,7 +57,7 @@ class StartupConfirm extends React.Component {
               <List>
                 <ListItem
                   primaryText="experience in Domain"
-                  secondaryText={experience_in_Domain}
+                  secondaryText={experience_in_domain}
                 />
               </List>
             </Grid>
@@ -99,6 +100,14 @@ class StartupConfirm extends React.Component {
             <Grid item xs={12} sm={6}>
               <List>
                 <ListItem primaryText="Country" secondaryText={country} />
+              </List>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <List>
+                <ListItem
+                  primaryText="Postal Code"
+                  secondaryText={postalCode}
+                />
               </List>
             </Grid>
 

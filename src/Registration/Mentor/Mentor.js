@@ -153,7 +153,7 @@ class Startup extends Component {
         domain: this.state.domain,
         email: this.state.email,
         phone_no: this.state.phone_no,
-        experience_in_Domain: this.state.experience_in_domain,
+        experience_in_domain: this.state.experience_in_domain,
         qualification: this.state.qualification,
         aboutWork: this.state.aboutWork,
         state: this.state.state,

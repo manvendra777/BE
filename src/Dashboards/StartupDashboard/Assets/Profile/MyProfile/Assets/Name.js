@@ -24,8 +24,8 @@ import Chip from "@material-ui/core/Chip";
 import Cookies from "js-cookie";
 import { Checkmark } from "react-checkmark";
 import Edit from "./Edit";
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 import person from "material-ui/svg-icons/social/person";
 const styles = (theme) => ({
   root: {},
@@ -67,11 +67,17 @@ class Name extends Component {
       postalCode: "",
       startupName: "",
       startupDescription: "",
+      percentageOfOwnership: "",
+      yearOfFoundation: "",
+      expectations: "",
+      alreadyRunning: "",
+      futureScope: "",
+      valuation: "",
       websiteURL: "",
       profession: "",
       image: null,
       showVe: false,
-      Mystatus: 'h',
+      Mystatus: "h",
     };
 
     this.mapDomain = this.mapDomain.bind(this);
@@ -81,7 +87,7 @@ class Name extends Component {
   }
   componentWillMount() {
     this.getImage();
-    this.getStatus()
+    this.getStatus();
   }
 
   getImage() {
@@ -99,24 +105,30 @@ class Name extends Component {
   }
 
   setStatus = (value) => {
-    var myId =  Cookies.get("id")
-    this.setState({Mystatus:value})
-    axios.post(`http://54.237.17.61/management/startup/profile/setStatus`, null,{ params: { id: myId, status: value } })
-      .then(res => {
+    var myId = Cookies.get("id");
+    this.setState({ Mystatus: value });
+    axios
+      .post(`http://54.237.17.61/management/startup/profile/setStatus`, null, {
+        params: { id: myId, status: value },
+      })
+      .then((res) => {
         var persons = res.data;
         console.log(persons);
-      })
-  }
+      });
+  };
   getStatus = () => {
-    var myId =  Cookies.get("id")
-    var self = this
-    axios.post(`http://54.237.17.61/management/startup/profile/getStatus`, null,{ params: { id: myId } })
-      .then(res => {
+    var myId = Cookies.get("id");
+    var self = this;
+    axios
+      .post(`http://54.237.17.61/management/startup/profile/getStatus`, null, {
+        params: { id: myId },
+      })
+      .then((res) => {
         var persons = res.data;
         console.log(persons);
-        this.setState({Mystatus:persons})
-      })
-  }
+        this.setState({ Mystatus: persons });
+      });
+  };
   componentWillReceiveProps(props) {
     this.setState({
       firstName: props.data.firstName,
@@ -135,6 +147,12 @@ class Name extends Component {
       postalCode: props.data.postalCode,
       startupName: props.data.startupName,
       startupDescription: props.data.startupDescription,
+      percentageOfOwnership: props.data.percentageOfOwnership,
+      yearOfFoundation: props.data.yearOfFoundation,
+      alreadyRunning: props.data.alreadyRunning,
+      expectations: props.data.expectations,
+      futureScope: props.data.futureScope,
+      valuation: props.data.valuation,
       websiteURL: props.data.websiteURL,
       profession: props.data.profession,
     });
@@ -162,6 +180,7 @@ class Name extends Component {
     var data = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
+      expectations: this.state.expectations,
       age: this.state.age,
       email: this.state.email,
       qualification: this.state.qualification,
@@ -176,6 +195,11 @@ class Name extends Component {
       postalCode: this.state.postalCode,
       startupName: this.state.startupName,
       startupDescription: this.state.startupDescription,
+      percentageOfOwnership: this.state.percentageOfOwnership,
+      yearOfFoundation: this.state.yearOfFoundation,
+      alreadyRunning: this.state.alreadyRunning,
+      futureScope: this.state.futureScope,
+      valuation: this.state.valuation,
       websiteURL: this.state.websiteURL,
       profession: this.state.profession,
     };
@@ -338,6 +362,54 @@ class Name extends Component {
                 onChange={this.handleChange.bind(this)}
               />
               <br />
+              <TextField
+                style={{ margin: 5 }}
+                defaultValue={this.state.percentageOfOwnership}
+                label="Percentage of Ownership"
+                name="percentageOfOwnership"
+                onChange={this.handleChange.bind(this)}
+              />
+              <br />
+              <TextField
+                style={{ margin: 5 }}
+                defaultValue={this.state.yearOfFoundation}
+                label="Year of Foundation"
+                name="yearOfFoundation"
+                onChange={this.handleChange.bind(this)}
+              />
+              <br />
+              <TextField
+                style={{ margin: 5 }}
+                defaultValue={this.state.futureScope}
+                label="Future Scope"
+                name="futureScope"
+                onChange={this.handleChange.bind(this)}
+              />
+              <br />
+              <TextField
+                style={{ margin: 5 }}
+                defaultValue={this.state.alreadyRunning}
+                label="Is already Running?"
+                name="alreadyRunning"
+                onChange={this.handleChange.bind(this)}
+              />
+              <br />
+              <TextField
+                style={{ margin: 5 }}
+                defaultValue={this.state.expectations}
+                label="Expectations"
+                name="expectations"
+                onChange={this.handleChange.bind(this)}
+              />
+              <br />
+              <TextField
+                style={{ margin: 5 }}
+                defaultValue={this.state.valuation}
+                label="Valuation"
+                name="valuation"
+                onChange={this.handleChange.bind(this)}
+              />
+              <br />
               <Button color="primary" type="submit">
                 Submit
               </Button>
@@ -382,8 +454,8 @@ class Name extends Component {
                     }
                   </div>
                 ) : (
-                    <div></div>
-                  )}
+                  <div></div>
+                )}
               </div>
             </Typography>
 
@@ -408,19 +480,35 @@ class Name extends Component {
           <Edit edit={this.toggleModal} />
         </Card>
 
-        <Card elevation={3} style={{ display: 'flex', marginTop: 20, width: "100%", padding: 20 }}>
-          <div><h5 style={{ color: "#5c6bc0" }}>Current Status :</h5></div>
+        <Card
+          elevation={3}
+          style={{ display: "flex", marginTop: 20, width: "100%", padding: 20 }}
+        >
+          <div>
+            <h5 style={{ color: "#5c6bc0" }}>Current Status :</h5>
+          </div>
           <Select
-            style={{ width: '40%', marginLeft: 50 }}
+            style={{ width: "40%", marginLeft: 50 }}
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={this.state.Mystatus}
-            onChange={(e)=>{this.setStatus(e.target.value)}}>
-            <MenuItem value={'Looking for Mentors'}>Looking for Mentors</MenuItem>
-            <MenuItem value={'Looking for Investors'}>Looking for Investors</MenuItem>
-            <MenuItem value={'Not looking for mentoring'}>Not looking for mentoring</MenuItem>
-            <MenuItem value={'Not looking for investement'}>Not looking for investement</MenuItem>
-            <MenuItem value={'Looking for Hiring'}>Looking for Hiring</MenuItem>
+            onChange={(e) => {
+              this.setStatus(e.target.value);
+            }}
+          >
+            <MenuItem value={"Looking for Mentors"}>
+              Looking for Mentors
+            </MenuItem>
+            <MenuItem value={"Looking for Investors"}>
+              Looking for Investors
+            </MenuItem>
+            <MenuItem value={"Not looking for mentoring"}>
+              Not looking for mentoring
+            </MenuItem>
+            <MenuItem value={"Not looking for investement"}>
+              Not looking for investement
+            </MenuItem>
+            <MenuItem value={"Looking for Hiring"}>Looking for Hiring</MenuItem>
           </Select>
         </Card>
 
