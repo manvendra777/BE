@@ -21,6 +21,7 @@ const useStyles = (theme) => ({
   media: {
     height: '10%',
   },
+  
 });
 
 class BookMarkedStartup extends React.Component {
@@ -45,7 +46,7 @@ class BookMarkedStartup extends React.Component {
       .then(res => {
         mem = res.data;
         console.log(mem);
-        if (mem != null) {
+        if (mem != '') {
           mem.map((item, i) => {
             console.log(item);
             this.setState({ connectedID: [...this.state.connectedID, <BooKMarkCard id={item} />] })

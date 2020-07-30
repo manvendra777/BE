@@ -17,7 +17,8 @@ import MyAdvertise from './Assets/MyAdvertise/MyAvertise'
 import ViewAd from './Assets/MyAdvertise/Assets/ViewAd'
 import BusinessEvalution from './Assets/BusinessEvalution'
 import { Button } from "@material-ui/core";
-
+import Home from "./Assets/home/Home"
+import Feed from './Assets/home/Assets/Feed'
 
 export default class StartupDashboard extends Component {
 	constructor(props) {
@@ -64,6 +65,9 @@ export default class StartupDashboard extends Component {
 								<Route path="/startupDashboard/MyAdvertise" component={MyAdvertise}></Route>
 								<Route path="/startupDashboard/viewAd/:id" component={ViewAd} />
 								<Route path= "/startupDashboard/BusinessEvalution" component= {BusinessEvalution}/>	
+								<Route path="/startupDashboard/Feed/:Domain" component={Feed}></Route>
+								<Route path="/startupDashboard/Home" component={Home} />
+
 							</div>
 						</div>
 

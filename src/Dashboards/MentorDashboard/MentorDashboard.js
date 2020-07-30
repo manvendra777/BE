@@ -16,6 +16,8 @@ import ConnectedStartup from "./Assets/Home/ConnectedStartup";
 import BookMarkedStartup from './Assets/Home/BookMarkedStartup'
 import Home from './Assets/Home/Home';
 
+
+
 export default class StartupDashboard extends Component {
   constructor(props) {
     super(props);
@@ -39,9 +41,8 @@ export default class StartupDashboard extends Component {
         <MuiThemeProvider theme={theme}>
           <Router>
             <Header />
-
             <div style={{ margin: "75px", marginLeft: "10px" }}>
-              <ListOfOnlineCandidates />
+              
               <Advertise />
               <div style={{ marginTop: "5%" }}></div>
               <div style={{ marginLeft: "18.5%", width: "80%" }}>

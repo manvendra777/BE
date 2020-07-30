@@ -25,6 +25,7 @@
     "react-checkmark": "^1.2.0",
     "react-dom": "^16.13.1",
     "react-feather": "^2.0.8",
+    "react-icons": "^3.10.0",
     "react-interval": "^2.1.1",
     "react-pricing-table": "^0.3.0",
     "react-promise-tracker": "^2.1.0",
