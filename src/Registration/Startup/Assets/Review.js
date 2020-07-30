@@ -1,60 +1,63 @@
-import React from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { List, ListItem } from 'material-ui/List';
-import RaisedButton from 'material-ui/RaisedButton'
-import axios from 'axios';
-import CardM from '@material-ui/core/Card';
-import Cookies from 'js-cookie';
-import Grid from '@material-ui/core/Grid';
-
+import React from "react";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import { List, ListItem } from "material-ui/List";
+import RaisedButton from "material-ui/RaisedButton";
+import axios from "axios";
+import CardM from "@material-ui/core/Card";
+import Cookies from "js-cookie";
+import Grid from "@material-ui/core/Grid";
 
 class StartupConfirm extends React.Component {
   constructor(props) {
     super(props);
-
   }
 
-
   render() {
-
-    const { values: { firstName, lastName, age, email, qualification, phone_no, userID, domain, DIPP_no,
-      Address, city, state, country, postalCode, startupName, startupDescription, websiteURL, profession } } = this.props;
+    const {
+      values: {
+        firstName,
+        lastName,
+        age,
+        email,
+        qualification,
+        phone_no,
+        userID,
+        domain,
+        DIPP_no,
+        Address,
+        city,
+        state,
+        country,
+        percentageOfOwnership,
+        postalCode,
+        startupName,
+        startupDescription,
+        websiteURL,
+        profession,
+      },
+    } = this.props;
 
     return (
-
       <MuiThemeProvider>
         <React.Fragment>
-
           <Grid container spacing={0}>
-
             <Grid item xs={12} sm={6}>
               <List>
-                <ListItem
-                  primaryText="First Name:"
-                  secondaryText={firstName}
-                />
+                <ListItem primaryText="First Name:" secondaryText={firstName} />
               </List>
             </Grid>
 
             <Grid item xs={12} sm={6}>
               <List>
-                <ListItem
-                  primaryText="Last Name:"
-                  secondaryText={lastName}
-                />
+                <ListItem primaryText="Last Name:" secondaryText={lastName} />
               </List>
             </Grid>
 
             <Grid item xs={12} sm={12}>
               <List>
-                <ListItem
-                  primaryText="Email"
-                  secondaryText={email}
-                />
+                <ListItem primaryText="Email" secondaryText={email} />
               </List>
             </Grid>
-
-
 
             <Grid item xs={12} sm={12}>
               <List>
@@ -67,27 +70,18 @@ class StartupConfirm extends React.Component {
 
             <Grid item xs={12} sm={6}>
               <List>
-                <ListItem
-                  primaryText="Age"
-                  secondaryText={age}
-                />
+                <ListItem primaryText="Age" secondaryText={age} />
               </List>
             </Grid>
             <Grid item xs={12} sm={6}>
               <List>
-                <ListItem
-                  primaryText="Phone No."
-                  secondaryText={phone_no}
-                />
+                <ListItem primaryText="Phone No." secondaryText={phone_no} />
               </List>
             </Grid>
 
             <Grid item xs={12} sm={12}>
               <List>
-                <ListItem
-                  primaryText="DIPP No."
-                  secondaryText={DIPP_no}
-                />
+                <ListItem primaryText="DIPP No." secondaryText={DIPP_no} />
               </List>
             </Grid>
 
@@ -117,42 +111,27 @@ class StartupConfirm extends React.Component {
               </List>
             </Grid>
 
-
-
-
             <Grid item xs={12} sm={12}>
               <List>
-                <ListItem
-                  primaryText="Address"
-                  secondaryText={Address}
-                />
-              </List>
-            </Grid >
-
-            <Grid item xs={12} sm={6}>
-              <List>
-                <ListItem
-                  primaryText="City"
-                  secondaryText={city}
-                />
+                <ListItem primaryText="Address" secondaryText={Address} />
               </List>
             </Grid>
 
             <Grid item xs={12} sm={6}>
               <List>
-                <ListItem
-                  primaryText="State"
-                  secondaryText={state}
-                />
+                <ListItem primaryText="City" secondaryText={city} />
               </List>
             </Grid>
 
             <Grid item xs={12} sm={6}>
               <List>
-                <ListItem
-                  primaryText="Country"
-                  secondaryText={country}
-                />
+                <ListItem primaryText="State" secondaryText={state} />
+              </List>
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <List>
+                <ListItem primaryText="Country" secondaryText={country} />
               </List>
             </Grid>
 
@@ -167,32 +146,19 @@ class StartupConfirm extends React.Component {
 
             <Grid item xs={12} sm={12}>
               <List>
-                <ListItem
-                  primaryText="Profession"
-                  secondaryText={profession}
-                />
+                <ListItem primaryText="Profession" secondaryText={profession} />
               </List>
             </Grid>
             <Grid item xs={12} sm={12}>
               <List>
-                <ListItem
-                  primaryText="domain"
-                  secondaryText={domain}
-                />
+                <ListItem primaryText="domain" secondaryText={domain} />
               </List>
             </Grid>
-
           </Grid>
-
         </React.Fragment>
-
-      </MuiThemeProvider >
-
-
+      </MuiThemeProvider>
     );
-
   }
-
 }
 
 export default StartupConfirm;

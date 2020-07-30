@@ -12,7 +12,7 @@
     width: 350px;
     border-radius: 50px;
     background: #eeeeee;
-    box-shadow: 20px 20px 60px #cacaca, -20px -20px 60px #ffffff;
+    box-shadow: 5px 5px 15px #cacaca, -5px -5px 15px #ffffff;
     border: none
 }
 
@@ -27,13 +27,13 @@
     margin-right: 10px;
     border-radius: 50%;
     background: linear-gradient(145deg, #d6d6d6, #ffffff);
-    box-shadow: 20px 20px 60px #cacaca, -20px -20px 60px #ffffff
+    box-shadow: 5px 5px 15px #cacaca, -5px -5px 15px #ffffff
 }
 
 .neo-button:active {
     border-radius: 50%;
     background: linear-gradient(145deg, #d6d6d6, #ffffff);
-    box-shadow: inset 20px 20px 60px #cacaca, inset -20px -20px 60px #ffffff
+    box-shadow: inset 5px 5px 15px #cacaca, inset -5px -5px 15px #ffffff
 }
 
 .fa-facebook {

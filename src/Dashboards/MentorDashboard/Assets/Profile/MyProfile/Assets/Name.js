@@ -21,6 +21,8 @@ import TextField from "@material-ui/core/TextField";
 import { EditorFormatAlignCenter } from "material-ui/svg-icons";
 import axios from "axios";
 import Cookies from "js-cookie";
+import Chip from "@material-ui/core/Chip";
+
 const styles = (theme) => ({
   root: {
     display: "flex",
@@ -64,6 +66,7 @@ class Name extends Component {
       city: "",
       country: "",
       experience_in_domain: "",
+      incentive: "",
       aboutWork: "",
       state: "",
       postalCode: "",
@@ -107,6 +110,7 @@ class Name extends Component {
       age: props.data.age,
       postalCode: props.data.postalCode,
       domain: props.data.domain,
+      incentive: props.data.incentive,
       address: props.data.address,
       city: props.data.city,
       country: props.data.country,
@@ -138,6 +142,7 @@ class Name extends Component {
       aboutWork: this.state.aboutWork,
       userID: this.state.userID,
       domain: this.state.domain,
+      incentive: this.state.incentive,
       address: this.state.address,
       age: this.state.age,
       postalCode: this.state.postalCode,
@@ -162,6 +167,13 @@ class Name extends Component {
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
+  showDomain = () => {
+    if (typeof this.props.data.domain !== "undefined") {
+      return this.props.data.domain.map((item, i) => (
+        <Chip color="primary" style={{ marginLeft: 7 }} label={item} />
+      ));
+    }
+  };
 
   render() {
     const { classes } = this.props;
@@ -251,6 +263,13 @@ class Name extends Component {
               />{" "}
               <br />
               <TextField
+                defaultValue={this.state.incentive}
+                label="Incentive"
+                name="incentive"
+                onChange={this.handleChange.bind(this)}
+              />{" "}
+              <br />
+              <TextField
                 defaultValue={this.state.experience_in_domain}
                 label="Experience in Domain"
                 name="experience_in_domain"
@@ -309,6 +328,7 @@ class Name extends Component {
                       "," +
                       this.props.data.country}
                   </Typography>
+                  <div style={{ margin: 10 }}>{this.showDomain()}</div>
                 </Grid>
               </Container>
             </Grid>

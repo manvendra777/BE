@@ -130,10 +130,10 @@ class Header extends Component {
 					</Typography>
 						</div>
 						<div className={classes.groupButtons}>
-							<Button onClick={this.findStartup} style={{ color: "white", margin: "5px" }} ><SearchIcon style={{ marginLeft: 7 }} />Find Startup</Button>
-							<Button onClick={this.connections} style={{ color: "white", margin: "5px" }} ><PersonAddIcon style={{ marginLeft: 7 }} />Connections</Button>
-							<Button onClick={this.messaging} style={{ color: "white", margin: "5px" }} ><MessageIcon style={{ marginLeft: 7 }} />Messaging</Button>
-							<Button onClick={this.profile} style={{ color: "white", margin: "5px" }} >  <AccountCircle style={{ marginLeft: 7 }} />Profile</Button>
+							<Button onClick={this.findStartup} style={{ color: "white", margin: "5px" }} ><SearchIcon style={{ marginRight: 7 }} />Find Startup</Button>
+							<Button onClick={this.connections} style={{ color: "white", margin: "5px" }} ><PersonAddIcon style={{ marginRight: 7 }} />Connections</Button>
+							<Button onClick={this.messaging} style={{ color: "white", margin: "5px" }} ><MessageIcon style={{ marginRight: 7 }} />Messaging</Button>
+							<Button onClick={this.profile} style={{ color: "white", margin: "5px" }} >  <AccountCircle style={{ marginRight: 7 }} />Profile</Button>
 							<LogoutButton	/>
 						</div>
 					</Toolbar>
