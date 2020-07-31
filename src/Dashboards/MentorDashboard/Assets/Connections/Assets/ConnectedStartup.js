@@ -58,12 +58,12 @@ class ConnectedMentor extends Component {
             My Startups
 							</Typography>
           <Divider />
-          <div style={{ height: 600, display: 'block', width: '100%' }}>
+          <div style={{ height: 700, display: 'block', width: '100%' }}>
             <div style={{ background: '#ffffff', overflowY: 'scroll', height: '100%' }}>
               <div style={{ margin: 40 }}>
-                <Grid>
+                <div>
                   {this.state.connections.map(child => child)}
-                </Grid>
+                </div>
 
               </div>
             </div>

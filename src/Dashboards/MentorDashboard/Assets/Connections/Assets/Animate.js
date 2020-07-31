@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { useSpring, animated } from 'react-spring'
 import StartupCard from './StartupCard'
 
-const calc = (x, y) => [-(y - window.innerHeight / 2) / 50, (x - window.innerWidth / 2) / 50, 1.05]
+const calc = (x, y) => [-(y - window.innerHeight / 2) / 50, (x - window.innerWidth / 2) / 50, 1.02]
 const trans = (x, y, s) => `perspective(600px) rotateX(${0}deg) rotateY(${0}deg) scale(${s})`
 
 function Animate(xyz) {

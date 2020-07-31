@@ -24,7 +24,7 @@ export default class Profile extends Component {
 			})
 	}
 	render() {
-		return <div style={{ right: "25%", float: "right", position: "relative" }}>
+		return <div style={{ right: "35%", float: "right", position: "relative" }}>
 			<Name data={this.state.myProfile} />
 		</div>;
 	}

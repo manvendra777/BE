@@ -21,7 +21,7 @@ const useStyles = theme => ({
   root: {
     marginTop: '1%',
     width: '60vmin',
-    height: "59vmin"
+    height: "59vmin",
   },
   r: {
     margin: '1%',
@@ -220,9 +220,8 @@ componentDidUpdate(){
       this.setState({ msgTypo: e.target.value });
     }
     return (
-      <div style={{ display: 'flex', height: "90%", width: "60%", position: 'fixed', marginLeft:'5%'}}>
+      <div style={{ display: 'flex', height: "90%", width: "60%", position: 'fixed',}}>
         <div className={classes.r}>
-
           <Paper elevation={2} style={{ backgroundColor: '#cfd8dc', height: '8.5%' }}>
             <Typography variant="h5" color='primary' style={{ backgroundColor: '#cfd8dc', padding: '2%' }} gutterBottom>
               <center>Inbox</center>

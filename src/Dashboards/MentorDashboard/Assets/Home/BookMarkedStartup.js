@@ -15,12 +15,18 @@ import Grid from "@material-ui/core/Grid";
 
 const useStyles = (theme) => ({
   root: {
-    width: "20%",
+    width: '20%',
+    height: "87%",
+    position: "fixed",
+    zIndex: 1,
+    overflowY: "hidden",
+    right: 3,
+    backgroundColor: theme.palette.background.paper,
   },
   media: {
     height: "10%",
   },
-  
+
 });
 
 class BookMarkedStartup extends React.Component {
@@ -62,21 +68,18 @@ class BookMarkedStartup extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <div>
+      <div> 
         <Card
-          elevation={2}
-          style={{ width: "30%", marginTop: 10, marginLeft: "50%" }}
-        >
+          className={classes.root}
+          elevation={2}>
           <Typography
             variant="h5"
             color="primary"
-            style={{ backgroundColor: "#eeeeee", padding: 10 }}
-          >
-            BookMark
+            style={{ backgroundColor: "#eeeeee", padding: 10 }}>
+            <center>Bookmarks</center>
           </Typography>
           <Divider />
-
-          <div style={{ margin: 40 }}>
+          <div style={{padding:10,overflowY:'scroll',height:'100%'}}>
             <Grid>{this.state.connectedID.map((child) => child)}</Grid>
           </div>
         </Card>

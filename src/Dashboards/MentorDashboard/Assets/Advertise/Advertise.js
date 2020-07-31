@@ -115,7 +115,7 @@ class Advertise extends Component {
         </Card >
         <div>
           <Card elevation={2} style={{ marginTop: 20 }}>
-            <CardActionArea style={{ background: "white", width: '100%', height: 400, textAlign: 'center', padding: 20 }}>
+            <CardActionArea style={{ background: "white", width: '100%', height: 435, textAlign: 'center', padding: 20 }}>
               <div className="text-center">
                 <h3 className="mt-2"> {" "}{" " + "Enhance your Mentoring skills Equipments" + " "}{" "}</h3> <span style={{ color: '#5c6bc0', fontSize: 20 }} className="mt-1 clearfix">"The Course Company"</span>
                 <Divider variant="middle" /><br />

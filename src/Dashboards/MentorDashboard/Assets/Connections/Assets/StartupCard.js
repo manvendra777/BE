@@ -13,11 +13,13 @@ import { Icon } from "@material-ui/core";
 import Cookies from 'js-cookie';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
+
 const useStyles = (theme) => ({
   root: {
     width: '100%',
     margin: 10,
     padding: 0,
+    marginTop: 30,
     whiteSpace: 'normal'
   },
   media: {
@@ -32,7 +34,7 @@ class StartupCard extends React.Component {
     this.state = {
       myProfile: {},
       image: null,
-      isBooked:false
+      isBooked: false,
     };
     this.getImage = this.getImage.bind(this);
 
@@ -45,13 +47,14 @@ class StartupCard extends React.Component {
     axios.get(`http://54.237.17.61/management/startup/profile/` + id)
       .then(res => {
         persons = res.data;
-        console.log(persons);
+
         this.setState({ myProfile: persons })
       })
   }
 
   componentWillMount() {
     this.getImage()
+    this.getBookmarks()
   }
   getImage() {
     var self = this;
@@ -63,15 +66,22 @@ class StartupCard extends React.Component {
       })
   }
 
-  getIcon(){
-    if(this.state.isBooked){
-     return <BookmarkIcon theme="filled"/>
+  getIcon() {
+    if (this.state.isBooked) {
+      return <BookmarkIcon theme="filled" />
     }
-    else{
-      return <BookmarkIcon theme="outlined"/>
+    else {
+      return <BookmarkIcon theme="outlined" />
     }
   }
-
+  getBookmarks = () => {
+    axios.get('http://54.237.17.61/entityAction/getBookmark?id=' + Cookies.get("id"))
+      .then(res => {
+        if(res.data.includes(this.props.id)){
+          this.setState({isBooked:true})
+        }
+      })
+  }
   render() {
     const { classes } = this.props;
     const showProfile = () => {
@@ -79,23 +89,21 @@ class StartupCard extends React.Component {
     }
 
 
-    const bookMark=()=>{
-
-      axios.get('http://54.237.17.61/entityAction/setBookmark?id='+Cookies.get("id")+'&target='+ this.props.id)
-      .then(res=>{
-        console.log("done")
-      })
+    const bookMark = () => {
+      axios.get('http://54.237.17.61/entityAction/setBookmark?id=' + Cookies.get("id") + '&target=' + this.props.id)
+        .then(res => { this.setState({ isBooked: !this.state.isBooked }) })
     }
     return (
       <div>
 
         <Card className={classes.root} elevation={3}>
-          <CardActionArea>
+          <CardActionArea onClick={showProfile}>
             <CardMedia
               className={classes.media}
               image={`data:image/jpeg;base64,${this.state.image}`}
               title={this.state.myProfile.firstName}
             />
+
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
                 {this.state.myProfile.firstName} {this.state.myProfile.lastName}
@@ -106,14 +114,10 @@ class StartupCard extends React.Component {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button onClick={showProfile}>
-              Profile
-        </Button>
-        
-        <Button onClick={bookMark}>Bookmark</Button>
 
-      
-        
+            <Button onClick={bookMark}>
+              {this.state.isBooked ? <BookmarkIcon /> : <BookmarkBorderIcon />}
+            </Button>
           </CardActions>
         </Card>
       </div>

@@ -14,13 +14,12 @@ import Link from '@material-ui/core/Link';
 
 const useStyles = (theme) => ({
   root: {
-    width: '80%',
-    margin: 10,
-    padding: 0,
-    whiteSpace: 'normal'
+    width: '100%',
+    whiteSpace: 'normal',
+    marginTop: 10
   },
   media: {
-    minHeight: 300,
+    minHeight: 200,
   },
 });
 
@@ -29,30 +28,40 @@ class BookMarkCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        myProfile: {},
+      myProfile: {},
+      image: ''
     };
-    
+
   }
 
   componentDidMount() {
     this.getName();
+    this.getImage()
     var id = this.props.id
   }
   getName() {
- 
-        var persons;
-        axios
-          .get(
-            `http://54.237.17.61/management/startup/profile/` +this.props.id
-          )
-          .then((res) => {
-            persons = res.data;
-            console.log(persons);
-            this.setState({ myProfile: persons });
-          });
-    
-  }
 
+    var persons;
+    axios
+      .get(
+        `http://54.237.17.61/management/startup/profile/` + this.props.id
+      )
+      .then((res) => {
+        persons = res.data;
+        console.log(persons);
+        this.setState({ myProfile: persons });
+      });
+
+  }
+  getImage = () => {
+    var self = this;
+    var mem;
+    axios.get(`http://54.237.17.61/management/startup/photos/` + this.props.id)
+      .then(res => {
+        mem = res.data;
+        this.setState({ image: mem })
+      })
+  }
   render() {
     const { classes } = this.props;
     const showProfile = () => {
@@ -61,18 +70,29 @@ class BookMarkCard extends React.Component {
 
     return (
       <div>
-
-       <Card className={classes.root} elevation={3}>
+        <Card className={classes.root} elevation={2}>
           <CardActionArea>
+            <CardMedia
+              className={classes.media}
+              image={`data:image/jpeg;base64,${this.state.image}`}
+              title={this.state.myProfile.firstName}
+            />
             <CardContent>
-            <Link onClick={showProfile}>
-              <Typography gutterBottom variant="h5" component="h2">
-              {" " +this.state.myProfile.firstName +" " +this.state.myProfile.lastName}
-              </Typography> </Link>
+              <Link onClick={showProfile}>
 
+                <Typography gutterBottom variant="h6" >
+                  {" " + this.state.myProfile.startupName}
+                </Typography>
+                <Typography gutterBottom variant="subtitle1" >
+                  {" " + this.state.myProfile.firstName + " " + this.state.myProfile.lastName}
+                </Typography>
+                <Typography gutterBottom variant="subtitle1" >
+                  {" " + this.state.myProfile.email}
+                </Typography>
+              </Link>
             </CardContent>
           </CardActionArea>
-         
+
         </Card>
       </div>
 

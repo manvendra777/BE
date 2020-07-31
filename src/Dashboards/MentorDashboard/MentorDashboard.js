@@ -39,8 +39,8 @@ export default class StartupDashboard extends Component {
         <MuiThemeProvider theme={theme}>
           <Router>
             <Header />
-            <div style={{ margin: "75px", marginLeft: "10px" }}>
-              
+            <div style={{ margin: "75px", marginLeft: "10px" }}>   
+            <BookMarkedStartup/>
               <Advertise />
               <div style={{ marginTop: "5%" }}></div>
               <div style={{ marginLeft: "18.5%", width: "80%" }}>
