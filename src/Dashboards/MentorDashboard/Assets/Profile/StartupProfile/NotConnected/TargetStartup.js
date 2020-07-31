@@ -339,6 +339,7 @@ class TargetStartup extends Component {
                   marginTop: "auto",
                   marginBottom: "auto",
                   marginLeft: 7,
+                  fontSize:20,
                   color: "#424242",
                 }}
               >
@@ -356,6 +357,7 @@ class TargetStartup extends Component {
                   marginTop: "auto",
                   marginBottom: "auto",
                   marginLeft: 7,
+                  fontSize:20,
                   color: "#424242",
                 }}
               >
@@ -372,6 +374,7 @@ class TargetStartup extends Component {
                   marginTop: "auto",
                   marginBottom: "auto",
                   marginLeft: 7,
+                  fontSize:20,
                   color: "#424242",
                 }}
               >
@@ -389,6 +392,7 @@ class TargetStartup extends Component {
                   marginTop: "auto",
                   marginBottom: "auto",
                   marginLeft: 7,
+                  fontSize:20,
                   color: "#424242",
                 }}
               >
@@ -405,6 +409,7 @@ class TargetStartup extends Component {
                   marginTop: "auto",
                   marginBottom: "auto",
                   marginLeft: 7,
+                  fontSize:20,
                   color: "#424242",
                 }}
               >
@@ -415,13 +420,14 @@ class TargetStartup extends Component {
 
             <div style={{ display: "flex", alignText: "center" }}>
               <Typography variant="h5" color="primary" gutterBottom>
-                Current:
+                Currently working with:
               </Typography>
               <div
                 style={{
                   marginTop: "auto",
                   marginBottom: "auto",
                   marginLeft: 7,
+                  fontSize:20,
                   color: "#424242",
                 }}
               >
@@ -432,13 +438,14 @@ class TargetStartup extends Component {
 
             <div style={{ display: "flex", alignText: "center" }}>
               <Typography variant="h5" color="primary" gutterBottom>
-                Previous:
+                Previously worked with:
               </Typography>
               <div
                 style={{
                   marginTop: "auto",
                   marginBottom: "auto",
                   marginLeft: 7,
+                  fontSize:20,
                   color: "#424242",
                 }}
               >

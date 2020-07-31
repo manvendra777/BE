@@ -15,7 +15,10 @@ import MyConnectedStartup from './Assets/Home/ConnectedStartup';
 import ConnectedStartup from "./Assets/Home/ConnectedStartup";
 import BookMarkedStartup from './Assets/Home/BookMarkedStartup'
 import Home from './Assets/Home/Home';
+import Feed from './Assets/Home/Assets/Feed'
 
+
+import { ToastContainer, toast } from 'react-toastify';
 export default class StartupDashboard extends Component {
   constructor(props) {
     super(props);
@@ -77,10 +80,20 @@ export default class StartupDashboard extends Component {
                   component={Home}
                 >
                 </Route>
+                <Route path="/mentorDashboard/Feed/:Domain" component={Feed}></Route>
               </div>
             </div>
           </Router>
-          
+          <ToastContainer
+                    position="bottom-right"
+                    autoClose={7000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover />
         </MuiThemeProvider>
       </div>
     );

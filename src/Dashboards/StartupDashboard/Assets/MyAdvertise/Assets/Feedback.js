@@ -3,6 +3,7 @@ import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField';
 import Cookies from 'js-cookie'
+import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios'
 class Feedback extends Component {
     constructor(props) {
@@ -31,6 +32,16 @@ class Feedback extends Component {
         .then(res => {
             console.log(res.data);
             this.setState({msg:''})
+
+            toast.success("mail sent successfully !", {
+                position: "bottom-right",
+                autoClose: 7000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              })
         })
     }
   }
@@ -55,7 +66,6 @@ class Feedback extends Component {
                             <TextField onKeyDown={this.keyPress} onChange={(e)=>{this.setState({msg:e.target.value})}} value={this.state.msg} id="outlined-basic" label="Send note" variant="outlined" />
                         </div>
                     </div>
-
                 </Paper>
             </div>
         );

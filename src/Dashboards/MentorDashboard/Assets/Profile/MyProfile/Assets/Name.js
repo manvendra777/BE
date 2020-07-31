@@ -315,7 +315,7 @@ class Name extends Component {
                 <Typography
                   variant="h4"
                   gutterBottom
-                  style={{ color: "#1a237e" }}
+                  style={{ color: "#607d8b" }}
                 >
                   {this.props.data.firstName + " " + this.props.data.lastName}
                 </Typography>
@@ -357,19 +357,19 @@ class Name extends Component {
               <TableBody>
                 <TableRow>
                   <TableCell>
-                    <h6 style={{ color: "#1a237e" }}>About Yourself</h6>
+                    <h6 style={{ color: "#607d8b", fontSize: 18 }}>About Yourself</h6>
                   </TableCell>
                   <TableCell>{this.props.data.about_yourself}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>
-                    <h6 style={{ color: "#1a237e" }}>Experience in Domain</h6>
+                    <h6 style={{ color: "#607d8b", fontSize: 18 }}>Experience in Domain</h6>
                   </TableCell>
                   <TableCell>{this.props.data.experience_in_domain}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>
-                    <h6 style={{ color: "#1a237e" }}>
+                    <h6 style={{ color: "#607d8b", fontSize: 18 }}>
                       About your Previous Work
                     </h6>
                   </TableCell>
@@ -378,7 +378,7 @@ class Name extends Component {
 
                 <TableRow>
                   <TableCell>
-                    <h6 style={{ color: "#1a237e" }}>Qualification</h6>
+                    <h6 style={{ color: "#607d8b", fontSize: 18 }}>Qualification</h6>
                   </TableCell>
                   <TableCell>{this.props.data.qualification}</TableCell>
                 </TableRow>
@@ -386,20 +386,20 @@ class Name extends Component {
               <TableBody>
                 <TableRow>
                   <TableCell>
-                    <h6 style={{ color: "#1a237e" }}>Email</h6>
+                    <h6 style={{ color: "#607d8b", fontSize: 18 }}>Email</h6>
                   </TableCell>
                   <TableCell>{this.props.data.email}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>
-                    <h6 style={{ color: "#1a237e" }}>Phone</h6>
+                    <h6 style={{ color: "#607d8b", fontSize: 18 }}>Phone</h6>
                   </TableCell>
                   <TableCell>{this.props.data.phone_no}</TableCell>
                 </TableRow>
 
                 <TableRow>
                   <TableCell>
-                    <h6 style={{ color: "#1a237e" }}>Address</h6>
+                    <h6 style={{ color: "#607d8b", fontSize: 18 }}>Address</h6>
                   </TableCell>
                   <TableCell>
                     {this.props.data.address +
@@ -416,11 +416,6 @@ class Name extends Component {
               </TableBody>
             </Table>
           </Card>
-
-          <Card
-            variant="outlined"
-            style={{ marginTop: 20, color: "#1a237e" }}
-          ></Card>
         </Card>
       </div>
     );
