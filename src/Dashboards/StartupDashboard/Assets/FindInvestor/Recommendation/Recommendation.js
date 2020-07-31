@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
-import StartupCard from './StartupCards'
+import InvestorCard from './InvestorCards'
 import Divider from '@material-ui/core/Divider';
 import Typography from "@material-ui/core/Typography";
 import {trackPromise} from 'react-promise-tracker';
@@ -17,7 +17,7 @@ class Recommendation extends Component {
         super(props);
 
         this.state = {
-            StartupList: [],
+            InvestorList: [],
             isEmpty: true,
         };
         this.getListData = this.getListData.bind(this)
@@ -30,14 +30,14 @@ class Recommendation extends Component {
   }
   getListData() {
     console.log(this.state.domains);
-    this.setState({ StartupList: [] })
-    var startups;
+    this.setState({ InvestorList: [] })
+    var mentors;
     trackPromise(
         axios.get(``,{params: { id: Cookies.get("id") },} )
         .then(res => {
-            startups = res.data;
-            startups.map((item, i) => {
-                this.setState({ StartupList: [...this.state.StartupList, <Animate id={item.id} domain={item.domain} firstname={item.firstName} lastname={item.lastName} about={item.about_yourself} />] })
+            mentors = res.data;
+            mentors.map((item, i) => {
+                this.setState({ InvestorList: [...this.state.InvestorList, <Animate id={item.id} domain={item.domain} firstname={item.firstName} lastname={item.lastName} about={item.about_yourself} />] })
             })
         })
     )
@@ -45,8 +45,8 @@ class Recommendation extends Component {
 }
 
 showData = () => {
-    if (this.state.StartupList.length > 0) {
-        return (this.state.StartupList.map(child => child))
+    if (this.state.InvestorList.length > 0) {
+        return (this.state.InvestorList.map(child => child))
     } else {
         return (<div><div elevation={5} style={{width: '100%', height: '100%', display: 'flex' }} >
             <img style={{ width: '100%', marginTop: 'auto', }} src={photo}></img>
