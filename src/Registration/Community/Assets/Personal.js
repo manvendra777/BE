@@ -41,7 +41,7 @@ class Personal extends React.Component {
   };
 
   onFileUpload = () => {
-    //54.237.17.61/management/community/uploadPhoto/5f1373f48888db417a8d0dcc
+    //50.19.216.143/management/community/uploadPhoto/5f1373f48888db417a8d0dcc
     const formData = new FormData();
     formData.append("image", this.state.selectedFile);
 
@@ -49,7 +49,7 @@ class Personal extends React.Component {
     axios({
       method: "post",
       url:
-        "http://54.237.17.61/management/community/uploadPhoto/" +
+        "http://50.19.216.143/management/community/uploadPhoto/" +
         Cookies.get("tempId"),
       data: formData,
       headers: { "Content-Type": "multipart/form-data" },

@@ -58,7 +58,7 @@ class ViewAd extends Component {
   getMyAd() {
     var self = this;
     var ad;
-    axios.get(`http://54.237.17.61/advert/myAd`, { params: { id: this.props.match.params.id } })
+    axios.get(`http://50.19.216.143/advert/myAd`, { params: { id: this.props.match.params.id } })
       .then(res => {
         ad = res.data;
         this.setState({ Ad: ad });

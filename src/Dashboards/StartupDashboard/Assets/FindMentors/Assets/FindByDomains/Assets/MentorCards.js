@@ -37,7 +37,7 @@ class MentorCard extends Component {
     getImage() {
         var self = this;
         var mem;
-        axios.get(`http://54.237.17.61/management/mentor/photos/` + this.props.id)
+        axios.get(`http://50.19.216.143/management/mentor/photos/` + this.props.id)
             .then(res => {
                 mem = res.data;
                 self.setState({ image: mem })
@@ -51,7 +51,7 @@ class MentorCard extends Component {
             
             var myid = Cookies.get('id');
             var response;
-            axios.get('http://54.237.17.61/entityAction/user/checkIfAdded', { params: { id: myid, target: this.props.id } })
+            axios.get('http://50.19.216.143/entityAction/user/checkIfAdded', { params: { id: myid, target: this.props.id } })
                 .then(res => {
                     response = res.data
                     if (response) {

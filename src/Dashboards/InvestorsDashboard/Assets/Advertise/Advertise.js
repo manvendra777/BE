@@ -54,7 +54,7 @@ class Advertise extends Component {
     var self = this;
     var mem;
     axios
-      .get(`http://54.237.17.61/management/investor/photos/` + Cookies.get("id"))
+      .get(`http://50.19.216.143/management/investor/photos/` + Cookies.get("id"))
       .then((res) => {
         mem = res.data;
         self.setState({ image: mem });
@@ -67,7 +67,7 @@ class Advertise extends Component {
   getName() {
     var persons;
     axios
-      .get(`http://54.237.17.61/management/investor/profile/` + Cookies.get("id"))
+      .get(`http://50.19.216.143/management/investor/profile/` + Cookies.get("id"))
       .then((res) => {
         persons = res.data;
         console.log(persons);

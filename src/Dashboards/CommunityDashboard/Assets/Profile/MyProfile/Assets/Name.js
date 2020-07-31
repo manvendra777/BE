@@ -73,7 +73,7 @@ class Name extends Component {
     var mem;
     axios
       .get(
-        `http://54.237.17.61/management/community/photos/` + Cookies.get("id")
+        `http://50.19.216.143/management/community/photos/` + Cookies.get("id")
       )
       .then((res) => {
         mem = res.data;
@@ -134,7 +134,7 @@ class Name extends Component {
 
     axios
       .post(
-        "http://54.237.17.61/management/community/profile/" + Cookies.get("id"),
+        "http://50.19.216.143/management/community/profile/" + Cookies.get("id"),
         (data = data)
       )
       .then(function (response) {

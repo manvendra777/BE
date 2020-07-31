@@ -39,7 +39,7 @@ class MentorCard extends React.Component {
     var persons;
     console.log("called33");
     console.log(this.props.id)
-    axios.get(`http://54.237.17.61/management/mentor/profile/` + id)
+    axios.get(`http://50.19.216.143/management/mentor/profile/` + id)
       .then(res => {
         persons = res.data;
         console.log(persons);
@@ -53,7 +53,7 @@ class MentorCard extends React.Component {
   getImage() {
     var self = this;
     var mem;
-    axios.get(`http://54.237.17.61/management/mentor/photos/` + this.props.id)
+    axios.get(`http://50.19.216.143/management/mentor/photos/` + this.props.id)
       .then(res => {
         mem = res.data;
         self.setState({ image: mem })

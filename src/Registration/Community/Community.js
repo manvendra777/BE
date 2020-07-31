@@ -107,7 +107,7 @@ class Startup extends Component {
   submitForm() {
     var self = this;
     axios
-      .put("http://54.237.17.61/management/community/profile/add", {
+      .put("http://50.19.216.143/management/community/profile/add", {
         id: this.state.id,
         firstName: this.state.firstName,
         lastName: this.state.lastName,
@@ -130,14 +130,14 @@ class Startup extends Component {
     var myid = Cookies.get("tempId");
     var response;
     axios
-      .post("http://54.237.17.61/entityAction/user/createRequestDB", null, {
+      .post("http://50.19.216.143/entityAction/user/createRequestDB", null, {
         params: { id: myid },
       })
       .then((res) => {
         response = res.data;
         axios
           .post(
-            "http://54.237.17.61/security/setCommunity?userName=" +
+            "http://50.19.216.143/security/setCommunity?userName=" +
               Cookies.get("temp")
           )
           .then((res) => {

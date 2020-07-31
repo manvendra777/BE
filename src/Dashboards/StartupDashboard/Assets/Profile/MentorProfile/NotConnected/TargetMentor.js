@@ -91,7 +91,7 @@ class TargetMentor extends Component {
     var mem;
     axios
       .get(
-        `http://54.237.17.61/management/mentor/photos/` +
+        `http://50.19.216.143/management/mentor/photos/` +
         this.props.match.params.id
       )
       .then((res) => {
@@ -100,11 +100,11 @@ class TargetMentor extends Component {
       });
   }
   checkInvitation() {
-    //54.237.17.61/entityAction/user/checkRequest
+    //50.19.216.143/entityAction/user/checkRequest
     var myid = Cookies.get("id");
     var sent;
     axios
-      .get(`http://54.237.17.61/entityAction/user/checkRequest`, {
+      .get(`http://50.19.216.143/entityAction/user/checkRequest`, {
         params: { id: myid, target: this.props.match.params.id },
       })
       .then((res) => {
@@ -114,13 +114,13 @@ class TargetMentor extends Component {
   }
   sendInvitation() {
     var myid = Cookies.get("id");
-    //54.237.17.61:8080/entityAction/user/sendRequest?id=5f07ae9d919bc64fc3513d0a&target=2
+    //50.19.216.143:8080/entityAction/user/sendRequest?id=5f07ae9d919bc64fc3513d0a&target=2
     if (this.state.isVerified) {
       console.log("buy");
     } else {
       console.log("sent");
       axios
-        .post(`http://54.237.17.61/entityAction/user/sendRequest`, null, {
+        .post(`http://50.19.216.143/entityAction/user/sendRequest`, null, {
           params: { id: myid, target: this.props.match.params.id },
         })
         .then((res) => {
@@ -138,7 +138,7 @@ class TargetMentor extends Component {
   }
   getNumberOfConnections = () => {
     axios
-      .get(`http://54.237.17.61/entityAction/user/numberOfConnections`, {
+      .get(`http://50.19.216.143/entityAction/user/numberOfConnections`, {
         params: { id: this.props.match.params.id },
       })
       .then((res) => {
@@ -151,7 +151,7 @@ class TargetMentor extends Component {
     var profileId = this.props.match.params.id;
     var response;
     axios
-      .get("http://54.237.17.61/entityAction/getMyPrevious", {
+      .get("http://50.19.216.143/entityAction/getMyPrevious", {
         params: { id: profileId },
       })
       .then((res) => {
@@ -160,14 +160,14 @@ class TargetMentor extends Component {
         if (response != "") {
           response.map((item, i) => {
             axios
-              .get("http://54.237.17.61/security/getTypeById?id=" + item)
+              .get("http://50.19.216.143/security/getTypeById?id=" + item)
               .then((res) => {
                 userType = res.data;
                 var persons;
                 var userType;
                 axios
                   .get(
-                    `http://54.237.17.61/management/` +
+                    `http://50.19.216.143/management/` +
                     userType +
                     `/profile/` +
                     item
@@ -194,7 +194,7 @@ class TargetMentor extends Component {
     var profileId = this.props.match.params.id;
     var response;
     axios
-      .get("http://54.237.17.61/entityAction/getMyCurrent", {
+      .get("http://50.19.216.143/entityAction/getMyCurrent", {
         params: { id: profileId },
       })
       .then((res) => {
@@ -203,14 +203,14 @@ class TargetMentor extends Component {
         if (response != "") {
           response.map((item, i) => {
             axios
-              .get("http://54.237.17.61/security/getTypeById?id=" + item)
+              .get("http://50.19.216.143/security/getTypeById?id=" + item)
               .then((res) => {
                 userType = res.data;
                 var persons;
                 var userType;
                 axios
                   .get(
-                    `http://54.237.17.61/management/` +
+                    `http://50.19.216.143/management/` +
                     userType +
                     `/profile/` +
                     item
@@ -236,7 +236,7 @@ class TargetMentor extends Component {
     var id = this.props.match.params.id;
     var isVerified;
     axios
-      .get(`http://54.237.17.61/ratings/isVerified`, {
+      .get(`http://50.19.216.143/ratings/isVerified`, {
         params: { id: this.props.match.params.id },
       })
       .then((res) => {
@@ -248,7 +248,7 @@ class TargetMentor extends Component {
     var id = this.props.match.params.id;
     var persons;
     axios
-      .get(`http://54.237.17.61/management/mentor/profile/` + id)
+      .get(`http://50.19.216.143/management/mentor/profile/` + id)
       .then((res) => {
         persons = res.data;
         console.log(persons);
@@ -260,7 +260,7 @@ class TargetMentor extends Component {
     var myid = Cookies.get("id");
     var my = 0;
     axios
-      .get(`http://54.237.17.61/ratings/get`, {
+      .get(`http://50.19.216.143/ratings/get`, {
         params: { provider: myid, entity: this.props.match.params.id },
       })
       .then((res) => {
@@ -273,9 +273,9 @@ class TargetMentor extends Component {
   setMyRating(rating) {
     var myid = Cookies.get("id");
     var m = this.props.match.params.id;
-    //54.237.17.61:8080/ratings/save
+    //50.19.216.143:8080/ratings/save
     axios
-      .post("http://54.237.17.61/ratings/save", {
+      .post("http://50.19.216.143/ratings/save", {
         entityId: m,
         providerId: myid,
         value: rating,
@@ -286,7 +286,7 @@ class TargetMentor extends Component {
   getRating() {
     var avg;
     axios
-      .get(`http://54.237.17.61/ratings/getRatingCount`, {
+      .get(`http://50.19.216.143/ratings/getRatingCount`, {
         params: { id: this.props.match.params.id },
       })
       .then((res) => {
@@ -298,7 +298,7 @@ class TargetMentor extends Component {
   getRatingAv() {
     var rate;
     axios
-      .get(`http://54.237.17.61/ratings/getRatingAverage`, {
+      .get(`http://50.19.216.143/ratings/getRatingAverage`, {
         params: { id: this.props.match.params.id },
       })
       .then((res) => {

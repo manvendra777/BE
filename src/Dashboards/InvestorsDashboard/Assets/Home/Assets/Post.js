@@ -99,7 +99,7 @@ class Post extends Component {
     var self = this;
     var mem;
     var postId = this.state.id;
-    axios.get(`http://54.237.17.61/forum/getCount`, { params: { idOfPost: postId } })
+    axios.get(`http://50.19.216.143/forum/getCount`, { params: { idOfPost: postId } })
       .then(res => {
         mem = res.data;
         self.setState({ count: mem })
@@ -110,7 +110,7 @@ class Post extends Component {
   getLikeStatus() {
     var self = this;
     var mem;
-    axios.get(`http://54.237.17.61/forum/checkLike`, { params: { idOfPost: self.state.id, idOfMember: Cookies.get('id') } })
+    axios.get(`http://50.19.216.143/forum/checkLike`, { params: { idOfPost: self.state.id, idOfMember: Cookies.get('id') } })
       .then(res => {
         mem = res.data;
         self.setState({ checkLike: mem })
@@ -120,7 +120,7 @@ class Post extends Component {
   setLike() {
     var self = this;
     var postId = this.state.id;
-    axios.post('http://54.237.17.61/forum/addLikes', null, { params: { idOfPost: postId, idOfMember: Cookies.get('id') } }).then(res => {
+    axios.post('http://50.19.216.143/forum/addLikes', null, { params: { idOfPost: postId, idOfMember: Cookies.get('id') } }).then(res => {
       if (res.data) {
         self.setState({ checkLike: true })
         self.setState({ count: self.state.count + 1 })
@@ -135,10 +135,10 @@ class Post extends Component {
   getProfilePicture() {
     var self = this;
     var mem;
-    axios.get("http://54.237.17.61/security/getTypeById?id=" + this.state.idOfUser)
+    axios.get("http://50.19.216.143/security/getTypeById?id=" + this.state.idOfUser)
       .then((res) => {
         var type = res.data;
-        axios.get(`http://54.237.17.61/management/` + type + `/photos/` + this.state.idOfUser)
+        axios.get(`http://50.19.216.143/management/` + type + `/photos/` + this.state.idOfUser)
           .then(res => {
             mem = res.data;
             self.setState({ profilePicture: mem })
@@ -149,7 +149,7 @@ class Post extends Component {
   getPostData() {
     var ads;
     var self = this;
-    axios.get(`http://54.237.17.61/forum/getPostbyId`, { params: { id: this.state.id } })
+    axios.get(`http://50.19.216.143/forum/getPostbyId`, { params: { id: this.state.id } })
       .then(res => {
         ads = res.data;
         console.log(ads);
@@ -177,7 +177,7 @@ class Post extends Component {
     
     if (e.keyCode == 13) {
       var self = this;
-      axios.post('http://54.237.17.61/forum/addComment', {
+      axios.post('http://50.19.216.143/forum/addComment', {
         "discussionId": this.props.id,
         "commentBody": self.state.comment,
         "userId": Cookies.get('username') + ' (investor)'

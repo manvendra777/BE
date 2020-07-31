@@ -39,7 +39,7 @@ media: {
 		var persons;
     console.log("called33");
     console.log(this.props.id)
-		axios.get(`http://54.237.17.61/management/investor/profile/` + id)
+		axios.get(`http://50.19.216.143/management/investor/profile/` + id)
 			.then(res => {
 				persons = res.data;
 				console.log(persons);
@@ -53,7 +53,7 @@ componentWillMount() {
 getImage() {
     var self = this;
     var mem;
-    axios.get(`http://54.237.17.61/management/investor/photos/` + this.props.id)
+    axios.get(`http://50.19.216.143/management/investor/photos/` + this.props.id)
         .then(res => {
             mem = res.data;
             self.setState({ image: mem })

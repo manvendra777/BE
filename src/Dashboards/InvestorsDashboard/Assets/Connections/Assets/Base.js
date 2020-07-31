@@ -44,7 +44,7 @@ class Base extends Component {
 
   getUsers = async () => {
     let data = await axios
-      .get(`http://54.237.17.61/entityAction/user/pendingRequests`, {
+      .get(`http://50.19.216.143/entityAction/user/pendingRequests`, {
         params: { id: Cookies.get("id") },
       })
       .then(({ data }) => data);

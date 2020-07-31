@@ -89,14 +89,14 @@ class Inbox extends Component {
     }
 
     getUsers() {
-        axios.get(`http://54.237.17.61/communication/message/getMails`, { params: { senderId: this.state.myId } })
+        axios.get(`http://50.19.216.143/communication/message/getMails`, { params: { senderId: this.state.myId } })
             .then(res => {
                 var persons = res.data.reverse();
                 console.log(persons);
                 persons.map((item, i) => {
-                    axios.get("http://54.237.17.61/security/getTypeById?id=" + item.senderId).then((res) => {
+                    axios.get("http://50.19.216.143/security/getTypeById?id=" + item.senderId).then((res) => {
                         var userType = res.data;
-                        axios.get(`http://54.237.17.61/management/startup/profile/` + item.senderId).then((res) => {
+                        axios.get(`http://50.19.216.143/management/startup/profile/` + item.senderId).then((res) => {
                             var data = res.data;
                             this.setState({ members: [...this.state.members, <Added name={data.startupName} founder={data.firstName + ' ' + data.lastName} method={this.setAddedUser} text={item.text} />] })
                         });
@@ -108,20 +108,20 @@ class Inbox extends Component {
 
     /* var myid = Cookies.get('id');
      let mem = [];
-     axios.get(`http://54.237.17.61/entityAction/user/myConnections`, { params: { id: myid } })
+     axios.get(`http://50.19.216.143/entityAction/user/myConnections`, { params: { id: myid } })
          .then(res => {
              mem = res.data;
              mem.map((item, i) => {
                  var id = item;
                  axios
-                     .get("http://54.237.17.61/security/getTypeById?id=" + id)
+                     .get("http://50.19.216.143/security/getTypeById?id=" + id)
                      .then((res) => {
                          userType = res.data;
                          var persons;
                          var userType;
                          axios
                              .get(
-                                 `http://54.237.17.61/management/` + userType + `/profile/` + id
+                                 `http://50.19.216.143/management/` + userType + `/profile/` + id
                              )
                              .then((res) => {
                                  persons = res.data;
@@ -142,7 +142,7 @@ class Inbox extends Component {
             // Your code here
             let persons = [];
             let up = [];
-            axios.get(`http://54.237.17.61/communication/message/find`, { params: { senderId: this.state.myId, receiverId: this.state.addedUserId } })
+            axios.get(`http://50.19.216.143/communication/message/find`, { params: { senderId: this.state.myId, receiverId: this.state.addedUserId } })
                 .then(res => {
                     persons = res.data;
                     persons.map((item, i) => {

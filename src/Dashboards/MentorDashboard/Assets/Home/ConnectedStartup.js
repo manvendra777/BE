@@ -35,7 +35,7 @@ class ConnectedMentor extends Component {
   getConnection() {
     var myid = Cookies.get('id')
     let mem = [];
-    axios.get(`http://54.237.17.61/entityAction/user/myConnections`, { params: { id: myid } })
+    axios.get(`http://50.19.216.143/entityAction/user/myConnections`, { params: { id: myid } })
       .then(res => {
         mem = res.data;
         mem.map((item, i) => {

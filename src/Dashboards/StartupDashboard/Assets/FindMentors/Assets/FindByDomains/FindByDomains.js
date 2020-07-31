@@ -57,12 +57,12 @@ class FindByDomains extends Component {
         }
     };
     getListData() {
-        //54.237.17.61/management/mentor/profile/domain/findbylist?domain=Milk
+        //50.19.216.143/management/mentor/profile/domain/findbylist?domain=Milk
         console.log(this.state.domains);
         this.setState({ MentorList: [] })
         var mentors;
         trackPromise(
-            axios.get(`http://54.237.17.61/management/mentor/profile/domain/findbylist`, { params: { domain: this.state.domains + '' } })
+            axios.get(`http://50.19.216.143/management/mentor/profile/domain/findbylist`, { params: { domain: this.state.domains + '' } })
             .then(res => {
                 mentors = res.data;
                 mentors.map((item, i) => {

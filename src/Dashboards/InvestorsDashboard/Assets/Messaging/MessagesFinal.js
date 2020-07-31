@@ -111,26 +111,26 @@ componentDidUpdate(){
   getUsers() {
     var myid = Cookies.get('id');
     let mem = [];
-    axios.get(`http://54.237.17.61/entityAction/user/myConnections`, { params: { id: myid } })
+    axios.get(`http://50.19.216.143/entityAction/user/myConnections`, { params: { id: myid } })
       .then(res => {
         mem = res.data;
         mem.map((item, i) => {
           var id = item;
           axios
-            .get("http://54.237.17.61/security/getTypeById?id=" + id)
+            .get("http://50.19.216.143/security/getTypeById?id=" + id)
             .then((res) => {
               userType = res.data;
               var persons;
               var userType;
               axios
                 .get(
-                  `http://54.237.17.61/management/` + userType + `/profile/` + id
+                  `http://50.19.216.143/management/` + userType + `/profile/` + id
                 )
                 .then((res) => {
                   persons = res.data;
                   var self = this;
                   var mem;
-                  axios.get(`http://54.237.17.61/management/` + userType + `/photos/` + id)
+                  axios.get(`http://50.19.216.143/management/` + userType + `/photos/` + id)
                     .then(res => {
                       mem = res.data;
                       this.setState({ members: [...this.state.members, <Added org={persons.startupName} selected={'sle '+i} image={mem} type={userType} name={persons.firstName + ' ' + persons.lastName} id={item} method={this.setAddedUser} />] })
@@ -159,7 +159,7 @@ componentDidUpdate(){
       // Your code here
       let persons = [];
       let up = [];
-      axios.get(`http://54.237.17.61/communication/message/find`, { params: { senderId: this.state.myId, receiverId: this.state.addedUserId } })
+      axios.get(`http://50.19.216.143/communication/message/find`, { params: { senderId: this.state.myId, receiverId: this.state.addedUserId } })
         .then(res => {
           persons = res.data;
           persons.map((item, i) => {
@@ -186,7 +186,7 @@ componentDidUpdate(){
       this.setState({ msgTypo: '' });
       var sender = this.state.myId;
       var receiver = this.state.addedUser;
-      axios.post('http://54.237.17.61/communication/message/send', {
+      axios.post('http://50.19.216.143/communication/message/send', {
         "senderId": sender,
         "receiverId": this.state.addedUserId,
         "text": this.state.msgTypo

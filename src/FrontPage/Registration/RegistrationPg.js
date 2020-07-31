@@ -57,14 +57,14 @@ class RegistrationPg extends React.Component {
             var self = this;
             trackPromise(
                 this.sleep(2000).then(() => {
-                    axios.post('http://54.237.17.61/security/addUser', data = data)
+                    axios.post('http://50.19.216.143/security/addUser', data = data)
                         .then(function (response) {
                             if (response.data == "exists") {
                                 self.setState({ helperUsername: 'username already exists' })
                                 self.setState({ exists: true })
                             } else {
                                 Cookies.set('temp', data.username);
-                                axios.post('http://54.237.17.61/security/getId', data = data)
+                                axios.post('http://50.19.216.143/security/getId', data = data)
                                     .then(function (response) {
                                         Cookies.set('tempId', response.data)
                                         window.location = "/register"

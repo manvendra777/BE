@@ -54,7 +54,7 @@ class Advertise extends Component {
   getImage() {
     var self = this;
     var mem;
-    axios.get(`http://54.237.17.61/management/startup/photos/` + Cookies.get('id'))
+    axios.get(`http://50.19.216.143/management/startup/photos/` + Cookies.get('id'))
       .then(res => {
         mem = res.data;
         self.setState({ image: mem })
@@ -66,7 +66,7 @@ class Advertise extends Component {
 
   getName() {
     var persons
-    axios.get(`http://54.237.17.61/management/startup/profile/` + Cookies.get('id'))
+    axios.get(`http://50.19.216.143/management/startup/profile/` + Cookies.get('id'))
       .then(res => {
         persons = res.data;
         console.log(persons);
@@ -78,7 +78,7 @@ class Advertise extends Component {
     var myId = Cookies.get("id");
     var self = this;
     axios
-      .post(`http://54.237.17.61/management/startup/profile/getStatus`, null, {
+      .post(`http://50.19.216.143/management/startup/profile/getStatus`, null, {
         params: { id: myId },
       })
       .then((res) => {

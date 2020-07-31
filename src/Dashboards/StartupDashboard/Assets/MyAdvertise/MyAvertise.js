@@ -43,7 +43,7 @@ class MyAvertise extends Component {
   getMyAds() {
     var ads = [];
     axios
-      .get(`http://54.237.17.61/advert/getMyAds`, {
+      .get(`http://50.19.216.143/advert/getMyAds`, {
         params: { id: Cookies.get("id") },
       })
       .then((res) => {
