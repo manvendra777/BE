@@ -191,7 +191,7 @@ class Post extends Component {
           draggable: true,
           progress: undefined, 
         })
-        self.setState({ commentList: [...self.state.commentList, <Comment name={Cookies.get('username') + ' (mentor)'} comment={self.state.comment} />] })
+        self.setState({ commentList: [...self.state.commentList, <Comment name={Cookies.get('username')} comment={self.state.comment} />] })
         self.setState({ comment: '' })
         
       })
