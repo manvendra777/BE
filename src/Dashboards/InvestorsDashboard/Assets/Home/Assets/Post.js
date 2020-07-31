@@ -174,14 +174,15 @@ class Post extends Component {
   }
 
   keyPress(e) {
+    
     if (e.keyCode == 13) {
       var self = this;
       axios.post('http://54.237.17.61/forum/addComment', {
         "discussionId": this.props.id,
         "commentBody": self.state.comment,
-        "userId": Cookies.get('username')
+        "userId": Cookies.get('username') + ' (investor)'
       }).then(res => {
-        toast.success("Post created successfully!", {
+        toast.success("Comment added successfully!", {
           position: "bottom-right",
           autoClose: 7000,
           hideProgressBar: false,
@@ -189,9 +190,10 @@ class Post extends Component {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-      })
-        self.setState({ commentList: [...self.state.commentList, <Comment name={Cookies.get('username')} comment={self.state.comment} />] })
+        })
+        self.setState({ commentList: [...self.state.commentList, <Comment name={Cookies.get('username') + ' (mentor)'} comment={self.state.comment} />] })
         self.setState({ comment: '' })
+        
       })
     }
   }
@@ -245,7 +247,8 @@ class Post extends Component {
             <ExpandMoreIcon />
           </IconButton>
         </CardActions>
-       
+        
+
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
 
           <CardContent>
@@ -266,7 +269,9 @@ class Post extends Component {
             onKeyDown={this.keyPress}
           />
         </Collapse>
+       
       </Card>
+      
     );
   }
 }

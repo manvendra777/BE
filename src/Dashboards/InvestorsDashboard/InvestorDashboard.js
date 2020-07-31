@@ -10,8 +10,10 @@ import MyStartup from './Assets/Profile/StartupProfile/Connected/MyStartup'
 import { Route, BrowserRouter as Router, Link } from 'react-router-dom'
 import Advertise from './Assets/Advertise/Advertise'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import Home from "./Assets/home/Home"
-import Feed from './Assets/home/Assets/Feed'
+import Home from "./Assets/Home/Home"
+import Feed from './Assets/Home/Assets/Feed'
+
+import { ToastContainer, toast } from 'react-toastify';
 export default class StartupDashboard extends Component {
 	constructor(props) {
 		super(props);
@@ -45,10 +47,8 @@ export default class StartupDashboard extends Component {
 							</div>
 							<div style={{ marginLeft: '18.5%', width: '80%' }}>
 								<Route path="/investorDashboard/Profile" component={Profile} />
-
 								<Route path="/investorDashboard/Messaging" component={Messaging} />
 								<Route path="/investorDashboard/Connections" component={Connections} />
-
 								<Route path="/investorDashboard/FindStartup" component={FindStartup} />
 								<Route exact path="/investorDashboard/TargetStartup/:id" component={TargetStartup} />
 								<Route exact path="/investorDashboard/MyStartup/:id" component={MyStartup} />
@@ -59,6 +59,16 @@ export default class StartupDashboard extends Component {
 						</div>
 
 					</Router>
+					<ToastContainer
+                    position="bottom-right"
+                    autoClose={7000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover />
 				</MuiThemeProvider>
 			</div>);
 	}

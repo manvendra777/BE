@@ -39,7 +39,7 @@ const useStyles = theme => ({
 		[theme.breakpoints.up("sm")]: {
 			display: "block"
 		},
-		color:'white'
+		color: 'white'
 	},
 	search: {
 		position: "relative",
@@ -97,14 +97,14 @@ class Header extends Component {
 		super(props);
 
 		this.state = {
-			
+
 		};
 	}
-	
+
 	findStartup() {
 		window.location = "/investorDashboard/FindStartup"
 	}
-	
+
 	connections() {
 		window.location = "/investorDashboard/Connections"
 	}
@@ -114,9 +114,12 @@ class Header extends Component {
 	profile() {
 		window.location = "/investorDashboard/Profile"
 	}
+	Home() {
+		window.location = "/investorDashboard/Home"
+	}
 	render() {
 		const { classes } = this.props;
-		
+
 		return (
 
 			<div className={classes.grow}>
@@ -130,11 +133,12 @@ class Header extends Component {
 					</Typography>
 						</div>
 						<div className={classes.groupButtons}>
+							<Button onClick={this.Home} style={{ color: "white", margin: "5px" }} ><SearchIcon style={{ marginRight: 7 }} />Home</Button>
 							<Button onClick={this.findStartup} style={{ color: "white", margin: "5px" }} ><SearchIcon style={{ marginRight: 7 }} />Find Startup</Button>
 							<Button onClick={this.connections} style={{ color: "white", margin: "5px" }} ><PersonAddIcon style={{ marginRight: 7 }} />Connections</Button>
 							<Button onClick={this.messaging} style={{ color: "white", margin: "5px" }} ><MessageIcon style={{ marginRight: 7 }} />Messaging</Button>
 							<Button onClick={this.profile} style={{ color: "white", margin: "5px" }} >  <AccountCircle style={{ marginRight: 7 }} />Profile</Button>
-							<LogoutButton	/>
+							<LogoutButton />
 						</div>
 					</Toolbar>
 				</AppBar>

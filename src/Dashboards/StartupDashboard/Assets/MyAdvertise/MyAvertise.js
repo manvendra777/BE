@@ -137,16 +137,6 @@ class MyAvertise extends Component {
             </div>
           </div>
         </div>
-        <ToastContainer
-                    position="bottom-right"
-                    autoClose={7000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover />
       </Paper>
     );
   }

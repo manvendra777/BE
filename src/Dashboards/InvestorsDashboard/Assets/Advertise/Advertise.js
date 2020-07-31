@@ -13,6 +13,7 @@ import Cookies from "js-cookie";
 import { shadows } from "@material-ui/system";
 import { Link } from "react-router-dom";
 import { Container } from "@material-ui/core";
+import CardActionArea from '@material-ui/core/CardActionArea'
 import './sidebar.css'
 
 
@@ -79,23 +80,34 @@ class Advertise extends Component {
 
     return (
       <div className={classes.root}>
-        <Link to="/investorDashboard/Profile">
-        <div className="container d-flex justify-content-center">
-        <div className="card p-3 py-4"  style={{background:"white"}}>
-        <div className="text-center"> <img src={`data:image/jpeg;base64,${this.state.image}`} style={{height: 100, width: 100}} className="rounded-circle" />
-    <h3 className="mt-2"> {" "}{" " +this.state.myProfile.firstName +" " +this.state.myProfile.lastName}</h3> 
-    <Divider variant="middle" /><br/>
-    <span className="mt-1 clearfix">{this.state.myProfile.investingCapacity}</span>
-    <div className="social-buttons mt-5"> 
-                        <a href="https://www.linkedin.com/" target="_blank"><button className="neo-button" onclick="location.href='http://www.example.com'" type="button"><i className="fa fa-linkedin fa-1x"></i> </button> </a>
-                        <a href="https://www.google.com/" target="_blank"><button className="neo-button"><i className="fa fa-google fa-1x"></i> </button></a>
-                        <a href="https://www.youtube.com/" target="_blank">   <button className="neo-button"><i className="fa fa-youtube fa-1x"></i> </button></a> 
-                        <a href ="https://www.twitter.com/" target="_blank"><button className="neo-button"><i className="fa fa-twitter fa-1x"></i> </button></a> 
-                    </div>
+        <Card onClick={() => { window.location = '/investorDashboard/Profile' }} elevation={2} >
+          <CardActionArea style={{ background: "white", width: '100%', height: 400, textAlign: 'center', padding: 20 }}>
+            <div className="text-center"> <img src={`data:image/jpeg;base64,${this.state.image}`} style={{ height: 100, width: 100 }} className="rounded-circle" />
+              <h3 className="mt-2"> {" "}{" " + this.state.myProfile.firstName + " " + this.state.myProfile.lastName}</h3> <span style={{ color: '#5c6bc0' }} className="mt-1 clearfix">{this.state.myProfile.aboutWork}</span>
+              <Divider variant="middle" /><br />
+              <small className="mt-4">{this.state.myProfile.investments}</small>
+              <div className="social-buttons mt-5">
+                <div>
+                  {this.state.myProfile.email}
+                </div>
+              </div>
             </div>
-            </div>
-          </div>
-        </Link>
+          </CardActionArea >
+        </Card >
+        <div>
+          <Card elevation={2} style={{ marginTop: 20 }}>
+            <CardActionArea style={{ background: "white", width: '100%', height: 435, textAlign: 'center', padding: 20 }}>
+              <div className="text-center">
+                <h3 className="mt-2"> {" "}{" " + "Investment made EASY" + " "}{" "}</h3> <span style={{ color: '#5c6bc0', fontSize: 20 }} className="mt-1 clearfix">"Groww - Online"</span>
+                <Divider variant="middle" /><br />
+                <small className="mt-4">Online Demat, Trading and Direct Mutual Fund</small>
+                <br /> <small className="mt-4"> 200 credits added </small>
+                <br /><div style={{ marginTop: 20 }}> If you register from this link!</div>
+                <large style={{ marginTop: 40 }}>CALL ON : 975757575</large>
+              </div>
+            </CardActionArea>
+          </Card>
+        </div>
       </div>
     );
   }

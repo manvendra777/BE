@@ -45,9 +45,8 @@ class Feed extends Component {
 
   render() {
     return (
-
       <div style={{ width: '84%', padding: '1%' }}>
-        <div style={{ width: '50%', marginLeft: 'auto', marginRight: 'auto' }}>
+        <div style={{ width: '60%', marginLeft: 'auto', marginRight: 'auto' }}>
           <Typography variant="h4" color="primary" gutterBottom>
             {this.props.match.params.Domain}
           </Typography>

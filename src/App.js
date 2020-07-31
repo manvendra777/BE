@@ -5,10 +5,6 @@ import FrontPage from './FrontPage/FrontPage';
 import { Route, BrowserRouter as Router, Link, Redirect } from 'react-router-dom'
 import RegistrationPg from './FrontPage/Registration/RegistrationPg';
 import LoginPg from './FrontPage/Registration/LoginPg'
-import StartupForm from './ProfileManagement/startup/StartupForm'
-import CommunityForm from './ProfileManagement/Community/CommunityForm';
-import InvestorForm from './ProfileManagement/Investor/InvestorForm';
-import MentorForm from './ProfileManagement/Mentor/MentorForm'
 import InvestorDashboard from './Dashboards/InvestorsDashboard/InvestorDashboard';
 import CommunityDashboard from './Dashboards/CommunityDashboard/CommunityDashboard';
 import axios from 'axios';
@@ -111,7 +107,7 @@ function App() {
         <ProtectedRoute path="/MentorDashboard" component={MentorDashboard} cookieValue={cookieValue} />
         <ProtectedRoute path="/investorDashboard" component={InvestorDashboard} cookieValue={cookieValue} />
         <ProtectedRoute path="/CommunityDashboard" component={CommunityDashboard} cookieValue={cookieValue} />
-      
+
       </Router>
     </div >
 

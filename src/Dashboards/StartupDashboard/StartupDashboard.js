@@ -19,7 +19,7 @@ import BusinessEvalution from './Assets/Calculator/BusinessEvalution'
 import { Button } from "@material-ui/core";
 import Home from "./Assets/home/Home"
 import Feed from './Assets/home/Assets/Feed'
-
+import { ToastContainer, toast } from 'react-toastify';
 export default class StartupDashboard extends Component {
 	constructor(props) {
 		super(props);
@@ -68,7 +68,16 @@ export default class StartupDashboard extends Component {
 						</div>
 
 					</Router>
-
+					<ToastContainer
+                    position="bottom-right"
+                    autoClose={7000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover />
 				</MuiThemeProvider>
 			</div>);
 	}

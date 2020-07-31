@@ -26,7 +26,7 @@ const useStyles = theme => ({
   r: {
 
     margin: '1%',
-    width: '40%',
+    width: '30%',
     height: "71.5vmin"
 
   },
@@ -220,7 +220,7 @@ componentDidUpdate(){
       this.setState({ msgTypo: e.target.value });
     }
     return (
-      <div style={{ display: 'flex', height: "90%", width: "50%", position: 'fixed', }}>
+      <div style={{ display: 'flex', height: "90%", width: "60%", position: 'fixed', }}>
         <div className={classes.r}>
 
           <Paper elevation={2} style={{ backgroundColor: '#e8eaf6', height: '8.5%' }}>

@@ -59,7 +59,7 @@ class CreatePost extends React.Component {
                 "header": this.state.title,
                 "tag": this.state.domain,
                 "idOfUser": Cookies.get('id'),
-                "userId": Cookies.get('username') + ' (mentor)'
+                "userId": Cookies.get('username') + ' (investor)'
             }).then(res => {
                 console.log(res.data);
                 self.setState({ title: '', description: '', })

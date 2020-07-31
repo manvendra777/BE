@@ -14,6 +14,7 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera'
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
 import Cookies from 'js-cookie'
 const useStyles = theme => ({
     root: {
@@ -60,9 +61,19 @@ class CreatePost extends React.Component {
                 "idOfUser": Cookies.get('id'),
                 "userId": Cookies.get('username')
             }).then(res => {
-                console.log(res.data);
+                toast.success("Post created successfully!", {
+                    position: "bottom-right",
+                    autoClose: 7000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                })
                 self.setState({ title: '', description: '', })
+               
                 window.location.reload();
+
             })
         })
     }
@@ -74,14 +85,14 @@ class CreatePost extends React.Component {
     fileData = () => {
         if (this.state.selectedFile) {
             return (
-                <div style={{ margin: 'auto' }}>
-                    <h6>Photo: {this.state.selectedFile.name}</h6>
+                <div style={{ margin: 'auto',marginLeft:20 }}>
+                    <h4>Photo: {this.state.selectedFile.name}</h4>
                 </div>
             );
         } else {
             return (
-                <div style={{ margin: 'auto' }}>
-                    <h6>You can post photo by clicking on camera button</h6>
+                <div style={{ marginLeft:20,margin:'auto' }}>
+                    <h4>You can post photo by clicking on camera button</h4>
                 </div>
             );
         }
