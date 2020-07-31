@@ -19,6 +19,7 @@ import TextField from '@material-ui/core/TextField';
 import Comment from './Comment'
 import Cookies from 'js-cookie'
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
 const styles = theme => ({
   root: {
     width: '100%',
@@ -62,7 +63,8 @@ class Post extends Component {
       mnth: '',
       date: '',
       year: '',
-      title: ''
+      title: '',
+      dateOfCreation: '',
     };
     this.keyPress = this.keyPress.bind(this)
     this.handleExpandClick = this.handleExpandClick.bind(this)
@@ -75,13 +77,9 @@ class Post extends Component {
   }
 
   componentWillMount() {
-    var d = new Date(this.props.date);
-    var mnth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    var n = mnth[d.getMonth()]
-    var dateH = d.getDate();
-    var year = d.getFullYear()
-    this.setState({ mnth: n, date: dateH, year: year })
     this.getPostData()
+
+
 
   }
 
@@ -112,7 +110,6 @@ class Post extends Component {
   getLikeStatus() {
     var self = this;
     var mem;
-    console.log(this.state.idOfUser);
     axios.get(`http://50.19.216.143/forum/checkLike`, { params: { idOfPost: self.state.id, idOfMember: Cookies.get('id') } })
       .then(res => {
         mem = res.data;
@@ -123,9 +120,7 @@ class Post extends Component {
   setLike() {
     var self = this;
     var postId = this.state.id;
-    console.log(this.state.id);
     axios.post('http://50.19.216.143/forum/addLikes', null, { params: { idOfPost: postId, idOfMember: Cookies.get('id') } }).then(res => {
-      console.log(res.data);
       if (res.data) {
         self.setState({ checkLike: true })
         self.setState({ count: self.state.count + 1 })
@@ -140,11 +135,14 @@ class Post extends Component {
   getProfilePicture() {
     var self = this;
     var mem;
-    console.log(this.state.idOfUser);
-    axios.get(`http://50.19.216.143/management/community/photos/` + this.state.idOfUser)
-      .then(res => {
-        mem = res.data;
-        self.setState({ profilePicture: mem })
+    axios.get("http://50.19.216.143/security/getTypeById?id=" + this.state.idOfUser)
+      .then((res) => {
+        var type = res.data;
+        axios.get(`http://50.19.216.143/management/` + type + `/photos/` + this.state.idOfUser)
+          .then(res => {
+            mem = res.data;
+            self.setState({ profilePicture: mem })
+          })
       })
   }
 
@@ -153,25 +151,30 @@ class Post extends Component {
     var self = this;
     axios.get(`http://50.19.216.143/forum/getPostbyId`, { params: { id: this.state.id } })
       .then(res => {
-
         ads = res.data;
+        console.log(ads);
         self.setState({ post: ads })
         self.setState({ username: ads.userId })
         self.setState({ image: ads.image.data })
         self.setState({ idOfUser: ads.idOfUser })
-        self.setState({title: ads.header})
-        console.log(ads);
+        self.setState({ title: ads.header })
+        var d = new Date(ads.dateOfCreation);
+        var mnth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        var n = mnth[d.getMonth()]
+        var dateH = d.getDate();
+        var year = d.getFullYear()
+        this.setState({ mnth: n, date: dateH, year: year })
         ads.commentList.map((item, i) => {
           self.setState({ commentList: [...self.state.commentList, <Comment name={item.userId} comment={item.commentBody} />] })
         })
         self.getProfilePicture()
         self.getLikeStatus()
         self.getCount();
-        console.log(self.state.checkLike);
       })
   }
 
   keyPress(e) {
+    
     if (e.keyCode == 13) {
       var self = this;
       axios.post('http://50.19.216.143/forum/addComment', {
@@ -179,9 +182,18 @@ class Post extends Component {
         "commentBody": self.state.comment,
         "userId": Cookies.get('username')
       }).then(res => {
-        console.log(res.data);
-        self.setState({ commentList: [...self.state.commentList, <Comment name={Cookies.get('username')} comment={self.state.comment} />] })
+        toast.success("Comment added successfully!", {
+          position: "bottom-right",
+          autoClose: 7000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined, 
+        })
+        self.setState({ commentList: [...self.state.commentList, <Comment name={Cookies.get('username') + ' (mentor)'} comment={self.state.comment} />] })
         self.setState({ comment: '' })
+        
       })
     }
   }
@@ -235,6 +247,7 @@ class Post extends Component {
             <ExpandMoreIcon />
           </IconButton>
         </CardActions>
+        
 
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
 
@@ -256,7 +269,9 @@ class Post extends Component {
             onKeyDown={this.keyPress}
           />
         </Collapse>
+       
       </Card>
+      
     );
   }
 }

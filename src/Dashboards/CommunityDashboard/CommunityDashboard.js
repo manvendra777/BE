@@ -20,7 +20,6 @@ import Mail from './Assets/Mail/Inbox'
 export default class StartupDashboard extends Component {
 	constructor(props) {
 		super(props);
-
 		this.state = {
 		};
 
@@ -44,7 +43,6 @@ export default class StartupDashboard extends Component {
 				<MuiThemeProvider theme={theme}>
 					<Router >
 						<Header />
-
 						<div style={{ margin: '75px', marginLeft: '10px' }}>
 							<Advertise domain={Cookies.get('ad')} />
 							<AdvertiseRight domain={Cookies.get('ad')} />
@@ -55,15 +53,11 @@ export default class StartupDashboard extends Component {
 								<Route path="/communityDashboard/Messaging" component={Mail} />
 								<Route path="/communityDashboard/Connections" component={Connections} />
 								<Route path="/communityDashboard/Home" component={Home} />
-
-
 								<Route exact path="/communityDashboard/TargetMentor/:id" component={TargetMentor} />
 								<Route exact path="/communityDashboard/MyMentor/:id" component={MyMentor} />
-
 								<Route path="/communityDashboard/TargetInvestor/:id" component={TargetInvestor} />
 								<Route path="/communityDashboard/MyInvestor/:id" component={MyInvestor} />
 								<Route path="/communityDashboard/Ads" component={Advertise}></Route>
-
 								<Route path="/communityDashboard/Feed/:Domain" component={Feed}></Route>
 							</div>
 						</div>
