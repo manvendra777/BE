@@ -23,7 +23,7 @@ const styles = theme => ({
 });
 
 
-class MentorCard extends Component {
+class StartupCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -37,7 +37,7 @@ class MentorCard extends Component {
     getImage() {
         var self = this;
         var mem;
-        axios.get(`http://54.237.17.61/management/mentor/photos/` + this.props.id)
+        axios.get(`http://54.237.17.61/management/startup/photos/` + this.props.id)
             .then(res => {
                 mem = res.data;
                 self.setState({ image: mem })
@@ -47,7 +47,7 @@ class MentorCard extends Component {
     render() {
         const { classes } = this.props;
         
-        const openMentorPage = () => {
+        const openInvestorPage = () => {
             
             var myid = Cookies.get('id');
             var response;
@@ -55,9 +55,9 @@ class MentorCard extends Component {
                 .then(res => {
                     response = res.data
                     if (response) {
-                        window.location = "/startupDashboard/MyMentor/" + this.props.id
+                        window.location = "/mentorDashboard/MyStartup/" + this.props.id
                     } else {
-                        window.location = "/startupDashboard/TargetMentor/" + this.props.id
+                        window.location = "/mentorDashboard/TargetStartup/" + this.props.id
                     }
 
                 })
@@ -65,11 +65,11 @@ class MentorCard extends Component {
 
         return (
             <Card elevation={2} className={classes.root}>
-                <CardActionArea onClick={openMentorPage}>
+                <CardActionArea onClick={openInvestorPage}>
                     <CardMedia
                         className={classes.media}
                         image={`data:image/jpeg;base64,${this.state.image}`}
-                        title="Contemplative Reptile"
+    
                     />
                     <CardContent >
                         <Typography gutterBottom variant="h5" component="h2">
@@ -94,7 +94,7 @@ class MentorCard extends Component {
 
                 </CardActionArea>
                 <CardActions>
-                    <Button onClick={openMentorPage} size="small" color="primary">
+                    <Button onClick={openInvestorPage} size="small" color="primary">
                         Learn More
         </Button>
                 </CardActions>
@@ -103,4 +103,4 @@ class MentorCard extends Component {
 
     }
 }
-export default withStyles(styles)(MentorCard);
+export default withStyles(styles)(StartupCard);

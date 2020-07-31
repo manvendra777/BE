@@ -4,7 +4,7 @@ import Profile from "./Assets/Profile/MyProfile/Profile";
 import ListOfOnlineCandidates from "./Assets/Messaging/Assets/ListOfOnlineCandidates";
 import Messaging from "./Assets/Messaging/Messaging";
 import Connections from "./Assets/Connections/Connections";
-import FindStartup from "./Assets/FindStartup/FindStartup";
+import FindStartup from './Assets/FindStartup/FindStartup'
 import TargetStartup from "./Assets/Profile/StartupProfile/NotConnected/TargetStartup";
 import MyStartup from "./Assets/Profile/StartupProfile/Connected/MyStartup";
 import { Route, BrowserRouter as Router, Link } from "react-router-dom";

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import FindByCapacity from './FindByCapacity'
-import FindInvestorByOF from './FindInvestorByOF'
+import FindByCapacity from './FindByScale/FindByCapacity'
+import FindInvestorByOF from './FindByScale/FindInvestorByOF'
+import Recommendation from './Recommendation/Recommendation'
 
 class FindInvestor extends Component {
     render() {
@@ -8,6 +9,7 @@ class FindInvestor extends Component {
             <div>
                 <FindByCapacity/>
                 <FindInvestorByOF/>
+                <Recommendation/>
             </div>
         );
     }

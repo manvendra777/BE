@@ -4,7 +4,7 @@ import Profile from "./Assets/Profile/MyProfile/Profile"
 import ListOfOnlineCandidates from "./Assets/Messaging/Assets/ListOfOnlineCandidates"
 import Messaging from './Assets/Messaging/Messaging'
 import Connections from "./Assets/Connections/Connections"
-import FindMentors from './Assets/FindMentors/FindMentors'
+import FindMentors from './Assets/FindMentors/FindMentor'
 import TargetMentor from './Assets/Profile/MentorProfile/NotConnected/TargetMentor'
 import MyMentor from './Assets/Profile/MentorProfile/Connected/MyMentor'
 import { Route, BrowserRouter as Router, Link } from 'react-router-dom'

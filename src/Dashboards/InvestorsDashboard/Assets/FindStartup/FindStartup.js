@@ -7,7 +7,6 @@ class FindStartup extends Component {
             <div>
                 <FindByDomain/>
                 <Recommendation/>
-                
             </div>
         );
     }
