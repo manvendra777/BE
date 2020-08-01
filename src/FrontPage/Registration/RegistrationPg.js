@@ -36,7 +36,7 @@ class RegistrationPg extends React.Component {
             helperUsername: '',
             showPass: false,
             isReferral: false,
-            referral:''
+            referral: ''
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.sleep = this.sleep.bind(this);
@@ -117,6 +117,8 @@ class RegistrationPg extends React.Component {
         return formIsValid;
     }
 
+
+
     render() {
         return (
             <div style={{ padding: '4%', backgroundColor: '#e0e0e0', height: '100%' }}>
@@ -143,7 +145,6 @@ class RegistrationPg extends React.Component {
                                         </Typography> */}
                                     </div>
                                     <div style={{ marginTop: 0, position: 'relative', width: '80%' }} elevation={10}>
-
                                         <Container>
                                             <Form className="RegistrationPg" method="post" onSubmit={this.handleSubmit} style={{ marginBottom: 40, marginTop: 20, marginLeft: 20 }}>
                                                 <Typography variant="h4" gutterBottom style={{ color: "#2F4F4F", fontWeight: "bold", }}>
@@ -171,14 +172,12 @@ class RegistrationPg extends React.Component {
                                                                     </InputAdornment>
                                                             }} />
                                                     </div>
-                                                    
                                                     <div>
                                                         <Checkbox
                                                             color="primary" checked={this.state.isReferral} onChange={() => this.setState({ isReferral: !this.state.isReferral })} />
-                                                        Have a referral code?
-                                                        {this.state.isReferral ?  <div> <TextField variant="outlined" style={{ marginBottom: 20, width: "100%" }}  id="standard-basic" onChange={(event) => { this.setState({ referral: event.target.value }) }} /></div> : <div></div>}
+                                                            Have a referral code?
+                                                        {this.state.isReferral ? <div> <TextField variant="outlined" style={{ marginBottom: 20, width: "100%" }} id="standard-basic" onChange={(event) => { this.setState({ referral: event.target.value }) }} /></div> : <div></div>}
                                                     </div>
-
                                                 </div>
                                                 <ButtonM type="submit" variant="contained" color="primary" style={{ marginTop: 20, background: "#2196f3" }}>
                                                     Sign up
