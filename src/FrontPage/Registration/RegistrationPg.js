@@ -20,6 +20,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import Checkbox from '@material-ui/core/Checkbox';
 class RegistrationPg extends React.Component {
     constructor(props) {
         super(props);
@@ -33,7 +34,9 @@ class RegistrationPg extends React.Component {
             estateP: false,
             exists: false,
             helperUsername: '',
-            showPass: false
+            showPass: false,
+            isReferral: false,
+            referral: ''
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.sleep = this.sleep.bind(this);
@@ -69,7 +72,6 @@ class RegistrationPg extends React.Component {
                                         Cookies.set('tempId', response.data)
                                         window.location = "/register"
                                     })
-
                             }
                         })
                 })
@@ -80,88 +82,56 @@ class RegistrationPg extends React.Component {
         }
     }
     validateForm() {
-
         let errors = {};
         this.setState({ estateM: false, estateP: false, exists: false })
         let formIsValid = true;
-
         if (!this.state.email) {
             this.setState({ estateM: true })
             formIsValid = false;
-
             errors["email"] = "*Please enter your email-ID.";
-
         }
-
         if (typeof this.state.email !== "undefined") {
-
             //regular expression for email validation
-
             var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-
             if (!pattern.test(this.state.email)) {
                 this.setState({ estateM: true })
                 formIsValid = false;
-
                 errors["email"] = "*Please enter valid email-ID.";
-
             }
-
         }
-
         if (!this.state.password) {
             this.setState({ estateP: true })
             formIsValid = false;
-
             errors["password"] = "*Please enter your password.";
-
         }
-
         if (typeof this.state.password !== "undefined") {
-
             if (!this.state.password.match(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/)) {
                 this.setState({ estateP: true })
                 formIsValid = false;
-
                 errors["password"] = "*Please enter secure and strong password.";
-
             }
-
         }
-
         this.setState({
             errors: errors
         });
-
         return formIsValid;
-
     }
+
+
+
     render() {
         return (
             <div style={{ padding: '4%', backgroundColor: '#e0e0e0', height: '100%' }}>
-
-
                 <Spring
                     from={{ opacity: 0, transform: 'translate3d(0,-40px,0)' }}
                     to={{ opacity: 1, transform: 'translate3d(0,0px,0)' }}
                     config={{ delay: 500 }}>
                     {props => <div style={props}>
-
-
-
-
                         <CardM elevation={10} style={{ display: 'flex', flexWrap: 'wrap' }}>
-
-
-
                             <div style={{ display: 'flex', width: '92%' }}>
-
-
                                 <div style={{ width: '70%', marginLeft: '5%' }}>
                                     <Image style={{ marginTop: '1%', marginLeft: '0%', width: '100%' }} src={registerPhoto} />
                                 </div>
-
-
                                 <div style={{ width: '30%', marginTop: '15%' }}>
                                     <div>
                                         {/*
@@ -175,12 +145,11 @@ class RegistrationPg extends React.Component {
                                         </Typography> */}
                                     </div>
                                     <div style={{ marginTop: 0, position: 'relative', width: '80%' }} elevation={10}>
-
                                         <Container>
                                             <Form className="RegistrationPg" method="post" onSubmit={this.handleSubmit} style={{ marginBottom: 40, marginTop: 20, marginLeft: 20 }}>
                                                 <Typography variant="h4" gutterBottom style={{ color: "#2F4F4F", fontWeight: "bold", }}>
                                                     Register
-                                         </Typography>
+                                                </Typography>
                                                 <div style={{ marginTop: 30 }}>
                                                     <div>
                                                         <TextField variant="outlined" type="username" helperText={this.state.helperUsername} error={this.state.exists} style={{ marginBottom: 20, width: "100%" }} id="standard-basic" label="Enter username" onChange={(event) => { this.setState({ username: event.target.value }) }} />
@@ -203,39 +172,29 @@ class RegistrationPg extends React.Component {
                                                                     </InputAdornment>
                                                             }} />
                                                     </div>
+                                                    <div>
+                                                        <Checkbox
+                                                            color="primary" checked={this.state.isReferral} onChange={() => this.setState({ isReferral: !this.state.isReferral })} />
+                                                            Have a referral code?
+                                                        {this.state.isReferral ? <div> <TextField variant="outlined" style={{ marginBottom: 20, width: "100%" }} id="standard-basic" onChange={(event) => { this.setState({ referral: event.target.value }) }} /></div> : <div></div>}
+                                                    </div>
                                                 </div>
-
                                                 <ButtonM type="submit" variant="contained" color="primary" style={{ marginTop: 20, background: "#2196f3" }}>
                                                     Sign up
-                                         </ButtonM>
+                                                </ButtonM>
                                                 <div style={{ display: "flex", marginTop: 20 }}>
-                                                    <Typography variant="subtitle1" gutterBottom>Already have an account?</Typography>
+                                                    <Typography style={{ marginLeft: 10 }} variant="subtitle1" gutterBottom>Already have an account?</Typography>
                                                     <Link to="./loginPg">
                                                         <Typography style={{ marginLeft: 10 }} variant="subtitle1" gutterBottom>Sign in</Typography>
                                                     </Link>
                                                 </div>
                                             </Form>
                                         </Container>
-
-
-
-
-
-
                                     </div>
                                 </div>
-
-
-
-
                             </div>
-
-
                         </CardM>
-
-                    </div>
-
-                    }
+                    </div>}
                 </Spring>
             </div>
         );

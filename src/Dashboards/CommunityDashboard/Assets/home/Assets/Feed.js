@@ -38,7 +38,7 @@ class Feed extends Component {
         ads = res.data;
         console.log(ads);
         ads.map((item, i) => {
-          self.setState({ postList: [...self.state.postList, <Post date={item.dateOfCreation} id={item.discussionId} />] })
+          self.setState({ postList: [...self.state.postList, <Post id={item} />] })
         })
       })
   }
