@@ -456,7 +456,7 @@ class Name extends Component {
                 height: 0,
                 paddingTop: "56.25%",
               }}
-              image= {frnd}
+              image={frnd}
               title="Paella dish"
             />
             <TextField
