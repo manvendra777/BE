@@ -22,6 +22,8 @@ import NoteAddIcon from '@material-ui/icons/NoteAdd';
 import MoreIcon from '@material-ui/icons/MoreVert'
 import LogoutButton from './Logout'
 import FunctionsIcon from '@material-ui/icons/Functions';
+import WorkIcon from '@material-ui/icons/Work';
+
 const useStyles = theme => ({
 	grow: {
 		flexGrow: 1
@@ -129,6 +131,12 @@ class Header extends Component {
 	Home() {
 		window.location = '/startupDashboard/Home'
 	}
+
+	createJob(){
+		window.location= '/startupDashboard/MyJobs'
+	}
+
+
 	render() {
 		const { classes } = this.props;
 		return (
@@ -143,6 +151,7 @@ class Header extends Component {
 						</div>
 						<div className={classes.groupButtons}>
 							<Button onClick={this.Home} style={{ color: "white", margin: "5px" }} > <HomeIcon style={{ marginRight: 7 }} />Home </Button>
+							<Button onClick={this.createJob} style={{ color: "white", margin: "5px" }} >  <WorkIcon style={{ marginRight: 7 }} />Create Jobs</Button>
 							<Button onClick={this.advertiseManagement} style={{ color: "white", margin: "5px" }} > <NoteAddIcon style={{ marginRight: 7 }} />Advertise Management </Button>
 							<Button onClick={this.BusinessEvalution} style={{ color: "white", margin: "5px" }} ><FunctionsIcon style={{ marginRight: 7 }} />Calculator</Button>
 							<Button onClick={this.findMentor} style={{ color: "white", margin: "5px" }} ><SearchIcon style={{ marginRight: 7 }} />Find Mentor</Button>

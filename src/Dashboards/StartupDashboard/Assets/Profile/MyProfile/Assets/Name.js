@@ -11,6 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import RoomIcon from "@material-ui/icons/Room";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import copy from "copy-to-clipboard";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -27,6 +28,9 @@ import Edit from "./Edit";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import person from "material-ui/svg-icons/social/person";
+import frnd from "./logo.png";
+import CardMedia from "@material-ui/core/Card";
+
 const styles = (theme) => ({
   root: {},
   cont: {
@@ -51,6 +55,8 @@ class Name extends Component {
 
     this.state = {
       isModalOpen: false,
+      isModalOpen2: false,
+      referralCode: "",
       firstName: "",
       lastName: "",
       age: "",
@@ -83,7 +89,10 @@ class Name extends Component {
     this.mapDomain = this.mapDomain.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleModal = this.handleModal.bind(this);
+    this.toggleModal2 = this.handleModal2.bind(this);
     this.getImage = this.getImage.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.Copytext = this.Copytext.bind(this);
   }
   componentWillMount() {
     this.getImage();
@@ -94,7 +103,9 @@ class Name extends Component {
     var self = this;
     var mem;
     axios
-      .get(`http://50.19.216.143/management/startup/photos/` + Cookies.get("id"))
+      .get(
+        `http://50.19.216.143/management/startup/photos/` + Cookies.get("id")
+      )
       .then((res) => {
         mem = res.data;
         self.setState({ image: mem });
@@ -175,6 +186,22 @@ class Name extends Component {
     });
   }
 
+  handleModal2() {
+    this.setState({
+      isModalOpen2: !this.state.isModalOpen2,
+    });
+  }
+
+  handleInputChange(e) {
+    this.setState({
+      textToCopy: e.target.value,
+    });
+  }
+
+  Copytext() {
+    copy(this.state.textToCopy);
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     var data = {
@@ -229,6 +256,7 @@ class Name extends Component {
   };
   render() {
     const { classes } = this.props;
+    const { referralCode } = this.state;
     const loginForm = (
       <div>
         <Card>
@@ -418,6 +446,36 @@ class Name extends Component {
         </Card>
       </div>
     );
+    const referral = (
+      <div>
+        <Card className={classes.root}>
+          <Container>
+            <Typography>Refer a friend and earn credits</Typography>
+            <CardMedia
+              style={{
+                height: 0,
+                paddingTop: "56.25%",
+              }}
+              image= {frnd}
+              title="Paella dish"
+            />
+            <TextField
+              label="reference code"
+              onChange={this.handleInputChange}
+            />{" "}
+            <br />
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.Copytext}
+              style={{ marginTop: 20, marginBottom: 10 }}
+            >
+              Copy to Clipboard
+            </Button>
+          </Container>
+        </Card>
+      </div>
+    );
     return (
       <div className={classes.root}>
         <Card elevation={3} style={{ display: "flex", padding: "1%" }}>
@@ -454,8 +512,8 @@ class Name extends Component {
                     }
                   </div>
                 ) : (
-                    <div></div>
-                  )}
+                  <div></div>
+                )}
               </div>
             </Typography>
 
@@ -482,7 +540,13 @@ class Name extends Component {
 
         <Card
           elevation={3}
-          style={{ display: "flex", marginTop: 20, width: "100%", padding: 20, fontSize: 20 }}
+          style={{
+            display: "flex",
+            marginTop: 20,
+            width: "100%",
+            padding: 20,
+            fontSize: 20,
+          }}
         >
           <div>
             <h5 style={{ color: "#5c6bc0" }}>Current Status :</h5>
@@ -510,37 +574,54 @@ class Name extends Component {
             </MenuItem>
             <MenuItem value={"Looking for Hiring"}>Looking for Hiring</MenuItem>
           </Select>
+          <div>
+            <Button style={{ color: "#5c6bc0" }} onClick={this.toggleModal2}>
+              Referrals{" "}
+            </Button>
+          </div>
         </Card>
 
-        <Card elevation={3} style={{ marginTop: 20, width: "100%", }}>
+        <Card elevation={3} style={{ marginTop: 20, width: "100%" }}>
           <div style={{ marginTop: 1, marginLeft: 600 }}></div>
           <Dialog open={this.state.isModalOpen} onClose={this.toggleModal}>
             {loginForm}
+          </Dialog>
+          <div style={{ marginTop: 1, marginLeft: 600 }}></div>
+          <Dialog open={this.state.isModalOpen2} onClose={this.toggleModal2}>
+            {referral}
           </Dialog>
 
           <Table>
             <TableBody>
               <TableRow>
                 <TableCell>
-                  <h5 style={{ color: "#5c6bc0", fontSize: 15 }}>Description</h5>
+                  <h5 style={{ color: "#5c6bc0", fontSize: 15 }}>
+                    Description
+                  </h5>
                 </TableCell>
                 <TableCell>{this.props.data.startupDescription}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>
-                  <h5 style={{ color: "#5c6bc0", fontSize: 15 }}>Year Of Foundation</h5>
+                  <h5 style={{ color: "#5c6bc0", fontSize: 15 }}>
+                    Year Of Foundation
+                  </h5>
                 </TableCell>
                 <TableCell>{this.props.data.yearOfFoundation}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>
-                  <h5 style={{ color: "#5c6bc0", fontSize: 15 }}>Expectations</h5>
+                  <h5 style={{ color: "#5c6bc0", fontSize: 15 }}>
+                    Expectations
+                  </h5>
                 </TableCell>
                 <TableCell>{this.props.data.expectations}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>
-                  <h5 style={{ color: "#5c6bc0", fontSize: 15 }}>Percentage Of Ownership</h5>
+                  <h5 style={{ color: "#5c6bc0", fontSize: 15 }}>
+                    Percentage Of Ownership
+                  </h5>
                 </TableCell>
                 <TableCell>{this.props.data.percentageOfOwnership}</TableCell>
               </TableRow>
@@ -574,7 +655,9 @@ class Name extends Component {
 
               <TableRow>
                 <TableCell>
-                  <h5 style={{ color: "#5c6bc0", fontSize: 15 }}>Qualification</h5>
+                  <h5 style={{ color: "#5c6bc0", fontSize: 15 }}>
+                    Qualification
+                  </h5>
                 </TableCell>
                 <TableCell>{this.props.data.qualification}</TableCell>
               </TableRow>
