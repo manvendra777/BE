@@ -28,7 +28,7 @@ import Edit from "./Edit";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import person from "material-ui/svg-icons/social/person";
-import frnd from "../../../../../../Photo/logo.png";
+import frnd from "./logo.png";
 import CardMedia from "@material-ui/core/Card";
 
 const styles = (theme) => ({
@@ -456,7 +456,7 @@ class Name extends Component {
                 height: 0,
                 paddingTop: "56.25%",
               }}
-              image="https://goo.gl/images/yDjWG9"
+              image={frnd}
               title="Paella dish"
             />
             <TextField

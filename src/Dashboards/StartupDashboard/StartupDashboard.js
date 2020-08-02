@@ -20,6 +20,10 @@ import { Button } from "@material-ui/core";
 import Home from "./Assets/home/Home"
 import Feed from './Assets/home/Assets/Feed'
 import { ToastContainer, toast } from 'react-toastify';
+import MyJobs from './Assets/CreateJobs/MyJobs'
+import ViewJobs from "./Assets/CreateJobs/Assets/ViewJobs.js";
+
+
 export default class StartupDashboard extends Component {
 	constructor(props) {
 		super(props);
@@ -64,6 +68,9 @@ export default class StartupDashboard extends Component {
 								<Route path="/startupDashboard/BusinessEvalution" component={BusinessEvalution} />
 								<Route path="/startupDashboard/Feed/:Domain" component={Feed}></Route>
 								<Route path="/startupDashboard/Home" component={Home} />
+								<Route path="/startupDashboard/MyJobs" component={MyJobs} />
+								<Route path="/startupDashboard/viewJobs/:id" component={ViewJobs} />
+
 							</div>
 						</div>
 

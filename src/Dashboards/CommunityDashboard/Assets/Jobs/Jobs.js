@@ -40,42 +40,8 @@ class Jobs extends Component {
   getJobs() {}
 
   componentWillMount() {
-    //this.getConnection();
+    this.getJobs();
   }
-
-  //   getConnection() {
-  //     var myid = Cookies.get('id')
-  //     let mem = [];
-  //     trackPromise(
-  //       axios.get(`http://50.19.216.143/entityAction/user/myConnections`, { params: { id: myid } })
-  //         .then(res => {
-  //           mem = res.data;
-  //           mem.map((item, i) => {
-  //             console.log(item)
-  //             var userType;
-  //             axios
-  //               .get("http://50.19.216.143/security/getTypeById?id=" + item)
-  //               .then((res) => {
-  //                 userType = res.data;
-  //                 if (userType == "mentor") {
-  //                   console.log("mentor")
-  //                   this.setState({
-  //                     MentorList: [...this.state.MentorList, <AnimateM id={item} />]
-  //                   })
-  //                 } else {
-  //                   console.log("investor")
-  //                   this.setState({
-  //                     InvestorList: [...this.state.InvestorList, <AnimateI id={item} />]
-  //                   })
-  //                 }
-  //               })
-  //           })
-
-  //           console.log(this.state.connections);
-  //         })
-  //     )
-
-  //   }
 
   render() {
     const { classes } = this.props;
