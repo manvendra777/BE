@@ -62,6 +62,8 @@ class CreatePost extends React.Component {
             }).then(res => {
                 console.log(res.data);
                 self.setState({ title: '', description: '', })
+                self.addGamification()
+                self.addGamification()
                 window.location.reload();
             })
         })
@@ -97,6 +99,15 @@ class CreatePost extends React.Component {
         })
 
     }
+
+  addGamification = () => {
+    axios
+      .post(
+        "http://50.19.216.143/management/community/profile/addGamification/" + Cookies.get("id"))
+      .then(function (response) {
+        console.log(response.data);
+      });
+  }
 
     handleSubmit(e) {
         console.log("Current state is:" + JSON.stringify(this.state));

@@ -114,6 +114,7 @@ class Post extends Component {
       .then(res => {
         mem = res.data;
         self.setState({ checkLike: mem })
+        
       })
   }
 
@@ -124,6 +125,7 @@ class Post extends Component {
       if (res.data) {
         self.setState({ checkLike: true })
         self.setState({ count: self.state.count + 1 })
+        self.addGamification()
       } else {
         self.setState({ checkLike: false })
         self.setState({ count: self.state.count - 1 })
@@ -173,6 +175,14 @@ class Post extends Component {
       })
   }
 
+  addGamification = () => {
+    axios
+      .post(
+        "http://50.19.216.143/management/community/profile/addGamification/" + Cookies.get("id"))
+      .then(function (response) {
+        console.log(response.data);
+      });
+  }
   keyPress(e) {
     
     if (e.keyCode == 13) {
@@ -182,6 +192,7 @@ class Post extends Component {
         "commentBody": self.state.comment,
         "userId": Cookies.get('username')
       }).then(res => {
+        self.addGamification()
         toast.success("Comment added successfully!", {
           position: "bottom-right",
           autoClose: 7000,
