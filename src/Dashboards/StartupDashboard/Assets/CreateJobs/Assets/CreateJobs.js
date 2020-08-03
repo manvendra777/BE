@@ -29,87 +29,43 @@ class CreateJobs extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      JobTitle: '',
-      JobDescription: '',
-      domain: 'Other',
-      selectedFile: null,
-      preview: null,
-      start_date: "",
-      budget: "",
-      duration: ""
+      jobTitle:'',
+      jobDescription:'',
+      startTime:'',
+      budget:'',
+      duration:'',
+      domain:'',
     }
-    this.createJobs = this.createJobs.bind(this)
-    this.onFileUpload = this.onFileUpload.bind(this)
+    
   }
-  createJobs() {
-    this.onFileUpload();
+  addGamification = () => {
+    axios
+      .post(
+        "http://50.19.216.143/management/community/profile/addGamification/" + Cookies.get("id"))
+      .then(function (response) {
+        console.log(response.data);
+      });
+  }
+  createJobs=()=> {
+    this.onjobCreate();
     this.props.method2();
   }
-
-  onFileChange = event => {
-    // Update the state 
-    this.setState({ selectedFile: event.target.files[0] });
-    this.setState({ preview: URL.createObjectURL(event.target.files[0]) })
-  };
-
-  setImageName = () => {
-    if (this.state.preview) {
-      return (<span>{this.state.selectedFile.name}</span>)
-    }
-  }
-  fileData = () => {
-    if (this.state.preview) {
-      return (
-        <div style={{ padding: '1%' }}>
-          <CardMedia
-            style={{ height: 300, width: '100%' }}
-            image={this.state.preview}
-            title="Contemplative Reptile"
-          />
-        </div>
-      );
-    } else {
-      return (
-        <div style={{ marginLeft: '2%' }}>
-          <br />
-          <h6> Choose before Pressing the Create button</h6>
-        </div>
-      );
-    }
-  };
-
-  onFileUpload = () => {
-    //50.19.216.143/management/community/uploadPhoto/5f1373f48888db417a8d0dcc
-    const formData = new FormData();
-    formData.append('image', this.state.selectedFile);
-    var id;
-    console.log(this.state.selectedFile);
-    var self = this;
-    axios({
-      method: 'post',
-      url: 'http://50.19.216.143',
-      data: formData,
-      headers: { 'Content-Type': 'multipart/form-data' }
+  onjobCreate = () => {
+    axios.post('http://50.19.216.143/forum/job/createJob', {
+      "startupId":Cookies.get('id'),
+      "jobTitle":this.state.jobTitle,
+      "jobDescription":this.state.jobDescription,
+      "startTime":this.state.startTime,
+      "budget":this.state.budget,
+      "duration":this.state.duration,
+      "domain":this.state.domain,
+      'worker':' ',
     }).then(res => {
-      id = res.data;
-      axios.post('http://50.19.216.143/', {
-        "jobsId": id,
-        "description": this.state.JobDescription,
-        "header": this.state.JobTitle,
-        "tag": this.state.domain,
-        "start_date": this.state.start_date,
-        "budget": this.state.budget,
-        "duration": this.state.duration,
-        "userId": Cookies.get('id')
-      }).then(res => {
-        console.log(res.data);
-        self.props.method()
-       self.props.refresh()
-      })
+      console.log(res.data);
+      this.props.method()
+      this.props.refresh()
     })
   };
-
-
   render() {
     const handleChange = (event) => {
       this.setState({ domain: event.target.value });
@@ -124,42 +80,31 @@ class CreateJobs extends Component {
           <TextField style={{ width: '50%', margin: 1 }}
             id="outlined-multiline-static"
             variant="outlined"
-            onChange={(event) => { this.setState({ JobTitle: event.target.value }) }}
+            onChange={(event) => { this.setState({ jobTitle: event.target.value }) }}
           />
         </div>
         <Divider />
-        <input onChange={this.onFileChange} accept="image/*" style={{ display: 'none' }} id="icon-img-file" type="file" />
-        <label htmlFor="icon-img-file">
-          <IconButton color="primary" aria-label="upload picture" component="span">
-            <PhotoCamera />
-          </IconButton>
-          {this.setImageName()}
-        </label>
-        <Divider />
         <div style={{}}>
-
-          {this.fileData()}
-
           <div style={{ width: '100%', marginLeft: 'auto' }}>
             <TextField style={{ width: "96%", height: '100%', margin: '2%' }}
               id="outlined-multiline-static"
               label="Description"
               multiline
               rows={5}
-              onChange={(event) => { this.setState({ JobDescription: event.target.value }) }}
+              onChange={(event) => { this.setState({ jobDescription: event.target.value }) }}
               variant="outlined"
             />
-              <TextField style={{ width: "96%", height: '100%', margin: '2%' }}
+            <TextField style={{ width: "96%", height: '100%', margin: '2%' }}
               id="outlined-multiline-static"
               label="Start Date"
-              onChange={(event) => { this.setState({ start_date: event.target.value }) }}
+              onChange={(event) => { this.setState({ startTime: event.target.value }) }}
             />
-               <TextField style={{ width: "96%", height: '100%', margin: '2%' }}
+            <TextField style={{ width: "96%", height: '100%', margin: '2%' }}
               id="outlined-multiline-static"
               label="Budget"
               onChange={(event) => { this.setState({ budget: event.target.value }) }}
             />
-           <TextField style={{ width: "96%", height: '100%', margin: '2%' }}
+            <TextField style={{ width: "96%", height: '100%', margin: '2%' }}
               id="outlined-multiline-static"
               label="Duration"
               onChange={(event) => { this.setState({ duration: event.target.value }) }}
@@ -185,16 +130,12 @@ class CreateJobs extends Component {
               <MenuItem value={'Marketing'}>Marketing</MenuItem>
               <MenuItem value={'Sports'}>Sports</MenuItem>
               <MenuItem value={'Other'}>Other</MenuItem>
-
             </Select>
           </FormControl>
-
-
-
           <Button style={{ marginLeft: 'auto' }} color="primary" onClick={this.createJobs}>Create</Button>
         </div>
         <Divider />
-       
+
       </Paper>
 
     );

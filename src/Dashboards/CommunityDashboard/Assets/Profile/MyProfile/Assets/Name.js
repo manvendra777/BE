@@ -171,14 +171,7 @@ class Name extends Component {
     this.setState({ isRanksOpen: !this.state.isRanksOpen })
   }
 
-  addGamification = () => {
-    axios
-      .post(
-        "http://50.19.216.143/management/community/profile/addGamification/" + Cookies.get("id"))
-      .then(function (response) {
-        console.log(response.data);
-      });
-  }
+
 
 
   getGamification = () => {

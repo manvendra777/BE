@@ -8,10 +8,12 @@ import SearchIcon from "@material-ui/icons/Search";
 import MenuItem from "@material-ui/core/MenuItem";
 import Cookies from "js-cookie";
 import Grid from "@material-ui/core/Grid";
-
+import { ToastContainer, toast } from 'react-toastify';
 import { trackPromise } from "react-promise-tracker";
 import Card from "@material-ui/core/Card";
-
+import Animate from './Animate'
+import AnimateM from './AnimateM'
+import Button from '@material-ui/core/Button'
 const useStyles = (theme) => ({
   root: {
     minWidth: 200,
@@ -26,9 +28,10 @@ class Jobs extends Component {
     super(props);
     this.state = {
       connections: [],
-      jobList: [],
+      jobsList: [],
       userType: "",
       MyDomain: "",
+      MyJobsList:[]
     };
     //this.getConnection = this.getConnection.bind(this);
   }
@@ -36,11 +39,52 @@ class Jobs extends Component {
   setDomain = (value) => {
     this.setState({ MyDomain: value });
   };
+  getMyJobs=()=>{
+    //getMyCJobs
+    var jobs = [];
+    this.setState({ jobsList: [] })
+    axios
+      .get(`http://50.19.216.143/forum/job/getMyCJobs`, {
+        params: { id: Cookies.get('id') },
+      })
+      .then((res) => {
+        jobs = res.data;
+        console.log(jobs);
+        jobs.map((item, i) => {
+          this.setState({
+            MyJobsList: [
+              ...this.state.MyJobsList,
+              <AnimateM id={item.id} jobTitle={item.jobTitle} jobDescription={item.jobDescription} startTime={item.startTime} budget={item.budget} duration={item.duration} domain={item.domain} isComplete={item.isComplete} isAssigned={item.isAssigned} />,
+            ],
+          });
+        });
+      });
+  }
 
-  getJobs() {}
+  getJobs = () => {
+    var jobs = [];
+    this.setState({ jobsList: [] })
+    axios
+      .get(`http://50.19.216.143/forum/job/getJob`, {
+        params: { domain: this.state.MyDomain },
+      })
+      .then((res) => {
+        jobs = res.data;
+        console.log(jobs);
+        jobs.map((item, i) => {
+          this.setState({
+            jobsList: [
+              ...this.state.jobsList,
+              <Animate id={item.id} jobTitle={item.jobTitle} jobDescription={item.jobDescription} startTime={item.startTime} budget={item.budget} duration={item.duration} domain={item.domain} isComplete={item.isComplete} isAssigned={item.isAssigned} />,
+            ],
+          });
+        });
+      });
+  }
 
   componentWillMount() {
     this.getJobs();
+    this.getMyJobs()
   }
 
   render() {
@@ -49,11 +93,60 @@ class Jobs extends Component {
 
     return (
       <div>
+ <div style={{ display: "flex", marginLeft: 40 }}>
+          <Card
+            elevation={2}
+            style={{
+              width: "70%",
+              marginLeft:'6%',
+              marginTop: 10,
+            }}
+          >
+            <Typography
+              variant="h5"
+              color="primary"
+              style={{ backgroundColor: "#e8eaf6", padding: 10 }}
+            >
+              My Jobs
+            </Typography>
+            <Divider />
+            <div style={{ overflowY: "scroll" }}>
+              <div style={{ height: 400, display: "block", width: "100%" }}>
+                <div
+                  style={{
+                    background: "#ffffff",
+
+                    height: "100%",
+                  }}
+                >
+                  <div style={{ margin: 40 }}>
+                    <Grid style={{ marginLeft: 10 }} container spacing={0}>
+                      {this.state.MyJobsList.map((child) => child)}
+                    </Grid>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
         <div style={{ display: "flex", marginLeft: 40 }}>
           <Card
             elevation={2}
             style={{
-              width: "80%",
+              width: "70%",
+              marginLeft:'6%',
               marginTop: 10,
             }}
           >
@@ -65,11 +158,11 @@ class Jobs extends Component {
               Available Jobs
             </Typography>
             <Divider />
-            <div style={{ overflowY: "scroll" }}>
-              <Typography style={{ padding: 10, marginLeft: 65 }}>
+            <div style={{ overflowY: "scroll"}}>
+              <Typography style={{ padding: 10, margin: 20 }}>
                 Select Domain:
               </Typography>
-              <div>
+              <div> 
                 <Select
                   style={{ width: "40%", marginLeft: 75 }}
                   defaultValue={{ label: "Select Domain", value: 0 }}
@@ -96,14 +189,17 @@ class Jobs extends Component {
                   <MenuItem value={"Sports"}>Sports</MenuItem>
                   <MenuItem value={"Other"}>Other</MenuItem>
                 </Select>
+                <Button>
                 <SearchIcon
                   style={{
                     cursor: "pointer",
                   }}
                   onClick={this.getJobs}
-                />
+                /></Button>
+                    <Divider/>
               </div>
-              <div style={{ height: 700, display: "block", width: "100%" }}>
+          
+              <div style={{ height: 500, display: "block", width: "100%" }}>
                 <div
                   style={{
                     background: "#ffffff",
@@ -112,13 +208,16 @@ class Jobs extends Component {
                   }}
                 >
                   <div style={{ margin: 40 }}>
-                    {this.state.jobList.map((child) => child)}
+                    <Grid style={{ marginLeft: 10 }} container spacing={0}>
+                      {this.state.jobsList.map((child) => child)}
+                    </Grid>
                   </div>
                 </div>
               </div>
             </div>
           </Card>
         </div>
+       
       </div>
     );
   }

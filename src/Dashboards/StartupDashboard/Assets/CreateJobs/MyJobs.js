@@ -38,23 +38,17 @@ class MyJobs extends Component {
   getMyJobs() {
     var jobs = [];
     axios
-      .get(`http://50.19.216.143/`, {
+      .get(`http://50.19.216.143/forum/job/getMyJobs`, {
         params: { id: Cookies.get("id") },
       })
       .then((res) => {
         jobs = res.data;
-        jobs.map((item, i) => {
+        console.log(jobs);
+       jobs.map((item, i) => {
           this.setState({
             JobsList: [
               ...this.state.JobsList,
-              <Animate
-                id={item.jobId}
-                tags={item.tags}
-                description={item.description}
-                image={item.image}
-                header={item.header}
-                feedbackList={item.feedbackList}
-              />,
+              <Animate id={item.id} jobTitle={item.jobTitle} jobDescription={item.jobDescription} startTime={item.startTime} budget={item.budget} duration={item.duration} domain={item.domain} isComplete={item.isComplete} isAssigned={item.isAssigned}/>,
             ],
           });
         });
