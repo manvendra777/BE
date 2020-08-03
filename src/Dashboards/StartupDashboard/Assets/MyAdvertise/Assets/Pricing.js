@@ -14,6 +14,8 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
+import Cookies from 'js-cookie'
+import axios from 'axios'
 const styles = theme => ({
   '@global': {
     ul: {
@@ -62,6 +64,14 @@ class Pricing extends Component {
   constructor(props) {
     super(props);
 
+  }
+
+  sendNotification=()=>{
+    //management/startup/sendmail
+    axios.get(`http://50.19.216.143/management/startup/sendmail`+Cookies.get('id'))
+    .then(res => {
+      console.log('done');
+    })
   }
 
   render() {
@@ -178,7 +188,7 @@ class Pricing extends Component {
                       </ul>
                     </CardContent>
                     <CardActions>
-                      <Button fullWidth variant={tier.buttonVariant} color="primary">
+                      <Button onClick={this.sendNotification} fullWidth variant={tier.buttonVariant} color="primary">
                         {tier.buttonText}
                       </Button>
                     </CardActions>
