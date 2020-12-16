@@ -29,7 +29,7 @@ class JobsCard extends Component {
         var myId = Cookies.get('id')
         //updateApplicant
         console.log();
-        axios.post('http://50.19.216.143/forum/job/jobCompleted',null, { params: { applicantId: myId+'',id:this.state.id } }).then(res => {
+        axios.post('http://localhost:8086/forum/job/jobCompleted',null, { params: { applicantId: myId+'',id:this.state.id } }).then(res => {
             console.log(res.data);
             toast.success("Job Completed successfully!", {
                 position: "bottom-right",
@@ -49,7 +49,7 @@ class JobsCard extends Component {
     addGamification = () => {
         axios
           .post(
-            "http://50.19.216.143/management/community/profile/addGamification/" + Cookies.get("id"))
+            "http://localhost:8082/management/community/profile/addGamification/" + Cookies.get("id"))
           .then(function (response) {
             console.log(response.data);
           });

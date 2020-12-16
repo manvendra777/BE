@@ -44,7 +44,7 @@ class BookMarkCard extends React.Component {
     var persons;
     axios
       .get(
-        `http://50.19.216.143/management/startup/profile/` + this.props.id
+        `http://localhost:8082/management/startup/profile/` + this.props.id
       )
       .then((res) => {
         persons = res.data;
@@ -56,7 +56,7 @@ class BookMarkCard extends React.Component {
   getImage = () => {
     var self = this;
     var mem;
-    axios.get(`http://50.19.216.143/management/startup/photos/` + this.props.id)
+    axios.get(`http://localhost:8082/management/startup/photos/` + this.props.id)
       .then(res => {
         mem = res.data;
         this.setState({ image: mem })

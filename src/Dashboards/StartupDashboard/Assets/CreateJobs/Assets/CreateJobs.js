@@ -41,7 +41,7 @@ class CreateJobs extends Component {
   addGamification = () => {
     axios
       .post(
-        "http://50.19.216.143/management/community/profile/addGamification/" + Cookies.get("id"))
+        "http://localhost:8082/management/community/profile/addGamification/" + Cookies.get("id"))
       .then(function (response) {
         console.log(response.data);
       });
@@ -51,7 +51,7 @@ class CreateJobs extends Component {
     this.props.method2();
   }
   onjobCreate = () => {
-    axios.post('http://50.19.216.143/forum/job/createJob', {
+    axios.post('http://localhost:8086/forum/job/createJob', {
       "startupId":Cookies.get('id'),
       "jobTitle":this.state.jobTitle,
       "jobDescription":this.state.jobDescription,

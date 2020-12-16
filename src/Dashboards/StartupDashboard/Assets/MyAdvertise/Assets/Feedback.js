@@ -24,7 +24,7 @@ class Feedback extends Component {
       this.setState({ msg: '' });
       var sender = Cookies.get('id')
       var receiver = this.props.userId
-      axios.post('http://50.19.216.143/communication/message/send', {
+      axios.post('http://localhost:8084/communication/message/send', {
         "senderId": sender,
         "receiverId": receiver,
         "text": this.state.msg

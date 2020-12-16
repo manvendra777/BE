@@ -38,7 +38,7 @@ class MyJobs extends Component {
   getMyJobs() {
     var jobs = [];
     axios
-      .get(`http://50.19.216.143/forum/job/getMyJobs`, {
+      .get(`http://localhost:8086/forum/job/getMyJobs`, {
         params: { id: Cookies.get("id") },
       })
       .then((res) => {

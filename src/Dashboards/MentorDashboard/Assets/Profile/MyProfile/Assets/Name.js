@@ -87,7 +87,7 @@ class Name extends Component {
     var self = this;
     var mem;
     axios
-      .get(`http://50.19.216.143/management/mentor/photos/` + Cookies.get("id"))
+      .get(`http://localhost:8082/management/mentor/photos/` + Cookies.get("id"))
       .then((res) => {
         mem = res.data;
         self.setState({ image: mem });
@@ -157,7 +157,7 @@ class Name extends Component {
 
     axios
       .post(
-        "http://50.19.216.143/management/mentor/profile/" + Cookies.get("id"),
+        "http://localhost:8082/management/mentor/profile/" + Cookies.get("id"),
         (data = data)
       )
       .then(function (response) {

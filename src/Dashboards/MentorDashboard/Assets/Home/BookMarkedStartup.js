@@ -46,7 +46,7 @@ class BookMarkedStartup extends React.Component {
     let mem = [];
     axios
       .get(
-        "http://50.19.216.143/entityAction/getBookmark?id=" + Cookies.get("id")
+        "http://localhost:8083/entityAction/getBookmark?id=" + Cookies.get("id")
       )
       .then((res) => {
         mem = res.data;

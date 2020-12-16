@@ -37,7 +37,7 @@ class StartupCard extends Component {
     getImage() {
         var self = this;
         var mem;
-        axios.get(`http://50.19.216.143/management/startup/photos/` + this.props.id)
+        axios.get(`http://localhost:8082/management/startup/photos/` + this.props.id)
             .then(res => {
                 mem = res.data;
                 self.setState({ image: mem })
@@ -49,7 +49,7 @@ class StartupCard extends Component {
         const openStartupPage = () => {
             var myid = Cookies.get('id');
             var response;
-            axios.get('http://50.19.216.143/entityAction/user/checkIfAdded', { params: { id: myid, target: this.props.id } })
+            axios.get('http://localhost:8083/entityAction/user/checkIfAdded', { params: { id: myid, target: this.props.id } })
                 .then(res => {
                     response = res.data
                     if (response) {

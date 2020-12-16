@@ -29,7 +29,7 @@ class JobsCard extends Component {
         var myId = Cookies.get('id')
         //updateApplicant
         console.log();
-        axios.post('http://50.19.216.143/forum/job/updateApplicant',null, { params: { applicantId: myId+'',id:this.state.id } }).then(res => {
+        axios.post('http://localhost:8086/forum/job/updateApplicant',null, { params: { applicantId: myId+'',id:this.state.id } }).then(res => {
             console.log(res.data);
             toast.success("Comment added successfully!", {
                 position: "bottom-right",

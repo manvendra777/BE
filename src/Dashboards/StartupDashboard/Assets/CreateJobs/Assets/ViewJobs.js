@@ -65,7 +65,7 @@ class ViewJobs extends Component {
     var jobs = []
     console.log(this.props.match.params.id);
     axios
-      .get(`http://50.19.216.143/forum/job/getJobById`, {
+      .get(`http://localhost:8086/forum/job/getJobById`, {
         params: { id: this.props.match.params.id },
       })
       .then((res) => {

@@ -104,7 +104,7 @@ class Name extends Component {
     var mem;
     axios
       .get(
-        `http://50.19.216.143/management/startup/photos/` + Cookies.get("id")
+        `http://localhost:8082/management/startup/photos/` + Cookies.get("id")
       )
       .then((res) => {
         mem = res.data;
@@ -119,7 +119,7 @@ class Name extends Component {
     var myId = Cookies.get("id");
     this.setState({ Mystatus: value });
     axios
-      .post(`http://50.19.216.143/management/startup/profile/setStatus`, null, {
+      .post(`http://localhost:8082/management/startup/profile/setStatus`, null, {
         params: { id: myId, status: value },
       })
       .then((res) => {
@@ -131,7 +131,7 @@ class Name extends Component {
     var myId = Cookies.get("id");
     var self = this;
     axios
-      .post(`http://50.19.216.143/management/startup/profile/getStatus`, null, {
+      .post(`http://localhost:8082/management/startup/profile/getStatus`, null, {
         params: { id: myId },
       })
       .then((res) => {
@@ -235,7 +235,7 @@ class Name extends Component {
 
     axios
       .post(
-        "http://50.19.216.143/management/startup/profile/" + Cookies.get("id"),
+        "http://localhost:8082/management/startup/profile/" + Cookies.get("id"),
         (data = data)
       )
       .then(function (response) {

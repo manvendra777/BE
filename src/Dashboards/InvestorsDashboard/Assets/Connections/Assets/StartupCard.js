@@ -38,7 +38,7 @@ class StartupCard extends React.Component {
     var id = this.props.id
     var persons;
 
-    axios.get(`http://50.19.216.143/management/startup/profile/` + id)
+    axios.get(`http://localhost:8082/management/startup/profile/` + id)
       .then(res => {
         persons = res.data;
         console.log(persons);
@@ -52,7 +52,7 @@ class StartupCard extends React.Component {
   getImage() {
     var self = this;
     var mem;
-    axios.get(`http://50.19.216.143/management/startup/photos/` + this.props.id)
+    axios.get(`http://localhost:8082/management/startup/photos/` + this.props.id)
       .then(res => {
         mem = res.data;
         self.setState({ image: mem })

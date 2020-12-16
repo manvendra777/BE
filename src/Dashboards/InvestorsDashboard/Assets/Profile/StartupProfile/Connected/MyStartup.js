@@ -74,7 +74,7 @@ class MyStartup extends Component {
     var mem;
     axios
       .get(
-        `http://50.19.216.143/management/startup/photos/` +
+        `http://localhost:8082/management/startup/photos/` +
           this.props.match.params.id
       )
       .then((res) => {
@@ -86,7 +86,7 @@ class MyStartup extends Component {
     var id = this.props.match.params.id;
     var persons;
     axios
-      .get(`http://50.19.216.143/management/startup/profile/` + id)
+      .get(`http://localhost:8082/management/startup/profile/` + id)
       .then((res) => {
         persons = res.data;
         this.setState({ myProfile: persons });
@@ -110,7 +110,7 @@ class MyStartup extends Component {
   getRating() {
     var avg;
     axios
-      .get(`http://50.19.216.143/ratings/getRatingCount`, {
+      .get(`http://localhost:8085/ratings/getRatingCount`, {
         params: { id: this.props.match.params.id },
       })
       .then((res) => {
@@ -122,7 +122,7 @@ class MyStartup extends Component {
   getRatingAv() {
     var rate;
     axios
-      .get(`http://50.19.216.143/ratings/getRatingAverage`, {
+      .get(`http://localhost:8085/ratings/getRatingAverage`, {
         params: { id: this.props.match.params.id },
       })
       .then((res) => {
@@ -136,7 +136,7 @@ class MyStartup extends Component {
     var myid = Cookies.get("id");
     var response;
     axios
-      .post("http://50.19.216.143/entityAction/user/sendRequest", null, {
+      .post("http://localhost:8083/entityAction/user/sendRequest", null, {
         params: { id: myid, target: this.props.match.params.id },
       })
       .then((res) => {
@@ -148,7 +148,7 @@ class MyStartup extends Component {
     var myid = Cookies.get("id");
     var response;
     axios
-      .get("http://50.19.216.143/entityAction/user/checkRequest", {
+      .get("http://localhost:8083/entityAction/user/checkRequest", {
         params: { id: myid, target: this.props.match.params.id },
       })
       .then((res) => {
@@ -161,7 +161,7 @@ class MyStartup extends Component {
     var myid = Cookies.get("id");
     console.log("sent");
     axios
-      .post(`http://50.19.216.143/entityAction/user/removeConnection`, null, {
+      .post(`http://localhost:8083/entityAction/user/removeConnection`, null, {
         params: { id: myid, target: this.props.match.params.id },
       })
       .then((res) => {
@@ -172,7 +172,7 @@ class MyStartup extends Component {
     var myId = this.props.match.params.id;
     var self = this;
     axios
-      .post(`http://50.19.216.143/management/startup/profile/getStatus`, null, {
+      .post(`http://localhost:8082/management/startup/profile/getStatus`, null, {
         params: { id: myId },
       })
       .then((res) => {

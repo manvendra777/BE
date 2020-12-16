@@ -40,7 +40,7 @@ class Invitation extends Component {
     this.setState({ col: "green" });
     var self = this;
     axios
-      .post("http://50.19.216.143/entityAction/user/acceptRequest", null, {
+      .post("http://localhost:8083/entityAction/user/acceptRequest", null, {
         params: { id: Cookies.get("id"), target: this.props.id },
       })
       .then((res) => {
@@ -60,7 +60,7 @@ class Invitation extends Component {
     this.setState({ col: "red" });
     var self = this;
     axios
-      .post("http://50.19.216.143/entityAction/user/deleteRequest", null, {
+      .post("http://localhost:8083/entityAction/user/deleteRequest", null, {
         params: { id: this.props.id, target: Cookies.get("id") },
       })
       .then((res) => {

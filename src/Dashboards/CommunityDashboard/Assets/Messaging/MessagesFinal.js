@@ -100,17 +100,17 @@ class MessagesFinal extends Component {
   getUsers() {
     var myid = Cookies.get('id');
     let mem = [];
-    axios.get(`http://50.19.216.143/entityAction/user/myConnections`, { params: { id: myid } })
+    axios.get(`http://localhost:8083/entityAction/user/myConnections`, { params: { id: myid } })
       .then(res => {
         mem = res.data;
         mem.map((item, i) => {
           var id = item;
           axios
-            .get("http://50.19.216.143/security/getTypeById?id=" + id).then((res) => {
+            .get("http://localhost:8081/security/getTypeById?id=" + id).then((res) => {
               userType = res.data;
               var persons;
               var userType;
-              axios.get(`http://50.19.216.143/management/` + userType + `/profile/` + id).then((res) => {
+              axios.get(`http://localhost:8082/management/` + userType + `/profile/` + id).then((res) => {
                   persons = res.data;
                   console.log(persons);
                   this.setState({ members: [...this.state.members, <Added name={persons.firstName + ' ' + persons.lastName} id={item} method={this.setAddedUser} />] })
@@ -138,7 +138,7 @@ class MessagesFinal extends Component {
       // Your code here
       let persons = [];
       let up = [];
-      axios.get(`http://50.19.216.143/communication/message/find`, { params: { senderId: this.state.myId, receiverId: this.state.addedUserId } })
+      axios.get(`http://localhost:8084/communication/message/find`, { params: { senderId: this.state.myId, receiverId: this.state.addedUserId } })
         .then(res => {
           persons = res.data;
           persons.map((item, i) => {
@@ -165,7 +165,7 @@ class MessagesFinal extends Component {
       this.setState({ msgTypo: '' });
       var sender = this.state.myId;
       var receiver = this.state.addedUser;
-      axios.post('http://50.19.216.143/communication/message/send', {
+      axios.post('http://localhost:8084/communication/message/send', {
         "senderId": sender,
         "receiverId": this.state.addedUserId,
         "text": this.state.msgTypo

@@ -119,7 +119,7 @@ class Startup extends Component {
   submitForm() {
     var self = this;
     axios
-      .put("http://50.19.216.143/management/investor/profile/add", {
+      .put("http://localhost:8082/management/investor/profile/add", {
         id: this.state.id,
         firstName: this.state.firstName,
         lastName: this.state.lastName,
@@ -144,14 +144,14 @@ class Startup extends Component {
     var myid = Cookies.get("tempId");
     var response;
     axios
-      .post("http://50.19.216.143/entityAction/user/createRequestDB", null, {
+      .post("http://localhost:8083/entityAction/user/createRequestDB", null, {
         params: { id: myid },
       })
       .then((res) => {
         response = res.data;
         axios
           .post(
-            "http://50.19.216.143/security/setInvestor?userName=" +
+            "http://localhost:8081/security/setInvestor?userName=" +
               Cookies.get("temp")
           )
           .then((res) => {

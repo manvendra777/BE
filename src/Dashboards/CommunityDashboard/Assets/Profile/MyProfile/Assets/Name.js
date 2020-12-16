@@ -95,7 +95,7 @@ class Name extends Component {
     var mem;
     axios
       .get(
-        `http://50.19.216.143/management/community/photos/` + Cookies.get("id")
+        `http://localhost:8082/management/community/photos/` + Cookies.get("id")
       )
       .then((res) => {
         mem = res.data;
@@ -156,7 +156,7 @@ class Name extends Component {
 
     axios
       .post(
-        "http://50.19.216.143/management/community/profile/" + Cookies.get("id"),
+        "http://localhost:8082/management/community/profile/" + Cookies.get("id"),
         (data = data)
       )
       .then(function (response) {
@@ -178,7 +178,7 @@ class Name extends Component {
     var self = this;
     axios
       .get(
-        "http://50.19.216.143/management/community/profile/getGamification/" + Cookies.get("id"))
+        "http://localhost:8082/management/community/profile/getGamification/" + Cookies.get("id"))
       .then(function (response) {
         self.setState({ points: (response.data * 100) % 1000, rank: Math.floor(((response.data) * 100) / 1000) })
         switch (self.state.rank) {

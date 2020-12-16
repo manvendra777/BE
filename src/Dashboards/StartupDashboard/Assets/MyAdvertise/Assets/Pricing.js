@@ -68,7 +68,7 @@ class Pricing extends Component {
 
   sendNotification=()=>{
     //management/startup/sendmail
-    axios.get(`http://50.19.216.143/management/startup/sendmail`+Cookies.get('id'))
+    axios.get(`http://localhost:8082/management/startup/sendmail`+Cookies.get('id'))
     .then(res => {
       console.log('done');
     })

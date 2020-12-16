@@ -47,12 +47,12 @@ class CreatePost extends React.Component {
         console.log(this.state.selectedFile);
         axios({
             method: 'post',
-            url: 'http://50.19.216.143/forum/createDiscussion',
+            url: 'http://localhost:8086/forum/createDiscussion',
             data: formData,
             headers: { 'Content-Type': 'multipart/form-data' }
         }).then(res => {
             id = res.data;
-            axios.post('http://50.19.216.143/forum/createDiscussionInfo', {
+            axios.post('http://localhost:8086/forum/createDiscussionInfo', {
                 "discussionId": id,
                 "description": this.state.description,
                 "header": this.state.title,
@@ -103,7 +103,7 @@ class CreatePost extends React.Component {
   addGamification = () => {
     axios
       .post(
-        "http://50.19.216.143/management/community/profile/addGamification/" + Cookies.get("id"))
+        "http://localhost:8082/management/community/profile/addGamification/" + Cookies.get("id"))
       .then(function (response) {
         console.log(response.data);
       });

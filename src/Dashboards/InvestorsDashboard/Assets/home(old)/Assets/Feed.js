@@ -33,7 +33,7 @@ class Feed extends Component {
   getPosts() {
     var ads;
     var self = this;
-    axios.get(`http://50.19.216.143/forum/getPostsByDomain/`, { params: { tag: this.props.match.params.Domain } })
+    axios.get(`http://localhost:8086/forum/getPostsByDomain/`, { params: { tag: this.props.match.params.Domain } })
       .then(res => {
         ads = res.data;
         console.log(ads);

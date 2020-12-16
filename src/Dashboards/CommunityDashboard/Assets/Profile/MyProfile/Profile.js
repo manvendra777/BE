@@ -16,7 +16,7 @@ export default class Profile extends Component {
     var persons;
 
     axios
-      .get(`http://50.19.216.143/management/community/profile/` + myid)
+      .get(`http://localhost:8082/management/community/profile/` + myid)
       .then((res) => {
         persons = res.data;
         console.log(persons);

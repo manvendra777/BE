@@ -34,7 +34,7 @@ class Feedback extends Component {
         console.log(this.props.id);
         console.log(this.props.job);
         //assignApplicant
-        axios.post('http://50.19.216.143/forum/job/assignApplicant', null, { params: { applicantId: this.props.id + '', id:this.props.job+'' } }).then(res => {
+        axios.post('http://localhost:8086/forum/job/assignApplicant', null, { params: { applicantId: this.props.id + '', id:this.props.job+'' } }).then(res => {
             console.log(res.data);
             toast.success("Job assigned successfully!", {
                 position: "bottom-right",
@@ -50,7 +50,7 @@ class Feedback extends Component {
     getInfo = () => {
         var persons = ''
         axios
-            .get(`http://50.19.216.143/management/community/profile/` + this.props.id)
+            .get(`http://localhost:8082/management/community/profile/` + this.props.id)
             .then((res) => {
                 persons = res.data;
                 console.log(persons);
@@ -65,7 +65,7 @@ class Feedback extends Component {
         var self = this;
         axios
             .get(
-                "http://50.19.216.143/management/community/profile/getGamification/" + this.props.id)
+                "http://localhost:8082/management/community/profile/getGamification/" + this.props.id)
             .then(function (response) {
                 self.setState({ points: (response.data * 100) % 1000, rank: Math.floor(((response.data) * 100) / 1000) })
                 switch (self.state.rank) {

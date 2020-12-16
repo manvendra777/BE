@@ -65,7 +65,7 @@ class TargetInvestor extends Component {
     var mem;
     axios
       .get(
-        `http://50.19.216.143/management/investor/photos/` +
+        `http://localhost:8082/management/investor/photos/` +
           this.props.match.params.id
       )
       .then((res) => {
@@ -77,7 +77,7 @@ class TargetInvestor extends Component {
     var id = this.props.match.params.id;
     var persons;
     axios
-      .get(`http://50.19.216.143/management/investor/profile/` + id)
+      .get(`http://localhost:8082/management/investor/profile/` + id)
       .then((res) => {
         persons = res.data;
         this.setState({ myProfile: persons });
@@ -89,7 +89,7 @@ class TargetInvestor extends Component {
     var myid = Cookies.get("id");
     var response;
     axios
-      .post("http://50.19.216.143/entityAction/user/sendRequest", null, {
+      .post("http://localhost:8083/entityAction/user/sendRequest", null, {
         params: { id: myid, target: this.props.match.params.id },
       })
       .then((res) => {
@@ -109,7 +109,7 @@ class TargetInvestor extends Component {
     var myid = Cookies.get("id");
     var response;
     axios
-      .get("http://50.19.216.143/entityAction/user/checkRequest", {
+      .get("http://localhost:8083/entityAction/user/checkRequest", {
         params: { id: myid, target: this.props.match.params.id },
       })
       .then((res) => {
@@ -129,7 +129,7 @@ class TargetInvestor extends Component {
     var profileId = this.props.match.params.id;
     var response;
     axios
-      .get("http://50.19.216.143/entityAction/getMyPrevious", {
+      .get("http://localhost:8083/entityAction/getMyPrevious", {
         params: { id: profileId },
       })
       .then((res) => {
@@ -138,14 +138,14 @@ class TargetInvestor extends Component {
         if (response != "") {
           response.map((item, i) => {
             axios
-              .get("http://50.19.216.143/security/getTypeById?id=" + item)
+              .get("http://localhost:8081/security/getTypeById?id=" + item)
               .then((res) => {
                 userType = res.data;
                 var persons;
                 var userType;
                 axios
                   .get(
-                    `http://50.19.216.143/management/` +
+                    `http://localhost:8082/management/` +
                       userType +
                       `/profile/` +
                       item
@@ -172,7 +172,7 @@ class TargetInvestor extends Component {
     var profileId = this.props.match.params.id;
     var response;
     axios
-      .get("http://50.19.216.143/entityAction/getMyCurrent", {
+      .get("http://localhost:8083/entityAction/getMyCurrent", {
         params: { id: profileId },
       })
       .then((res) => {
@@ -181,14 +181,14 @@ class TargetInvestor extends Component {
         if (response != "") {
           response.map((item, i) => {
             axios
-              .get("http://50.19.216.143/security/getTypeById?id=" + item)
+              .get("http://localhost:8081/security/getTypeById?id=" + item)
               .then((res) => {
                 userType = res.data;
                 var persons;
                 var userType;
                 axios
                   .get(
-                    `http://50.19.216.143/management/` +
+                    `http://localhost:8082/management/` +
                       userType +
                       `/profile/` +
                       item
@@ -213,7 +213,7 @@ class TargetInvestor extends Component {
 
   getNumberOfConnections = () => {
     axios
-      .get(`http://50.19.216.143/entityAction/user/numberOfConnections`, {
+      .get(`http://localhost:8083/entityAction/user/numberOfConnections`, {
         params: { id: this.props.match.params.id },
       })
       .then((res) => {

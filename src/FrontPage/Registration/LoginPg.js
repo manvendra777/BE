@@ -93,14 +93,14 @@ class LoginPg extends React.Component {
     if (this.validateForm()) {
       trackPromise(
         this.sleep(4000).then(() => {
-          axios.post('http://50.19.216.143/security/login', data = data)   //Login
+          axios.post('http://localhost:8081/security/login', data = data)   //Login
             .then(function (response) {
               if (response.data) {
 
-                axios.post('http://50.19.216.143/security/getId', data = data) //Gets the session ID from database
+                axios.post('http://localhost:8081/security/getId', data = data) //Gets the session ID from database
                   .then(function (response) {
                     var id = response.data
-                    axios.get('http://50.19.216.143/security/getType?userName=' + self.state.username)  //Gets the type of user from database.
+                    axios.get('http://localhost:8081/security/getType?userName=' + self.state.username)  //Gets the type of user from database.
                       .then(function (response) {
                         var destination = response.data;  //store the type of user in variable
                         //console.log(response.data);

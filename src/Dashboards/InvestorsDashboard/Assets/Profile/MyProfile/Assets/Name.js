@@ -96,7 +96,7 @@ class Name extends Component {
     var mem;
     axios
       .get(
-        `http://50.19.216.143/management/investor/photos/` + Cookies.get("id")
+        `http://localhost:8082/management/investor/photos/` + Cookies.get("id")
       )
       .then((res) => {
         mem = res.data;
@@ -135,7 +135,7 @@ class Name extends Component {
 
     axios
       .post(
-        "http://50.19.216.143/management/investor/profile/" + Cookies.get("id"),
+        "http://localhost:8082/management/investor/profile/" + Cookies.get("id"),
         (data = data)
       )
       .then(function (response) {

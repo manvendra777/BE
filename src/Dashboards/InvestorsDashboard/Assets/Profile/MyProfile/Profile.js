@@ -16,7 +16,7 @@ export default class Profile extends Component {
 		var myid = Cookies.get('id')
 		var persons;
 
-		axios.get(`http://50.19.216.143/management/investor/profile/` + myid)
+		axios.get(`http://localhost:8082/management/investor/profile/` + myid)
 			.then(res => {
 				persons = res.data;
 				console.log(persons);

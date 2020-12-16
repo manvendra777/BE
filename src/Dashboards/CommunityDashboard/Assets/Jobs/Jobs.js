@@ -44,7 +44,7 @@ class Jobs extends Component {
     var jobs = [];
     this.setState({ jobsList: [] })
     axios
-      .get(`http://50.19.216.143/forum/job/getMyCJobs`, {
+      .get(`http://localhost:8086/forum/job/getMyCJobs`, {
         params: { id: Cookies.get('id') },
       })
       .then((res) => {
@@ -65,7 +65,7 @@ class Jobs extends Component {
     var jobs = [];
     this.setState({ jobsList: [] })
     axios
-      .get(`http://50.19.216.143/forum/job/getJob`, {
+      .get(`http://localhost:8086/forum/job/getJob`, {
         params: { domain: this.state.MyDomain },
       })
       .then((res) => {

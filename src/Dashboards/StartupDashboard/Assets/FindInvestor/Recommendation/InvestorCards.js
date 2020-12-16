@@ -37,7 +37,7 @@ class InvestorCard extends Component {
     getImage() {
         var self = this;
         var mem;
-        axios.get(`http://54.237.17.61/management/investor/photos/` + this.props.id)
+        axios.get(`http://localhost:8082/management/investor/photos/` + this.props.id)
             .then(res => {
                 mem = res.data;
                 self.setState({ image: mem })
@@ -51,7 +51,7 @@ class InvestorCard extends Component {
             
             var myid = Cookies.get('id');
             var response;
-            axios.get('http://54.237.17.61/entityAction/user/checkIfAdded', { params: { id: myid, target: this.props.id } })
+            axios.get('http://localhost:8083/entityAction/user/checkIfAdded', { params: { id: myid, target: this.props.id } })
                 .then(res => {
                     response = res.data
                     if (response) {

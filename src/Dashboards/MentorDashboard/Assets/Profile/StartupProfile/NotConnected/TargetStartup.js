@@ -68,7 +68,7 @@ class TargetStartup extends Component {
     var mem;
     axios
       .get(
-        `http://50.19.216.143/management/startup/photos/` +
+        `http://localhost:8082/management/startup/photos/` +
           this.props.match.params.id
       )
       .then((res) => {
@@ -81,7 +81,7 @@ class TargetStartup extends Component {
     var id = this.props.match.params.id;
     var persons;
     axios
-      .get(`http://50.19.216.143/management/startup/profile/` + id)
+      .get(`http://localhost:8082/management/startup/profile/` + id)
       .then((res) => {
         persons = res.data;
         this.setState({ myProfile: persons });
@@ -103,7 +103,7 @@ class TargetStartup extends Component {
   getRating() {
     var avg;
     axios
-      .get(`http://50.19.216.143/ratings/getRatingCount`, {
+      .get(`http://localhost:8085/ratings/getRatingCount`, {
         params: { id: this.props.match.params.id },
       })
       .then((res) => {
@@ -115,7 +115,7 @@ class TargetStartup extends Component {
   getRatingAv() {
     var rate;
     axios
-      .get(`http://50.19.216.143/ratings/getRatingAverage`, {
+      .get(`http://localhost:8085/ratings/getRatingAverage`, {
         params: { id: this.props.match.params.id },
       })
       .then((res) => {
@@ -128,7 +128,7 @@ class TargetStartup extends Component {
     var myid = Cookies.get("id");
     var response;
     axios
-      .post("http://50.19.216.143/entityAction/user/sendRequest", null, {
+      .post("http://localhost:8083/entityAction/user/sendRequest", null, {
         params: { id: myid, target: this.props.match.params.id },
       })
       .then((res) => {
@@ -148,7 +148,7 @@ class TargetStartup extends Component {
     var myid = Cookies.get("id");
     var response;
     axios
-      .get("http://50.19.216.143/entityAction/user/checkRequest", {
+      .get("http://localhost:8083/entityAction/user/checkRequest", {
         params: { id: myid, target: this.props.match.params.id },
       })
       .then((res) => {
@@ -171,7 +171,7 @@ class TargetStartup extends Component {
     var profileId = this.props.match.params.id;
     var response;
     axios
-      .get("http://50.19.216.143/entityAction/getMyPrevious", {
+      .get("http://localhost:8083/entityAction/getMyPrevious", {
         params: { id: profileId },
       })
       .then((res) => {
@@ -180,14 +180,14 @@ class TargetStartup extends Component {
         if (response != "") {
           response.map((item, i) => {
             axios
-              .get("http://50.19.216.143/security/getTypeById?id=" + item)
+              .get("http://localhost:8081/security/getTypeById?id=" + item)
               .then((res) => {
                 userType = res.data;
                 var persons;
                 var userType;
                 axios
                   .get(
-                    `http://50.19.216.143/management/` +
+                    `http://localhost:8082/management/` +
                       userType +
                       `/profile/` +
                       item
@@ -214,7 +214,7 @@ class TargetStartup extends Component {
     var profileId = this.props.match.params.id;
     var response;
     axios
-      .get("http://50.19.216.143/entityAction/getMyCurrent", {
+      .get("http://localhost:8083/entityAction/getMyCurrent", {
         params: { id: profileId },
       })
       .then((res) => {
@@ -222,14 +222,14 @@ class TargetStartup extends Component {
         if (response != "") {
           response.map((item, i) => {
             axios
-              .get("http://50.19.216.143/security/getTypeById?id=" + item)
+              .get("http://localhost:8081/security/getTypeById?id=" + item)
               .then((res) => {
                 userType = res.data;
                 var persons;
                 var userType;
                 axios
                   .get(
-                    `http://50.19.216.143/management/` +
+                    `http://localhost:8082/management/` +
                       userType +
                       `/profile/` +
                       item
@@ -255,7 +255,7 @@ class TargetStartup extends Component {
     var myId = this.props.match.params.id;
     var self = this;
     axios
-      .post(`http://50.19.216.143/management/startup/profile/getStatus`, null, {
+      .post(`http://localhost:8082/management/startup/profile/getStatus`, null, {
         params: { id: myId },
       })
       .then((res) => {
